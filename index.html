@@ -2,8 +2,6 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Learn Redux</title>
-    <!-- Pure CSS is a minimalist CSS file we have included to make things look nicer -->
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
   </head>
   <body style='margin: 0 1em;'>
@@ -13,8 +11,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
     <script>
-      const { createStore } = Redux;
-
       // counter is the reducer that manages state updates:
       const counter = (state = 0, action) => {
         switch (action.type) {
@@ -26,19 +22,19 @@
             return state;
         }
       }
-
+      const { createStore } = Redux; // Redux is GLOBAL Object from redux.min.js
+      // create the store for our mini-app using the counter reducer
       const store = createStore(counter);
 
       console.log(store.getState()); // counter should be 0 (zero)
-
-      store.dispatch({type:'INCREMENT'});
-
+      store.dispatch({type:'INCREMENT'}); // increment from zero to one
       console.log(store.getState()); // counter is 1 (one)
 
-      store.subscribe(() => {
+      const render = () => {
         document.body.innerText = store.getState();
-      });
-
+      }
+      store.subscribe(render);
+      render(); // render the initial state of the page/app
       document.addEventListener('click', () => {
         store.dispatch({type:'INCREMENT'});
       });
