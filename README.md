@@ -31,6 +31,7 @@ Dan Abramov recorded a series of videos tutorials for
 Redux Store has 3 methods:
 
 + `dispatch` -
++ 
 
 
 Try the [`index.html`]() in [**Chrome** ***Canary***](https://github.com/nelsonic/learn-redux/issues/5#issue-123923845)
