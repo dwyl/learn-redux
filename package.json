@@ -25,5 +25,8 @@
     "inert": "^3.2.0",
     "istanbul": "^0.4.1",
     "nodemon": "^1.8.1"
+  },
+  "dependencies": {
+    "redux": "^3.0.5"
   }
 }
