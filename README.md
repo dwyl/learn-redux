@@ -84,7 +84,7 @@ recoded by Dan Abramov = Creator of Redux for
 
 > Video: https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree
 
-The first thing to learn in Redux is that you are going to represent your whole
+The **first principal** to learn in Redux is that you are going to represent your whole
 application ("State") as a single JavaScript Object. All changes and mutations
 to the state in Redux are *explicit* so it is possible to keep track of all of them.
 
@@ -97,7 +97,7 @@ data is added and filters applied; its a *glimpse* of power of the single state 
 
 > Video: https://egghead.io/lessons/javascript-redux-describing-state-changes-with-actions
 
-The second principal of Redux is that the **state tree** is ***read-only***;
+The **second principal** of Redux is that the **state tree** is ***read-only***;
 you cannot modify or write to it, instead, any time you want to change the state
 you need to dispatch an action. (i.e. *you can only "update" the state using a function*...)
 An action is a *plain Javascript Object* describing the change.
@@ -110,6 +110,17 @@ because they are serialisable (*i.e. easy to `JSON.stringify`*)
 > "*Any data that gets into your Redux Application gets there by actions*"
 
 <br />
+
+#### 3. Pure and Impure Functions (*Principal 3*)
+
+> Video: https://egghead.io/lessons/javascript-redux-pure-and-impure-functions
+
+Pure functions depend solely on the values of the arguments.
+Pure functions do not have any (*observable*) sideeffects such as network
+or database calls. Pure functions just calculate the new value [of the state].
+
+The functions you write in redux need to be pure.
+
 
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
 
