@@ -13,4 +13,4 @@ server.register(Inert, function () {
     }
   });
   server.start(function() { console.log('Visit: http://127.0.0.1:' +port) });
-}); // requires a callback function but can be blank
+});
