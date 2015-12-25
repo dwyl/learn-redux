@@ -19,6 +19,10 @@ which simplifies writing web apps.
 Dan Abramov recorded a series of videos tutorials for
 [egghead.io](https://egghead.io/series/getting-started-with-redux)
 
+#### 6. Store Methods: getState(), dispatch(), and subscribe()
+
+
+
 
 ## Background Reading / Watching / Listening
 
@@ -26,3 +30,7 @@ Dan Abramov recorded a series of videos tutorials for
 on The Changelog Podcast: https://changelog.com/187 -
 Good history and insight into his motivations for learning to program
 and the journey that lead him to writing Redux.
+
++ Full-Stack Redux Tutorial (Redux, React & Immutable.js) by
+[@teropa](https://github.com/teropa)
+http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 2h+!

@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Learn Redux</title>
+    <!-- Pure CSS is a minimalist CSS file we have included to make things look nicer -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
+  </head>
+  <body style='margin: 0 1em;'>
+    <div id='main'>
+      <h1>Learn <em>Redux</em></h1>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
+    <script>
+      const { createStore } = Redux;
+
+      // counter is the reducer that manages state updates:
+      const counter = (state = 0, action) => {
+        switch (action.type) {
+          case 'INCREMENT':
+            return state + 1;
+          case 'DECREMENT':
+            return state - 1;
+          default:
+            return state;
+        }
+      }
+
+      const store = createStore(counter);
+
+      console.log(store.getState()); // counter should be 0 (zero)
+
+      store.dispatch({type:'INCREMENT'});
+
+      console.log(store.getState()); // counter is 1 (one)
+    </script>
+  </body>
+</html>
