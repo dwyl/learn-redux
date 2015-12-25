@@ -34,6 +34,15 @@
       store.dispatch({type:'INCREMENT'});
 
       console.log(store.getState()); // counter is 1 (one)
+
+      store.subscribe(() => {
+        document.body.innerText = store.getState();
+      });
+
+      document.addEventListener('click', () => {
+        store.dispatch({type:'INCREMENT'});
+      });
+
     </script>
   </body>
 </html>
