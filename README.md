@@ -8,7 +8,14 @@ Learn how to use Redux to write Predictable / Testable web apps.
 
 ## Why?
 
-Redux is a *logical* way to write front-end web applications.
+Redux is a *logical* way to write *simplified* front-end web applications.
+While there is an ***initial learning curve*** we feel the *elegance*
+of the single store (*snapshot of your app's state*) offers a significant
+benefit over other ways of organising your code.
+
+> *Please, don't take my/our word for it,
+skim through the notes we have made and*
+***decide for yourself***.
 
 ## What?
 
