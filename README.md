@@ -150,8 +150,19 @@ you have to write a function that takes the previous state of the app
 and the action being dispatched and returns the next state.
 The function has to be pure and is called the "Reducer".
 
+<br />
 
+#### 5. Writing a Counter Reducer with Tests
 
+Using [Michael Jackson](https://github.com/mjackson)'s (*Yes, there's a developer with that name...*)
+**Expect** (testing assertion) library: https://github.com/mjackson/expect
+This video walks through creating a basic counter in Redux.
+
+The convention in Redux is that if the reducer receives `undefined` as the
+`state` argument, it *must* `return` what it considers to be the inital
+`state` of the application. In the case of our counter it will be zero.
+
+<br />
 
 
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
