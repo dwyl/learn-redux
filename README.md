@@ -111,15 +111,47 @@ because they are serialisable (*i.e. easy to `JSON.stringify`*)
 
 <br />
 
-#### 3. Pure and Impure Functions (*Principal 3*)
+#### 3. Pure and Impure Functions
 
 > Video: https://egghead.io/lessons/javascript-redux-pure-and-impure-functions
 
 Pure functions depend solely on the values of the arguments.
-Pure functions do not have any (*observable*) sideeffects such as network
+Pure functions do not have any (*observable*) side-effects such as network
 or database calls. Pure functions just calculate the new value [of the state].
 
 The functions you write in redux need to be pure.
+
+#### 4. The Reducer Function (*Principal 3*)
+
+> Video: https://egghead.io/lessons/javascript-redux-the-reducer-function
+
+The UI/View layer of an application is most predictable when it is described
+as a pure function of the application state. Pioneered by ~~React~~ [Ractive](https://github.com/ractivejs/ractive) and now addopted by several other
+frameworks, Redux compliments this approach with another idea:
+the state mutations in your app need to be described as a pure function
+that takes the previous state and the action being "dispatched" (*performed*)
+and returns the next state of your app.
+
+Inside any Redux app there is one function that takes the state of the whole
+application and the action being dispatched and returns the next state of
+the whole application. It is important that it does not modify the state given
+to it; it has to be pure, so it has to `return` a new `Object`
+Even in *large* applications there is still just a simple function
+that manages how the next state is calculated based on the previous state
+of the whole application and the action being dispatched.
+It does not have to be slow, for example: if I change the visibility filter
+I have to create the new object for the whole state, but I can keep the
+reference to the previous version of the Todo's array because the list of
+todos has not changed when we change the visibility filter; this is what makes
+Redux fast.
+
+> this is the 3rd and final principal of Redux: to describe state changes
+you have to write a function that takes the previous state of the app
+and the action being dispatched and returns the next state.
+The function has to be pure and is called the "Reducer".
+
+
+
 
 
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
