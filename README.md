@@ -241,13 +241,17 @@ if (action.type === 'INCREMENT') {
 And the tests pass now.
 
 > *Code for*
-[***Video 5 @ 1:49*** ](https://github.com/nelsonic/learn-redux/blob/8ded8853d5a789f94aff410eef0799bb66926a0d/index.html#L15)
+[***Video 5 @ 1:49*** ](https://github.com/nelsonic/learn-redux/blob/d6c9051922e288583d5f43c45dbf3a57f1113648/index.html#L15)
 
-
+Another issue is that while the reducer is in control of the application state,
+*currently* it does not specify the initial state; in the case of the counter
+example that would be zero.
 
 The convention in Redux is that if the reducer receives `undefined` as the
 `state` argument, it *must* `return` what it considers to be the inital
-`state` of the application. In the case of our counter it will be zero.
+`state` of the application. In this case it will be zero.
+
+
 
 <br />
 
