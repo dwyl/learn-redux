@@ -154,9 +154,63 @@ The function has to be pure and is called the "Reducer".
 
 #### 5. Writing a Counter Reducer with Tests
 
-Using [Michael Jackson](https://github.com/mjackson)'s (*Yes, there's a developer with that name...*)
-**Expect** (testing assertion) library: https://github.com/mjackson/expect
 This video walks through creating a basic counter in Redux.
+
+> Video: https://egghead.io/lessons/javascript-redux-writing-a-counter-reducer-with-tests
+
+The first [*and only*] function in this video is the Reducer for the counter example.
+A reducer accepts state and action as arguments and returns the next state.
+
+Before writing any code, we write a few assertions (*tests*) using
+[Michael Jackson](https://github.com/mjackson)'s
+(*Yes, there's a developer with that name...*)
+**Expect** (testing/assertion) library: https://github.com/mjackson/expect
+
+We assert that when the state of the counter is zero and you pass an `INCREMENT`
+action, it should return 1.
+
+```js
+expect (
+  counter(0, { type: 'INCREMENT' })
+).toEqual(1);
+```
+
+And similarly when the counter is 1 and we `INCREMENT` it should return 2.
+
+```js
+expect (
+  counter(1, { type: 'INCREMENT' })
+).toEqual(2);
+```
+
+We add a test that check how `DECREMENT` works; from 2 to 1 and from 1 to zero:
+
+```js
+expect (
+  counter(2, { type: 'DECREMENT' })
+).toEqual(1);
+
+expect (
+  counter(1, { type: 'DECREMENT' })
+).toEqual(0);
+```
+
+If we run these tests [*in the browser*], they will fail because we have not
+even *begun* to implement the reducer.
+We are going to start by checking the action type.
+If the action type is `INCREMENT` we are going to `return state + 1` (*state plus one*)
+If the type is `DECREMENT` we are going to `return state - 1` (*state minus one*)
+
+```js
+if (action.type === 'INCREMENT') {
+  return state + 1;
+} else if (action.type === 'DECREMENT') {
+  return state - 1;
+}
+```
+
+If you run the tests, you will find that that this is enough to get them to pass.
+
 
 The convention in Redux is that if the reducer receives `undefined` as the
 `state` argument, it *must* `return` what it considers to be the inital

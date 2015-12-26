@@ -15,17 +15,12 @@
     <script>
       // counter is the reducer that manages state updates:
       function counter(state, action) {
-        if (typeof state === 'undefined') {
-          return 0; // If state is undefined, return the initial application state
-        }
         if (action.type === 'INCREMENT') {
-          console.log('state:' + state + ' >>  ' + parseInt(state,10) + 1 + '|  action: '+JSON.stringify(action));
+          // console.log('state:' + state + ' >>  ' + parseInt(state,10) + 1 + '|  action: '+JSON.stringify(action));
           return state + 1;
         } else if (action.type === 'DECREMENT') {
-          console.log('state:' + state + ' >>  ' + parseInt(state,10) - 1 + '|  action: '+JSON.stringify(action));
+          // console.log('state:' + state + ' >>  ' + parseInt(state,10) - 1 + '|  action: '+JSON.stringify(action));
           return state - 1;
-        } else {
-          return state; // In case an action is passed in we don't understand
         }
       }
 
@@ -42,12 +37,11 @@
       ).toEqual(1);
 
       expect (
-        counter(1, { type: 'INCREMENT' })
+        counter(1, { type: 'DECREMENT' })
       ).toEqual(0);
 
-      expect (
-          counter(1, { type: 'SOMETHING_ELSE' })
-      ).toEqual(1);
+      // Confirm that the test are successful:
+      console.log('Tests passed!');
 
     </script>
   </body>
