@@ -251,7 +251,67 @@ The convention in Redux is that if the reducer receives `undefined` as the
 `state` argument, it *must* `return` what it considers to be the inital
 `state` of the application. In this case it will be zero.
 
+> *Code for*
+[***Video 5 @ 2:15*** ](https://github.com/nelsonic/learn-redux/blob/36775c88bb9d236f4918b1721c4d72c3ac8820a1/index.html#L18)
 
+"*Now come a few* ***cosmetic tweaks***" ... At the end of the video Dan replaces
+the `if/else` blocks with a `switch` statement* - which we *agree* is *neater* (*and works in* ***all browsers***)
+
+```js
+switch (action.type) {
+  case 'INCREMENT':
+    return state + 1;
+  case 'DECREMENT':
+    return state - 1;
+  default:
+    return state;
+}
+```
+
+*However* Dan *also* makes a couple of changes which are *not* just "*cosmetic*":
+changing the reducer function to be an **ES6**
+[`Arrow Function`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) and also includes an **ES6** [`default parameter`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/default_parameters)
+syntax to specify what the state should be if its undefined.
+
+The reducer function written in ES5 (*Works in* ***ALL Browsers***):
+```js
+function counter(state, action) {
+  state = state || 0; // default parameter assignment before ES6
+  /* reducer code here */
+}
+```
+is re-written using ES6 features: (***Only Chrome*** *fully-supports both these new features*)
+
+```js
+const counter = (state = 0, action) => {
+  /* reducer code here */
+}
+```
+
+***Arrow functions*** can be fewer characters to type but are
+[***not supported***](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Browser_compatibility) in **Safari** *or* **Internet Explorer** [*at the time of writing*] ...
+![ES6-arrow-functions-not-supported-in-safari-or-internet-explorer](https://cloud.githubusercontent.com/assets/194400/12050430/5800888c-aeed-11e5-91fb-0bb8ff2ae4a4.png)
+
+***Default parameters*** are a *nice* addition to JavaScript (ECMAScript 2015) because
+they make it clear what the default value of the parameter should be if its unset,
+however they are
+[***not supported***](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/default_parameters#Browser_compatibility) in **Internet Explorer**, **Safari** *or* **Opera** [*at the time of writing*] ...
+![es6-default_parameters-browser_compatibility](https://cloud.githubusercontent.com/assets/194400/12050412/095e590c-aeed-11e5-8dae-a8a4105715fb.png)
+
+These browsers still account for between 30%-50% of people using the internet in December 2015
+(*depending on the age/geography of the people using your app...
+see*:  https://en.wikipedia.org/wiki/Usage_share_of_web_browsers )
+And considering that *most* people take *ages* to upgrade to the latest browser
+Microsoft ***Internet Explorer 8*** *still has*
+[***10%*** *market share*!](https://www.netmarketshare.com/browser-market-share.aspx?qprid=2&qpcustomd=0)
+and is [still available](https://www.microsoft.com/en-us/download/internet-explorer-8-details.aspx)
+to be downloaded.
+
+using ES6 features has two implications:
++ If you want to run the code in a browser you need Google Chrome ***Canary***.
++ And/Or, You need to "*transpile*" (*convert*) your code using ***Babel*** before running it in browsers.
+
+We will come back to Babel later...
 
 <br />
 
