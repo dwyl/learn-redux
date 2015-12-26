@@ -13,13 +13,11 @@
     <script src="redux.min.js"></script>
     <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script>
-      // counter is the reducer that manages state updates:
+      // counter is the reducer (function) that manages state updates:
       function counter(state, action) {
         if (action.type === 'INCREMENT') {
-          // console.log('state:' + state + ' >>  ' + parseInt(state,10) + 1 + '|  action: '+JSON.stringify(action));
           return state + 1;
         } else if (action.type === 'DECREMENT') {
-          // console.log('state:' + state + ' >>  ' + parseInt(state,10) - 1 + '|  action: '+JSON.stringify(action));
           return state - 1;
         }
       }

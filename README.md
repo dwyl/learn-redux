@@ -162,9 +162,9 @@ The first [*and only*] function in this video is the Reducer for the counter exa
 A reducer accepts state and action as arguments and returns the next state.
 
 Before writing any code, we write a few assertions (*tests*) using
-[Michael Jackson](https://github.com/mjackson)'s
+[**Michael Jackson**](https://github.com/mjackson)'s
 (*Yes, there's a developer with that name...*)
-**Expect** (testing/assertion) library: https://github.com/mjackson/expect
+***Expect*** (testing/assertion) **library**: https://github.com/mjackson/expect
 
 We assert that when the state of the counter is zero and you pass an `INCREMENT`
 action, it should return 1.
@@ -211,6 +211,8 @@ if (action.type === 'INCREMENT') {
 
 If you run the tests, you will find that that this is enough to get them to pass.
 
+> Code for this point in the video:
+
 
 The convention in Redux is that if the reducer receives `undefined` as the
 `state` argument, it *must* `return` what it considers to be the inital
@@ -222,7 +224,7 @@ The convention in Redux is that if the reducer receives `undefined` as the
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
 
 > Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe
-x
+
 Redux Store has 3 methods:
 
 + `dispatch` - used to instruct redux to
