@@ -210,8 +210,39 @@ if (action.type === 'INCREMENT') {
 ```
 
 If you run the tests, you will find that that this is enough to get them to pass.
+> *Code for*
+[***Video 5 @ 1:15*** ](https://github.com/nelsonic/learn-redux/blob/8ded8853d5a789f94aff410eef0799bb66926a0d/index.html#L15)
 
-> Code for this point in the video:
+However, there are still some flaws in our implementation of the counter reducer.
+If we dispatch an action that it [*the reducer*] does not understand,
+it should return the current state of the application.
+
+```js
+expect (
+  counter(1, { type: 'SOMETHING_ELSE' })
+).toEqual(1);
+```
+
+However if we check for that, we will see that this test fails
+because we currently don't handle unknown actions.
+So I'm going to add an `else` clause that returns the current state
+and the tests pass now.
+
+```js
+if (action.type === 'INCREMENT') {
+  return state + 1;
+} else if (action.type === 'DECREMENT') {
+  return state - 1;
+} else {
+  return state;
+}
+```
+
+And the tests pass now.
+
+> *Code for*
+[***Video 5 @ 1:49*** ](https://github.com/nelsonic/learn-redux/blob/8ded8853d5a789f94aff410eef0799bb66926a0d/index.html#L15)
+
 
 
 The convention in Redux is that if the reducer receives `undefined` as the

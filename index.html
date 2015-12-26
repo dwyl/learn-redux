@@ -19,6 +19,8 @@
           return state + 1;
         } else if (action.type === 'DECREMENT') {
           return state - 1;
+        } else {
+          return state;
         }
       }
 
@@ -37,6 +39,10 @@
       expect (
         counter(1, { type: 'DECREMENT' })
       ).toEqual(0);
+
+      expect (
+        counter(1, { type: 'SOMETHING_ELSE' })
+      ).toEqual(1);
 
       // Confirm that the test are successful:
       console.log('Tests passed!');
