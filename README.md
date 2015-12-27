@@ -123,7 +123,7 @@ const render = () => {
 };
 ```
 
-Since the state is held inside the Redux Store the counter component can 
+Since the state is held inside the Redux Store the counter component can
 be a simple function which is a supported way of declaring components
 since React version `0.14`.
 
@@ -135,13 +135,34 @@ In my render method I pass the callbacks that call `store.dispatch`
 with appropriate actions.
 Now the application state is updated when I click the buttons.
 
-The final code for this video is:
+by the *end* of Video 8 your code should look like this:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/93674e84dc7267c285bb5fa714767a4293b85579/index.html#L19-L77)
+
+##### *Recap*
+
+[1:20] Now let's recap how this application works.
+
+The `counter` component is what I call a "*dumb component*",
+it does not contain *any* business logic, it only specifies how the current application state transforms into renderable output
+and how the callback passed via props are bound to the event handlers.
+
+When we render a counter we specify that its `value` should be taken
+from the Redux `store` *current* state.
+And when the user presses `increment` [button] or `decrement` [button]
+we dispatch the corresponding action to the Redux store.
+
+Our reducer specifies how the *next* state is calculated based on the
+*current* state and the `action` being dispatched.
+
+And *finally* we subscribe to the Redux store so our `render` function
+runs any time the state changes, so the `counter` [component]
+gets the *current* state.
 
 
 
-### Notes on using JSX Syntax in React Components in Browsers
+#### Notes on using JSX Syntax in React Components in Browsers
 
-*Most* React.js Examples are written using 
+*Most* React.js Examples are written using
 [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax.
 This is not *standard* JavaScript so no browser can *understand* it.  
 
@@ -153,12 +174,14 @@ If you want the Counter *example* to work in the browser (*without having to com
 **note**: in-browser compilation of JSX is [not recommended](http://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html#other-deprecations) for "*Production*" use.
 instead you will need to *compile* your JSX to JS using Babel...
 
-For more detail, 
+For more detail,
 read: https://facebook.github.io/react/docs/tooling-integration.html#jsx
 
-Don't forget to add `type="text/jsx"` to your script in `index.html` 
+Don't forget to add `type="text/jsx"` to your script tag in `index.html`
 to ensure that the JSX in the React Component is transformed.
 see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
+
+<br />
 
 ## Background Reading / Watching / Listening
 
