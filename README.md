@@ -77,62 +77,88 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 ### *Video Tutorials* by Dan Abramov (*the Creator of Redux*)
 
 The *fastest* way to get started with Redux is to watch the video tutorials
-recoded by Dan Abramov = Creator of Redux for
+recoded by Dan Abramov (Creator of Redux) for
 [egghead.io](https://egghead.io/series/getting-started-with-redux)
+
+We have made a set of *comprehensive* notes:
 
 <br />
 
 
-#### 7. Implementing Store from Scratch
 
-> Video: https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch
+#### 8. React Counter Example
 
-In the 7<sup>th</sup> Video Dan shows how the Redux store is *implemented*
-in ***20 lines of code***:
+> Video: https://egghead.io/lessons/javascript-redux-react-counter-example
+
+"In the simplest counter example I update the `document.body` *manually*
+any time the store state changes, but of course this approach does not scale
+to complex applications. So instead of manually updating the DOM I'm going
+to use React."
+
+I'm adding two scripts to the `<head>` corresponding to React and [React-DOM](https://facebook.github.io/react/docs/glossary.html)
+and a `root` div to render to:
 
 ```js
-const createStore = (reducer) => {
-  let state;
-  let listeners = [];
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
+```
+> These scripts are available on CDNJS: https://cdnjs.com/libraries/react/
+You can opt to use `fb.me` as your React CDN if you *prefer*.
 
-  const getState = () => state; // return the current state (object)
+So now I can call `ReactDOM.render` with my root component.
+The render function is called any time the store state changes,
+so I can safely pass the sate of the store as a `prop` to my
+root component.
 
-  const dispatch = (action) => {
-    state = reducer(state, action);
-    listeners.forEach(listener => listener());
-  };
-  const subscribe = (listener) => {
-    listeners.push(listeners);
-    return () => { // removing the listener from the array to unsubscribe listener
-      listeners = listeners.filter(l => l !== listener);
-    };
-  };
+```js
+const Counter = ({ value }) => (
+  <h1>{value}</h1>
+);
 
-  dispatch({});
-
-  return { getState, dispatch, subscribe };
-}
+const render = () => {
+  ReactDOM.render(
+    <Counter value={store.getState()}/>,
+    document.getElementById('root')
+  );
+};
 ```
 
-"Because the subscribe function can be called many times,
-we need to keep track of all the changed listeners.
-And any time it is called we want to push the new listener into the (`listeners`) array.
-Dispatching an action is the only way to change the internal state.
-in order to calculate the new state we call the reducer with the state
-and the action being dispatched.
-And after the state is updated we need to notify every change listener by calling it.  
-1:44 - There is an important missing piece here: we have not provided a way
-to unsubscribe a listener. But instead of adding a dedicated `unsubscribe` method,
-we will just return a function from the subscribe method that removes this listener from the `listeners` array.  
-2:03 - Finally by the time the store is returned we want it to have the inital
-state populated. so we are going to dispatch a dummy action just to get the
-reducer to return the initial value.  
-2:18 - this implementation of the Redux store is (*apart from a few minor details
-  and edge cases*) is the `createStore` we ship with Redux."
+Since the state is held inside the Redux Store the counter component can 
+be a simple function which is a supported way of declaring components
+since React version `0.14`.
 
-> Once you have watched the video, checkout the source code for Redux.createStore
-on Github: https://github.com/rackt/redux/blob/master/src/createStore.js
+Now I want to add increment and decrement buttons to the component,
+but I don't want to *hard-code* the Redux dependency into the component,
+so I just add `onIncrement` and `onDecrement` props as callbacks.
 
+In my render method I pass the callbacks that call `store.dispatch`
+with appropriate actions.
+Now the application state is updated when I click the buttons.
+
+The final code for this video is:
+
+
+
+##### Notes on using JSX Syntax in React Components in Browsers
+
+*Most* React.js Examples are written using 
+[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax.
+This is not *standard* JavaScript so no browser can *understand* it.  
+
+If you want the Counter *example* to work in the browser (*without having to compile your counter component with babel*) you will need to include the `JSXTransformer`:
+
+```js
+<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+```
+**note**: in-browser compilation of JSX is [not recommended](http://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html#other-deprecations) for "*Production*" use.
+instead you will need to *compile* your JSX to JS using Babel...
+
+For more detail, 
+read: https://facebook.github.io/react/docs/tooling-integration.html#jsx
+
+Don't forget to add `type="text/jsx"` to your script in `index.html` 
+to ensure that the JSX in the React Component is transformed.
+see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
 
 ## Background Reading / Watching / Listening
 
