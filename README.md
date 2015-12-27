@@ -83,99 +83,56 @@ recoded by Dan Abramov = Creator of Redux for
 <br />
 
 
-#### 6. Store Methods: getState(), dispatch(), and subscribe()
+#### 7. Implementing Store from Scratch
 
-> Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe
+> Video: https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch
 
-Video #6 picks up from where #5 finished, so if you skipped
-video 5, go back and watch it, and try writing/running the code!
-
-Dan starts off by showing how to include Redux (*from CDN JS*)
-in a client-side app so we can start using the methods.
-This is not the *recommended* way of loading Redux but works fine for this
-example/demo.
-
-"*In real applications I suggest you use npm and a module bundler like
-webpack or browserify*".
-
-
-In this tutorial we are using a single function from Redux called `createStore`
-
-Using **ES6** [**destructuring assignment**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-syntax to extract the `createStore` method from Redux:
+In the 7<sup>th</sup> Video Dan shows how the Redux store is *implemented*
+in ***20 lines of code***:
 
 ```js
-const { createStore } = Redux;  // 6 fewer characters to type. OMG! what will we do with all that extra free time?!
-// this is equivalent to:
-var createStore = Redux.createStore;
+const createStore = (reducer) => {
+  let state;
+  let listeners = [];
+
+  const getState = () => state; // return the current state (object)
+
+  const dispatch = (action) => {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  };
+  const subscribe = (listener) => {
+    listeners.push(listeners);
+    return () => { // removing the listener from the array to unsubscribe listener
+      listeners = listeners.filter(l => l !== listener);
+    };
+  };
+
+  dispatch({});
+
+  return { getState, dispatch, subscribe };
+}
 ```
 
-"The store binds together the **3 Principals** of Redux,
-it holds the current application state object, it lets you dispatch actions.
-When you create it [the store] you need to specify the reducer that tells
-how to update the state with actions.
-In this example we are calling `createStore` with `counter` as the reducer
-that manages the state updates."
+"Because the subscribe function can be called many times,
+we need to keep track of all the changed listeners.
+And any time it is called we want to push the new listener into the (`listeners`) array.
+Dispatching an action is the only way to change the internal state.
+in order to calculate the new state we call the reducer with the state
+and the action being dispatched.
+And after the state is updated we need to notify every change listener by calling it.  
+1:44 - There is an important missing piece here: we have not provided a way
+to unsubscribe a listener. But instead of adding a dedicated `unsubscribe` method,
+we will just return a function from the subscribe method that removes this listener from the `listeners` array.  
+2:03 - Finally by the time the store is returned we want it to have the inital
+state populated. so we are going to dispatch a dummy action just to get the
+reducer to return the initial value.  
+2:18 - this implementation of the Redux store is (*apart from a few minor details
+  and edge cases*) is the `createStore` we ship with Redux."
 
-Redux Store has **3** (*important*) **methods**:
+> Once you have watched the video, checkout the source code for Redux.createStore
+on Github: https://github.com/rackt/redux/blob/master/src/createStore.js
 
-+ `getState` - retrieves the current state of the Redux store. In the case of our counter the initial state is Zero.
-+ `dispatch` - lets you dispatch actions to change the state of your application.
-if we log the state of the application after dispatching an action (e.g: `INCREMENT`), we see that the state has changed to 1.
-(*the most commonly used method*)
-+ `subscribe` - lets you register a callback that the Redux store will call
-any time an action has been dispatched. so you can update the UI of your application to reflect the current application state.
-
-The code at the end of video #6 looks like this: (*explanatory comments added*)
-
-```js
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Learn Redux</title>
-    <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
-  </head>
-  <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
-    <script>
-      // counter is the reducer (function) that manages state updates:
-      const counter = (state = 0, action) => {
-        switch (action.type) {
-          case 'INCREMENT':
-            return state + 1;
-          case 'DECREMENT':
-            return state - 1;
-          default:
-            return state;
-        }
-      }
-
-      const { createStore } = Redux; // Redux is GLOBAL Object from redux.min.js
-      // create the store for our mini-app using the counter reducer
-      const store = createStore(counter);
-      console.log(store.getState()); // counter should be 0 (zero)
-
-      store.dispatch({type:'INCREMENT'}); // increment from zero to one
-      console.log(store.getState()); // counter is 1 (one)
-
-      const render = () => { // render function updates DOM with counter value
-        document.body.innerText = store.getState();
-      }
-      store.subscribe(render); // all actions re-redner the DOM
-      render(); // render the initial state of the page/app
-
-      // listen for click event on the whole document (click anywhere on the page)
-      document.addEventListener('click', () => {
-        store.dispatch({type:'INCREMENT'});
-      });
-    </script>
-  </body>
-</html>
-```
-
-Try viewing the [`index.html`](https://github.com/nelsonic/learn-redux/blob/2430c6e95eacd61ebf7ff4a660cc64e80c9e883e/index.html) file in [**Chrome** ***Canary***](https://github.com/nelsonic/learn-redux/issues/5#issue-123923845)
-
-> Download Chrome Canary: https://www.google.co.uk/chrome/browser/canary.html
 
 ## Background Reading / Watching / Listening
 
