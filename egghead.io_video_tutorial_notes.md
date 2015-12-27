@@ -239,7 +239,8 @@ We will come back to Babel later...
 
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
 
-> Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe
+> Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe  
+> Code: [Video 6 Code Snapshot]( https://github.com/nelsonic/learn-redux/blob/2430c6e95eacd61ebf7ff4a660cc64e80c9e883e/index.html)
 
 Video #6 picks up from where #5 finished, so if you skipped
 video 5, go back and watch it, and try writing/running the code!
@@ -330,3 +331,55 @@ The code at the end of video #6 looks like this: (*explanatory comments added*)
 Try viewing the [`index.html`](https://github.com/nelsonic/learn-redux/blob/2430c6e95eacd61ebf7ff4a660cc64e80c9e883e/index.html) file in [**Chrome** ***Canary***](https://github.com/nelsonic/learn-redux/issues/5#issue-123923845)
 
 > Download Chrome Canary: https://www.google.co.uk/chrome/browser/canary.html
+
+
+#### 7. Implementing Store from Scratch
+
+> Video: https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch  
+> Code: [Video #7 Code Snapshot](https://github.com/nelsonic/learn-redux/blob/17432aacb7e75702fe66338d9eacf27ffcca33c7/index.html#L15-L43)
+
+In the 7<sup>th</sup> Video Dan shows how the Redux store is *implemented*
+in ***20 lines of code***:
+
+```js
+const createStore = (reducer) => {
+  let state;
+  let listeners = [];
+
+  const getState = () => state; // return the current state (object)
+
+  const dispatch = (action) => {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  };
+  const subscribe = (listener) => {
+    listeners.push(listeners);
+    return () => { // removing the listener from the array to unsubscribe listener
+      listeners = listeners.filter(l => l !== listener);
+    };
+  };
+
+  dispatch({});
+
+  return { getState, dispatch, subscribe };
+}
+```
+
+"Because the subscribe function can be called many times,
+we need to keep track of all the changed listeners.
+And any time it is called we want to push the new listener into the (`listeners`) array.
+Dispatching an action is the only way to change the internal state.
+in order to calculate the new state we call the reducer with the state
+and the action being dispatched.
+And after the state is updated we need to notify every change listener by calling it.  
+1:44 - There is an important missing piece here: we have not provided a way
+to unsubscribe a listener. But instead of adding a dedicated `unsubscribe` method,
+we will just return a function from the subscribe method that removes this listener from the `listeners` array.  
+2:03 - Finally by the time the store is returned we want it to have the inital
+state populated. so we are going to dispatch a dummy action just to get the
+reducer to return the initial value.  
+2:18 - this implementation of the Redux store is (*apart from a few minor details
+  and edge cases*) is the `createStore` we ship with Redux."
+
+> Once you have watched the video, checkout the source code for Redux.createStore
+on Github: https://github.com/rackt/redux/blob/master/src/createStore.js
