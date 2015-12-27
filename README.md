@@ -139,7 +139,7 @@ The final code for this video is:
 
 
 
-##### Notes on using JSX Syntax in React Components in Browsers
+### Notes on using JSX Syntax in React Components in Browsers
 
 *Most* React.js Examples are written using 
 [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax.
