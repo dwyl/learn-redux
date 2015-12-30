@@ -100,7 +100,6 @@ And similarly when the counter is 1 and we `INCREMENT` it should return 2.
 expect (
   counter(1, { type: 'INCREMENT' })
 ).toEqual(2);
-```
 
 We add a test that check how `DECREMENT` works; from 2 to 1 and from 1 to zero:
 
@@ -383,3 +382,110 @@ reducer to return the initial value.
 
 > Once you have watched the video, checkout the source code for Redux.createStore
 on Github: https://github.com/rackt/redux/blob/master/src/createStore.js
+
+<br />
+
+
+#### 8. React Counter Example
+
+> Video: https://egghead.io/lessons/javascript-redux-react-counter-example
+
+"In the simplest counter example I update the `document.body` *manually*
+any time the store state changes, but of course this approach does not scale
+to complex applications. So instead of manually updating the DOM I'm going
+to use React."
+
+I'm adding two scripts to the `<head>` corresponding to React and [React-DOM](https://facebook.github.io/react/docs/glossary.html)
+and a `root` div to render to:
+
+```js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
+```
+> These scripts are available on CDNJS: https://cdnjs.com/libraries/react/
+You can opt to use `fb.me` as your React CDN if you *prefer*.
+
+So now I can call `ReactDOM.render` with my root component.
+The render function is called any time the store state changes,
+so I can safely pass the sate of the store as a `prop` to my
+root component.
+
+```js
+const Counter = ({ value }) => (
+  <h1>{value}</h1>
+);
+
+const render = () => {
+  ReactDOM.render(
+    <Counter value={store.getState()}/>,
+    document.getElementById('root')
+  );
+};
+```
+
+Since the state is held inside the Redux Store the counter component can
+be a simple function which is a supported way of declaring components
+since React version `0.14`.
+
+Now I want to add increment and decrement buttons to the component,
+but I don't want to *hard-code* the Redux dependency into the component,
+so I just add `onIncrement` and `onDecrement` props as callbacks.
+
+In my render method I pass the callbacks that call `store.dispatch`
+with appropriate actions.
+Now the application state is updated when I click the buttons.
+
+by the *end* of Video 8 your code should look like this:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/ff649795f8b92761c63e949601e90603eb05c8ee/index.html#L19-L77)
+
+##### *Recap*
+
+[1:20] Now let's recap how this application works.
+
+The `counter` component is what I call a "*dumb component*",
+it does not contain *any* business logic, it only specifies how the current application state transforms into renderable output
+and how the callback passed via props are bound to the event handlers.
+
+When we render a counter we specify that its `value` should be taken
+from the Redux `store` *current* state.
+And when the user presses `increment` [button] or `decrement` [button]
+we dispatch the corresponding action to the Redux store.
+
+Our reducer specifies how the *next* state is calculated based on the
+*current* state and the `action` being dispatched.
+
+And *finally* we subscribe to the Redux store so our `render` function
+runs any time the state changes, so the `counter` [component]
+gets the *current* state.
+
+
+
+#### Notes on using JSX Syntax in React in Browsers
+
+*Most* React.js Examples are written using
+[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax.
+This is not *standard* JavaScript so no browser can *understand* it.  
+
+If you want the Counter *example* to work in the browser (*without having to compile your counter component with babel*) you will need to include the `JSXTransformer`:
+
+```js
+<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+```
+**note**: in-browser compilation of JSX is [not recommended](http://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html#other-deprecations) for "*Production*" use.
+instead you will need to *compile* your JSX to JS using Babel...
+
+For more detail,
+read: https://facebook.github.io/react/docs/tooling-integration.html#jsx
+
+Don't forget to add `type="text/jsx"` to your script tag in `index.html`
+to ensure that the JSX in the React Component is transformed.
+see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
+
+> *Final version* of *working* code for Video 9: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/ff649795f8b92761c63e949601e90603eb05c8ee/index.html#L19-L77)
+You can run this by opening it in **Google Chrome Canary**:
+
+![learn-redux-video-9-counter-example](https://cloud.githubusercontent.com/assets/194400/12079438/c0203cdc-b230-11e5-9338-00254dc9761a.png)
+
+
+<br />

@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Learn Redux</title>
+    <title>Learn Redux - Counter Example</title>
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
@@ -71,10 +71,6 @@ const render = () => { // render function updates DOM with counter
 store.subscribe(render); // all actions re-redner the DOM
 render(); // render the initial state of the page/app
 
-// listen for click event on the whole document (click anywhere on the page)
-document.addEventListener('click', () => {
-  store.dispatch({type:'INCREMENT'});
-});
 
 // tests make sure everything still works when ever we change any code
 expect (
