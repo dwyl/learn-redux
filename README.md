@@ -133,8 +133,13 @@ testAddCounter();
 console.log('All tests passed.');
 ```
 
-At first I use the [`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 
-method.
+At first I use the 
+[`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 
+method to add an item at the end of the `Array`, and it works.
+> Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/dca4f085effb3e515c9c81882c2e879f2336318f/index.html#L16-L27)
+
+*However* we need to learn to ***avoid mutations*** in Redux 
+and I'm enforcing this by calling `deep-freeze` on the original array.
 
 
 ## Background Reading / Watching / Listening

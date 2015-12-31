@@ -5,17 +5,18 @@
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
+    <script src="https://wzrd.in/standalone/expect@latest"></script>
+    <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
   </head>
   <body style='margin: 0 1em;'>
     <div id='root'>
-      <p>If you can see this the Redux Script <em>Failed</em> ...</p>
+      <!-- <p>If you can see this the Redux Script <em>Failed</em> ...</p> -->
     </div>
 
-    <!-- Specify the Counter Component is JSX to ensure it gets compiled -->
     <script>
 const addCounter = (list) => {
-  
-  
+  list.push(0);
+  return list;
 };
 
 const testAddCounter = () => {
