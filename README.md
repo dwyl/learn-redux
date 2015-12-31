@@ -83,13 +83,16 @@ recoded by Dan Abramov (Creator of Redux) for
 We have made a set of *comprehensive* notes:
 [egghead.io_**video_tutorial**_***notes***.md](https://github.com/nelsonic/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
 
-If you have them open while you are watching the videos you can
-go a lot faster.
+If you have the notes open while you are watching the videos you can
+go a *lot* faster.  
+
 *Please* give feedback and suggest improvements by creating issues on GitHub:
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
+#### 10. Avoiding Object Mutations with Object.assign() and ...spread
 
+> Video: https://egghead.io/lessons/javascript-redux-avoiding-object-mutations-with-object-assign-and-spread
 
 
 

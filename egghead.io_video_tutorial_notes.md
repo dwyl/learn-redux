@@ -688,5 +688,8 @@ and how to *protect* yourself from *mutation* with `deepFreeze`
 in your tests.
 
 
+> Code snapshot at the end of Video 9:
+[`index.html`(https://github.com/nelsonic/learn-redux/blob/f25da6293c26b9262c888219139830979c51633b/index.html#L16-L67)
+
 <br />
 
