@@ -215,7 +215,15 @@ to write it more concicely:
 > **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
 *of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
 
+Now that we have implemented adding and removing counters,
 
+```js
+const removeCounter = (list, index) => {
+  return [
+    ...list.slice(0, index),
+    ...list.slice(index + 1)
+  ];
+};
 
 <br />
 
