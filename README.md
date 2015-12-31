@@ -83,10 +83,10 @@ recoded by Dan Abramov (Creator of Redux) for
 We have made a set of *comprehensive* notes:
 [egghead.io_**video_tutorial**_***notes***.md](https://github.com/nelsonic/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
 
-If you have them open while you are watching the videos you can 
-go a lot faster. 
-*Please* give feedback and suggest improvements by creating issues on GitHub: 
-https://github.com/nelsonic/learn-redux/issues 
+If you have them open while you are watching the videos you can
+go a lot faster.
+*Please* give feedback and suggest improvements by creating issues on GitHub:
+https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
 <br />
@@ -98,7 +98,7 @@ In this video we learn how to avoid mutating arrays using concat(), slice(), and
 
 > Video: https://egghead.io/lessons/javascript-redux-avoiding-array-mutations-with-concat-slice-and-spread
 
-"In this lesson I use the *expect* library to make assertions 
+"In this lesson I use the *expect* library to make assertions
 and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my code is ***free*** *of* ***mutations***."
 
 ```js
@@ -112,13 +112,13 @@ I would need to write a few function that operate on its' state and
 its' state is an `Array` of JavaScript *Numbers* representing the individual counters."
 
 The first function I want to write is called addCounter
-and all it should do is to *append* a zero at the end 
+and all it should do is to *append* a zero at the end
 of the passed `Array`.
 
 
 ```js
 const addCounter = (list) => {
-  
+  // write the tests first then implement the function to make them pass.
 };
 
 const testAddCounter = () => {
@@ -136,12 +136,12 @@ testAddCounter();
 console.log('All tests passed.');
 ```
 
-At first I use the 
-[`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 
+At first I use the
+[`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
 method to add an item at the end of the `Array`, and it works.
 > Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/65fd87d59a91ca1b12fb8b3a3d1e5516ee520174/index.html#L17-L20)
 
-*However* we need to learn to ***avoid mutations*** in Redux 
+*However* we need to learn to ***avoid mutations*** in Redux
 and I'm enforcing this by calling `deepFreeze` on the original array.
 Now my attempt to `.push` does not work; it cannot add a new property to a "frozen" object.
 Instead of `.push` I'm going to use the `concat` method which does not *modify* the array.
@@ -153,7 +153,8 @@ const addCounter = (list) => {
 ```
 
 Now the tests pass without *mutations*.
-And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+
+And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 to write the code in a more consise way:
 
 ```js
@@ -162,14 +163,34 @@ const addCounter = (list) => {
 };
 ```
 
-> Note: Again, (at the time of writing) You will need to be running 
-[**Chrome**](https://www.google.co.uk/chrome/browser/canary.html) or 
-[**Firefox**](https://www.mozilla.org/en-GB/firefox/developer/) 
-for this example to work because the 
+> **Note**: *Again*, (at the time of writing) You will need to be running
+[**Chrome**](https://www.google.co.uk/chrome/browser/canary.html) or
+[**Firefox**](https://www.mozilla.org/en-GB/firefox/developer/)
+for this example to work because the
 [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
-is still [not supported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility) in all browsers ... even though it is a *Standard* ... 
+is still [***not*** *(yet)* ***supported***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility) in *all* browsers ... even though it is a *Standard* ...
 
 
+My next function is `removeCounter` and it accepts two arguments: `list` (*an `Array` of `Numbers`*) and `index` the `Number` to *skip* from the `Array`.
+
+So if I've got three numbers 
+and I'm passing 1 as the second argument,
+I expect to receive an `Array` with *two* items with the *second* item *skipped* in the `Array`:
+
+
+```js
+const testRemoveCounter = () => {
+  const listBefore = [0, 10, 20];
+  const listAfter  = [0, 20];
+  expect(
+  	removeCounter(listBefore, 1)
+  ).toEqual(listAfter);
+};
+
+```
+
+
+<br />
 
 ## Background Reading / Watching / Listening
 
@@ -191,7 +212,7 @@ http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good 
 > Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks
 
 At the time of writing, the *minified* version of redux is 5.4kb and has
-No Dependencies. 
+No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)
 We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
