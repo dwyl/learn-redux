@@ -124,6 +124,9 @@ const addCounter = (list) => {
 const testAddCounter = () => {
   const listBefore = [];
   const listAfter  = [0];
+
+  deepFreeze(listBefore);
+
   expect(
   	addCounter(listBefore)
   ).toEqual(listAfter);
@@ -136,10 +139,36 @@ console.log('All tests passed.');
 At first I use the 
 [`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 
 method to add an item at the end of the `Array`, and it works.
-> Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/dca4f085effb3e515c9c81882c2e879f2336318f/index.html#L16-L27)
+> Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/65fd87d59a91ca1b12fb8b3a3d1e5516ee520174/index.html#L17-L20)
 
 *However* we need to learn to ***avoid mutations*** in Redux 
-and I'm enforcing this by calling `deep-freeze` on the original array.
+and I'm enforcing this by calling `deepFreeze` on the original array.
+Now my attempt to `.push` does not work; it cannot add a new property to a "frozen" object.
+Instead of `.push` I'm going to use the `concat` method which does not *modify* the array.
+
+```js
+const addCounter = (list) => {
+  return list.concat([0]);
+};
+```
+
+Now the tests pass without *mutations*.
+And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+to write the code in a more consise way:
+
+```js
+const addCounter = (list) => {
+  return [...list, 0];
+};
+```
+
+> Note: Again, (at the time of writing) You will need to be running 
+[**Chrome**](https://www.google.co.uk/chrome/browser/canary.html) or 
+[**Firefox**](https://www.mozilla.org/en-GB/firefox/developer/) 
+for this example to work because the 
+[***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+is still [not supported](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility) in all browsers ... even though it is a *Standard* ... 
+
 
 
 ## Background Reading / Watching / Listening
