@@ -489,3 +489,206 @@ Run it by opening it in **Google Chrome Canary**:
 
 <br />
 
+
+#### 9. Avoiding Array Mutations with concat(), slice(), and ...spread
+
+In this video we learn how to avoid mutating arrays using concat(), slice(), and the ES6 array spread operator.
+
+> Video: https://egghead.io/lessons/javascript-redux-avoiding-array-mutations-with-concat-slice-and-spread
+
+"In this lesson I use the *expect* library to make assertions
+and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my code is ***free*** *of* ***mutations***."
+
+```js
+    <script src="https://wzrd.in/standalone/expect@latest"></script>
+    <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
+```
+These are loaded from [@Substack](https://github.com/substack)'s CDN: https://wzrd.in
+
+"Let's say that I want to implement a **counter** ***list*** application.
+I would need to write a few function that operate on its' state and
+its' state is an `Array` of JavaScript *Numbers* representing the individual counters."
+
+The first function I want to write is called addCounter
+and all it should do is to *append* a zero at the end
+of the passed `Array`.
+
+
+```js
+const addCounter = (list) => {
+  // write the tests first then implement the function to make them pass.
+};
+
+const testAddCounter = () => {
+  const listBefore = [];
+  const listAfter  = [0];
+
+  deepFreeze(listBefore);
+
+  expect(
+    addCounter(listBefore)
+  ).toEqual(listAfter);
+}
+
+testAddCounter();
+console.log('All tests passed.');
+```
+
+At first I use the
+[`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+method to add an item at the end of the `Array`, and it works.
+> Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/65fd87d59a91ca1b12fb8b3a3d1e5516ee520174/index.html#L17-L20)
+
+*However* we need to learn to ***avoid mutations*** in Redux
+and I'm enforcing this by calling `deepFreeze` on the original array.
+Now my attempt to `.push` does not work; it cannot add a new property to a "frozen" object.
+Instead of `.push` I'm going to use the `concat` method which does not *modify* the array.
+
+```js
+const addCounter = (list) => {
+  return list.concat([0]);
+};
+```
+
+Now the tests pass without *mutations*.
+
+And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+to write the code in a more consise way:
+
+```js
+const addCounter = (list) => {
+  return [...list, 0];
+};
+```
+
+> **Note**: *Again*, (at the time of writing) You will need to be running
+[**Chrome**](https://www.google.co.uk/chrome/browser/canary.html) or
+[**Firefox**](https://www.mozilla.org/en-GB/firefox/developer/)
+for this example to work because the
+[***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+is still [***not*** *(yet)* ***supported***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility) in *all* browsers ... even though it is a *Standard* ...
+
+
+My next function is `removeCounter` and it accepts two arguments: `list` (*an `Array` of `Numbers`*) and `index` the `Number` to *skip* from the `Array`.
+
+So if I've got three numbers 
+and I'm passing 1 as the second argument,
+I expect to receive an `Array` with *two* items with the *second* item *skipped* in the `Array`:
+
+
+```js
+const testRemoveCounter = () => {
+  const listBefore = [0, 10, 20];
+  const listAfter  = [0, 20];
+  expect(
+    removeCounter(listBefore, 1)
+  ).toEqual(listAfter);
+};
+```
+
+*Usually* to `delete` an item from an `Array` I would use the `splice` method.
+However `splice` is a mutating method, so you can't use it in Redux.
+I'm going to `deepFreeze` the (`listBefore`) `Array` object,
+and now I need to figure out a *different* way of removing an item from 
+the array *without mutating it*.
+I'm using a method called `slice` here and it does not have *anything* to do with `splice`; it is ***not mutating*** and it gives me a part of the `Array` from some beginning to some end index.
+So what I am doing is taking the parts before the index I want to skip
+and after the index I want to skip
+and I `concat` them to get a new array:
+
+```js
+const removeCounter = (list, index) => {
+  return list
+    .slice(0, index)
+    .concat(list.slice(index+1));
+};
+```
+
+Finally, instead of writing it as a method chain with `concat` calls, 
+I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+to write it more concicely:
+
+```js
+const removeCounter = (list, index) => {
+  return [
+    ...list.slice(0, index),
+    ...list.slice(index + 1)
+  ];
+};
+```
+
+> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
+*of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
+
+Now that we have implemented adding and removing counters,
+lets implement *incrementing* the counter:
+
+```js
+incrementCounter = (list, index) => {
+  
+};
+
+// write a test/assertion before implementing the function:
+testIncrementCounter = () => {
+  const listBefore = [0, 10, 20];
+  const listAfter  = [0, 11, 20];
+
+  expect(
+    incrementCounter(listBefore, 1)
+  ).toEqual(listAfter);
+
+}
+```
+
+The `incrementCounter` function takes two arguments:
+`list` - the `Array` (*of all our counters*) 
+and `index` - the counter that should be incremented.
+So the returned value (`Array`) has the same count of items
+but one of them is incremented.
+
+Directly setting the value at the `index` *works* but this a mutation.
+so if we add a `deepFreeze` call its *not* going to work *anymore*.
+
+So *how* do we *replace* a single value in the array
+ ***without mutating*** it?
+ it turns out the *answer* is *really similar* to how we *remove* an item.
+
+ ```js
+incrementCounter = (list, index) => {
+  return list
+    .slice(0, index)
+    .concat(list[index] + 1)
+    .concat(list.slice(index + 1));
+};
+ ```
+
+We want to take a slice *before* the `index` 
+and `concat` it with a single item `Array` with a *new* value
+and then `concat` it with the *rest* of the original `Array`.
+
+Fincally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+we can spread over the left part of the `Array`
+*specify* the *new* item,
+and then *spread* over the right part of the *original* `Array`
+and this *looks* much nicer ... 
+
+```js
+incrementCounter = (list, index) => {
+  return [
+    ...list.slice(0, index),
+    list[index] + 1,
+    ...list.slice(index + 1)
+  ];
+};
+```
+
+In this lesson you learned how to use the `concat` method
+*or* the *spread operator*
+and the `slice` method to add, remove and change items in arrays
+*without mutating* them
+and how to *protect* yourself from *mutation* with `deepFreeze`
+in your tests.
+
+
+<br />
+
