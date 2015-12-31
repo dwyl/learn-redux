@@ -94,6 +94,54 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-avoiding-object-mutations-with-object-assign-and-spread
 
+Like in the previous example I use `expect` and `deepFreeze` libraries
+from NPM to make test assertions.
+And this time I'm testing a function called `toggleTodo`
+that takes a todo `Object` and *flips* its "*completed*" field.
+So if `completed` was `false` it should be `true` in the returned value
+or if it was `true` it should be `false`
+
+```js
+const toggleTodo = (todo) => {
+	
+};
+
+const testToggleTodo = () => {
+  const todoBefore = {
+  	id: 0,
+  	text: 'Learn Redux',
+  	completed: false
+  }
+  const todoAfter  = {
+  	id: 0,
+  	text: 'Learn Redux',
+  	completed: true
+  }
+  expect(
+  	toggleTodo(todoBefore)
+  ).toEqual(todoAfter);
+}
+
+testToggleTodo(); // run the test
+
+```
+
+Just like in the last lesson, I'm going to start by writing 
+a *mutating* version that passes the current test.
+So a *mutating* version just flips the `completed` field and re-assigns it on the passed `Object` (*the `todo`):
+
+```js
+const toggleTodo = (todo) => {
+  todo.completed = !todo.completed;
+  return todo;
+}
+```
+And while it works, 
+we know that *mutations* are ***not allowed*** in Redux.
+So to *enforce* this, I'm calling `deepFreeze` on my `todo` Object 
+(*in the case of the test `todoBefore`*) 
+and I'm *not allowed* to change its `completed` field anymore.
+
 
 
 <br />
