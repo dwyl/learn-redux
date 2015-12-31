@@ -109,14 +109,22 @@ https://youtu.be/okdC5gcD-dM (*good overview by* [**Tim Griesser**](https://gith
 [@teropa](https://github.com/teropa)
 http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
 + Single source of truth: https://en.wikipedia.org/wiki/Single_Source_of_Truth
-
 + Redux Undo: https://github.com/omnidan/redux-undo
 
-> Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks
+
+## Notes:
 
 At the time of writing, the *minified* version of redux is 5.4kb and has
 No Dependencies.
-[![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)
+[![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
 ... Unidirectional Data Flow (*why is this better than bi-directional e.g: Angular.js*)
+
+## Kudos
+
+> Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*   
+> Thanks to [Milo](https://github.com/bananaoomarang) for his 
+*fantastic* demo: https://github.com/bananaoomarang/isomorphic-redux  
+> and *love* to [Niki](https://github.com/nikhilaravi) for her enthusiasm
+while explaining it all to us ... 

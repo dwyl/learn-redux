@@ -487,8 +487,6 @@ Run it by opening it in **Google Chrome Canary**:
 
 ![learn-redux-video-9-counter-example](https://cloud.githubusercontent.com/assets/194400/12079438/c0203cdc-b230-11e5-9338-00254dc9761a.png)
 
-<br />
-
 
 #### 9. Avoiding Array Mutations with concat(), slice(), and ...spread
 
@@ -500,8 +498,8 @@ In this video we learn how to avoid mutating arrays using concat(), slice(), and
 and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my code is ***free*** *of* ***mutations***."
 
 ```js
-    <script src="https://wzrd.in/standalone/expect@latest"></script>
-    <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
+<script src="https://wzrd.in/standalone/expect@latest"></script>
+<script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
 ```
 These are loaded from [@Substack](https://github.com/substack)'s CDN: https://wzrd.in
 
@@ -537,7 +535,7 @@ console.log('All tests passed.');
 At first I use the
 [`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
 method to add an item at the end of the `Array`, and it works.
-> Code: [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/65fd87d59a91ca1b12fb8b3a3d1e5516ee520174/index.html#L17-L20)
+> Snapshot of code for [Video 9 @ 0:36](https://github.com/nelsonic/learn-redux/blob/65fd87d59a91ca1b12fb8b3a3d1e5516ee520174/index.html#L17-L20)
 
 *However* we need to learn to ***avoid mutations*** in Redux
 and I'm enforcing this by calling `deepFreeze` on the original array.
@@ -569,7 +567,7 @@ for this example to work because the
 is still [***not*** *(yet)* ***supported***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility) in *all* browsers ... even though it is a *Standard* ...
 
 
-My next function is `removeCounter` and it accepts two arguments: `list` (*an `Array` of `Numbers`*) and `index` the `Number` to *skip* from the `Array`.
+The next function is `removeCounter` and it accepts two arguments: `list` (*an `Array` of `Numbers`*) and `index` the `Number` to *skip* from the `Array`.
 
 So if I've got three numbers 
 and I'm passing 1 as the second argument,
