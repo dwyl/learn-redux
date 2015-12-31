@@ -210,13 +210,6 @@ Finally, instead of writing it as a method chain with `concat` calls,
 I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
 to write it more concicely:
 
-
-
-> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
-*of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
-
-Now that we have implemented adding and removing counters,
-
 ```js
 const removeCounter = (list, index) => {
   return [
@@ -224,6 +217,59 @@ const removeCounter = (list, index) => {
     ...list.slice(index + 1)
   ];
 };
+```
+
+> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
+*of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
+
+Now that we have implemented adding and removing counters,
+lets implement *incrementing* the counter:
+
+```js
+incrementCounter = (list, index) => {
+	
+};
+
+// write a test/assertion before implementing the function:
+testIncrementCounter = () => {
+  const listBefore = [0, 10, 20];
+  const listAfter  = [0, 11, 20];
+
+  expect(
+  	incrementCounter(listBefore, 1)
+  ).toEqual(listAfter);
+
+}
+```
+
+The `incrementCounter` function takes two arguments:
+`list` - the `Array` (*of all our counters*) 
+and `index` - the counter that should be incremented.
+So the returned value (`Array`) has the same count of items
+but one of them is incremented.
+
+Directly setting the value at the `index` *works* but this a mutation.
+so if we add a `deepFreeze` call its *not* going to work *anymore*.
+
+So *how* do we *replace* a single value in the array
+ ***without mutating*** it?
+ it turns out the *answer* is *really similar* to how we *remove* an item.
+
+ ```js
+incrementCounter = (list, index) => {
+  return list
+    .slice(0, index)
+    .concat(list[index] + 1)
+    .concat(list.slice(index + 1));
+};
+ ```
+
+We want to take a slice *before* the `index` 
+and `concat` it with a single item `Array` with a *new* value
+and then `concat` it with the *rest* of the original `Array`.
+
+Fincally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+
 
 <br />
 
