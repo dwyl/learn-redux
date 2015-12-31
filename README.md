@@ -99,9 +99,42 @@ In this video we learn how to avoid mutating arrays using concat(), slice(), and
 > Video: https://egghead.io/lessons/javascript-redux-avoiding-array-mutations-with-concat-slice-and-spread
 
 "In this lesson I use the *expect* library to make assertions 
-and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my code is ***free*** *of* ***mutations***.
-"
+and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my code is ***free*** *of* ***mutations***."
 
+```js
+    <script src="https://wzrd.in/standalone/expect@latest"></script>
+    <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
+```
+These are loaded from [@Substack](https://github.com/substack)'s CDN: https://wzrd.in
+
+"Let's say that I want to implement a **counter** ***list*** application.
+I would need to write a few function that operate on its' state and
+its' state is an `Array` of JavaScript *Numbers* representing the individual counters."
+
+The first function I want to write is called addCounter
+and all it should do is to *append* a zero at the end 
+of the passed `Array`.
+
+
+```js
+const addCounter = (list) => {
+  
+};
+
+const testAddCounter = () => {
+  const listBefore = [];
+  const listAfter  = [0];
+  expect(
+  	addCounter(listBefore)
+  ).toEqual(listAfter);
+}
+
+testAddCounter();
+console.log('All tests passed.');
+```
+
+At first I use the [`Array.push()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 
+method.
 
 
 ## Background Reading / Watching / Listening
@@ -116,7 +149,7 @@ and the journey that lead him to writing Redux.
 https://youtu.be/okdC5gcD-dM (*good overview by* [**Tim Griesser**](https://github.com/tgriesser) December 2015)
 + Full-Stack Redux Tutorial (Redux, React & Immutable.js) by
 [@teropa](https://github.com/teropa)
-http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 2h+!
+http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
 + Single source of truth: https://en.wikipedia.org/wiki/Single_Source_of_Truth
 
 + Redux Undo: https://github.com/omnidan/redux-undo
@@ -124,5 +157,8 @@ http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good 
 > Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks
 
 At the time of writing, the *minified* version of redux is 5.4kb and has
+No Dependencies. 
+[![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)
+We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
 ... Unidirectional Data Flow (*why is this better than bi-directional e.g: Angular.js*)

@@ -436,7 +436,7 @@ with appropriate actions.
 Now the application state is updated when I click the buttons.
 
 by the *end* of Video 8 your code should look like this:
-[`index.html`](https://github.com/nelsonic/learn-redux/blob/ff649795f8b92761c63e949601e90603eb05c8ee/index.html#L19-L77)
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/a6cbc789e078d8c42a73066dbb94adf8bd5a7f3f/index.html#L19-L72)
 
 ##### *Recap*
 
@@ -481,11 +481,11 @@ Don't forget to add `type="text/jsx"` to your script tag in `index.html`
 to ensure that the JSX in the React Component is transformed.
 see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
 
-> *Final version* of *working* code for Video 9: 
-[`index.html`](https://github.com/nelsonic/learn-redux/blob/ff649795f8b92761c63e949601e90603eb05c8ee/index.html#L19-L77)
-You can run this by opening it in **Google Chrome Canary**:
+> *Final version* of *working* code for Video 8: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/a6cbc789e078d8c42a73066dbb94adf8bd5a7f3f/index.html#L19-L72)  
+Run it by opening it in **Google Chrome Canary**:
 
 ![learn-redux-video-9-counter-example](https://cloud.githubusercontent.com/assets/194400/12079438/c0203cdc-b230-11e5-9338-00254dc9761a.png)
 
-
 <br />
+
