@@ -186,8 +186,35 @@ const testRemoveCounter = () => {
   	removeCounter(listBefore, 1)
   ).toEqual(listAfter);
 };
-
 ```
+
+*Usually* to `delete` an item from an `Array` I would use the `splice` method.
+However `splice` is a mutating method, so you can't use it in Redux.
+I'm going to `deepFreeze` the (`listBefore`) `Array` object,
+and now I need to figure out a *different* way of removing an item from 
+the array *without mutating it*.
+I'm using a method called `slice` here and it does not have *anything* to do with `splice`; it is ***not mutating*** and it gives me a part of the `Array` from some beginning to some end index.
+So what I am doing is taking the parts before the index I want to skip
+and after the index I want to skip
+and I `concat` them to get a new array:
+
+```js
+const removeCounter = (list, index) => {
+  return list
+    .slice(0, index)
+    .concat(list.slice(index+1));
+};
+```
+
+Finally, instead of writing it as a method chain with `concat` calls, 
+I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+to write it more concicely:
+
+
+
+> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
+*of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
+
 
 
 <br />
