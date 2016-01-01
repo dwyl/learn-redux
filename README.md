@@ -163,8 +163,9 @@ console.log(store.getState());
 console.log('--------------');
 ```
 
-> or you can run: [`index.html`]() (Snapshot for Video 14 @ 0:40)
-> which has the following console *output*:
+> or you can run: [`index.html`](https://github.com/nelsonic/learn-redux/blob/33a46dbc0eb733f6494fdb8de89d91dde58c1731/index.html#L50-L87) 
+(Code Snapshot for Video 14 @ 0:40)  
+> which has the following developer console *output*:
 
 ![learn-redux-output-of-video-14-console logs](https://cloud.githubusercontent.com/assets/194400/12122835/6dc1bc44-b3d5-11e5-8e4d-691bdd86f910.png)
 
@@ -173,23 +174,55 @@ Representing the *whole* `state` of the application
 as an `Array` of todos works for a *simple* example 
 but what if we want to store *more* information?
 For *example* we may want to let the user choose which todos 
-are *currently* *visible* with a visibility filter
+are *currently* *visible* with a `visibilityFilter`
 such as `SHOW_COMPLETED`, `SHOW_ALL` or `SHOW_ACTIVE`.
+
+```js
+const visibilityFilter = (
+  state = 'SHOW_ALL', // default state
+  action
+) => {
+  switch (action.type) {
+    case: 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+```
 
 The `state` of the `visibilityFilter` is a *simple* `String`
 representing the *current* filter
 and it is *changed* by the `SET_VISIBILITY_FILTER` `action`.
+
+```js
+const todoApp = (state = {}, action) => {
+  return {
+    todos: todos(
+      state.todos,
+      action
+    ),
+    visibilityFilter: visibilityFilter(
+      state.visibilityFilter,
+      action
+    )
+  };
+};
+```
+
 To *store* this *new* information, I don't need to *change* 
 the *exisiting* reducers, I will use the Reducer Composition Pattern
 and create a *new* reducer that *calls* the existing reducers 
 to manage parts of its state 
 and combines the results in a *single* `state` `Object`
-note that the first time it runs, it will pass `undefined` as the `state`
+***note*** that the first time it runs, it will pass `undefined` as the `state`
 to the "*child*" reducers because the *initial* state 
 of the *combined* reducer is an *empty* `Object`
 so all its fields are `undefined` 
 this gets the "*child*" reducers to return their *initial* `state`
 and populates the `state` `Object` for the first time.
+
+> Code Snapshot for Video 14 @ 1:45 [`index.html`]()
 
 When an `action` comes in, it calls the reducers 
 with the parts of the `state` that they manage and the `action`
@@ -197,6 +230,8 @@ and combines the result into the *new* `State` object.
 This is *another* example of the Reducer Composition Pattern
 but this time we use it to *combine* *several* reducers
 into a single reducer that we will now use to create our `store`.
+
+> 
 
 The *initial* `state` of the *combined* reducer now contains
 the *initial* `state` of the *independent* reducers 
