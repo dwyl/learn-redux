@@ -139,6 +139,10 @@ const testAddTodo = () => {
   	todos(stateBefore, action);
   ).toEqual(stateAfter);
 };
+
+testAddTodo();
+
+console.log('All tests passed.');
 ```
 
 I'm declaring two variables:
@@ -161,6 +165,22 @@ the todo reducer with the `stateBefore` and the `action`
 I'm going to get the result that is ***deeply*** **equal** 
 to the `stateAfter` I *just* declared.
 
+This concludes my *first* test, now I can call it 
+just like a regular JavaScript function: `testAddTodo();` 
+And if it doesn't `throw` in the `expect` call I'm going to see a message
+that the tests have passed.
+
+Of *course* it fails because the reducer is not implemented yet;
+it's an *empty* function, so it returns `undefined` 
+instead of the `Array` with a single item that I `expect` in the test.
+
+To fix this I will need my reducer to take a look at the `action.type` 
+
+
+
+
+
+
 <br />
 
 ## Background Reading / Watching / Listening
@@ -182,7 +202,7 @@ http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good 
 
 ## Notes:
 
-At the time of writing, the *minified* version of redux is 5.4kb and has
+At the time of writing, the *minified* version of redux is **5.4kb** and has
 No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
