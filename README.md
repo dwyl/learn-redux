@@ -162,13 +162,106 @@ const testToggleTodo = () => {
   ];
 
   deepFreeze(stateBefore);
-  deepFreeze(stateAfter);
+  deepFreeze(action);
+
+  expect(
+  	todos(stateBefore, action)
+  ).toEqual(stateAfter);
 }
+
+testToggleTodo();
+console.log('All tests passed.')
+
 ```
 
 the reducer *must* be a "*pure function*"
 so at a matter of *precaution* I call `deepFreeze` 
 on the `state` and the `action`
+
+*Finally*, just like in the previous lesson, I'm asserting 
+that the result of calling our reducer with the `stateBefore` and the `action` 
+is going to be "*deeply equal*" (`toEqual`) the `stateAfter`.
+
+Now, my test is a function so I need to call it at the end of the file
+And if I run it, it fails because I have not *implemented* 
+handling this action yet.
+
+I'm adding a new `switch case` to my reducer
+and I remember that I should not change the original `Array`
+so I'm using the [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method
+to produce a *new* `Array`
+the function I pass as an argument will be called for *every* todo
+so if its *not* the todo I'm looking for, I don't want to change it,
+so I just `return` it as is.  
+*However* if the todo *is* the one we want to toggle
+I'm going to `return` a *new* `Object`
+that *all* the properties of the *original* todo `Object`
+thanks to the `Object` spread operator
+but *also* an *inverted* value of the `completed` field:
+
+```js
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        }
+      ];
+    case 'TOGGLE_TODO':
+      return state.map(todo => {
+      	if(todo.id !== action.id){
+      	  return todo;
+      	}
+      	return {
+      	  ...todo,
+      	  completed: !todo.completed
+        };
+      });
+    default:
+      return state;
+  }
+};
+```
+
+Now both of our tests run successfully...
+And we have an implementation of the reducer that can add and toggle todos.
+
+> ***Note**: While the [*spread operator*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility)
+is an **ES6** *Standard* for `Array`, its only a ***Draft*** for `Object`
+proposed for **ES7** which means it is 
+**not** yet **available** in ***any*** **Browser**! 
+As such I have modified Dan's
+code to use `Object.assign` (*see Video #10) 
+which (*at least*) works in Chrome...:
+
+```js
+return Object.assign({}, todo, {
+  completed: !todo.completed
+});
+```
+
+The *works* in ***ALL Modern Browsers Today (Without Babel)*** way of doing this is:
+```js
+var keys = Object.keys(todo);
+var toggled = {};             // new object to avoid mutation
+keys.forEach(function(index) {
+  toggled.index = todo.index; // copy all properties/valud of todo
+});
+toggled.completed = !todo.completed
+return toggled;
+```
+
+We can *probably* ***all*** agree that the code is more *elegant* 
+with the ES7 Object spread operator.
+But in the interest of having something that works *now* 
+(*without Babel for running this tutorial in a Chrome...*)
+I've opted to use the `Object.assign` method.
+
+
 
 
 <br />
