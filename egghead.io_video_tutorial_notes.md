@@ -1102,7 +1102,7 @@ And we have an implementation of the reducer that can add and toggle todos.
 > Code at the end of Video 12: 
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/92b9a312678ba26ca90050f17d796b26f992de63/index.html#L31-L33) (*using `Object` spread*)
 
-> ***Note**: While the [*spread operator*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility)
+> ***Note***: While the [*spread operator*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility)
 is an **ES6** *Standard* for `Array`, its only a ***Draft*** for `Object`
 proposed for **ES7** which means it is 
 **not** yet **available** in ***any*** **Browser**! 
@@ -1111,20 +1111,34 @@ code to use `Object.assign` (*see Video #10)
 which (*at least*) works in Chrome...:
 
 ```js
-return Object.assign({}, todo, {
-  completed: !todo.completed
-});
+
+case 'TOGGLE_TODO':
+  return state.map(todo => {
+    if(todo.id !== action.id){
+      return todo;
+    }
+    return Object.assign({}, todo, {
+      completed: !todo.completed
+    });
+  });
 ```
 
 The *works* in ***ALL Modern Browsers Today (Without Babel)*** way of doing this is:
 ```js
-var keys = Object.keys(todo);
-var toggled = {};             // new object to avoid mutation
-keys.forEach(function(index) {
-  toggled.index = todo.index; // copy all properties/valud of todo
-});
-toggled.completed = !todo.completed
-return toggled;
+case 'TOGGLE_TODO':
+  return state.map(todo => {
+    if(todo.id !== action.id){
+      return todo;
+    }
+    var keys = Object.keys(todo); // IE9+
+    var toggled = {};             // new object to avoid mutation
+    keys.forEach(function(index) {
+      toggled.index = todo.index; // copy all properties/valud of todo
+    });
+    toggled.completed = !todo.completed
+    return toggled;
+  });
+
 ```
 
 We can *probably* ***all*** agree that the code is more *elegant* 

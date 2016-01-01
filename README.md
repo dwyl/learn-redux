@@ -5,8 +5,8 @@ Learn how to use Redux to write Predictable / Testable web apps.
 > Note: these notes are aimed at people who already have "***intermediate***" ***JavaScript experience***.  
 > If you are just starting out on your programming journey, we recommend you read:  
 > [https://github.com/nelsonic/***learn-javascript***](https://github.com/nelsonic/learn-javascript)
-> https://github.com/nelsonic/learn-javascript ***first***
-and then come *back* here!  
+> ***first***
+and *then* come *back* here!  
 > :star: this GitHub repo so you don't forget where it is!
 
 
@@ -54,6 +54,8 @@ we *urge* you to have faith and keep reading...
 Instead of directly updating data in the store, we describe the update
 as a function which gets applied to the existing store and returns a new version.
 
+> See: https://en.wikipedia.org/wiki/Immutable_object
+
 #### 3. Changes are made Using *Pure Functions*
 
 To change the state tree we use "*actions*" called "*reducers*",
@@ -96,6 +98,56 @@ https://github.com/nelsonic/learn-redux/issues
 #### 13. Reducer Composition with Arrays
 
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-arrays
+
+In the *previous* lesson we created a *reducer* 
+that can handle two actions: adding a *new* todo 
+and toggling an *existing* todo.
+Right now the code to *update* the todo item
+or to *create* a new one is placed right inside the todos reducer
+this function is hard [*difficult*] to understand
+because it mixes two different concerns:
+how the todos `Array` is updated *and* 
+how individual todos (`Objects`) are updated.
+This is not a problem *unique* to Redux
+any time a function does *too many* things
+you want to *extract* other functions from it and call them 
+so that every function only addresses a single concern
+
+In this case I decided that creating and updating a todo
+in response to an `action` is a *separate* operation
+and needs to be handled by a *separate* function called `todo`
+
+```js
+const todo = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false
+      }
+    case 'TOGGLE_TODO':
+      if (todo.id !== action.id) {
+        return todo;
+      }
+      return Object.assign({}, todo, {
+        completed: !todo.completed
+      });
+  }
+}
+```
+
+As a matter of convention I decided that it should also accept 
+two arguments: the *current* `state` and the `action` being dispatched
+and it should `return` the *next* `state`. 
+But in this case the `state` refers to the *individual* todo
+and *not* to the *list* (`Array`) of todos.
+
+*Finally* there is no "*magic*" in Redux to make it work.
+We extracted the todo reducer from the todos reducer.
+So now we need to call it for every todo 
+and assemble the results into an `Array`.
+While this is not required in this particular example
 
 <br />
 
