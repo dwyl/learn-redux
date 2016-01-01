@@ -98,9 +98,118 @@ https://github.com/nelsonic/learn-redux/issues
 
 #### 14. Reducer Composition with Objects
 
+Tip: This tutorial builds apon the code written in Video/Lesson 13.
+If you skipped it, or left a break between watching the videos,
+go back and re-aquaint yourself before proceeding.
+
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-objects
 
-... begin watching video 14 ...
+In the *previous* lesson we established 
+the *pattern* of "*Reducer Composition"
+where one reducer can be called by another reducer
+to update items inside an array. 
+If we creat a `store` with this reducer and log its `state` 
+we will find that the *initial* `state` of it
+is an *empty* `Array` of todos 
+and if we *dispatch* an `ADD_TODO` `action` 
+we will find that the *corresponding* todo has been added 
+to the `state` `Array`
+if we *dispatch* *another* `ADD_TODO` `action` 
+the *corresponding* todo will *also* be added at the end of the `Array`.
+And dispatching a `TOGGLE_TODO` `action` with `id` (*set to*) `0` 
+will flip the `completed` field of the todo with `id` *zero* (`0`).
+
+> The new code not in the previous tutorial is:
+
+```js
+
+const { createStore } =  Redux;
+const store = createStore(todos);
+
+console.log('Initial state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching ADD_TODO.'); // first todo
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 0,
+  text: 'Learn Redux'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching ADD_TODO.'); // second todo
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 0,
+  text: 'Go shopping'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching TOGGLE_TODO.'); // toggle first todo
+store.dispatch({
+  type: 'TOGGLE_TODO',
+  id: 0
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+```
+
+> or you can run: [`index.html`]() (Snapshot for Video 14 @ 0:40)
+> which has the following console *output*:
+
+![learn-redux-output-of-video-14-console logs](https://cloud.githubusercontent.com/assets/194400/12122835/6dc1bc44-b3d5-11e5-8e4d-691bdd86f910.png)
+
+
+Representing the *whole* `state` of the application 
+as an `Array` of todos works for a *simple* example 
+but what if we want to store *more* information?
+For *example* we may want to let the user choose which todos 
+are *currently* *visible* with a visibility filter
+such as `SHOW_COMPLETED`, `SHOW_ALL` or `SHOW_ACTIVE`.
+
+The `state` of the `visibilityFilter` is a *simple* `String`
+representing the *current* filter
+and it is *changed* by the `SET_VISIBILITY_FILTER` `action`.
+To *store* this *new* information, I don't need to *change* 
+the *exisiting* reducers, I will use the Reducer Composition Pattern
+and create a *new* reducer that *calls* the existing reducers 
+to manage parts of its state 
+and combines the results in a *single* `state` `Object`
+note that the first time it runs, it will pass `undefined` as the `state`
+to the "*child*" reducers because the *initial* state 
+of the *combined* reducer is an *empty* `Object`
+so all its fields are `undefined` 
+this gets the "*child*" reducers to return their *initial* `state`
+and populates the `state` `Object` for the first time.
+
+When an `action` comes in, it calls the reducers 
+with the parts of the `state` that they manage and the `action`
+and combines the result into the *new* `State` object.
+This is *another* example of the Reducer Composition Pattern
+but this time we use it to *combine* *several* reducers
+into a single reducer that we will now use to create our `store`.
+
+The *initial* `state` of the *combined* reducer now contains
+the *initial* `state` of the *independent* reducers 
+and any time an `action` comes in those reducers handle the action 
+*independently* this pattern helps *scale* Redux development
+because different people on the team
+can work on differnt reducers handling the *same* actions 
+without running into each other and causing merge conflicts 
+
+*Finally* I'm dispatching the `SET_VISIBILITY_FILTER` `action`
+and you can see that it does not affect the todos 
+but the `visibilityFilter` field has been updated. 
+
 
 <br />
 
