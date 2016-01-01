@@ -1,45 +1,45 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Learn Redux - Counter Example</title>
+    <title>Learn Redux - Todo</title>
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
     <script src="https://wzrd.in/standalone/expect@latest"></script>
     <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
   </head>
-  <body style='margin: 0 1em;'>
-    <div id='root'>
-      <!-- <p>If you can see this the Redux Script <em>Failed</em> ...</p> -->
-    </div>
+  <body>
 
     <script>
-const toggleTodo = (todo) => {
-  return Object.assign({}, todo, {
-    completed: !todo.completed
-  });
+
+const todos = (state = [], action) => {
+    
 };
 
-const testToggleTodo = () => {
-  const todoBefore = {
+const testAddTodo = () => {
+  const stateBefore = [];
+  const action = {
+    type: 'ADD_TODO',
     id: 0,
-    text: 'Learn Redux',
-    completed: false
+    text: 'Learn Redux'
   }
-  const todoAfter  = {
-    id: 0,
-    text: 'Learn Redux',
-    completed: true
-  }
+  const stateAfter = [
+    {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }
+  ];
 
-  deepFreeze(todoBefore);
+  deepFreeze(stateBefore);
+  deepFreeze(action);
 
   expect(
-    toggleTodo(todoBefore)
-  ).toEqual(todoAfter);
-}
+    todos(stateBefore, action)
+  ).toEqual(stateAfter);
+};
 
-testToggleTodo(); // run the test
+testAddTodo();
 
 console.log('All tests passed.');
 

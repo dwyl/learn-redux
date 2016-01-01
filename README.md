@@ -4,7 +4,8 @@ Learn how to use Redux to write Predictable / Testable web apps.
 
 > Note: these notes are aimed at people who already have "***intermediate***" ***JavaScript experience***.  
 > If you are just starting out on your programming journey, we recommend you read:  
-> https://github.com/nelsonic/learn-javascript *first* 
+> [https://github.com/nelsonic/***learn-javascript***](https://github.com/nelsonic/learn-javascript)
+> https://github.com/nelsonic/learn-javascript ***first***
 and then come *back* here!  
 > :star: this GitHub repo so you don't forget where it is!
 
@@ -92,7 +93,75 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
+#### 11. Writing a Todo List Reducer (Adding a Todo)
 
+> Video: https://egghead.io/lessons/javascript-redux-writing-a-todo-list-reducer-adding-a-todo
+
+Just like in the previous two lessons, I'm using the 
+**expect** library to make test assertions and
+**deep-freeze** library to *prevent accidental mutations* in my code.
+
+In this lesson I will create a reducer for a Todo-list application
+who's state is described as an array of Todos.
+
+Just to remind you what a reducer is: its a "*pure function*" 
+you write to implement the update logic of your application.
+That is how the next state is calculated given the current state
+and the action being disptched.
+
+Before writing a reducer I want a way of knowing whether its code is correct. So I'm starting by writing a test for it:
+
+
+```js
+const todos = (state = [], action) => {
+  	
+};
+
+const testAddTodo = () => {
+  const stateBefore = [];
+  const action = {
+  	type: 'ADD_TODO',
+  	id: 0,
+  	text: 'Learn Redux'
+  }
+  const stateAfter = [
+  	{
+  	  id: 0,
+  	  text: 'Learn Redux',
+  	  completed: false
+  	}
+  ];
+
+  deepFreeze(stateBefore);
+  deepFreeze(stateAfter);
+
+  expect(
+  	todos(stateBefore, action);
+  ).toEqual(stateAfter);
+};
+```
+
+I'm declaring two variables:
++ `stateBefore` - the state before, which is an *empty* `Array`
++ `action` - the action being dispatched - which is an action describing a user adding a new todo with some `id` and a `text` (*fields*).
+
+I am also declaring the *state* I `expect` *after* calling the reducer.
+and like `stateBefore` it is an `Array`, but this time it has 
+a *single element* representing the Todo that was just added;
+so it has the same `id` and `text` as the action `Object`.
+and it *also* has an *additional* field called `completed` 
+that I want to be *initialised* to be `false`
+
+We want to make sure that the reducer is a "*pure function*",
+so I am calling `deepFreeze` both on the `stateBefore`
+*and* the `action`.
+
+*Finally* I'm ready to use the `expect` library to verify that if I call
+the todo reducer with the `stateBefore` and the `action`
+I'm going to get the result that is ***deeply*** **equal** 
+to the `stateAfter` I *just* declared.
+
+<br />
 
 ## Background Reading / Watching / Listening
 

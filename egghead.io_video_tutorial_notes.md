@@ -1,4 +1,6 @@
 
+## Notes for Dan's Egghead Videos [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
+
 #### 1. The Single Immutable State Tree (*Principal #1*)
 
 > Video: https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree
