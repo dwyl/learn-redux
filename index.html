@@ -28,10 +28,9 @@ const todos = (state = [], action) => {
         if(todo.id !== action.id){
           return todo;
         }
-        return {
-          ...todo,
+        return Object.assign({}, todo, {
           completed: !todo.completed
-        };
+        });
       });
     default:
       return state;
