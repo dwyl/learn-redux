@@ -95,108 +95,12 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
-#### 13. Reducer Composition with Arrays
 
-> Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-arrays
+#### 14. Reducer Composition with Objects
 
-In the *previous* lesson we created a *reducer* 
-that can handle two actions: adding a *new* todo 
-and toggling an *existing* todo.
-Right now the code to *update* the todo item
-or to *create* a new one is placed right inside the todos reducer
-this function is hard [*difficult*] to understand
-because it mixes two different concerns:
-how the todos `Array` is updated *and* 
-how individual todos (`Objects`) are updated.
-This is not a problem *unique* to Redux
-any time a function does *too many* things
-you want to *extract* other functions from it and call them 
-so that every function only addresses a single concern
+> Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-objects
 
-In this case I decided that creating and updating a todo
-in response to an `action` is a *separate* operation
-and needs to be handled by a *separate* function called `todo`
-
-```js
-const todo = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false
-      }
-    case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
-        return state;
-      }
-      return Object.assign({}, state, { // see: http://git.io/vuBzV
-        completed: !state.completed     // here state is the individual todo
-      });
-    default:
-      return state;
-  }
-}
-
-const todos = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ];
-    case 'TOGGLE_TODO':
-      return state.map(t => todo(t, action));
-    default:
-      return state;
-  }
-};
-```
-
-As a matter of convention I decided that it should also accept 
-two arguments: the *current* `state` and the `action` being dispatched
-and it should `return` the *next* `state`. 
-But in this case the `state` refers to the *individual* todo
-and *not* to the *list* (`Array`) of todos.
-
-*Finally* there is no "*magic*" in Redux to make it work.
-We extracted the todo reducer from the todos reducer.
-So now we need to call it for every todo 
-and assemble the results into an `Array`.
-While this is not required in this particular example 
-I suggest that you *always* have the `default` case 
-where you `return` the *current* `state`
-to avoid "*odd bugs*" in the future.
-
-The ***Pattern*** described in this lesson 
-is *pervasive* in Redux development 
-and is called "[***Reducer Composition***](http://rackt.org/redux/docs/basics/Reducers.html)".
-
-Different reducers specify how different parts of the `state` tree
-are updated in response to different actions.
-Reducers are also "*normal*" JavaScript functions 
-so they can call *other* reducers
-to delegate and abstract away handling of updates 
-of some parts of the `state` they manage
-this pattern can be applied *many* times 
-and while there is still a *single* top-level reducer
-managing the `state` of your app
-you will find it convenient 
-to express it as *many* reducers calling each other 
-each contributing to a *part* of the application `state` tree.
-
-
-> Recap: this video/lesson was simply to show how
-to extract a method from inside the *main* ("*top-level*")
-reducer and have a *separate* reducer 
-which handles updates on the *individual* todo items.
-> Note that the tests from the *previous* video still pass
-after we have created the `todo` reducer, 
-because the *functionality* has not changed, 
-its merely been separated to simplify the *main* reducer.
-
-> Code at the end of Video 13: 
-[`index.html`]()
+... begin watching video 14 ...
 
 <br />
 
