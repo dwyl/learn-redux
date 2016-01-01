@@ -821,3 +821,145 @@ const toggleTodo = (todo) => {
 our code because it does not run in *any* browser!!
 
 <br />
+
+#### 11. Writing a Todo List Reducer (Adding a Todo)
+
+> Video: https://egghead.io/lessons/javascript-redux-writing-a-todo-list-reducer-adding-a-todo
+
+Just like in the previous two lessons, I'm using the 
+**expect** library to make test assertions and
+**deep-freeze** library to *prevent accidental mutations* in my code.
+
+In this lesson I will create a reducer for a Todo-list application
+who's state is described as an array of Todos.
+
+Just to remind you what a reducer is: its a "*pure function*" 
+you write to implement the update logic of your application.
+That is how the next state is calculated given the current state
+and the action being disptched.
+
+Before writing a reducer I want a way of knowing whether its code is correct. So I'm starting by writing a test for it:
+
+
+```js
+const todos = (state = [], action) => {
+    
+};
+
+const testAddTodo = () => {
+  const stateBefore = [];
+  const action = {
+    type: 'ADD_TODO',
+    id: 0,
+    text: 'Learn Redux'
+  }
+  const stateAfter = [
+    {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }
+  ];
+
+  deepFreeze(stateBefore);
+  deepFreeze(stateAfter);
+
+  expect(
+    todos(stateBefore, action);
+  ).toEqual(stateAfter);
+};
+
+testAddTodo();
+
+console.log('All tests passed.');
+```
+
+I'm declaring two variables:
++ `stateBefore` - the state before, which is an *empty* `Array`
++ `action` - the action being dispatched - which is an action describing a user adding a new todo with some `id` and a `text` (*fields*).
+
+I am also declaring the *state* I `expect` *after* calling the reducer.
+and like `stateBefore` it is an `Array`, but this time it has 
+a *single element* representing the Todo that was just added;
+so it has the same `id` and `text` as the action `Object`.
+and it *also* has an *additional* field called `completed` 
+that I want to be *initialised* to be `false`
+
+We want to make sure that the reducer is a "*pure function*",
+so I am calling `deepFreeze` both on the `stateBefore`
+*and* the `action`.
+
+*Finally* I'm ready to use the `expect` library to verify that if I call
+the todo reducer with the `stateBefore` and the `action`
+I'm going to get the result that is ***deeply*** **equal** 
+to the `stateAfter` I *just* declared.
+
+This concludes my *first* test, now I can call it 
+just like a regular JavaScript function: `testAddTodo();` 
+And if it doesn't `throw` in the `expect` call I'm going to see a message
+that the tests have passed.
+
+Of *course* it fails because the reducer is not implemented yet;
+it's an *empty* function, so it returns `undefined` 
+instead of the `Array` with a single item that I `expect` in the test.
+
+To fix this I will need my reducer to take a look at the 
+`action.type` property which is a `String`
+when it matches the `ADD_TODO` string which I specify in my test
+to *satisfy* the test I need to return a *new* `Array`
+which includes all the items from the *original* `Array`
+but *also* a *new* Todo item that has its `id` and `text`
+copied from the `action` Object 
+and a `completed` field set to `false`
+
+Finally I add a `default` case to my `switch` statement
+because *every* reducer has to `return` the *current* state
+for any *unknown* `action`:
+
+```js
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        }
+      ];
+    default:
+      return state;
+  }
+};
+```
+
+Now the tests run *successfully*!
+
+Lets **recap** the *data flow* in this example to see why
+first I create the state `Array` (`stateBefore`) 
+which is an *empty* `Array`
+and the `action` Object inside my test function.
+I'm passing them as arguments to my *reducer* function called todos
+the `todos` reducer accepts the state and action as *arguments*
+and takes a look at the `action.type`
+in this case the `action.type` is a `String` saying `ADD_TODO`
+so it matches the `switch` `case` inside the reducer
+the reducer returns a *new* `Array` 
+which contains the items from the *old* `Array`
+(*in the case of our test, the empty `stateBefore` Array*...)
+and a *new* item (`Object`) representing the added todo
+however the `state` we passed from the test was an *empty* `Array`
+so at the end we are going to get an `Array` with a *single* item
+which is the *new* todo
+*finally* we compare the returned value 
+to an `Array` with a single todo item 
+to make sure the reducer works as intended
+the equality check passes 
+so this makes the test successful.
+
+> Code snapshot for the end of Video 11: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/278a17be1fafe2e0f354aa431e0ad4fc776bbc41/index.html#L15-L56)
+
+<br />
+
