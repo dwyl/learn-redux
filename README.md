@@ -222,7 +222,8 @@ so all its fields are `undefined`
 this gets the "*child*" reducers to return their *initial* `state`
 and populates the `state` `Object` for the first time.
 
-> Code Snapshot for Video 14 @ 1:45 [`index.html`]()
+> Code Snapshot for Video 14 @ 1:45 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/7fef9d1ede97b48a03a4e55c6b8f10bdcc0b5a89/index.html#L62-L73)
 
 When an `action` comes in, it calls the reducers 
 with the parts of the `state` that they manage and the `action`
@@ -231,20 +232,41 @@ This is *another* example of the Reducer Composition Pattern
 but this time we use it to *combine* *several* reducers
 into a single reducer that we will now use to create our `store`.
 
-> 
-
 The *initial* `state` of the *combined* reducer now contains
 the *initial* `state` of the *independent* reducers 
 and any time an `action` comes in those reducers handle the action 
 *independently* this pattern helps *scale* Redux development
 because different people on the team
 can work on differnt reducers handling the *same* actions 
-without running into each other and causing merge conflicts 
+without running into each other and causing merge conflicts.
+
+```js
+console.log('Dispatching SET_VISIBILITY_FILTER');
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+```
+
+> Note: This `action` is merely setting the `visibilityFilter` *propert*
+of the `store` `Object`
+
+![console-log-output-for-set_visibility_filter](https://cloud.githubusercontent.com/assets/194400/12123718/753f2a92-b3da-11e5-982a-17be0a075f1b.png)
+
+
+> ***NOTE***: this code does not actually do anything 
+to the ***UI** *yet*. (*be patient that's next...*)
 
 *Finally* I'm dispatching the `SET_VISIBILITY_FILTER` `action`
 and you can see that it does not affect the todos 
 but the `visibilityFilter` field has been updated. 
 
+> Code Snapshot for *End* of Video 14: 
+[`index.html`]()
 
 <br />
 
