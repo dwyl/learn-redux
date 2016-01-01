@@ -21,12 +21,14 @@ const todo = (state, action) => {
         completed: false
       }
     case 'TOGGLE_TODO':
-      if (todo.id !== action.id) {
-        return todo;
+      if (state.id !== action.id) {
+        return state;
       }
-      return Object.assign({}, todo, {
-        completed: !todo.completed
+      return Object.assign({}, state, { // see: http://git.io/vuBzV
+        completed: !state.completed     // here state is the individual todo
       });
+    default:
+      return state;
   }
 }
 
@@ -35,21 +37,10 @@ const todos = (state = [], action) => {
     case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false
-        }
+        todo(undefined, action)
       ];
     case 'TOGGLE_TODO':
-      return state.map(todo => {
-        if(todo.id !== action.id){
-          return todo;
-        }
-        return Object.assign({}, todo, {
-          completed: !todo.completed
-        });
-      });
+      return state.map(t => todo(t, action));
     default:
       return state;
   }
