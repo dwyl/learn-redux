@@ -15,8 +15,9 @@
 
     <script>
 const toggleTodo = (todo) => {
-  todo.completed = !todo.completed;
-  return todo;
+  return Object.assign({}, todo, {
+    completed: !todo.completed
+  });
 };
 
 const testToggleTodo = () => {
@@ -30,6 +31,9 @@ const testToggleTodo = () => {
     text: 'Learn Redux',
     completed: true
   }
+
+  deepFreeze(todoBefore);
+
   expect(
     toggleTodo(todoBefore)
   ).toEqual(todoAfter);
