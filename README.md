@@ -94,6 +94,81 @@ https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
 
+#### 12. Writing a Todo List Reducer (Toggling a Todo)
+
+This lesson picks up where we left off in Video 11,
+so make sure you watched that an tried writing/running the code!
+
+> Video: https://egghead.io/lessons/javascript-redux-writing-a-todo-list-reducer-toggling-a-todo
+
+In this lesson we will continue creating the reducer for the
+todo list application
+and the only action that this reducer *currently* handles 
+is called `ADD_TODO`
+we also created a ***test*** that makes sure that when the reducer
+is called with an *empty* `Array` and the `ADD_TODO` `action`
+it returns an `Array` with a *single* todo element.
+
+In this lesson we will follow the same approach
+to implement another action called `toggleTodo`
+
+We're going to start with the *test* again 
+and *this* time we are testing a different action 
+and we have a different *initial* `state` 
+the `state` *before* calling the reducer (`stateBefore`) 
+now includes two different todos with `id` `0` and `1`.
+notice how *both* of them have their `completed` field set to `false`
+
+Next I declare the `action`
+and the action is as `Object` with the `type` property 
+wich is `TOGGLE_TODO` `String`
+and the `id` of the todo that I want to be "*toggled*"
+I declare the state that I `expect` 
+to receive *after* calling the reducer (`stateAfter`)
+its pretty much the same as *before* calling the reducer 
+however I `expect` the todo with `id` specified in the `action`
+or `1` in this case 
+to change its `completed` field 
+
+```js
+const testToggleTodo = () => {
+  const stateBefore = [
+    {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+	},
+	{
+	  id: 1,
+	  text: 'Go shopping',
+	  completed: false
+	}
+  ];
+  const action = {
+  	type: 'TOGGLE_TODO',
+  	id: 1
+  };
+  const stateAfter = [
+    {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+	},
+	{
+	  id: 1,
+	  text: 'Go shopping',
+	  completed: true
+	}
+  ];
+
+  deepFreeze(stateBefore);
+  deepFreeze(stateAfter);
+}
+```
+
+the reducer *must* be a "*pure function*"
+so at a matter of *precaution* I call `deepFreeze` 
+on the `state` and the `action`
 
 
 <br />

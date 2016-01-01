@@ -83,8 +83,8 @@ The first [*and only*] function in this video is the Reducer for the counter exa
 A reducer accepts state and action as arguments and returns the next state.
 
 Before writing any code, we write a few assertions (*tests*) using
-[**Michael Jackson**](https://github.com/mjackson)'s
-(*Yes, there's a developer with that name...*)
+[**Michael Jackson**](https://github.com/mjackson)'s  
+(*Yes, there's a* ***developer*** *with that name... and he's* ***really good***)  
 ***Expect*** (testing/assertion) **library**: https://github.com/mjackson/expect
 
 We assert that when the state of the counter is zero and you pass an `INCREMENT`
