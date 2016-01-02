@@ -189,6 +189,37 @@ and `SHOW_ACTIVE` is going to be the *opposite* of that
 its going to `return` *only* those todos that 
 where `completed` field is `false`.
 
+```js
+const getVisibleTodos = (
+  todos,
+  filter
+) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(
+        t => t.completed
+      );
+    case 'SHOW_ACTIVE':
+      return todos.filter(
+        t => !t.completed
+      );
+  }
+}
+```
+
+Now I need to *call* this function 
+to `filter` the todos *before* rendering them
+so in the `render` function of the `TodoApp` Component
+I get the `visibleTodos` by calling the `getVisibleTodos`
+with the `todos` and the `visibilityFilter` *values* from my props 
+and I'm going to *use* the `visibleTodos` *instead* of
+`this.props.todos` when I enumerate them for rendering. 
+
+> Code snapshot for Video 19 @ 03:45: 
+[`index.html`]()
+
 
 <br />
 
