@@ -1634,4 +1634,223 @@ in the long term.
 
 <br />
 
+#### 17. React Todo List Example (Adding a Todo)
 
+> Video: https://egghead.io/lessons/javascript-redux-react-todo-list-example-adding-a-todo
+
+In the *previous* lesson we learned how to split the "*root*" reducer
+into *many* smaller reducers that manage *parts* of the `state` tree
+and now we have a ready `todoApp` reducer 
+that handles all the `actions` of our simple todo application.
+
+So now it's time to *implement* the ***view layer***
+and I'm going to use React in this example
+
+I'm adding **React** and [React-DOM](https://facebook.github.io/react/docs/glossary.html) packages from the Facebook CDN 
+and I'm also adding a div with `id='root'`
+which is where I'm going to `render` my React application
+
+```js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
+```
+
+Similar to the React *Counter* example from the 8<sup>th</sup> Lesson
+I declare a `render` function that is going to update the DOM
+in response to the *current* application `state`
+and I'm going to `subscribe` to the `store` changes
+and call `render` when ever the `store` changes 
+and *once* to `render` the *initial* state:
+
+```js
+const { createStore } =  Redux;
+const store = createStore(todoApp);
+
+const render = () => {
+  // gets expanded below ...
+};
+
+store.subscribe(render);
+render();
+```
+
+And the *implementation* of the `render` method
+is going to use React so its calling `ReactDOM.render`
+for some `TodoApp` *component* I haven't written *yet*
+and it renders it into the `div` I created inside the `html`
+called `root`.
+
+React provides a "*base*" `Class` for all components 
+so I'm grabbing it from the React `Object` 
+its called `React.Component`
+and I'm declaring my own `TodoApp` component 
+that `extends` the React "*base*" `Component`
+
+```js
+const { Component } = React;
+
+class TodoAPP extends Component {
+// filled out below ...
+}
+
+const render = () => {
+  ReactDOM.render( 
+    <TodoApp />,
+    document.getElementById('root')
+  );
+};
+```
+
+This `Component` is only going to have a `render` function
+and is going to return a `<div>` 
+and *inside* the `<div>` I'm going to place a `<button>` saying "Add Todo"
+but I don't want to add an `input` field *yet* to keep the example *simple*
+at first so I'm dispatching the `ADD_TODO` `action` 
+and I'm going to put `Test` as my `text` for the `action`
+so it's going to keep adding todos with the `text` "Test".
+and the `id` I need to specify a sequential `id` 
+so this is why I'm declaring a *global* variable called `nextTodoId`
+and I'm going to keep incrementing it.
+so every time its going to emit (*dispatch an `action` with*) a *new* `id` 
+and *finally* I aslo want to display a *list* of the todos
+so, *assuming* that I have the todos injected as a `todos` prop
+I will call `.map` and for every `todo` item I'm going to show a `<li>`
+showing the text of that particular todo.
+
+*Finally* because I need the `todos` as a `prop` 
+I'm going to pass it to the `TodoApp` 
+by reading the the *current* `store` `state`
+and reading its `todos` field: 
+
+```js
+const { Component } = React;
+
+let nextTodoId = 0;
+
+class TodoApp extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: 'Test',
+            id: nextTodoId++
+          });
+        }}>
+          Add Todo 
+        </button> 
+        <ul>
+          {this.props.todos.map(todo => 
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
+
+const render = () => {
+  ReactDOM.render( 
+    <TodoApp todos={store.getState().todos} />,
+    document.getElementById('root')
+  );
+};
+```
+
+> Code snapshot for Video 17 @ 02:56:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/c44025b2ea3ed7f8cd4b1120c4aad7f98cce2c97/index.html#L81-L104)
+
+If you open the file in your browser, you should expect to see:
+
+![learn-redux-video-17-example](https://cloud.githubusercontent.com/assets/194400/12147411/a1bb3974-b490-11e5-8ab0-b011dfecc959.png)
+
+
+You can see that there is a `<button>` "Add todo"
+and any time I press it I see a *new* todo with the "Test" `text`.
+
+Now I'm going to add an `input` inside my render function
+and I'm using the React callback `ref` API where `ref` is a function
+it gets the `node` corresponding to the `ref` 
+and I'm saving that `node` in this case `this.input`
+so I'm able to *read* the `value` of the `input` 
+inside my event handler, I'm reading `this.input.value`
+and I'm also able to *reset* that value 
+*after* dispatching the `action` so that the field is cleared.
+
+Now if I try to write something in the `input` field and press "Add Todo"
+the `ADD_TODO` `action` is dispatched and the field is *cleared*.
+
+Lets take a moment to recap how this application works.
+
+It starts with the TodoApp React Component 
+and this Component is not aware *exactly* how todos are being added
+however it can express its desire to mutate the `state` 
+by dispatching an `action` with the `type` `ADD_TODO`
+for the `text` field it uses the *current* `input` value (`this.input.value`)
+and it passes an *incrementing* `id` as the `id` of todo
+every todo needs its own `id` and in this approach we are just going 
+to increment the counter so it always gives us the next integer as `id`
+it is common for React Components to dispatch `actions` in Redux apps
+however it is *equally* important to be able to `render` the *current* `state`
+my `TodoApp` Component assumes that it is going to receive todos 
+as a `prop` and it *maps* over the todos to display a *list* of them.
+using the `id` as a `key`.
+This Component is being rendered in the `render` function 
+that runs any time the `store` `state` changes, and *initially*. 
+The `render` function reads the *current* `state` of the `store` 
+and passes the todos `Array` that it gets 
+from the *current* `state` of the `store`
+to the `TodoApp` Component as a `prop`
+the `render` function is called on every `store` change
+so the `todos` prop is always up-to-date 
+this was the *rendering* part of the Redux flow. 
+
+Lets recap how *mutations* work in Redux:
+any `state` change is caused by a `store.dispatch` 
+call somewhere in the Component.
+When an `action` is dispatched 
+the `store` calls the *reducer* it was created with 
+with the *current* `state` and the `action` being dispatched 
+and in our case, this is the `todoApp` reducer
+which we obtained by combining the `visibilityFilter` and the `todos` reducer.
+It matches the `action` `type` in a `switch` statement 
+and if the `action` `type` is `ADD_TODO` 
+and indeed it is equal to `ADD_TODO` `String`
+in this case it will call the "*child*" `todo` reducer,
+passing it `undefined` because there is no `state` for a *new* todo
+and the `action`.
+We have a *similar* `switch` statement inside the `todo` reducer
+and the `action` `type` is `ADD_TODO` which returns the 
+*initial* `state` of the todo with the `id` and `text` from the `action`
+and `completed` field set to `false`
+the todos reducer that *called* it will return 
+a *new* `Array` with all *existing* items 
+and the *new* item added at the very end as a *new* todo
+to the *current* `state`
+
+*Finally* the combined reducer called `todoApp`
+will use this *new* `Array` as the new value for the todos field 
+in the *global* `state` `Object` 
+so its going to return a *new* `state` `Object` 
+where the todos field corresponds to the `Array` 
+with the newly added Todo item.
+The `todoApp` reducer is the "*root*" reducer in this application 
+it is the one the `store` was created with. 
+so its next state is the *next* `state` of the Redux `store` 
+and all the *listeners* are notified 
+the `render` function is *subscribed* to the `store` changes 
+so it is called *again* and it gets the *fresh* `state` 
+by calling `getState` and it passes the *fresh* todos to the Component 
+re-rending it with the *new* data.
+
+> Code at the *end* of Video 17:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/c7715af33d93b499d8e607b3bbd0d82505d941fd/index.html)
+
+Which should look like this: (*when you open it in Chrome Canary*)
+
+![learn-redux-video17-end-screenshot](https://cloud.githubusercontent.com/assets/194400/12149102/c2e4c7e2-b499-11e5-9c4a-0b61619addc4.png)
+
+<br />
