@@ -1258,3 +1258,178 @@ its merely been separated to simplify the *main* reducer.
 > Code at the end of Video 13: 
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/89572d3b8e751c2fe11d8a1750ea4f82d64d5e3c/index.html#L15-L47)
 
+<br />
+
+#### 14. Reducer Composition with Objects
+
+Tip: This tutorial builds apon the code written in Video/Lesson 13.
+If you skipped it, or left a break between watching the videos,
+go back and re-aquaint yourself before proceeding.
+
+> Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-objects
+
+In the *previous* lesson we established 
+the *pattern* of "*Reducer Composition"
+where one reducer can be called by another reducer
+to update items inside an array. 
+If we creat a `store` with this reducer and log its `state` 
+we will find that the *initial* `state` of it
+is an *empty* `Array` of todos 
+and if we *dispatch* an `ADD_TODO` `action` 
+we will find that the *corresponding* todo has been added 
+to the `state` `Array`
+if we *dispatch* *another* `ADD_TODO` `action` 
+the *corresponding* todo will *also* be added at the end of the `Array`.
+And dispatching a `TOGGLE_TODO` `action` with `id` (*set to*) `0` 
+will flip the `completed` field of the todo with `id` *zero* (`0`).
+
+> The new code not in the previous tutorial is:
+
+```js
+
+const { createStore } =  Redux;
+const store = createStore(todos);
+
+console.log('Initial state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching ADD_TODO.'); // first todo
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 0,
+  text: 'Learn Redux'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching ADD_TODO.'); // second todo
+store.dispatch({
+  type: 'ADD_TODO',
+  id: 0,
+  text: 'Go shopping'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+
+console.log('Dispatching TOGGLE_TODO.'); // toggle first todo
+store.dispatch({
+  type: 'TOGGLE_TODO',
+  id: 0
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+```
+
+> or you can run: [`index.html`](https://github.com/nelsonic/learn-redux/blob/33a46dbc0eb733f6494fdb8de89d91dde58c1731/index.html#L50-L87) 
+(Code Snapshot for Video 14 @ 0:40)  
+> which has the following developer console *output*:
+
+![learn-redux-output-of-video-14-console logs](https://cloud.githubusercontent.com/assets/194400/12122835/6dc1bc44-b3d5-11e5-8e4d-691bdd86f910.png)
+
+
+Representing the *whole* `state` of the application 
+as an `Array` of todos works for a *simple* example 
+but what if we want to store *more* information?
+For *example* we may want to let the user choose which todos 
+are *currently* *visible* with a `visibilityFilter`
+such as `SHOW_COMPLETED`, `SHOW_ALL` or `SHOW_ACTIVE`.
+
+```js
+const visibilityFilter = (
+  state = 'SHOW_ALL', // default state
+  action
+) => {
+  switch (action.type) {
+    case: 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+```
+
+The `state` of the `visibilityFilter` is a *simple* `String`
+representing the *current* filter
+and it is *changed* by the `SET_VISIBILITY_FILTER` `action`.
+
+```js
+const todoApp = (state = {}, action) => {
+  return {
+    todos: todos(
+      state.todos,
+      action
+    ),
+    visibilityFilter: visibilityFilter(
+      state.visibilityFilter,
+      action
+    )
+  };
+};
+```
+
+To *store* this *new* information, I don't need to *change* 
+the *exisiting* reducers, I will use the Reducer Composition Pattern
+and create a *new* reducer that *calls* the existing reducers 
+to manage parts of its state 
+and combines the results in a *single* `state` `Object`
+***note*** that the first time it runs, it will pass `undefined` as the `state`
+to the "*child*" reducers because the *initial* state 
+of the *combined* reducer is an *empty* `Object`
+so all its fields are `undefined` 
+this gets the "*child*" reducers to return their *initial* `state`
+and populates the `state` `Object` for the first time.
+
+> Code Snapshot for Video 14 @ 1:45 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/7fef9d1ede97b48a03a4e55c6b8f10bdcc0b5a89/index.html#L62-L73)
+
+When an `action` comes in, it calls the reducers 
+with the parts of the `state` that they manage and the `action`
+and combines the result into the *new* `State` object.
+This is *another* example of the Reducer Composition Pattern
+but this time we use it to *combine* *several* reducers
+into a single reducer that we will now use to create our `store`.
+
+The *initial* `state` of the *combined* reducer now contains
+the *initial* `state` of the *independent* reducers 
+and any time an `action` comes in those reducers handle the action 
+*independently* this pattern helps *scale* Redux development
+because different people on the team
+can work on differnt reducers handling the *same* actions 
+without running into each other and causing merge conflicts.
+
+```js
+console.log('Dispatching SET_VISIBILITY_FILTER');
+store.dispatch({
+  type: 'SET_VISIBILITY_FILTER',
+  filter: 'SHOW_COMPLETED'
+});
+
+console.log('Current state:');
+console.log(store.getState());
+console.log('--------------');
+```
+
+> Note: This `action` is merely setting the `visibilityFilter` *propert*
+of the `store` `Object`
+
+![console-log-output-for-set_visibility_filter](https://cloud.githubusercontent.com/assets/194400/12123718/753f2a92-b3da-11e5-982a-17be0a075f1b.png)
+
+
+> ***NOTE***: this code does not actually do anything 
+to the ***UI** *yet*. (*be patient that's next...*)
+
+*Finally* I'm dispatching the `SET_VISIBILITY_FILTER` `action`
+and you can see that it does not affect the todos 
+but the `visibilityFilter` field has been updated. 
+
+> Code Snapshot for *End* of Video 14: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/9702c1c858b4a22fff85339c55cf914ae3969666/index.html#L115-L123)
+
+<br />
