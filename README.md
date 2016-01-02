@@ -97,104 +97,39 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
-#### 18. React Todo List Example (Toggling a Todo)
-
-> https://egghead.io/lessons/javascript-redux-react-todo-list-example-toggling-a-todo
-
-In the last lesson we implemented a simple UI for the Todo List application
-that is able to add *new* todos and view the *existing* todos in a list
-to *add* the todos we dispatched the `ADD_TODO` `action`
-and in *this* lesson we are going to the `TOGGLE_TODO` `action`
-to *toggle* the *completed* `state` of the todos by clicking on them.
-
-I'm scrolling down to my React Component and I've got a `<li>` here 
-corresponding to the todo so I'm adding the `onClick` handler 
-so when the user clicks on the list item I want to dispatch an `action` 
-to my `store` with the `type` `TOGGLE_TODO` and the `id` 
-of the todo being *toggled* which I get from the todo `Object`
-
-The event handler *knows* which todo it corresponds to so it is able 
-to pass its `id` in the `action`. 
-In the user interface I want the completed todos to appear crossed out. 
-so I'm adding the `style` attribute to the `<li>` 
-and I'm going to use the `textDecoration` property 
-which is going to be "line-through" (*strike-through*) 
-when `completed` is `true` and *none* when `todo.compleded` is `false`
-so I get a "normal" looking todo.
-And now if I add a couple of todos
-I can click on them and they are going to appear toggled:
-
-```js
-<ul>
-  {this.props.todos.map(todo => 
-    <li key={todo.id}
-     onClick={() => {
-      store.dispatch({
-        type: 'TOGGLE_TODO',
-        id: todo.id
-      });
-     }}
-     style={{
-      textDecoration: 
-        todo.completed ? 
-          'line-through' :
-          'none'
-     }}
-     >
-      {todo.text}
-    </li>
-  )}
-</ul>
-```
-
-> Code snapshot for Video 18 @ 1:25:
-[`index.html`](https://github.com/nelsonic/learn-redux/blob/fbc9a10538f513d21e9b06a9db13f33af79f938f/index.html#L104-L116)
-
-When you run it (*in Google Chrome Canary*) you should expect to see:
-
-![video-18-at-1min25sec-screenshot](https://cloud.githubusercontent.com/assets/194400/12149808/a7565b22-b49d-11e5-87b5-a66dec698686.png)
-
-... And I can *toggle* them back. Isn't that *satisfying*...?
-
-Lets recap how *toggling* the todo actually *works*.
-it starts with me dispatching the `TOGGLE_TODO` `action` 
-inside my `onClick` handler with the `type` `TOGGLE_TODO` 
-and the `id` which is the `id` of the todo being rendered 
-I get the `todo` `Object` as an *argument* to the `Array.map` callback 
-inside my `render` method where I render all the todos
-when an `action` is dispatched the `store` will call the "*root*" reducer 
-which will call the todos reducer with the `Array` of todos 
-and the `action` and in *this* case the `action` `type` is `TOGGLE_TODO`
-so the todos reducer delegates the handling of *every* todo 
-to the `todo` reducer with a `.map` function to call it for *every* todo item.
- So the `todo` reducer receives the todo as `state` and the `action`
-again we `switch` on the `action.type` and it matches `TOGGLE_TODO` `String`
-and now for *every* todo who's `id` does not match the `id` specified 
-in the `action` we just `return` the *previous* `state` 
-that is the todo `Object` as it was 
-*however* if the `id` of the todo matches 
-the one *specified* in the `action` 
-we are going to `return` a *new* `Object`
-with all the properties of the *original* todo 
-but with the `completed` field equal to 
-the *opposite* value of what it was; 
-e.g: `completed: !state.completed`
-
-The updated todo item will be will be included in the todos field 
-under the *new* application `state`
-and because we `subscribe` the `render` function 
-its going to get the *next* `state` of the application 
-in `store.getState()
-and pass the *new* version of the todos to the `TodoApp` Component. 
-Which is going to render the *updated* todos.
-
-*Finally* the (CSS) `style` of the `<li>` 
-depends on the `todo.completed` field which we just updated. 
-which is why it re-renders in a crossed-out `state`.
-
-
-
+#### 19. React Todo List Example (Filtering Todos)
   
+> Video: https://egghead.io/lessons/javascript-redux-react-todo-list-example-filtering-todos
+
+In the previous two lessons we working on creating the user-interface
+for the Todo List Application that displays the todos 
+lets us add new todos and "toggle" them `onClick`
+we *implemented* that by dispatching `ADD_TODO` and `TOGGLE_TODO` `actions` 
+that we already know how to handle in our reducers.
+
+In *this* lesson we are going to dispatch `SET_VISIBILITY_FILTER` `action` 
+and use the `visibilityFilter` *field* 
+to *only* show the todos the *user* wants to see; 
+either the *completed* todos, *active* todos 
+or *all* the todos in the *current* `state`. 
+
+I'm starting by creating a *new* Component, 
+a *functional* Component called `FilterLink`
+that user needs to click to switch the *current* visible todos. 
+and the `FilterLink` accepts `filter` prop which is just a `String`
+and the `children` which is the contens of the link. 
+and its going to be a simple `<a>` ("*anchor*") tag 
+that doesn't really *link* anywhere, 
+its going to `prevent` the navigation when clicked 
+and its going to dispacth and `action` 
+with a `type` `SET_VISIBILITY_FILTER` 
+and passing the `filter` prop 
+so that the reducer knows which filter is being clicked. 
+I will pass the `children` down to the `<a>` tag 
+so the "consumer" can specify the `text` of the link 
+Now I can use it in my `TodoApp` Component. 
+
+
 
 
 <br />
