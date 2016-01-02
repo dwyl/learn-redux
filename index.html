@@ -41,9 +41,13 @@ const todo = (state, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      // array spread causing errors...
+      // return [
+      //   ...state,
+      //   todo(undefined, action)
+      // ]
+      // array spread was causing errors ... so this is the ES5 version:
       var newState = state.map( (e) => { return e; }); // copy state values
-      newState.push(todo(undefined, action));
+      newState.push(todo(undefined, action));  // add the new todo entry
       return newState;
     case 'TOGGLE_TODO':
       return state.map(t => todo(t, action));

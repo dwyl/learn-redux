@@ -249,6 +249,76 @@ the `ADD_TODO` `action` is dispatched and the field is *cleared*.
 
 Lets take a moment to recap how this application works.
 
+It starts with the TodoApp React Component 
+and this Component is not aware *exactly* how todos are being added
+however it can express its desire to mutate the `state` 
+by dispatching an `action` with the `type` `ADD_TODO`
+for the `text` field it uses the *current* `input` value (`this.input.value`)
+and it passes an *incrementing* `id` as the `id` of todo
+every todo needs its own `id` and in this approach we are just going 
+to increment the counter so it always gives us the next integer as `id`
+it is common for React Components to dispatch `actions` in Redux apps
+however it is *equally* important to be able to `render` the *current* `state`
+my `TodoApp` Component assumes that it is going to receive todos 
+as a `prop` and it *maps* over the todos to display a *list* of them.
+using the `id` as a `key`.
+This Component is being rendered in the `render` function 
+that runs any time the `store` `state` changes, and *initially*. 
+The `render` function reads the *current* `state` of the `store` 
+and passes the todos `Array` that it gets 
+from the *current* `state` of the `store`
+to the `TodoApp` Component as a `prop`
+the `render` function is called on every `store` change
+so the `todos` prop is always up-to-date 
+this was the *rendering* part of the Redux flow. 
+
+Lets recap how *mutations* work in Redux:
+any `state` change is caused by a `store.dispatch` 
+call somewhere in the Component.
+When an `action` is dispatched 
+the `store` calls the *reducer* it was created with 
+with the *current* `state` and the `action` being dispatched 
+and in our case, this is the `todoApp` reducer
+which we obtained by combining the `visibilityFilter` and the `todos` reducer.
+It matches the `action` `type` in a `switch` statement 
+and if the `action` `type` is `ADD_TODO` 
+and indeed it is equal to `ADD_TODO` `String`
+in this case it will call the "*child*" `todo` reducer,
+passing it `undefined` because there is no `state` for a *new* todo
+and the `action`.
+We have a *similar* `switch` statement inside the `todo` reducer
+and the `action` `type` is `ADD_TODO` which returns the 
+*initial* `state` of the todo with the `id` and `text` from the `action`
+and `completed` field set to `false`
+the todos reducer that *called* it will return 
+a *new* `Array` with all *existing* items 
+and the *new* item added at the very end as a *new* todo
+to the *current* `state`
+
+*Finally* the combined reducer called `todoApp`
+will use this *new* `Array` as the new value for the todos field 
+in the *global* `state` `Object` 
+so its going to return a *new* `state` `Object` 
+where the todos field corresponds to the `Array` 
+with the newly added Todo item.
+The `todoApp` reducer is the "*root*" reducer in this application 
+it is the one the `store` was created with. 
+so its next state is the *next* `state` of the Redux `store` 
+and all the *listeners* are notified 
+the `render` function is *subscribed* to the `store` changes 
+so it is called *again* and it gets the *fresh* `state` 
+by calling `getState` and it passes the *fresh* todos to the Component 
+re-rending it with the *new* data.
+
+> Code at the *end* of Video 17:
+[`index.html`]()
+
+Which should look like this: (*when you open it in Chrome Canary*)
+
+![video-17-end-state-screenshot](https://cloud.githubusercontent.com/assets/194400/12148939/0cca4cb6-b499-11e5-8c0a-3aec949a547b.png)
+
+
+
 <br />
 
 ## Background Reading / Watching / Listening
