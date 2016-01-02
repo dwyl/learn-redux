@@ -155,7 +155,50 @@ and I'm also specifying an *empty* `Object` as the *initial* `nextState`
 And there we have it this is a *working* re-implementation of 
 `combineReducers` utility from Redux
 
-Lets *recap* how it works.
+Lets briefly *recap* how it works.
+I'm calling `combineReducers` with an `Object`
+who's values are the reducer functions 
+and keys are the `state` fields they manage
+inside the *generated* reducer I'm retrieving all the keys 
+of the reducers I passed to `combineReducers` which is 
+an `Array` of `Strings` (*spcifically*) 
+`todos` and `visibilityFilter` (*in our example*).
+I'm starting with an *empty* `Object` for my `nextState`
+and I'm using the `Reduce` operation over these `keys` 
+to fill it *gradually*.
+Notice that I am *mutating* the `nextState` `Object` on every itteration
+this is not a problem because it is an `Object` I created 
+*inside* the reducer it is not something passed from *outside*
+so reducer stays a "*pure*" function.
+To calculate the `nextState` for a given `key` 
+it calls the corresponding reducer function 
+such as `todos` or `visibilityFilter` 
+the *generated* reducer will pass to the *child* reducer 
+only a *part* of its `state` by the `key`
+so if its `state` is a *single* `Object`
+its only going to pass the *relevant* part
+such as `todos` or `visibilityFilter` 
+depending on the *current* `key`
+and save the result in the `nextState` by the same `key`
+
+*Finally* we use the `Array.reduce` operation (*method*) 
+with the *empty* `Object` as the *initial* `nextState` 
+that is being filled on every itteration 
+until it is the return value of the whole `.reduce` operation
+
+In this lesson you learned how to implement the `combineReducers`
+utility that comes with Redux from *scratch* 
+it is not *essential* to use in Redux 
+so it is *fine* if you don't fully understand how it works *yet* 
+however it is a *good* [*great*!] idea to 
+*practice* functional programming 
+and *understand* that functions can take other functions 
+and `return` other functions
+because knowing this will help you get more productive in Redux
+in the long term. 
+
+
+
 
 
 
