@@ -225,12 +225,29 @@ const render = () => {
 ```
 
 > Code snapshot for Video 17 @ 02:56:
-[`index.html`]()
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/c44025b2ea3ed7f8cd4b1120c4aad7f98cce2c97/index.html#L81-L104)
+
+If you open the file in your browser, you should expect to see:
+
+![learn-redux-video-17-example](https://cloud.githubusercontent.com/assets/194400/12147411/a1bb3974-b490-11e5-8ab0-b011dfecc959.png)
 
 
 You can see that there is a `<button>` "Add todo"
-and any time I press it
+and any time I press it I see a *new* todo with the "Test" `text`.
 
+Now I'm going to add an `input` inside my render function
+and I'm using the React callback `ref` API where `ref` is a function
+it gets the `node` corresponding to the `ref` 
+and I'm saving that `node` in this case `this.input`
+so I'm able to *read* the `value` of the `input` 
+inside my event handler, I'm reading `this.input.value`
+and I'm also able to *reset* that value 
+*after* dispatching the `action` so that the field is cleared.
+
+Now if I try to write something in the `input` field and press "Add Todo"
+the `ADD_TODO` `action` is dispatched and the field is *cleared*.
+
+Lets take a moment to recap how this application works.
 
 <br />
 
