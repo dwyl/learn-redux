@@ -173,6 +173,28 @@ and now for *every* todo who's `id` does not match the `id` specified
 in the `action` we just `return` the *previous* `state` 
 that is the todo `Object` as it was 
 *however* if the `id` of the todo matches 
+the one *specified* in the `action` 
+we are going to `return` a *new* `Object`
+with all the properties of the *original* todo 
+but with the `completed` field equal to 
+the *opposite* value of what it was; 
+e.g: `completed: !state.completed`
+
+The updated todo item will be will be included in the todos field 
+under the *new* application `state`
+and because we `subscribe` the `render` function 
+its going to get the *next* `state` of the application 
+in `store.getState()
+and pass the *new* version of the todos to the `TodoApp` Component. 
+Which is going to render the *updated* todos.
+
+*Finally* the (CSS) `style` of the `<li>` 
+depends on the `todo.completed` field which we just updated. 
+which is why it re-renders in a crossed-out `state`.
+
+
+
+  
 
 
 <br />
