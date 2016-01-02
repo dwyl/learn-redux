@@ -5,6 +5,7 @@
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
     <script src="https://wzrd.in/standalone/expect@latest"></script>
     <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
   </head>
@@ -59,43 +60,23 @@ const visibilityFilter = (
   }
 };
 
-// const { combineReducers } = Redux;
-const combineReducers = (reducers) => {
-  return (state = {}, action) => {
-    return Object.keys(reducers).reduce(
-      (nextState, key) => {
-        nextState[key] = reducers[key](
-          state[key],
-          action
-        );
-        return nextState;
-      },
-      {} // empty initial nextState
-    );
-  };
-};
-
+const { combineReducers } = Redux;
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
 
-// const todoApp = (state = {}, action) => {
-//   return {
-//     todos: todos(
-//       state.todos,
-//       action
-//     ),
-//     visibilityFilter: visibilityFilter(
-//       state.visibilityFilter,
-//       action
-//     )
-//   };
-// };
-
-
 const { createStore } =  Redux;
 const store = createStore(todoApp);
+
+const render = () => {
+
+};
+
+store.subscribe(render);
+render();
+
+// Checks and Tests Below this Point
 
 console.log('Initial state:');
 console.log(store.getState());

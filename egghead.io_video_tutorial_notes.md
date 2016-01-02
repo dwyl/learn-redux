@@ -1531,6 +1531,107 @@ by using the `combineReducers` utility function.
 
 <br />
 
+#### 16. Implementing combineReducers() from Scratch
 
+> Video: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
+
+In the previous lesson we learned to use the `combineReducers` function
+which comes with Redux and generates one reducer
+from several other reducers
+delegating to them parts of the `state` tree.
+
+To gain a *deeper* understanding of how *exactly* `combineReducers` works
+we will *implement* it ***from scratch*** in this lesson.
+
+`combineReducers` is a function so I'm writing a function declaration
+and its' only argument is the *mapping* between `state` keys
+and the reducers, so I'm just going to call it `reducers`.
+
+```js
+// const { combineReducers } = Redux;
+const combineReducers = (reducers) => {
+  return (state = {}, action) => {
+    return Object.keys(reducers).reduce(
+      (nextState, key) => {
+        nextState[key] = reducers[key](
+          state[key],
+          action
+        );
+        return nextState;
+      },
+      {} // empty initial nextState
+    );
+  };
+};
+```
+
+The returned value is supposed to be a reducer its' self
+so this is a function that returns another function
+and the signature of the returned function is a reducer signature
+it has the `state` and the `action`
+now I'm calling the [`Object.keys` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) (*IE9+*) 
+which gives me all the `keys` of the `reducers` `Object`
+in our example this is `todos` and `visibilityFilter`
+next I am calling the (Array) `reduce` method on the `keys`
+because I want to produce a *single* value such as the `nextState`
+by *accumulating* over every reducer `key`
+and calling the *corresponding* reducer
+each reducer passed to the combined reducers function is only responsible
+for updating a *part* of the `state` 
+this is why I'm saying that the `nextState` by the given `key`
+can be calculated by calling 
+the *corresponding* reducer by the *given* `key` with 
+the *current* `state` by the *given* `key` 
+and the `action`
+the `Array.reduce` wants me to `return` the *next* accumulated value
+from the callback so I am returning the `nextState` 
+and I'm also specifying an *empty* `Object` as the *initial* `nextState`
+*before* all the `keys` are processed. 
+And there we have it this is a *working* re-implementation of 
+`combineReducers` utility from Redux
+
+Lets briefly *recap* how it works.
+I'm calling `combineReducers` with an `Object`
+who's values are the reducer functions 
+and keys are the `state` fields they manage
+inside the *generated* reducer I'm retrieving all the keys 
+of the reducers I passed to `combineReducers` which is 
+an `Array` of `Strings` (*spcifically*) 
+`todos` and `visibilityFilter` (*in our example*).
+I'm starting with an *empty* `Object` for my `nextState`
+and I'm using the `Reduce` operation over these `keys` 
+to fill it *gradually*.
+Notice that I am *mutating* the `nextState` `Object` on every itteration
+this is not a problem because it is an `Object` I created 
+*inside* the reducer it is not something passed from *outside*
+so reducer stays a "*pure*" function.
+To calculate the `nextState` for a given `key` 
+it calls the corresponding reducer function 
+such as `todos` or `visibilityFilter` 
+the *generated* reducer will pass to the *child* reducer 
+only a *part* of its `state` by the `key`
+so if its `state` is a *single* `Object`
+its only going to pass the *relevant* part
+such as `todos` or `visibilityFilter` 
+depending on the *current* `key`
+and save the result in the `nextState` by the same `key`
+
+*Finally* we use the `Array.reduce` operation (*method*) 
+with the *empty* `Object` as the *initial* `nextState` 
+that is being filled on every itteration 
+until it is the return value of the whole `.reduce` operation
+
+In this lesson you learned how to implement the `combineReducers`
+utility that comes with Redux from *scratch* 
+it is not *essential* to use in Redux 
+so it is *fine* if you don't fully understand how it works *yet* 
+however it is a *good* [*great*!] idea to 
+*practice* functional programming 
+and *understand* that functions can take other functions 
+and `return` other functions
+because knowing this will help you get more productive in Redux
+in the long term. 
+
+<br />
 
 
