@@ -100,6 +100,14 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
 
+In the previous lesson we learned to use the `combineReducers` function
+which comes with Redux and generates one reducer
+from several other reducers
+delegating to them parts of the `state` tree.
+
+To gain a *deeper* understanding of how *exactly* `combineReducers` works
+we will *implement* it ***from scratch*** in this lesson.
+
 
 <br />
 

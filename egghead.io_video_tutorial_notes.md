@@ -1527,7 +1527,10 @@ by using the `combineReducers` utility function.
 > *I have a* ***strong bias*** *towards* ***explicitly*** 
 *typing the* ***Values*** *in an `Object` litteral for clarity*.
 *But given the* ***naming convention*** *in Redux*,
-*its pretty safe to omit them in this case*
-
+*its pretty safe to omit them in this case*.
 
 <br />
+
+
+
+
