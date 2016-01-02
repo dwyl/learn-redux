@@ -122,13 +122,57 @@ which is going to be "line-through" (*strike-through*)
 when `completed` is `true` and *none* when `todo.compleded` is `false`
 so I get a "normal" looking todo.
 And now if I add a couple of todos
-I can click on them and they are going to appear toggled. 
+I can click on them and they are going to appear toggled:
+
+```js
+<ul>
+  {this.props.todos.map(todo => 
+    <li key={todo.id}
+     onClick={() => {
+      store.dispatch({
+        type: 'TOGGLE_TODO',
+        id: todo.id
+      });
+     }}
+     style={{
+      textDecoration: 
+        todo.completed ? 
+          'line-through' :
+          'none'
+     }}
+     >
+      {todo.text}
+    </li>
+  )}
+</ul>
+```
 
 > Code snapshot for Video 18 @ 1:25:
-[`index.html`]()
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/fbc9a10538f513d21e9b06a9db13f33af79f938f/index.html#L104-L116)
+
+When you run it (*in Google Chrome Canary*) you should expect to see:
 
 ![video-18-at-1min25sec-screenshot](https://cloud.githubusercontent.com/assets/194400/12149808/a7565b22-b49d-11e5-87b5-a66dec698686.png)
 
+... And I can *toggle* them back. Isn't that *satisfying*...?
+
+Lets recap how *toggling* the todo actually *works*.
+it starts with me dispatching the `TOGGLE_TODO` `action` 
+inside my `onClick` handler with the `type` `TOGGLE_TODO` 
+and the `id` which is the `id` of the todo being rendered 
+I get the `todo` `Object` as an *argument* to the `Array.map` callback 
+inside my `render` method where I render all the todos
+when an `action` is dispatched the `store` will call the "*root*" reducer 
+which will call the todos reducer with the `Array` of todos 
+and the `action` and in *this* case the `action` `type` is `TOGGLE_TODO`
+so the todos reducer delegates the handling of *every* todo 
+to the `todo` reducer with a `.map` function to call it for *every* todo item.
+ So the `todo` reducer receives the todo as `state` and the `action`
+again we `switch` on the `action.type` and it matches `TOGGLE_TODO` `String`
+and now for *every* todo who's `id` does not match the `id` specified 
+in the `action` we just `return` the *previous* `state` 
+that is the todo `Object` as it was 
+*however* if the `id` of the todo matches 
 
 
 <br />
