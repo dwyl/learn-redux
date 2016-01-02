@@ -218,7 +218,50 @@ and I'm going to *use* the `visibleTodos` *instead* of
 `this.props.todos` when I enumerate them for rendering. 
 
 > Code snapshot for Video 19 @ 03:45: 
-[`index.html`]()
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/5e0622c277a37a478c887ba27e521474a5d480ad/index.html#L83-L128)
+
+*Finally* I now use the `visibilityFilter` inside my `TodoApp` Component 
+so I need to pass it as a prop
+and I can do this *explicitly* 
+but its *easier* just to "spread" over *all* the `state` fields 
+so *every* property of the `state` `Object` is passed 
+as a prop to the `TodoApp` Component 
+this way it receives the `visibilityFilter` 
+and if I *add* some todo items and then click on them
+so I change their `completed` fields 
+and then click on the `visibilityFilter` links 
+the *currently* visible todos are rendered according 
+to the *chosen* `visibilityFilter`. 
+
+The links look all the same right now 
+but we want to highlight the *chosen* one. 
+To *implement* this, we're going to need the `visibilityFilter` prop 
+which says which is the *current* one.
+I'm changing the *beginning* of the `render` method 
+to "*destructure*" the `todos` and `visibilityFilter` from the props 
+so I can access them *directly* without typing `this.props` every time. 
+and I'm going to pass the `visibilityFilter` to every `FilterLink`
+so it can *know* which `filter` is the *current* one 
+and *apply* different styling 
+if the `currentFilter` matches the `FilterLink`'s *own* filter. 
+
+After passing the `currentFilter` prop to every `FilterLink` 
+I go back to the `FilterLink` declaration and I'm adding
+`currentFilter` as a prop to it and I'm adding a *condition* 
+that says that when the `filter` is the `currentFilter` 
+that is when the link is *active* 
+I want to `return` a `<span>` instead of a link
+because I don't want it to be *clickable*, 
+I want it to be *static* text 
+this completes the user-interface of our Todo List example 
+it lets us *add* items, it lets us *view* items,
+toggle them as *completed* 
+and when we `switch` the `visibilityFilter` 
+it displays only *relevant* todos 
+and it *also* updates the link *appearance* 
+so we see which link is *active*.
+
+Lets recap 
 
 
 <br />
