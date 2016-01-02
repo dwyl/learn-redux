@@ -108,6 +108,56 @@ delegating to them parts of the `state` tree.
 To gain a *deeper* understanding of how *exactly* `combineReducers` works
 we will *implement* it ***from scratch*** in this lesson.
 
+`combineReducers` is a function so I'm writing a function declaration
+and its' only argument is the *mapping* between `state` keys
+and the reducers, so I'm just going to call it `reducers`.
+
+```js
+// const { combineReducers } = Redux;
+const combineReducers = (reducers) => {
+  return (state = {}, action) => {
+    return Object.keys(reducers).reduce(
+      (nextState, key) => {
+        nextState[key] = reducers[key](
+          state[key],
+          action
+        );
+        return nextState;
+      },
+      {} // empty initial nextState
+    );
+  };
+};
+```
+
+The returned value is supposed to be a reducer its' self
+so this is a function that returns another function
+and the signature of the returned function is a reducer signature
+it has the `state` and the `action`
+now I'm calling the [`Object.keys` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) (*IE9+*) 
+which gives me all the `keys` of the `reducers` `Object`
+in our example this is `todos` and `visibilityFilter`
+next I am calling the (Array) `reduce` method on the `keys`
+because I want to produce a *single* value such as the `nextState`
+by *accumulating* over every reducer `key`
+and calling the *corresponding* reducer
+each reducer passed to the combined reducers function is only responsible
+for updating a *part* of the `state` 
+this is why I'm saying that the `nextState` by the given `key`
+can be calculated by calling 
+the *corresponding* reducer by the *given* `key` with 
+the *current* `state` by the *given* `key` 
+and the `action`
+the `Array.reduce` wants me to `return` the *next* accumulated value
+from the callback so I am returning the `nextState` 
+and I'm also specifying an *empty* `Object` as the *initial* `nextState`
+*before* all the `keys` are processed. 
+And there we have it this is a *working* re-implementation of 
+`combineReducers` utility from Redux
+
+Lets *recap* how it works.
+
+
 
 <br />
 

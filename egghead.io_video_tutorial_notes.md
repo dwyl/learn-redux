@@ -1,5 +1,5 @@
 
-## Notes for Dan's Egghead Videos [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
+## Notes for Dan Abramov's egghead.io Videos [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
 
 #### 1. The Single Immutable State Tree (*Principal #1*)
 
@@ -32,7 +32,7 @@ because they are serialisable (*i.e. easy to `JSON.stringify`*)
 
 <br />
 
-#### 3. Pure and Impure Functions
+#### 3. *Pure* and *Impure* Functions
 
 > Video: https://egghead.io/lessons/javascript-redux-pure-and-impure-functions
 
