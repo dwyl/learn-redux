@@ -124,8 +124,112 @@ I declare a `render` function that is going to update the DOM
 in response to the *current* application `state`
 and I'm going to `subscribe` to the `store` changes
 and call `render` when ever the `store` changes 
-and *once* to `render` the *initial* state
+and *once* to `render` the *initial* state:
 
+```js
+const { createStore } =  Redux;
+const store = createStore(todoApp);
+
+const render = () => {
+  // gets expanded below ...
+};
+
+store.subscribe(render);
+render();
+```
+
+And the *implementation* of the `render` method
+is going to use React so its calling `ReactDOM.render`
+for some `TodoApp` *component* I haven't written *yet*
+and it renders it into the `div` I created inside the `html`
+called `root`.
+
+React provides a "*base*" `Class` for all components 
+so I'm grabbing it from the React `Object` 
+its called `React.Component`
+and I'm declaring my own `TodoApp` component 
+that `extends` the React "*base*" `Component`
+
+```js
+const { Component } = React;
+
+class TodoAPP extends Component {
+// filled out below ...
+}
+
+const render = () => {
+  ReactDOM.render( 
+    <TodoApp />,
+    document.getElementById('root')
+  );
+};
+```
+
+This `Component` is only going to have a `render` function
+and is going to return a `<div>` 
+and *inside* the `<div>` I'm going to place a `<button>` saying "Add Todo"
+but I don't want to add an `input` field *yet* to keep the example *simple*
+at first so I'm dispatching the `ADD_TODO` `action` 
+and I'm going to put `Test` as my `text` for the `action`
+so it's going to keep adding todos with the `text` "Test".
+and the `id` I need to specify a sequential `id` 
+so this is why I'm declaring a *global* variable called `nextTodoId`
+and I'm going to keep incrementing it.
+so every time its going to emit (*dispatch an `action` with*) a *new* `id` 
+and *finally* I aslo want to display a *list* of the todos
+so, *assuming* that I have the todos injected as a `todos` prop
+I will call `.map` and for every `todo` item I'm going to show a `<li>`
+showing the text of that particular todo.
+
+*Finally* because I need the `todos` as a `prop` 
+I'm going to pass it to the `TodoApp` 
+by reading the the *current* `store` `state`
+and reading its `todos` field: 
+
+```js
+const { Component } = React;
+
+let nextTodoId = 0;
+
+class TodoApp extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: 'Test',
+            id: nextTodoId++
+          });
+        }}>
+          Add Todo 
+        </button> 
+        <ul>
+          {this.props.todos.map(todo => 
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
+
+const render = () => {
+  ReactDOM.render( 
+    <TodoApp todos={store.getState().todos} />,
+    document.getElementById('root')
+  );
+};
+```
+
+> Code snapshot for Video 17 @ 02:56:
+[`index.html`]()
+
+
+You can see that there is a `<button>` "Add todo"
+and any time I press it
 
 
 <br />

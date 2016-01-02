@@ -3,15 +3,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Learn Redux - Todo</title>
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
-    <script src="https://npmcdn.com/expect/umd/expect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
+    <!-- Why JSXTransformer? see: http://git.io/vug4q -->
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
     <script src="https://wzrd.in/standalone/expect@latest"></script>
     <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
   </head>
   <body>
+    <div id='root'></div>
 
-    <script>
+    <script type="text/jsx">
+
+'use strict';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -36,10 +41,10 @@ const todo = (state, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ];
+      // array spread causing errors...
+      var newState = state.map( (e) => { return e; }); // copy state values
+      newState.push(todo(undefined, action));
+      return newState;
     case 'TOGGLE_TODO':
       return state.map(t => todo(t, action));
     default:
@@ -69,8 +74,40 @@ const todoApp = combineReducers({
 const { createStore } =  Redux;
 const store = createStore(todoApp);
 
-const render = () => {
+const { Component } = React;
 
+let nextTodoId = 0;
+
+class TodoApp extends Component {
+  render() {
+    return (
+      <div>
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: 'Test',
+            id: nextTodoId++
+          });
+        }}>
+          Add Todo 
+        </button> 
+        <ul>
+          {this.props.todos.map(todo => 
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
+
+const render = () => {
+  ReactDOM.render( 
+    <TodoApp todos={store.getState().todos} />,
+    document.getElementById('root')
+  );
 };
 
 store.subscribe(render);
