@@ -1433,3 +1433,101 @@ but the `visibilityFilter` field has been updated.
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/9702c1c858b4a22fff85339c55cf914ae3969666/index.html#L115-L123)
 
 <br />
+
+#### 15. Reducer Composition with `combineReducers`()
+
+> Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-combinereducers
+
+In the previous lesson we learned how to use 
+the "*Reducer Composition*" Pattern 
+to let different reducers handle different parts of the `state` tree
+and then *combine* their results.
+In fact this pattern is *so* common 
+that it's present in *most* Redux applications.
+And this is why Redux provides a function called `combineReducers`
+that lets you avoid writing this code by *hand*
+and instead it *generates* the top-level reducer *for* you.
+
+The *only* argument to `combineReducers` is an `Object`
+and this `Object` lets me specify the *mapping* between
+the `state` field names and the reducers managing them:
+
+```js
+const { combineReducers } = Redux;
+const todoApp = combineReducers({
+  todos: todos,
+  visibilityFilter: visibilityFilter
+});
+```
+
+The returned value of the `combineReducers` call is a reducer function
+which is pretty much equivalent to 
+the reducer function I wrote by hand previously [*See: Video 14 above*]
+
+The keys of the `Object` that I configure `combineReducers` with
+correspond to the fields of the `state` `Object` its going to manage. 
+
+The *values* of the `Object` I pass to combine reducers are the reducers
+it should call to update the corresponding `state` fields
+this *combined* reducer call says that 
+the todos field inside the state object manages 
+will be updated by the `todos` reducer 
+and the `visibilityFilter` field inside the the `state` `Object` 
+will be will be updated by calling the `visibilityFilter` reducer
+and the results will be assembled into a *single* `Object`
+in other words it behaves pretty much exactly as the function
+commented out below:
+
+```js
+// const todoApp = (state = {}, action) => {
+//   return {
+//     todos: todos(
+//       state.todos,
+//       action
+//     ),
+//     visibilityFilter: visibilityFilter(
+//       state.visibilityFilter,
+//       action
+//     )
+//   };
+// };
+```
+
+*Finally* I will establish a *useful* convention:
+I will *always* name my reducers after the `state` keys they manage
+since the *key* names and the *value* names are now the *same*
+I can *omit* the *values* thanks to the **ES6** Object Litteral 
+***Shorthand Notation***:
+
+```js
+const { combineReducers } = Redux;
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+});
+```
+
+In this lesson you learned how to *generate* a single reducer 
+that calls many reducers to manage parts of its state 
+by using the `combineReducers` utility function. 
+
+> Code Snapshot for *End* of Video 15 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/128196f61fe5d0e752b16625e8676961f74858ff/index.html#L62-L66)
+
+
+##### Read more about ES6 Object Litteral *Shorthand* Notation
+
++ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015
++ Good examples: http://eslint.org/docs/rules/object-shorthand.html (*by Nicholas C. Zakas*)
+
+> ***NOTE***: as *usual*, while **ES6** Object Litteral *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
+
+![es6-object-literal-shorthand-notation](https://cloud.githubusercontent.com/assets/194400/12127256/0d4190d8-b3ee-11e5-9191-8c4a532ad59f.png)
+
+> *I have a* ***strong bias*** *towards* ***explicitly*** 
+*typing the* ***Values*** *in an `Object` litteral for clarity*.
+*But given the* ***naming convention*** *in Redux*,
+*its pretty safe to omit them in this case*
+
+
+<br />
