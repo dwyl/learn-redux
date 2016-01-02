@@ -46,7 +46,12 @@ const todos = (state = [], action) => {
       //   todo(undefined, action)
       // ]
       // array spread was causing errors ... so this is the ES5 version:
-      var newState = state.map( (e) => { return e; }); // copy state values
+      console.log('-------> ADD_TODO');
+      console.log(state);
+
+      var newState = (state && state.length > 0) ? 
+        state.map( (e) => { return e; }) // copy state values
+        : [];
       newState.push(todo(undefined, action));  // add the new todo entry
       return newState;
     case 'TOGGLE_TODO':
@@ -107,6 +112,8 @@ const getVisibleTodos = (
   todos,
   filter
 ) => {
+  console.log('getVisibleTodos Called!')
+  console.log(todos, filter)
   switch (filter) {
     case 'SHOW_ALL':
       return todos;
@@ -118,6 +125,8 @@ const getVisibleTodos = (
       return todos.filter(
         t => !t.completed
       );
+    default:
+      return todos;
   }
 }
 
@@ -126,14 +135,21 @@ let nextTodoId = 0;
 
 class TodoApp extends Component {
   render() {
-    const {
-      todos,
-      visibilityFilter
-    } = this.props; // destructuring assignment
+    // const {
+    //   todos,
+    //   visibilityFilter
+    // } = this.props; // destructuring assignment
+    const todos = this.props.todos, visibilityFilter = this.props.visibilityFilter
+    console.log('--------> visibilityFilter:')
+    console.log(visibilityFilter);
     const visibleTodos = getVisibleTodos(
       todos,
       visibilityFilter
     );
+    console.log('---------> todos:')
+    console.log(todos);
+    console.log('---------> visibleTodos:')
+    console.log(visibleTodos);
     return (
       <div>
         <input ref={node => {
@@ -150,7 +166,7 @@ class TodoApp extends Component {
           Add Todo 
         </button> 
         <ul>
-          {visibleTodos.map(todo => 
+          { visibleTodos.map(todo => 
             <li key={todo.id}
              onClick={() => {
               store.dispatch({
@@ -209,7 +225,7 @@ render(); // initial state
 
 
 // Checks and Tests Below this Point
-
+/*
 console.log('Initial state:');
 console.log(store.getState());
 console.log('--------------');
@@ -321,7 +337,7 @@ testAddTodo();
 testToggleTodo();
 
 console.log('All tests passed.');
-
+*/
     </script>
   </body>
 </html>

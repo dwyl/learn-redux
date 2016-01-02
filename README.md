@@ -240,6 +240,24 @@ which says which is the *current* one.
 I'm changing the *beginning* of the `render` method 
 to "*destructure*" the `todos` and `visibilityFilter` from the props 
 so I can access them *directly* without typing `this.props` every time. 
+
+> ***NOTE***: [**ES6** ***Destructuring assignment***](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+is ***not supported*** in Chrome yet, so I'm not using this in the code example.
+> so Instead of:
+
+```js
+const {
+  todos,
+  visibilityFilter
+} = this.props; // destructuring assignment
+```
+
+I'm using:
+
+```js
+const todos = this.props.tods, visibilityFilter = this.props.visibilityFilter
+```
+
 and I'm going to pass the `visibilityFilter` to every `FilterLink`
 so it can *know* which `filter` is the *current* one 
 and *apply* different styling 
@@ -261,7 +279,46 @@ it displays only *relevant* todos
 and it *also* updates the link *appearance* 
 so we see which link is *active*.
 
-Lets recap 
+Lets recap how changing the `visibilityFilter` *works*
+it starts with a dispatch call with an `action` 
+of the `type: 'SET_VISIBILITY_FILTER'` 
+and it passes `filter` which is a prop to the `FilterLink` Component 
+so every one of those 3 links is going to have a different `filter` prop 
+it passes in the `action`.
+The `store.dispatch` function will call our *root* reducer with
+the `state` and the `action` which in turn 
+will call the `visibilityFilter` reducer 
+with the *part* of the `state` and the `action`. 
+Note that when the `action.type` is `SET_VISIBILITY_FILTER` 
+it doesn't *care* for the *previous* `state` 
+it just returns the `action.filter` as the *next* value, 
+the next `state` of the `visibilityFilter` reducer 
+the root reducer will *use* this new field as part of its *new*
+`state` `Object` and because the `render` function is
+*subscribed* to the `store` changes ( `store.subscribe(render);` ) 
+its going to get this *new* `state` `Object` 
+and pass all its keys as props to the `TodoApp` Component 
+so the `TodoApp` Component will receive the todos 
+and the *updated* `visibilityFilter` as its' props 
+both its props are passed to the `getVisibleTodos` function 
+which calculates the *currently* `visibleTodos` 
+according to a list of *all* `todos` and the `visibilityFilter` 
+and the `filter` is just a `String` saying
+`SHOW_ALL`, `SHOW_COMPLETED` or `SHOW_ACTIVE` 
+and the returned value is a *new* `Array` of todos 
+that in some cases filters them and in some cases returns as is 
+and the `SHOW_COMPLETED` and `SHOW_ACTIVE` are 
+only different in their *predicates*. 
+
+The `return` value is the `Array` of `visibleTodos` and it is used 
+in the `render` function to actually enumerate every `todo`
+and *render* it 
+and the `visibilityFilter` field is also used byt the `FilterLink`
+as the `currentFilter` because the `FilterLink` wants to know
+whether its `filter` is the *current* one 
+in order to `render` a `<span>` instead of a link (`<a>` tag). 
+This is how clicking a link makes it appear selected 
+and changes the *currently* displayed items in the list.
 
 
 <br />
