@@ -129,7 +129,65 @@ I will pass the `children` down to the `<a>` tag
 so the "consumer" can specify the `text` of the link 
 Now I can use it in my `TodoApp` Component. 
 
+Just below the todo list I'm adding a paragraph
+where I'm going to offer the user the choice 
+as to which todos should be *currently* visible 
+by using the `FilterLink` Component I just created.
+The `filter` prop is one of these possible values 
+such as `SHOW_ALL` which corresponds 
+to showing *every* todo in the `state`
+`SHOW_ACTIVE` which means just show the todos
+that are *not* completed yet,
+and `SHOW_COMPLETED` which means show the *completed* todos.
 
+```js
+<p>
+  Show:
+  {' '}
+  <FilterLink
+    filter='SHOW_ALL'
+  >
+  All
+  </FilterLink>
+  {' '}
+  <FilterLink
+    filter='SHOW_ACTIVE'
+  >
+  Active
+  </FilterLink>
+  {' '}
+  <FilterLink
+    filter='SHOW_COMPLETED'
+  >
+  Completed
+  </FilterLink>
+</p>
+```
+
+So I'm *copy-pasting* the `FilterLink` 
+and I'm changing the lables 
+and the filters corresponding to it 
+running this code will give me 3 different things
+under the list of todos.
+Clicking on them will change the `state.visibilityFilter` field
+*however* it doesn't have *any* effect yet.
+because we don't interpret the value of the `visibilityFilter`
+
+
+I'm creating a *new* function 
+that is going to help me filter the todos according to the 
+the filter value, its called `getVisibleTodos`
+it accepts two arguments: the `todos` and the `filter`
+and it *switches* on the *current* `filter` value 
+so if the `filter` is `SHOW_ALL`
+its going to `return` all of the todos
+but if the `filter` is `SHOW_COMPLETED` 
+its going to call `todos.filter()` 
+(*that is the `Array.filter` method*) 
+to only return those todos that have `completed` set to `true` 
+and `SHOW_ACTIVE` is going to be the *opposite* of that 
+its going to `return` *only* those todos that 
+where `completed` field is `false`.
 
 
 <br />

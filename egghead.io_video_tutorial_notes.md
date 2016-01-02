@@ -1942,12 +1942,12 @@ The updated todo item will be will be included in the todos field
 under the *new* application `state`
 and because we `subscribe` the `render` function 
 its going to get the *next* `state` of the application 
-in `store.getState()
+in `store.getState()`
 and pass the *new* version of the todos to the `TodoApp` Component. 
 Which is going to render the *updated* todos.
 
 *Finally* the (CSS) `style` of the `<li>` 
-depends on the `todo.completed` field which we just updated. 
+depends on the `todo.completed` field which we just updated 
 which is why it re-renders in a crossed-out `state`.
 
 
