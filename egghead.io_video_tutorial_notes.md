@@ -2183,3 +2183,157 @@ and changes the *currently* displayed items in the list.
 > Code at the *end* of Video 19:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/bebd3844c144ceb072365b4a4bf7b816124e9626/index.html)
 
+<br />
+
+#### 20. Extracting Presentational Components (Todo, TodoList)
+
+> Video: https://egghead.io/lessons/javascript-redux-extracting-presentational-components-todo-todolist
+
+In the last few lessons we created the user interface for a simple 
+React and Redux Todo List where I can add items, toggle them 
+as completed and change the *currently* visible Todos 
+and we do that by having a *single* `TodoApp` Component 
+that the `<input>`, the `<button>` for *adding* todos 
+the *list* of *currently* visible todos with `onClick` handler 
+and it has these 3 links that let us change 
+the *currently* visible todos.
+The *single* Component approach worked so far,
+however we really want to have *many* components 
+that can be used tested and changed by different people separately 
+so we are going to re-factor our application in this lesson. 
+
+The first Component I want to *extract* from the `TodoApp` Component 
+is the `Todo` Component that renders a *single* `<li>`
+I'm declaring the `Todo` Component as a function 
+which React 0.14 allows me to do. 
+I'm not *sure* which props its going to have 
+so I will leave them blank for now 
+and I will just *paste* the `<li>` I coppied before. 
+
+The first thing I am doing is *removing* the special `key` property
+because it's only needed when I am enumerating an `Array` 
+and I will use it *later* when enumerating *many* todos. 
+One of my goals with this refactoring is to make every Component
+as flexible as it is *reasonable*.
+Right now I have *hard-coded* that *clicking* a todo always
+causes the `TOGGLE_TODO` `action` 
+and this is perfectly fine to do in your app 
+however I prefer to have a bunch of Components 
+that don't specify any *behaviours* 
+and that are *only* concerned with how things *look* 
+or how they `render` and I call such Components 
+the "*presentational*" Components 
+I would like to keep `Todo` a "*Presentational*" Component 
+so I *remove* the `onClick` handler and I promote it to be a prop 
+so that anyone who uses the `Todo` Component 
+can specify what happens on the *click* 
+and you don't *have* to do this in your Redux apps 
+but I find it to be a very *convenient* pattern. 
+*Finally* while it does not make a lot of difference,
+I prefer to keep it explicit what is the `data` 
+that the Component needs to `render` 
+so instead of passing a `todo` `Object` 
+I pass `completed` and `text` fields as *separate* props. 
+note: how the `Todo` Component 
+is now a *purely* "*Presentational*" Component 
+and does not specify *any* behaviour 
+but it *knows* how to `render` a todo. 
+
+```js
+const Todo = ({
+  onClick,
+  completed,
+  text
+}) => (
+<li 
+  onClick={onClick}
+  style={{
+  textDecoration: 
+    completed ? 
+      'line-through' :
+      'none'
+  }}
+ >
+  {text}
+</li>
+);
+```
+
+The *next* Component I create is called `TodoList` 
+and it's *also* a "*Presentational*" Component 
+its *only* concerned with how things *look* 
+and it accepts an `Array` of todos 
+and is going to `render` an `<ul>` (*unordered list*) of them
+by calling the todos `map` function (`Array.map`) 
+and rendering a Todo component for every todo. 
+it tells React to use `todo.id` as the unique `key` for the elements 
+and it *spreads* over the `todo` `Object` properties 
+so that `text` and `completed` end up as props on `Todo` Component 
+now I need to *specify* what happens when a `Todo` is clicked 
+and I *could* have dispatched an `action` here 
+and again, that would be *fine* 
+but I want it to be a "*Presentational*" Component 
+so I'm going to call *another* function 
+called `onTodoClick` and pass the `id` of the `todo` 
+and let it decide what should happen 
+so `onTodoClick` is another prop for the `TodoList` 
+both `Todo` and `TodoList` are "*Presentational*" Components 
+so we need something I call "*Container*" Components 
+to actually pass the data from the `store` 
+and to specify the behaviour
+
+```js
+const TodoList = ({
+  todos,
+  onTodoClick
+}) => (
+  <ul>
+    {todos.map(todo =>
+      <Todo 
+        key={todo.id}
+        {...todo}
+        onClick={() => onTodoClick(todo.id)}
+      />
+    )}
+  </ul> 
+```
+
+In this case the top-level `TodoApp` Component 
+acts as a "*Container*" Components 
+and we will see more examples of "*Container*" Components 
+in the future lessons. 
+In this case you just render the `TodoList` with `visibleTodos`
+as the `todos` and with a callback that says 
+that when `onTodoClick` is called with a `todo.id` 
+we should dispatch an `action` on the `store` 
+with the `type` `TOGGLE_TODO` and the `id` of the `todo`.
+
+```js
+<TodoList 
+  todos={visibleTodos}
+  onTodoClick={id =>
+    store.dispatch({
+      type: 'TOGGLE_TODO',
+      id // where is id value?
+    })
+  } />
+```
+
+Let's recap again how this works:
+The `TodoApp` Component renders a `TodoList` 
+and it passes a function to it 
+that can dispatch an `action` 
+the `TodoList` Component renders the `Todo` Component 
+and passes `onClick` prop which calls `onTodoClick` 
+the `Todo` Component uses the `onClick` prop it receives 
+and binds it to the `<li>` `onClick` 
+this way when its called the `onTodoClick` is called 
+and this dispatches the `action` and updates the `visibleTodos` 
+because the `action` updates the `store`.
+
+> Complete Code at the *end* of Video 20:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/3014d077563b3a7a195596d17bf2040d49a06ddb/index.html)
+
+<br />
+
+
