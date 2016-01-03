@@ -156,7 +156,7 @@ const Todo = ({
   onClick,
   completed,
   text
-}) => {
+}) => (
 <li 
   onClick={onClick}
   style={{
@@ -168,9 +168,67 @@ const Todo = ({
  >
   {text}
 </li>
-};
+);
 ```
 
+The *next* Component I create is called `TodoList` 
+and it's *also* a "*Presentational*" Component 
+its *only* concerned with how things *look* 
+and it accepts an `Array` of todos 
+and is going to `render` an `<ul>` (*unordered list*) of them
+by calling the todos `map` function (`Array.map`) 
+and rendering a Todo component for every todo. 
+it tells React to use `todo.id` as the unique `key` for the elements 
+and it *spreads* over the `todo` `Object` properties 
+so that `text` and `completed` end up as props on `Todo` Component 
+now I need to *specify* what happens when a `Todo` is clicked 
+and I *could* have dispatched an `action` here 
+and again, that would be *fine* 
+but I want it to be a "*Presentational*" Component 
+so I'm going to call *another* function 
+called `onTodoClick` and pass the `id` of the `todo` 
+and let it decide what should happen 
+so `onTodoClick` is another prop for the `TodoList` 
+both `Todo` and `TodoList` are "*Presentational*" Components 
+so we need something I call "*Container*" Components 
+to actually pass the data from the `store` 
+and to specify the behaviour
+
+In this case the top-level `TodoApp` Component 
+acts as a "*Container*" Components 
+and we will see more examples of "*Container*" Components 
+in the future lessons. 
+In this case you just render the `TodoList` with `visibleTodos`
+as the `todos` and with a callback that says 
+that when `onTodoClick` is called with a `todo.id` 
+we should dispatch an `action` on the `store` 
+with the `type` `TOGGLE_TODO` and the `id` of the `todo`.
+
+```js
+<TodoList 
+  todos={visibleTodos}
+  onTodoClick={id =>
+    store.dispatch({
+      type: 'TOGGLE_TODO',
+      id // where is id value?
+    })
+  } />
+```
+
+Let's recap again how this works:
+The `TodoApp` Component renders a `TodoList` 
+and it passes a function to it 
+that can dispatch an `action` 
+the `TodoList` Component renders the `Todo` Component 
+and passes `onClick` prop which calls `onTodoClick` 
+the `Todo` Component uses the `onClick` prop it receives 
+and binds it to the `<li>` `onClick` 
+this way when its called the `onTodoClick` is called 
+and this dispatches the `action` and updates the `visibleTodos` 
+because the `action` updates the `store`.
+
+> Code at the *end* of Video 20:
+[`index.html`]()
 
 
 <br />
