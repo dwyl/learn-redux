@@ -1960,7 +1960,7 @@ which is why it re-renders in a crossed-out `state`.
   
 > Video: https://egghead.io/lessons/javascript-redux-react-todo-list-example-filtering-todos
 
-In the previous two lessons we working on creating the user-interface
+In the previous two lessons we were working on creating the user-interface
 for the Todo List Application that displays the todos 
 lets us add new todos and "toggle" them `onClick`
 we *implemented* that by dispatching `ADD_TODO` 

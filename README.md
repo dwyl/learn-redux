@@ -101,6 +101,76 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-presentational-components-todo-todolist
 
+In the last few lessons we created the user interface for a simple 
+React and Redux Todo List where I can add items, toggle them 
+as completed and change the *currently* visible Todos 
+and we do that by having a *single* `TodoApp` Component 
+that the `<input>`, the `<button>` for *adding* todos 
+the *list* of *currently* visible todos with `onClick` handler 
+and it has these 3 links that let us change 
+the *currently* visible todos.
+The *single* Component approach worked so far,
+however we really want to have *many* components 
+that can be used tested and changed by different people separately 
+so we are going to re-factor our application in this lesson. 
+
+The first Component I want to *extract* from the `TodoApp` Component 
+is the `Todo` Component that renders a *single* `<li>`
+I'm declaring the `Todo` Component as a function 
+which React 0.14 allows me to do. 
+I'm not *sure* which props its going to have 
+so I will leave them blank for now 
+and I will just *paste* the `<li>` I coppied before. 
+
+The first thing I am doing is *removing* the special `key` property
+because it's only needed when I am enumerating an `Array` 
+and I will use it *later* when enumerating *many* todos. 
+One of my goals with this refactoring is to make every Component
+as flexible as it is *reasonable*.
+Right now I have *hard-coded* that *clicking* a todo always
+causes the `TOGGLE_TODO` `action` 
+and this is perfectly fine to do in your app 
+however I prefer to have a bunch of Components 
+that don't specify any *behaviours* 
+and that are *only* concerned with how things *look* 
+or how they `render` and I call such Components 
+the "*presentational*" Components 
+I would like to keep `Todo` a "*presentational*" Component 
+so I *remove* the `onClick` handler and I promote it to be a prop 
+so that anyone who uses the `Todo` Component 
+can specify what happens on the *click* 
+and you don't *have* to do this in your Redux apps 
+but I find it to be a very *convenient* pattern. 
+*Finally* while it does not make a lot of difference,
+I prefer to keep it explicit what is the `data` 
+that the Component needs to `render` 
+so instead of passing a `todo` `Object` 
+I pass `completed` and `text` fields as *separate* props. 
+note: how the `Todo` Component 
+is now a *purely* "*presentational*" Component 
+and does not specify *any* behaviour 
+but it *knows* how to `render` a todo. 
+
+```js
+const Todo = ({
+  onClick,
+  completed,
+  text
+}) => {
+<li 
+  onClick={onClick}
+  style={{
+  textDecoration: 
+    completed ? 
+      'line-through' :
+      'none'
+  }}
+ >
+  {text}
+</li>
+};
+```
+
 
 
 <br />
