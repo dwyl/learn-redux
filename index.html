@@ -46,8 +46,6 @@ const todos = (state = [], action) => {
       //   todo(undefined, action)
       // ]
       // array spread was causing errors ... so this is the ES5 version:
-      console.log('-------> ADD_TODO');
-      console.log(state);
       var newState = (state && state.length > 0) ? state.map( (e) => { return e; }) : [];
       newState.push(todo(undefined, action));  // add the new todo entry
       return newState;
@@ -87,8 +85,6 @@ const FilterLink = ({
   currentFilter,
   children
 }) => {
-  console.log('90: filter, currentFilter, children');
-  console.log(filter, currentFilter, children);
   if (filter === currentFilter) {
     return <span> { children } </span>
   }
@@ -112,9 +108,6 @@ const getVisibleTodos = (
   todos,
   filter
 ) => {
-  console.log('getVisibleTodos called')
-  console.log('todos, filter')
-  console.log(todos, filter)
   switch (filter) {
     case 'SHOW_ALL':
       return todos;
@@ -141,18 +134,10 @@ class TodoApp extends Component {
     //   visibilityFilter
     // } = this.props; // destructuring assignment
     const todos = this.props.todos, visibilityFilter = this.props.visibilityFilter
-    console.log('------->this.props:')
-    console.log(this.props)
-    console.log('--------> visibilityFilter:')
-    console.log(visibilityFilter);
     const visibleTodos = getVisibleTodos(
       todos,
       visibilityFilter
     );
-    console.log('---------> todos:')
-    console.log(todos);
-    console.log('---------> visibleTodos:')
-    console.log(visibleTodos);
     return (
       <div>
         <input ref={node => {
@@ -228,7 +213,7 @@ render(); // initial state
 
 
 // Checks and Tests Below this Point
-/*
+
 console.log('Initial state:');
 console.log(store.getState());
 console.log('--------------');
@@ -340,7 +325,7 @@ testAddTodo();
 testToggleTodo();
 
 console.log('All tests passed.');
-*/
+
     </script>
   </body>
 </html>
