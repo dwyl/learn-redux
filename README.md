@@ -104,7 +104,8 @@ https://github.com/nelsonic/learn-redux/issues
 In the previous two lessons we working on creating the user-interface
 for the Todo List Application that displays the todos 
 lets us add new todos and "toggle" them `onClick`
-we *implemented* that by dispatching `ADD_TODO` and `TOGGLE_TODO` `actions` 
+we *implemented* that by dispatching `ADD_TODO` 
+and `TOGGLE_TODO` `actions` 
 that we already know how to handle in our reducers.
 
 In *this* lesson we are going to dispatch `SET_VISIBILITY_FILTER` `action` 

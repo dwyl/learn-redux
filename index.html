@@ -48,10 +48,7 @@ const todos = (state = [], action) => {
       // array spread was causing errors ... so this is the ES5 version:
       console.log('-------> ADD_TODO');
       console.log(state);
-
-      var newState = (state && state.length > 0) ? 
-        state.map( (e) => { return e; }) // copy state values
-        : [];
+      var newState = (state && state.length > 0) ? state.map( (e) => { return e; }) : [];
       newState.push(todo(undefined, action));  // add the new todo entry
       return newState;
     case 'TOGGLE_TODO':
@@ -90,6 +87,8 @@ const FilterLink = ({
   currentFilter,
   children
 }) => {
+  console.log('90: filter, currentFilter, children');
+  console.log(filter, currentFilter, children);
   if (filter === currentFilter) {
     return <span> { children } </span>
   }
@@ -97,9 +96,10 @@ const FilterLink = ({
     <a href='#'
       onClick={e => {
         e.preventDefault();
+        // console.log(e);
         store.dispatch({
           type: 'SET_VISIBILITY_FILTER',
-          filter 
+          filter: filter // explicitly setting filter prop
         });
       }}
     >
@@ -112,7 +112,8 @@ const getVisibleTodos = (
   todos,
   filter
 ) => {
-  console.log('getVisibleTodos Called!')
+  console.log('getVisibleTodos called')
+  console.log('todos, filter')
   console.log(todos, filter)
   switch (filter) {
     case 'SHOW_ALL':
@@ -140,6 +141,8 @@ class TodoApp extends Component {
     //   visibilityFilter
     // } = this.props; // destructuring assignment
     const todos = this.props.todos, visibilityFilter = this.props.visibilityFilter
+    console.log('------->this.props:')
+    console.log(this.props)
     console.log('--------> visibilityFilter:')
     console.log(visibilityFilter);
     const visibleTodos = getVisibleTodos(
@@ -215,7 +218,7 @@ class TodoApp extends Component {
 
 const render = () => {
   ReactDOM.render( 
-    <TodoApp todos={store.getState().todos} />,
+    <TodoApp {...store.getState()} />,
     document.getElementById('root')
   );
 };
