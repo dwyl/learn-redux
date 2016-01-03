@@ -1,3 +1,5 @@
+![learn-redux-header](https://cloud.githubusercontent.com/assets/194400/12205940/0c75bc34-b636-11e5-91b5-1e9a3a104400.png)
+
 # Learn Redux
 
 Learn how to use Redux to write Predictable / Testable web apps.
@@ -147,6 +149,8 @@ and not specify behaviour
 so I'm just calling a function called `onAddClick` 
 passing the *current* `input` value and I make `onAddClick` a prop 
 so that the Component that *uses* `AddTodo` 
+can specify what happens when `Add` button is clicked.
+
 
 
 
