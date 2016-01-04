@@ -189,6 +189,107 @@ Now that the `VisibleTodoList` is connected to the Redux `store`
 we can use it *instead* of the `TodoList` 
 and we no longer have to pass all the props from the top.
 
+*Finally* in the *previous* lesson 
+I made `AddTodo` a *Presentational* Component 
+but I'm going to ***back-track*** on this now. 
+I will *copy-paste* the `dispatch` call back inline 
+into the `onClick` handler inside the Component 
+because there isn't really a lot of presentation or *behaviour* here 
+and its *easier* to keep them together 
+until we figure out how to split the *presentation*. 
+For example if in the *future* we're going to have something 
+like a `<form>` Component we may split it 
+but for now we'll keep them together.
+
+I'm scrolling down to my `TodoApp` Component 
+and I'm removing the `onAddClick` prop 
+and I just noticed that *none* of the *Containers* actually 
+need props from the `state` 
+so I can *remove* the props of the `TodoApp` Component 
+and I can *remove* the `render` function that 
+renders the `TodoApp` Component with 
+the *current* `state` of the `store` 
+because I can just call it *once* 
+remove all the props that are related to the `state` 
+and just `render` it *as is* 
+because the *Container* Components that I render 
+are going to `subscribe` to the `store` *themselves* 
+and are going to *update* themselves when the `store` `state` changes.
+
+```js
+const TodoApp = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+)
+
+ReactDOM.render( 
+  <TodoApp />,
+  document.getElementById('root')
+);
+```
+
+Lets re-cap the data flow after separating 
+the *Presentational* and the *Container* Components.
+
+There is just *one* `ReactDOM.render` call 
+at the very end and we don't `render` again 
+when the `store` `state` changes 
+because the *Container* Components take care of that!
+The *first* Component I'm looking at is called `AddTodo` 
+and frankly I can't classify it either as a *Presentational* Component 
+*or* as a *Container* Component because it doesn't fit either category.
+The `<input>` and the `<button>` are the *Presentational* part 
+but dispatching an `action` `onClick` is the *behaviour* 
+which is *usually* specified by the *Container* 
+however in *this* case I'd rather keep them together 
+because there isn't any `state`, the **UI** is *very simple* 
+and its hard to imagine any *other* behaviour 
+other than dispatching the `ADD_TODO` `action`. 
+
+The *second* Component I render inside the `TodoApp` is 
+`VisibleTodoList`, and this time it is a "proper" *Container* Component 
+that subscribes to the `store` and re-renders 
+the `TodoList` any time the `store` `state` changes 
+and it *calculates* the `visibleTodos` 
+from the *current* Redux `store` `state`, the todos and 
+`visibilityFilter` fields and it passes them as the `todos` (prop) 
+and when the `todos` are *clicked* 
+its going to `dispatch` an `action` with the `type:'TOGGLE_TODO'` 
+and the `id` of the *respective* `todo` 
+the *actual* rendering here is performed 
+by the `TodoList` Component that just renders the Todos 
+passed through as prop and binds their clicks to the `onTodoClick` prop.
+
+*Finally* the *last* Component the `TodoApp` renders is the `Footer` 
+and the `Footer` is just a *Presentational* Component 
+rendering **3** different `FilterLink`s.
+The `FilterLink` is a *Container* Component 
+so it *subscribes* to the `store` 
+and it renders the *Presentational* Component called `Link` 
+calculating weather it should be *active* based on its' props 
+the *current* Redux `store` `state` 
+and it specifies the *behaviour* 
+(*what happens when it's clicked*). 
+*Finally* the `Link` Component is just a *Presentational* Component 
+that renders an `<a>` tag. 
+
+Separating the *Container* and the *Presentational* Components 
+is often a good idea, but you shouldn't take it as a 
+"[*dogma*](https://en.wikipedia.org/wiki/Dogma)"; 
+Only do this when it *truly* reduces the *complexity* 
+of your codebase. In general I suggest *first* trying to 
+extract the *Presentational* Components, 
+and if there is *too much* boilerplate 
+passing the props to them then you can create the *Containers* 
+around them that load the data and specify the *behaviour*.
+
+
+
+
+
 <br />
 
 ## Background Reading / Watching / Listening
