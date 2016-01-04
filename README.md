@@ -252,8 +252,8 @@ so I can get rid of the `return` statement
 and *un-indent* the code to make it look nicer. 
 
 > Full code snapshot for Video 21 @ 04:12:
-[`index.html`]()
-> *This version of `TodoApp` is *so* much cleaner...*
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/6577aa2eb0256fca4aba7bf1694d998e9f128100/index.html)
+> *This version of `TodoApp` is *so* ***much cleaner***...
 
 This concludes the *initial* refactoring of the Todo List Application 
 into a single "*Container*" Component called `TodoApp` 
@@ -261,7 +261,81 @@ and many "*Presentational*" Components that are
 only concerned with how things *look*.
 
 Lets re-cap the *data* flow in this example:
+We have a *single* "*Container*" Component called `TodoApp` 
+and we re-render it any time the `store` changes 
+it receives the `keys` of the *global* `state` `Object` as the props 
+so it receives the `todos` and the `visibilityFilter` values 
+the *first* Component it renders is called `AddTodo`. 
+`AddTodo` is a "*Presentational*" Component that 
+renders an `<input>` and a `<button>` 
+and when the `<button>` is *clicked* it passes the *current* `<input>` value 
+to the `onAddClick` function.
+`onAddClick` function is a prop for the `AddTodo` Component 
+in this case it is *specified* by the `TodoApp` 
+which says that when the `<button>` is clicked it should dispatch an `action` 
+containing the *current* `text` in the `action` `Object`. 
+Dispatching the `ADD_TODO` `action` will call our reducer 
+update the `store` `state` with the new todos 
+and re-render the `TodoApp` Component with the new todos. 
+The todos themselves are rendered by the `TodoList`
+"*Presentational*" Component that receives two props:
+the *currently* visible todos and the `onTodoClick` callback 
+the `TodoList` Component receives an `Array` of todos 
+and it *maps* over them rendering individual `Todo` Components 
+it uses the *spread* operator to pass every property of the todo `Object` 
+as a prop to `Todo` Component 
+and it specifies the `onClick` handler as calling `onTodoClick` 
+with the `id` of the particular todo 
+the `Todo` Component is defined above 
+and it is also a "*Presentational*" Component 
+so it doesn't specify the behaviour 
+it says that when a `<li>` is *clicked* 
+it should call the `onClick` handler 
+being a "*Presentational*" Component it specifies how the Component *looks* 
+in different circumstances 
+and in this case it uses the `completed` prop 
+to chose between two different styles of the todo item 
+the `TodoList` is also a "*Presentational*" Component 
+so it delegates actually *handling* the *click* to `onTodoClick` prop 
+and it pass the `id` of the todo being *clicked*.
 
+*Finally* the `TodoApp` reacts to it by dispatching an `action` 
+containing the `id` of the todo clicked and the `type: 'TOGGLE_TODO'`
+the `store` will call our reducer and update the `state` of the application 
+re-rendering the `TodoApp` Component with the *new* todos. 
+
+The `Footer` Component receives the *current* `visibilityFilter` as a prop 
+and also receives the `onFilterClick` callback that sets 
+the *current* `visibilityFilter`. 
+The `Footer` Component renders *three* `FilterLink` 
+passing down their respective `filter` values 
+the `onClick` handler and the *current* `visibilityFilter` 
+the `FilterLink` Component being a "*Presentational*" Component 
+doesn't know *what* to do when it is *clicked*. 
+so it calls the `onClick` callback passing the `filter` 
+which is different for each of those links as an *argument* 
+the `Footer` delegates handling the *click* of the `FilterLink` 
+to its own prop called `onFilterClick`. 
+
+*Finally* the `TodoApp` Component being the "*Container*" Component 
+in our application specifies the *behaviour* 
+which in this case means that when the `FilterLink` is *clicked* 
+it should dispatch and `action` with the `action` 
+`type: 'SET_VISIBILITY_FILTER` and the *new* `filter`. 
+
+Separation of the "*Presentational*" Components is *not required* in Redux.
+But I *recommend* this pattern because it de-couples your rendering from Redux. So if you later chose to move your project to another framework 
+such as Relay you will not have to *change* all your components 
+because you can keep all your "*Presentational*" Component exactly the same. 
+
+This approach also has *downsides* such as that you have to 
+thread a lot of props through the Components to get them 
+to the "*leaf*" Components including the callbacks 
+this problem can be *easily* solved by introducing 
+many intermediate "*Container*" Components as we will see in the next lesson. 
+
+> Code at the *end* of Video 21:
+[`index.html`]()
 
 
 <br />
