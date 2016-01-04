@@ -101,31 +101,6 @@ const Link = ({
   );
 };
 
-
-// const FilterLink = ({
-//   filter, 
-//   currentFilter,
-//   children
-// }) => {
-//   if (filter === currentFilter) {
-//     return <span> { children } </span>
-//   }
-//   return (
-//     <a href='#'
-//       onClick={e => {
-//         e.preventDefault();
-//         // console.log(e);
-//         store.dispatch({
-//           type: 'SET_VISIBILITY_FILTER',
-//           filter: filter // explicitly setting filter prop
-//         })
-//       }}
-//     >
-//     {children}
-//     </a>
-//   );
-// };
-
 class FilterLink extends Component {
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => 
