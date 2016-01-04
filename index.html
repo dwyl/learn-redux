@@ -4,7 +4,7 @@
     <title>Learn Redux - Todo</title>
     <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
     <!-- Why JSXTransformer? see: http://git.io/vug4q -->
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
@@ -96,7 +96,7 @@ const FilterLink = ({
         store.dispatch({
           type: 'SET_VISIBILITY_FILTER',
           filter: filter // explicitly setting filter prop
-        });
+        })
       }}
     >
     {children}
@@ -113,35 +113,35 @@ const FilterLink = ({
 const Footer = ({
   visibilityFilter,
   onFilterClick
-}) => {
-<p>
-  Show:
-  {' '}
-  <FilterLink
-    filter='SHOW_ALL' 
-    currentFilter={visibilityFilter}
-    onClick={onFilterClick}
-  >
-  All
-  </FilterLink>
-  {' '}
-  <FilterLink
-    filter='SHOW_ACTIVE' 
-    currentFilter={visibilityFilter}
-    onClick={onFilterClick}
-  >
-  Active
-  </FilterLink>
-  {' '}
-  <FilterLink
-    filter='SHOW_COMPLETED' 
-    currentFilter={visibilityFilter}
-    onClick={onFilterClick}
-  >
-  Completed
-  </FilterLink>
-</p>
-}
+}) => (
+  <p>
+    Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    All
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_ACTIVE' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    Active
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_COMPLETED' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    Completed
+    </FilterLink>
+  </p>
+);
 
 const Todo = ({
   onClick,
@@ -180,6 +180,7 @@ const AddTodo = ({
   onAddClick
 }) => {
   let input;
+
   return (
     <div>
       <input ref={node => {
@@ -221,34 +222,44 @@ let nextTodoId = 0;
 const TodoApp = ({
   todos, 
   visibilityFilter
-)} => (
-  <div>
-    <AddTodo
-      onAddClick={ text =>
-        store.dispatch({
-          type: 'ADD_TODO',
-          text: text,
-          id: nextTodoId++
-        });
-      } />
-    <TodoList 
-      todos={
-        getVisibleTodos(
-          todos,
-          visibilityFilter
-        )
-      }
-      onTodoClick={id =>
-        store.dispatch({
-          type: 'TOGGLE_TODO',
-          id // where is id value?
-        })
-      } />
-    <Footer 
-      visibilityFilter={visibilityFilter},
-      filter 
-  </div>
-);
+}) => {
+   return (
+      <div>
+        <AddTodo
+          onAddClick={text =>
+            store.dispatch({
+              type: 'ADD_TODO',
+              id: nextTodoId++,
+              text
+            })
+          } 
+        />
+        <TodoList 
+          todos={
+            getVisibleTodos(
+              todos,
+              visibilityFilter
+            )
+          }
+          onTodoClick={id =>
+            store.dispatch({
+              type: 'TOGGLE_TODO',
+              id 
+            })
+          } 
+        />
+        <Footer 
+          visibilityFilter={visibilityFilter} 
+          onFilterClick={filter =>
+            store.dispatch({
+              type: 'SET_VISIBILITY_FILTER',
+              filter
+            })
+          }
+        />
+      </div>
+    );
+}
 
 const render = () => {
   ReactDOM.render( 
