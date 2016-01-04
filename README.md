@@ -176,6 +176,42 @@ and I pass `onClick={onFilterClick}` for every link in the `Footer`
 so what ever we pass to the `Footer` as `onFilterClick` prop is
 going to end up in the `FilterLink` as `onClick`. 
 
+```js
+const Footer = ({
+  visibilityFilter,
+  onFilterClick
+}) => (
+  <p>
+    Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    All
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_ACTIVE' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    Active
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_COMPLETED' 
+      currentFilter={visibilityFilter}
+      onClick={onFilterClick}
+    >
+    Completed
+    </FilterLink>
+  </p>
+);
+```
+
+
 Now I can use the `Footer` Component I just defined 
 inside my `TodoApp` Component 
 and I need to pass *two* props 
@@ -183,6 +219,23 @@ one of them is the `visibilityFilter` so it can highlight the *active* link
 and another prop is `onFilterClick` where I say that 
 whenever a `Filter` is clicked I want to dispatch an `action` 
 with the `type: 'SET_VISIBILITY_FILTER'` and the `filter` being clicked.
+
+```js
+// inside the TodoApp Component:
+
+  <Footer 
+    visibilityFilter={visibilityFilter} 
+    onFilterClick={filter =>
+      store.dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter
+      })
+    }
+  />
+
+// see index.html for full TodoApp
+```
+
 *Finally* I just noticed that the `TodoApp` Component doesn't actually
 *have* to be a `Class`, I can turn it into a `function` 
 and I prefer to do that when possible. 
@@ -198,12 +251,17 @@ Now the body of my function is just a *single* expression
 so I can get rid of the `return` statement 
 and *un-indent* the code to make it look nicer. 
 
+> Full code snapshot for Video 21 @ 04:12:
+[`index.html`]()
+> *This version of `TodoApp` is *so* much cleaner...*
+
 This concludes the *initial* refactoring of the Todo List Application 
 into a single "*Container*" Component called `TodoApp` 
 and many "*Presentational*" Components that are 
 only concerned with how things *look*.
 
 Lets re-cap the *data* flow in this example:
+
 
 
 <br />
