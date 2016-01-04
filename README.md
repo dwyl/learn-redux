@@ -99,10 +99,95 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
+#### 23. Extracting Container Components (VisibleTodoList, AddTodo)
 
+> Video: https://egghead.io/lessons/javascript-redux-extracting-container-components-visibletodolist-addtodo
 
+In the previous lesson I separated the 
+`Link` "*Presentational*" Component from the 
+`FilterLink` "*Container*" Component 
+that is subscribed to the Redux `store` 
+and that provides the *data* and the *behaviour* 
+for the `Link` Component it renders.
+While it makes the data flow a little bit *less* explicit 
+it makes it easier to use `FilterLink` in 
+*any* Component without worrying about passing additional data 
+to the `FilterLink` or to the Component that *contains* it. 
 
+In *this* lesson we will continue extracting 
+the "*Container*" Components from the top-level 
+"*Container*" Component and the *first* candidate is 
+the `TodoList` Component. 
 
+I actually want to *keep* the `TodoList` a "*Presentational*" Component 
+however I want to *encapsulate* within the *currently* 
+visible Todos into a *separate* "*Container*" Component 
+that connects the `TodoList` to the Redux `store` 
+so I'm going to call this Component the `VisibleTodoList`.
+Just like when declaring the `FilterLink` Component 
+in the *previous* lesson, I calculate the data for the *current* 
+Component by using the *current* `state` 
+which is the `state` from the Redux `store` 
+and I'm using the `getVisibleTodos` function 
+to calculate the *currently* visible todos 
+based on all the todos from the Redux `store` 
+and the *current* `visibilityFilter` from the Redux `store` `state` 
+and I'm specifying the *behaviour* as well 
+I'm saying that when the todo is *clicked* 
+we should dispatch an `action` with `type: 'TOGGLE_TODO'`
+and the `id` of the todo being clicked.
+All "*Container*" Components are similar 
+their job is to *connect* a "*Presentational*" Component 
+to the Redux `store` and specify the data and the behaviour 
+that it needs. 
+
+```js
+class VisibleTodoList extends Component {
+  render() {
+    const props = this.props;
+    const state = store.getState();
+    return (
+      <TodoList 
+        todos={
+          getVisibleTodos(
+            state.todos,
+            state.visibilityFilter
+          )
+        }
+        onTodoClick={id =>
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+          })
+        }
+    )
+  }
+}
+```
+
+I'm scrolling up to the `FilterLink` *Container* Component 
+I wrote in the *previous* lesson to *copy-paste* 
+the `store` *subscription* logic:
+
+```js
+componentDidMount() {
+  this.unsubscribe = store.subscribe(() => 
+    this.forceUpdate()
+  );
+}
+
+componentWillUnmount() {
+  this.unsubscribe();
+}
+```
+
+Just like the `FilterLink` the `VisibleTodoList` is 
+going to *subscribe* to the `store` 
+and *force* an update any time the `store` `state` changes 
+because it uses the `state` in its' `render` method. 
+Now that the `VisibleTodoList` is connected to the Redux `store` 
+we can use it *instead* of the `TodoList` 
+and we no longer have to pass all the props from the top.
 
 <br />
 
