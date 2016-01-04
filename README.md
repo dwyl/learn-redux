@@ -140,6 +140,32 @@ doesn't *care* about the values of these props
 they only exist to be passed down to the `Filterlink` 
 that cares about them.
 
+```js
+const Footer = () => (
+  <p>
+    Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL' 
+    >
+    All
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_ACTIVE' 
+    >
+    Active
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter='SHOW_COMPLETED' 
+    >
+    Completed
+    </FilterLink>
+  </p>
+);
+```
+
 I'm removing the props definition
 and I'm removing these props from the `FilterLink` usage 
 and it might start to seem a lot like the code *before* 
@@ -247,7 +273,7 @@ class FilterLink extends Component {
 }
 ```
 
-There is a small problem with this implementation of `FilterLink` 
+There is a *small problem* with this implementation of `FilterLink` 
 inside the `render` method it reads the *current* `state` 
 of the Redux `store` however it is not *subscribed* to this `store`. 
 So if the *Parent* Component does not update when 
@@ -355,8 +381,10 @@ and de-coupled from the behaviour and data
 that its' child Components need. 
 
 
+> Code at the *end* of Video 22: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/4572cb33f575567687b2683dfe20b22cfda8b16e/index.html)
 
-
+<br />
 
 
 
