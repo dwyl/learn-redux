@@ -151,7 +151,59 @@ passing the *current* `input` value and I make `onAddClick` a prop
 so that the Component that *uses* `AddTodo` 
 can specify what happens when `Add` button is clicked.
 
+Again, the `TodoApp` Component acts as a "*Container*" Component 
+for the `AddTodo` and it specifies that when the *add* `<button>` 
+is clicked we should dispatch an action with the `type: 'ADD_TODO'` 
+the corresponding `text` and the `nextTodoId`. 
 
+The *last* Component I want to extract is the *footer* which contains 
+all these three `FilterLink`. 
+I'm creating a *new* "*Functional*" Component called `footer` 
+and I'm not sure which props it needs so I skip them 
+and I *paste* the markup. 
+It seems that the `FilterLink` need the `visbilityFilter` 
+so I add it as a prop.
+I would like the `Footer` and the `FilterLink` to be 
+"*Presentational*" Components 
+however the `FilterLink` currently includes a `store.dispatch` call. 
+I'm replacing it with an `onClick` call 
+and I pass the `filter` as the single parameter 
+for the calling Component's convenience 
+I add `onClick` to the props and now I need to specify it 
+every time `FilterLink` is used 
+so I add `onFilterClick` to the `Footer` 
+and I pass `onClick={onFilterClick}` for every link in the `Footer`
+so what ever we pass to the `Footer` as `onFilterClick` prop is
+going to end up in the `FilterLink` as `onClick`. 
+
+Now I can use the `Footer` Component I just defined 
+inside my `TodoApp` Component 
+and I need to pass *two* props 
+one of them is the `visibilityFilter` so it can highlight the *active* link 
+and another prop is `onFilterClick` where I say that 
+whenever a `Filter` is clicked I want to dispatch an `action` 
+with the `type: 'SET_VISIBILITY_FILTER'` and the `filter` being clicked.
+*Finally* I just noticed that the `TodoApp` Component doesn't actually
+*have* to be a `Class`, I can turn it into a `function` 
+and I prefer to do that when possible. 
+Instead of `destructuring` the props inside the `render` method
+I am now doing it inside the arugments.
+I can remove now the `destructuring` and I can also remove
+the `render` method declaration 
+the `visibleTodos` are only used in a *single* place 
+so I'm moving the `getVisibleTodos` call 
+to the `TodoList` `todos` prop declaration. 
+
+Now the body of my function is just a *single* expression 
+so I can get rid of the `return` statement 
+and *un-indent* the code to make it look nicer. 
+
+This concludes the *initial* refactoring of the Todo List Application 
+into a single "*Container*" Component called `TodoApp` 
+and many "*Presentational*" Components that are 
+only concerned with how things *look*.
+
+Lets re-cap the *data* flow in this example:
 
 
 <br />
