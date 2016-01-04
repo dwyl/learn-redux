@@ -160,6 +160,30 @@ I'm going to call `Link`
 and I will create another `FilterLink` Component 
 as a Container that uses it for rendering. 
 
+```js
+const Link = ({
+  active,
+  children,
+  onClick
+}) => {
+  if (active) {
+    return <span>{children}</span>;
+  }
+
+  return (
+    <a href='#'
+      onClick={e => {
+        e.preventDefault();
+        onClick();
+      }}
+    >
+      {children}
+    </a>
+  );
+};
+
+```
+
 The `Link` Component doesn't know *anything* about the `Filter` 
 it only accepts the `active` prop and calls its `onClick` handler 
 it is *only* concerned with rendering 
@@ -182,8 +206,153 @@ with the `visibilityFilter` in the Redux `store` `state`.
 The `filter` prop is the one that is passed 
 to the `FilterLink` from the `Footer` 
 and the `visibilityFilter` corresponds to the 
-*currently* chose `visibilityFilter` 
+*currently* chosen `visibilityFilter` 
+that is held in the Redux `store` `state`. 
+and if they *match* we want the `Link` to appear *active*
+(*un-clickable*). 
+The "*Container*" Component also needs to specify the *behaviour* 
+so in this case the `FilterLink` 
+specifies that when this particular link is *clicked* 
+we should dispatch the `action` with the `type: 'SET_VISIBILITY_FILTER'`
+and the `filter` value that we take from the props 
+the `FilterLink` may accept "*Children*" 
+which are used as the *contents* of the `Link` 
+so we are going to pass the *children* down 
+to the `Link` Component which is going to `render` them
+inside the `<a>` tag. 
 
+```js
+class FilterLink extends Component {
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <Link 
+        active={
+          props.filter ===
+          state.visibilityFilter
+        }
+        onClick={() =>
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        }
+      >
+        {props.children}
+      </Link>
+    );
+  }
+}
+```
+
+There is a small problem with this implementation of `FilterLink` 
+inside the `render` method it reads the *current* `state` 
+of the Redux `store` however it is not *subscribed* to this `store`. 
+So if the *Parent* Component does not update when 
+the `store` is updated its going to render the "*stale*" value. 
+
+Currently we re-render the *whole* application when the `state` changes 
+however this is *not* very efficient 
+so in future we will instead move the *subscription* to the `store` 
+to the lifecycle methods of the "*Container*" Components. 
+React provides a *special* `forceUpdate` method 
+on the Component instances to *force* their re-rendering 
+and we're going to use it together with `store.subscribe` method 
+so that any time the `store` `state` changes 
+we `forceUpdate` the "*Container*" Components. 
+We perform the subscription inside the `componentDidMount` 
+lifecycle method so its important to 
+to *unsubscribe* inside the `componentWillUnmount` method. 
+
+```js
+class FilterLink extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => 
+      this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <Link 
+        active={
+          props.filter ===
+          state.visibilityFilter
+        }
+        onClick={() =>
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        }
+      >
+        {props.children}
+      </Link>
+    );
+  }
+}
+
+```
+
+Note that we don't actually have the `unsubscribe` method,
+but this is the returned value of the `store.subscribe` method 
+so we can keep it and then *call* it in `componentWillUnmount`. 
+
+Let's re-cap this part:
+the `FilterLink` Component subscribes to the `store` 
+calling `forceUpdate` any time the `store` changes 
+so it can `render` the *current* `state` of the `store`. 
+it saves the *reference* to the `unsubscribe` function 
+returned by `store.subscribe` 
+and it *invokes* it when the Component is about to *Unmount* 
+to clean up the subscription. 
+
+Let's re-cap the relationship between the  
+`FilterLink` "*Container*" Component 
+and the `Link` "*Presentational*" Component:
+The `Link` Component only specifies the *appearance* of a link
+when it is *active* or *inactive* 
+but it doesn't know about the behaviour. 
+The `FilterLink` Component is a *Container* 
+so it provides the *data* and the *behaviour* for 
+the "*Presentational*" Component. 
+When it mounts it subscribes to the `store` so 
+it *independently* re-renders when the `store` `state` changes 
+because it needs to use the `store` *current* `state` 
+inside its `render` method. 
+Instead of specifying the DOM tree 
+it delegates all the rendering to 
+the `Link` "*Presentational*" Component 
+and its' only job is to calculate the props 
+base on its *own* props and the *current* `state` of the Redux `store` 
+and it also specifies the callbacks that are 
+going to dispatch the `actions` on the `store`. 
+
+After the `action` is dispatched the `store` will remember 
+the *new* `state` returned by the reducer 
+and will call *every* subscriber to the `store` 
+and this case every `FilterLink` Component instance 
+is subscribed to the `store` 
+so they will all have their `forceUpdate` methods called on them 
+and they will re-render according to the *current* `store` `state`.
+
+The `FilterLink` is a "*Container*" Component 
+so it is completely self-sufficient 
+and can be used inside the "*Presentational*" Components such as
+`Footer` without passing additional props 
+to get the data from the `store` and specify the behaviour 
+this lets us keep the `Footer` Component simple 
+and de-coupled from the behaviour and data 
+that its' child Components need. 
 
 
 
