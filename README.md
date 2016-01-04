@@ -99,6 +99,10 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
+#### 24. Passing the Store Down Explicitly via Props
+
+> Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-explicitly-via-props
+
 
 
 
