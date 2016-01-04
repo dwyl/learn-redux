@@ -99,6 +99,10 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
+#### 25. Passing the Store Down Implicitly via Context
+
+> Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-implicitly-via-context
+
 
 
 <br />
