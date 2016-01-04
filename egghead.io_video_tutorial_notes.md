@@ -2334,6 +2334,8 @@ because the `action` updates the `store`.
 > Complete Code at the *end* of Video 20:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/3014d077563b3a7a195596d17bf2040d49a06ddb/index.html)
 
+<br />
+
 #### 21. Extracting Presentational Components (AddTodo, Footer, FilterLink)
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-presentational-components-addtodo-footer-filterlink

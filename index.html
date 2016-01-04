@@ -104,33 +104,41 @@ const FilterLink = ({
   );
 };
 
-const Footer = ({
-  visibilityFilter,
-  onFilterClick
-}) => (
+class FilterLink extends Component {
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <Link 
+        active={
+          props.filter ===
+          state.visibilityFilter
+        }
+      />
+    );
+  }
+}
+
+
+const Footer = () => (
   <p>
     Show:
     {' '}
     <FilterLink
       filter='SHOW_ALL' 
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
     >
     All
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_ACTIVE' 
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
     >
     Active
     </FilterLink>
     {' '}
     <FilterLink
       filter='SHOW_COMPLETED' 
-      currentFilter={visibilityFilter}
-      onClick={onFilterClick}
     >
     Completed
     </FilterLink>

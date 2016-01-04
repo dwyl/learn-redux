@@ -103,6 +103,95 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-container-components-filterlink
 
+In the previous lesson we separated the "*Presentational*" Components 
+from the the main "*Container*" Component 
+the `TodoApp` specifies the *behaviours* 
+such as what happens when the **Add** `<button>` is clicked 
+how the todos are selected 
+what happens when a *single* `Todo` has been clicked 
+and what happens when a `Footer` Link is clicked.
+And the components such as `AddTodo`, the `TodoList`, the `Todo` its' self 
+the `Footer` and the `FilterLink` they don't dispatch actions 
+they call their callbacks [passed] in the props 
+so they are *only* responsible for the *looks* but not for the behaviour. 
+The downside of this approach is that 
+I have to pass a lot of props down the "tree" 
+even when the *intermediate* Components don't really *use* them 
+for example: the `FilterLink` needs to know the `currentFilter` 
+so that it can chose a different appearance when it is *active* 
+however, in order to *receive* the `currentFilter` it has to be passed down 
+from the top, so this is why the `Footer` has to accept `visibilityFilter` 
+as a prop so it can pass it down as a `currentFilter` to the `FilterLink`.
+
+In a way this *breaks* encapsulation 
+because the "*Parent*" Components need to *know* too much 
+about what data the *Child* Components need 
+so to solve this we are going to *extract* a few more "*Container*" Components 
+just like we extracted the "*Presentational*" Components in the previous lesson. 
+
+The *first* Component I'm going to re-factor is the `Footer` Component 
+and *currently* it accepts two props the `visibilityFilter` 
+and the `onFilterClick` callback, 
+but it doesn't actually *use* either of them, 
+it just passes them down to the `Filterlink` 
+so this seems like a *good* opportunity for *simplification*. 
+We can only do this because we *know* that the `Footer` Component 
+doesn't *care* about the values of these props 
+they only exist to be passed down to the `Filterlink` 
+that cares about them.
+
+I'm removing the props definition
+and I'm removing these props from the `FilterLink` usage 
+and it might start to seem a lot like the code *before* 
+separating the "*Presentational*" Components 
+however what I want to do here is a little bit different.
+
+The `FilterLink` does not *currently* specify the behaviour 
+for clicking on the link 
+it also needs the `currentFilter` 
+to tell whether it should be rendered as *active*
+therefore its a bit "*dishonest*" to say that `FilterLink` 
+is a "*Presentational*" Component 
+because it is inseperable from its *behaviour* 
+the only *reasonable* reaction to clicking on it 
+is setting the `visibilityFilter` by dispatching an `action` 
+this is why I am changing it to a *different* "*Presentational*" Component 
+I'm going to call `Link` 
+and I will create another `FilterLink` Component 
+as a Container that uses it for rendering. 
+
+The `Link` Component doesn't know *anything* about the `Filter` 
+it only accepts the `active` prop and calls its `onClick` handler 
+it is *only* concerned with rendering 
+however I am *also* creating another Component called `FilterLink` 
+and its going to be a `Class` this time.
+It's going to `render` the `Link` 
+with the *current* data from the `store`.
+It's going to read the props, the Component props 
+and it's going to read the `state` 
+but I don't mean the *React* `state` 
+I mean the Redux `store` state 
+it gets by calling `store.getState()`. 
+As a "*Container*" Component the `FilterLink` 
+doesn't have its *own* markup 
+and it delegates rendering to the `Link` 
+"*Presentational*" Component.
+In this case it *calculates* its' `active` prop 
+by comparing its *own* `filter` prop 
+with the `visibilityFilter` in the Redux `store` `state`. 
+The `filter` prop is the one that is passed 
+to the `FilterLink` from the `Footer` 
+and the `visibilityFilter` corresponds to the 
+*currently* chose `visibilityFilter` 
+
+
+
+
+
+
+
+
+
 <br />
 
 ## Background Reading / Watching / Listening
