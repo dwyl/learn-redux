@@ -196,7 +196,34 @@ It turns out that they *also* receive the Context
 but as a *second* argument *after* the `props` 
 so I'm destructuring the *second argument* 
 and getting the `store` from there 
-and the *second argument* is the Context 
+and the *second argument* is the Context.
+Just like with the `class` Components 
+I still have to add a property called `contextTypes` 
+that specifies which *Context* I want to receive 
+and in this case I want to receive the `store` from the `Provider`. 
+If I *forget* to declare the `contextTypes` 
+my *functiona* Component will not receive the relevant *Context* 
+as the *second argument*.
+
+```js
+AddTodo.contextTypes = {
+  store: React.PropTypes.object 
+}
+```
+So, its *important* to *remember* to declare them 
+any time you *use* the *Context*.
+*Finally* I'm replacing the `props` with the `context` 
+when getting the `store` for the `FilterLink` 
+and I'm adding the `contextTypes` declaration 
+to the `FilterLink` so it receives the relevant *Context* 
+from the `Provider`. 
+Now that the `FilterLink` receives the `store` by `context` 
+I no longer need to pass it as a `prop` 
+so I'm removing its' usage (*from the `Footer` Component*)
+and I'm also removing the `store` prop from the `Footer` 
+because it doesn't need to pass it down anymore. 
+
+
 
 
 <br />
