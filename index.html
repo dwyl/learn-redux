@@ -284,13 +284,13 @@ VisibleTodoList.contextTypes = {
 
 
 
-const TodoApp = ({ store }) => (
+const TodoApp = () => (
   <div>
-    <AddTodo store={store} />
-    <VisibleTodoList store={store} />
-    <Footer store={store} />
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
   </div>
-)
+);
 
 class Provider extends Component {
   getChildContext() {
@@ -312,8 +312,8 @@ const { createStore } =  Redux;
 
 ReactDOM.render( 
   <Provider store={createStore(todoApp)}>
-  <TodoApp />,
-  </Provider>
+  <TodoApp />
+  </Provider>,
   document.getElementById('root')
 );
 

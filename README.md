@@ -223,6 +223,13 @@ so I'm removing its' usage (*from the `Footer` Component*)
 and I'm also removing the `store` prop from the `Footer` 
 because it doesn't need to pass it down anymore. 
 
+I'm also removing the `store` prop from the `TodoApp` Component 
+because I no longer need to pass it down to the *Containers*. 
+Now instead of *explicitly* passing the `store` down 
+by `props`, we pass it *implicitly* by `context`. 
+
+Lets recap how we use the `context` to pass the `store` down:
+
 
 
 
