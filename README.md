@@ -229,7 +229,82 @@ Now instead of *explicitly* passing the `store` down
 by `props`, we pass it *implicitly* by `context`. 
 
 Lets recap how we use the `context` to pass the `store` down:
+We *start* by *rendering* the `TodoApp` 
+inside the `Provider` Component we defined above. 
+The `Provider` Component just *renders* 
+what ever you pass to it 
+so in this case it renders its' "*Children*" 
+or [*more specifically*] the `TodoApp` component 
+however it also provides the `context` 
+to *any* Components inside it, including "*Grand Children*" 
+the `context` contains just *one* key called the `store` 
+and it corresponds to the `store` we passed as a `prop` 
+to the `Provider` Component. 
+We pass the `store` to the `Provider` Component in our `render` call 
+and make it available to "*Child Components*" 
+by defining the `getChildContext` with the `store` key 
+pointing to that `prop`. 
+It is ***essential*** that the `getChildContext` 
+is matched by `childContextTypes` 
+where we specifcy that the `store` key has `PropTypes` 
+of `object`. 
 
+> Note: that the `childContextTypes` definition 
+is ***absolutely required*** 
+if you want to pass the `context` down the tree. 
+
+The benefit is that we don't need to pass the `store` 
+through the *intermediate* components 
+and instead we can declare the `contextTypes` 
+on the *Container* Components that need access to the `store` 
+so that they can retrieve it from the `context` 
+instead of retrieving it from the `props`. 
+The `context` creates something like a "*worm hole*" 
+between the `VisibleTodoList` Component that reads the `context` 
+and the `Provider` that *provides* the `context` 
+and this "*worm hole*" is only *enabled* 
+because the `contextTypes` declared ont he `VisibleTodoList` 
+include the `store` that is defined in `childContextTypes` 
+of the `Provider` Component. 
+
+The `AddTodo` is another Component that needs *access* to the `store` 
+so it also *opts-in* to receiving it in the `context` 
+by specifying the `contextTypes` 
+this is why in *addition* to `props`, 
+it receives a *second argument* which is the `context` 
+I'm using the *destructuring* syntax here so instead of:
+
+```js
+const AddTodo = (props, context) => {
+const store = context.store; // need to manually assign the store from context
+// rest of code ...
+```
+we get a simplified version:
+
+```js
+const AddTodo = (props, { store }) => {
+// rest of code ...
+```
+The `context` works at *any* depth 
+so it is not necessary to put `contextTypes` on the `Footer` 
+the `FilterLink` is the Component that *directly* uses the `context` 
+so this is the component that has to *specify* the `contextTypes` 
+so that it can use the `store` by reading it from the `context`. 
+
+Context is a *powerful feature* 
+but in a way it contradicts the React philosophy 
+of the ***explicit data flow***. 
+The `context` essentially allows ***Global Variables*** 
+across the Component Tree 
+but ***Global Variables*** are *usually* a ***Bad Idea*** ... 
+and unless you're using it for dependency injection 
+like here where we need to make a *single* `Object` 
+available to all Components, 
+then probably you *shouldn't* use `context` ... 
+
+*Finally* the Context API is ***NOT Stable*** in React! 
+It has changed before and it is likely to change again 
+so try your best not to rely on it too much. 
 
 
 
