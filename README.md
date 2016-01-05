@@ -103,6 +103,100 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-implicitly-via-context
 
+In the previous lesson we got rid of the top-level `store` variable 
+and instead started passing the `store` as a `prop` to the `TodoApp` 
+Component so *every* Component below received the `store` 
+as a `prop`. And we even have to do this for *Presentational* Components 
+because sometimes they contain *Container* Components 
+that need the `store` to `subscribe` to the changes. 
+We have to write a lot of "*boilerplate*" code 
+to pass the `store` down as a `prop` 
+but there is *another* way using the "*advanced*" React feature 
+called "***Context***".
+
+I'm creating a *new* Component called `Provider` 
+and from its' `render` method it just returns what ever its' *child* is. 
+So we can *wrap* any Component in a `Provider` 
+and it's going to `render` that Component. 
+
+```js
+class Provider extends Component {
+  render() {
+    return this.props.children;
+  }
+}
+```
+
+I'm changing the `render` call 
+to render a `TodoApp` inside the `Provider` 
+and I'm moving the `store` `prop` from the `TodoApp` 
+to the `Provider` Component.
+
+```js
+ReactDOM.render( 
+  <Provider store={createStore(todoApp)}>
+  <TodoApp />,
+  </Provider>
+  document.getElementById('root')
+);
+```
+
+The `Provider` Component will use the React 
+*advanced* ***Context*** Feature to make the `store` 
+available to *any* Component inside it 
+including "*Grand Children*". 
+To do this it has to define a special method called 
+`getChildContext` that will be *called* by React. 
+We are using `this.props.store` which corresponds to 
+`store` passed to the `Provider` as a `prop` just *once*.
+*this* `store` will be part of the *Context* 
+that the `Provider` specifies 
+for any "*Children*" and "*Grand Children*" 
+so the `TodoApp` is going to receive this *Context* 
+and any Component inside `TodoApp` is going to receive 
+this *Context* `Object` with the `store` inside it. 
+However there is an *important condition* for the *Context* to work, 
+and this *condition* is that you have to specify 
+`childContextTypes` on the Component that defines 
+`getChildContext` these are just `React.PropTypes` definitions 
+but *unlike* `PropTypes`, the `ChildContext` Types are ***essential*** 
+for the *Context* to be turned on. 
+If you don't specify them, no *Child* Components 
+will receive this *Context*. 
+
+The *Container* Components *currently* access `store` by `props` 
+but we are going to change this to read the `store` from React *Context* 
+and to do that we just refer to `this.context` 
+similarly in the `render` method I'm also going to *read* the `store` 
+from the *Context* instead of the `props`:
+
+```js
+const store = this.context.store; // no ES6 required.
+```
+
+*Finally* the *Context* is "*Opt In*" 
+for the *receiving* Components *too* 
+so you *have* to *specify* a special field called `contextTypes` 
+which are *similar* to `childContextTypes` 
+but in this case we are specifying which Context we
+want to *receive* and not pass down. 
+
+```js
+VisibleTodoList.contextTypes = {
+  store: React.PropTypes.object
+}
+```
+If you *forget* to declare the `contextTypes` 
+the Component will *not* receive the relevant Context 
+so it is ***essential*** to remember to declare them.
+
+What about the *functional* Components that don't have [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 
+(*JavaScript context*). 
+It turns out that they *also* receive the Context 
+but as a *second* argument *after* the `props` 
+so I'm destructuring the *second argument* 
+and getting the `store` from there 
+and the *second argument* is the Context 
 
 
 <br />
