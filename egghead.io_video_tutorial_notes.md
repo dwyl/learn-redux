@@ -3435,3 +3435,170 @@ to `subscribe` to the `store` updates and `dispatch` *actions*.
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/bbc303a0a689d0c99daa71c6b0a8ead5ccc5484e/index.html)
 
 <br />
+
+#### 27. Generating Containers with `connect()` from React Redux (VisibleTodoList)
+
+> Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-visibletodolist
+
+
+In the previous lesson I added `ReactRedux` bindings to the project 
+and I used the `Provider` Component from `ReactRedux` 
+to pass the `store` down the `context` 
+so that the *Container* Components can *read* the `store` 
+from the `context` and `subscribe` to its' changes. 
+All *Container* Components are *very similar*, 
+they need to *re-render* when the `store` `state` changes 
+they need to `unsubscribe` from the `store` when they `Unmount`. 
+and they take the *current* `state` of the Redux `store` 
+and use it to `render` the *Presentational* Components 
+with some `props` that they *calculate* from the `state` of the `store` 
+and they *also* need to *specify* the `contextTypes` 
+to get the `store` from the `context`. 
+
+I'm going to write this Component in a *diferent* way now: 
+and I'll declare a function called `mapStateToProps` 
+which takes the Redux `store` `state` 
+and returns the `props` that I need to pass to the 
+*Presentational* `TodoList` Component 
+to `render` it with the *current* `state`. 
+In this case there is just a *single* `prop` called `todos` 
+so I *copy-paste* this expression: 
+
+```js
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
+  };
+};
+```
+It returns the `props` that *depend* on the *current* 
+`state` of the Redux `store` 
+so in *this* case this is just the `todos` prop. 
+
+I'm creating another function 
+that I call `mapDispatchToProps` 
+and it accepts the `dispatch` method from the `store`
+as the *only* argument and returns 
+the `props` that should be passed to the `TodoList` Component 
+and that *depend* on the `dispatch` method. 
+The *only* `prop` that uses `store.dispatch` 
+is called `onTodoClick` 
+so I'm *copy-pasting* [*cut-and-pasting*] `onTodoClick` 
+into `mapDispatchToProps`. 
+Note that I don't have the reference to the `store` here *anymore* 
+so instead I'm changing it to use *just* the `dispatch` 
+which is provided as an *argument* to `mapDispatchToProps` 
+"I will add some *punctuation* to make it *appear* easier on my eyes"
+[*brackes around the `id` argument 
+& curly-braces around the function block*]
+`onTodoClick` is a function that accepts the `id` 
+of the `todo` and dispatches an `action`. 
+
+```js
+const mapDispatchToProps = (dispatch) => {
+  return { 
+    onTodoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  };
+}
+```
+
+Now I've got two different functions:
+The *first* one *maps* the Redux `store` `state` 
+to the `props` of the `TodoList` Component 
+that are *related* to the *data* from the Redux `store` 
+the *second* function maps the `dispatch` method of the `store` 
+to the callback `props` of the `TodoList` Component 
+it specifies the *behaviour* 
+that is which callback `prop` dispatches which `action`. 
+
+Together these two functions describe the a *Container* Component 
+*so* well that instead of *writing* it 
+I can *generate* it by using the `connect` function 
+provided by the `ReactRedux` Library: 
+
+```js
+const { connect } = ReactRedux;
+```
+If you use `npm` and `Babel` you will 
+likely *import* it like *this* instead:
+
+```js
+import { connnect } from 'react-redux'
+```
+"*and don't forget the curly braces*..." 
+[*destructuring assignment of the `connect` method from the `react-redux` package*]
+
+Now, instead of declaring a `class` I'm going to declare a `variable` 
+and I will call the `connect` method to *obtain* it. 
+I'm passing `mapStateToProps` as the *first* argument, 
+and `mapDispatchToProps` as the *second* argument. 
+And notice that this is a 
+["*curried*"](https://github.com/iteles/Javascript-the-Good-Parts-notes#curry) 
+function so I have to call it once *again* 
+and this time I pass the *Presentational* Component 
+that I want it to *wrap* and pass the `props` to. 
+
+```js
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
+```
+
+The `connect` function will *generate* the Component 
+will *generate* the Component just like the one 
+I *previously* wrote by *hand* 
+so I don't want you to write the *code* 
+to `subscribe` to the `store` or to *specify* the `contextTypes` 
+because the `connect` function takes care of that. 
+
+> At 03:27 Dan *deletes* the "old" `VisibleTodoList` Component 
+and its `contextTypes` definition which 
+are *both* now being *generated* by the `connect` call.
+
+Now lets re-cap how to *generate* the *Container* Component 
+using the `connect` function: 
+ 
+*First* I write a `function` called `mapStateToProps` 
+that takes the `state` of the Redux `store` 
+and returns the `props` for the *Presentational* Component 
+calculated from it. 
+These `props` will be *updated* any time the `state` changes 
+*Next* I write a `function` that I call `mapDispatchToProps` 
+it takes the `store.dispatch` method as it's *first* argument 
+and it returns the `props` that *use* the `dispatch` method 
+to `dispatch` *actions*, 
+so it *returns* the calback `props` 
+needed for the *Presentational* Component. 
+
+To create a *Container* Component from them, 
+I *import* `connect` from the `ReactRedux` library 
+and I *call* it passing `mapStateToProps` 
+as the *first* argument and `mapDispatchToProps` 
+as the *second* argument. 
+*Finally*, I close the function call parens, 
+and I *open* another [*pair of*] parentheses 
+because this is a *curried* function and it needs to be 
+*called* ***twice*** 
+and the last argument is the *Presentational* Component 
+that I want to *connect* to the Redux `store`. 
+The *result* of the `connect` call 
+is the *Container* Component 
+that is going to `render` my *Presentational* Component 
+it will calculate the `props` to pass to the 
+*Presentational* Component by merging the objects 
+returned from `mapStateToProps`, `mapDispatchToProps` 
+and its *own* `props`. 
+
+> Complete Code at the *end* of **Video 27**:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/182bde8b227fd2746838f57e89bc97f049ef5370/index.html)
+
+<br />
