@@ -134,7 +134,7 @@ so I *copy-paste* this expression:
 ```js
 const mapStateToProps = (state) => {
   return {
-    totos: getVisibleTodos(
+    todos: getVisibleTodos(
       state.todos,
       state.visibilityFilter
     )
@@ -168,7 +168,7 @@ of the `todo` and dispatches an `action`.
 const mapDispatchToProps = (dispatch) => {
   return { 
     onTodoClick: (id) => {
-      store.dispatch({
+      dispatch({
         type: 'TOGGLE_TODO',
         id
       })
@@ -234,6 +234,37 @@ are *both* now being *generated* by the `connect` call.
 Now lets re-cap how to *generate* the *Container* Component 
 using the `connect` function: 
  
+*First* I write a `function` called `mapStateToProps` 
+that takes the `state` of the Redux `store` 
+and returns the `props` for the *Presentational* Component 
+calculated from it. 
+These `props` will be *updated* any time the `state` changes 
+*Next* I write a `function` that I call `mapDispatchToProps` 
+it takes the `store.dispatch` method as it's *first* argument 
+and it returns the `props` that *use* the `dispatch` method 
+to `dispatch` *actions*, 
+so it *returns* the calback `props` 
+needed for the *Presentational* Component. 
+
+To create a *Container* Component from them, 
+I *import* `connect` from the `ReactRedux` library 
+and I *call* it passing `mapStateToProps` 
+as the *first* argument and `mapDispatchToProps` 
+as the *second* argument. 
+*Finally*, I close the function call parens, 
+and I *open* another [*pair of*] parentheses 
+because this is a *curried* function and it needs to be 
+*called* ***twice*** 
+and the last argument is the *Presentational* Component 
+that I want to *connect* to the Redux `store`. 
+The *result* of the `connect` call 
+is the *Container* Component 
+that is going to `render` my *Presentational* Component 
+it will calculate the `props` to pass to the 
+*Presentational* Component by merging the objects 
+returned from `mapStateToProps`, `mapDispatchToProps` 
+and its *own* `props`. 
+
 
 
 

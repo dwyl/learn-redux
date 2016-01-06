@@ -245,7 +245,7 @@ const getVisibleTodos = (
 
 const mapStateToProps = (state) => {
   return {
-    totos: getVisibleTodos(
+    todos: getVisibleTodos(
       state.todos,
       state.visibilityFilter
     )
@@ -255,7 +255,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return { 
     onTodoClick: (id) => {
-      store.dispatch({
+      dispatch({
         type: 'TOGGLE_TODO',
         id
       })
@@ -276,22 +276,6 @@ const TodoApp = () => (
     <Footer />
   </div>
 );
-
-// class Provider extends Component {
-//   getChildContext() {
-//     return {
-//       store: this.props.store // what no ES6 Destructuring here Dan...?
-//     };
-//   }
-
-//   render() {
-//     return this.props.children;
-//   };
-
-// }
-// Provider.childContextTypes = {
-//   store: React.PropTypes.object
-// };
 
 const { Provider }    = ReactRedux;
 const { createStore } = Redux;
