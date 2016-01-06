@@ -103,10 +103,21 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-with-provider-from-react-redux
 
+In the *previous* lesson we implemented the `Provider` Component 
+that uses the React "*Advanced*" Context Feature 
+to make the `store` from the `props` available 
+to *every* Component in our App. 
+So if we pass it to the `Provider` 
+we can read it in *any* other Component from the `context` 
+which is *really* convenient for the *Container* Components 
+in fact this is *so* convenient 
+that you don't actually *need* to write the `Provider` *yourself* 
+because it is included in a "*special library*" 
+called ***React-Redux*** 
 
-
-
-
+```js
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.5/react-redux.js"></script>
+```
 
 
 <br />
