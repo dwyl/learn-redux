@@ -15,8 +15,8 @@ and *then* come *back* here!
 ## Why?
 
 Redux is a *very* ***elegant*** way 
-to **structure** JavaScript web applications.
-While there is an ***initial learning curve*** we feel the *simplicyt*
+to **structure** JavaScript web applications.  
+While there is an ***initial learning curve*** we feel the *simplicity*
 of the *single* `store` (*snapshot of your app's state*) 
 offers a ***significant***
 **benefit** over other ways of organising your code.
@@ -29,10 +29,13 @@ skim through the notes we have made and*
 
 Redux<sup>1</sup> *borrows the* ***reducer pattern*** *from*
 [***Elm*** Architecture](https://github.com/evancz/elm-architecture-tutorial/)
-which simplifies writing web apps.
-If you have *never heard of Elm*, don't worry,
-you don't need to go read another doc before you can understand this...
+which simplifies writing web apps.  
+If you have *never heard of Elm*, ***don't worry***,
+you *don't need* to go read another doc before you can understand this...
 Just keep reading this page and (*hopefully*) everything will become clear.
+
+> _If **anything** is **unclear**, 
+**please tell us** where you are stuck **so we can help**_!
 
 
 <sup>1</sup> <small> ***Redux*** *the JavaScript Library should not to be confused with the Redux Framework [PHP framework](https://github.com/reduxframework/redux-framework)  
@@ -100,9 +103,42 @@ https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
 
-#### 27. Generating Containers with connect() from React Redux (VisibleTodoList)
+#### 27. Generating Containers with `connect()` from React Redux (VisibleTodoList)
 
 > Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-visibletodolist
+
+
+In the previous lesson I added `ReactRedux` bindings to the project 
+and I used the `Provider` Component from `ReactRedux` 
+to pass the `store` down the `context` 
+so that the *Container* Components can *read* the `store` 
+from the `context` and `subscribe` to its' changes. 
+All *Container* Components are *very similar*, 
+they need to *re-render* when the `store` `state` changes 
+they need to `unsubscribe` from the `store` when they `Unmount`. 
+and they take the *current* `state` of the Redux `store` 
+and use it to `render` the *Presentational* Components 
+with some `props` that they *calculate* from the `state` of the `store` 
+and they *also* need to *specify* the `contextTypes` 
+to get the `store` from the `context`. 
+
+I'm going to write this Component in a *diferent* way now: 
+and I'll declare a function called `mapStateToProps` 
+which takes the Redux `store` `state` 
+and returns the `props` that I need to pass to the 
+*Presentational* `TodoList` Component 
+to `render` it with the *current* `state`. 
+In this case there is just a *single* `prop` called `todos` 
+so I *copy-paste* this expression: 
+
+```js
+getVisibleTodos(
+  state.todos,
+  state.visibilityFilter
+)
+```
+
+
 
 <br />
 
@@ -125,7 +161,9 @@ http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good 
 
 ## Notes:
 
-At the time of writing, the *minified* version of redux is **5.4kb** and has
+At the time of writing, the *minified* version of redux is 
+[**5.4kb**](https://github.com/nelsonic/learn-redux/issues/11#issue-124671091) 
+and has
 No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
