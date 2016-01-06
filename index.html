@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.5/react-redux.js"></script>
     <!-- Why JSXTransformer? see: http://git.io/vug4q -->
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
     <script src="https://wzrd.in/standalone/expect@latest"></script>
@@ -292,23 +293,24 @@ const TodoApp = () => (
   </div>
 );
 
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store // what no ES6 Destructuring here Dan...?
-    };
-  }
+// class Provider extends Component {
+//   getChildContext() {
+//     return {
+//       store: this.props.store // what no ES6 Destructuring here Dan...?
+//     };
+//   }
 
-  render() {
-    return this.props.children;
-  };
+//   render() {
+//     return this.props.children;
+//   };
 
-}
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-};
+// }
+// Provider.childContextTypes = {
+//   store: React.PropTypes.object
+// };
 
-const { createStore } =  Redux;
+const { Provider }    = ReactRedux;
+const { createStore } = Redux;
 
 ReactDOM.render( 
   <Provider store={createStore(todoApp)}>
