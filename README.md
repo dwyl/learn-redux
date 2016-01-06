@@ -132,11 +132,108 @@ In this case there is just a *single* `prop` called `todos`
 so I *copy-paste* this expression: 
 
 ```js
-getVisibleTodos(
-  state.todos,
-  state.visibilityFilter
-)
+const mapStateToProps = (state) => {
+  return {
+    totos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
+  };
+};
 ```
+It returns the `props` that *depend* on the *current* 
+`state` of the Redux `store` 
+so in *this* case this is just the `todos` prop. 
+
+I'm creating another function 
+that I call `mapDispatchToProps` 
+and it accepts the `dispatch` method from the `store`
+as the *only* argument and returns 
+the `props` that should be passed to the `TodoList` Component 
+and that *depend* on the `dispatch` method. 
+The *only* `prop` that uses `store.dispatch` 
+is called `onTodoClick` 
+so I'm *copy-pasting* [*cut-and-pasting*] `onTodoClick` 
+into `mapDispatchToProps`. 
+Note that I don't have the reference to the `store` here *anymore* 
+so instead I'm changing it to use *just* the `dispatch` 
+which is provided as an *argument* to `mapDispatchToProps` 
+"I will add some *punctuation* to make it *appear* easier on my eyes"
+[*brackes around the `id` argument 
+& curly-braces around the function block*]
+`onTodoClick` is a function that accepts the `id` 
+of the `todo` and dispatches an `action`. 
+
+```js
+const mapDispatchToProps = (dispatch) => {
+  return { 
+    onTodoClick: (id) => {
+      store.dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  };
+}
+```
+
+Now I've got two different functions:
+The *first* one *maps* the Redux `store` `state` 
+to the `props` of the `TodoList` Component 
+that are *related* to the *data* from the Redux `store` 
+the *second* function maps the `dispatch` method of the `store` 
+to the callback `props` of the `TodoList` Component 
+it specifies the *behaviour* 
+that is which callback `prop` dispatches which `action`. 
+
+Together these two functions describe the a *Container* Component 
+*so* well that instead of *writing* it 
+I can *generate* it by using the `connect` function 
+provided by the `ReactRedux` Library: 
+
+```js
+const { connect } = ReactRedux;
+```
+If you use `npm` and `Babel` you will 
+likely *import* it like *this* instead:
+
+```js
+import { connnect } from 'react-redux'
+```
+"*and don't forget the curly braces*..." 
+[*destructuring assignment of the `connect` method from the `react-redux` package*]
+
+Now, instead of declaring a `class` I'm going to declare a `variable` 
+and I will call the `connect` method to *obtain* it. 
+I'm passing `mapStateToProps` as the *first* argument, 
+and `mapDispatchToProps` as the *second* argument. 
+And notice that this is a 
+["*curried*"](https://github.com/iteles/Javascript-the-Good-Parts-notes#curry) 
+function so I have to call it once *again* 
+and this time I pass the *Presentational* Component 
+that I want it to *wrap* and pass the `props` to. 
+
+```js
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
+```
+
+The `connect` function will *generate* the Component 
+will *generate* the Component just like the one 
+I *previously* wrote by *hand* 
+so I don't want you to write the *code* 
+to `subscribe` to the `store` or to *specify* the `contextTypes` 
+because the `connect` function takes care of that. 
+
+> At 03:27 Dan *deletes* the "old" `VisibleTodoList` Component 
+and its `contextTypes` definition which 
+are *both* now being *generated* by the `connect` call.
+
+Now lets re-cap how to *generate* the *Container* Component 
+using the `connect` function: 
+ 
 
 
 
@@ -166,14 +263,17 @@ At the time of writing, the *minified* version of redux is
 and has
 No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
-We like this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
+We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
-... Unidirectional Data Flow (*why is this better than bi-directional e.g: Angular.js*)
+## Todo: [![contributions welcome](https://img.shields.io/badge/pull-request-welcome-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
 
-## Kudos
++ [ ] Explain why ***Unidirectional Data Flow*** is this "better" than bi-directional e.g: Angular.js 
+
+## Kudos to Fellow *DWYLers*
 
 > Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*   
 > Thanks to [Milo](https://github.com/bananaoomarang) for his 
-*fantastic* demo: https://github.com/bananaoomarang/isomorphic-redux  
-> and *love* to [Niki](https://github.com/nikhilaravi) for her enthusiasm
-while explaining it all to us ... 
+*fantastic* demo/example: https://github.com/bananaoomarang/isomorphic-redux  
+(*which he has painstakingly kept up-to-date with the latest Redux/React versions!*)  
+> and *love* to [Niki](https://github.com/nikhilaravi) for her 
+*enthusiasm* and *patience* while explaining it all to us ... 
