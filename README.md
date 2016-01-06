@@ -100,7 +100,9 @@ https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
 
+#### 27. Generating Containers with connect() from React Redux (VisibleTodoList)
 
+> Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-visibletodolist
 
 <br />
 
