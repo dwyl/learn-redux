@@ -99,57 +99,6 @@ go a *lot* faster.
 https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
-#### 26. Passing the Store Down with <Provider> from React Redux
-
-> Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-with-provider-from-react-redux
-
-In the *previous* lesson we implemented the `Provider` Component 
-that uses the React "*Advanced*" Context Feature 
-to make the `store` from the `props` available 
-to *every* Component in our App. 
-So if we pass it to the `Provider` 
-we can read it in *any* other Component from the `context` 
-which is *really* convenient for the *Container* Components 
-in fact this is *so* convenient 
-that you don't actually *need* to write the `Provider` *yourself* 
-because it is included in a "*special library*" 
-called ***React-Redux*** 
-
-```js
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.5/react-redux.js"></script>
-```
-And note that this is *not* the same a Redux, 
-this is a *different* library 
-these are *React bindings* to the Redux Library.
-
-You can import the `Provider` by *destructuring* the `ReactRedux`
-***Global*** `Object` in JSBin: 
-```js
-const { Provider } = ReactRedux;
-```
-***or*** if you use `Babel` 
-and something like `npm` 
-you can:
-
-```js
-import { Provider } from 'react-redux'
-``` 
-
-with the braces because it is a *named* `export` 
-from the `react-redux` package. 
-Or if you write **ES5** code, you can write:
-
-```js
-var Provider = require('react-redux').Provider;
-```
-
-Just like the `Provider` we wrote *before*, 
-the `Provider` that comes with `ReactRedux` 
-exposes the `store` you pass to it as a `prop` 
-on the `context` so the Components can specify 
-the `contextTypes` and then use `this.context.store` 
-to `subscribe` to the `store` updates and `dispatch` *actions*. 
-
 
 
 
