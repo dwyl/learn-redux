@@ -133,7 +133,7 @@ No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
-## Todo: [![contributions welcome](https://img.shields.io/badge/pull-request-welcome-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
+## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcomed-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
 
 + [ ] Explain why ***Unidirectional Data Flow*** is this "better" than bi-directional e.g: Angular.js 
 
