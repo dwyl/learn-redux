@@ -260,7 +260,33 @@ as a `prop`.
 AddTodo = connect()(AddTodo);
 ```
 
-Let's re-cap ...
+03:44 - Let's re-cap what happens to the Components here:
+The `AddTodo` Component that I declare 
+accepts `dispatch` as a `prop` 
+but it doesn't know how to *get* the `store` 
+it just "*hopes*" that "*someone*" is going 
+to *pass* `dispatch` to it. 
+The `connect` call without any arguments is going 
+to *generate* a *Container* Component 
+that does *not* `subscribe` to the `store` 
+however that will pass `dispatch` to the Component that it *wraps* 
+and in this case it *wraps* my `AddTodo` Component 
+
+The *second* `connect` call returns the *generated* 
+*Container* Component and I'm assinging it to `AddTodo` 
+so I'm re-assiging the `let` binding the second time 
+and when the further code references `AddTodo` 
+it's going to reference the *Container* Component 
+that does not need the `dispatch` prop 
+and that will pass the `dispatch` prop 
+to my *inner* `AddTodo` Component 
+that I don't have a reference to anymore. 
+
+> If you did not fully understand *why* Dan did this re-factoring, 
+read the docs: http://rackt.org/redux/docs/basics/UsageWithReact.html
+
+> Complete code for the *end* of **Video 28**: 
+[`index.html`]()
 
 
 
