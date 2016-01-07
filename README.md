@@ -107,6 +107,110 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-footerlink
 
+*Finally* let's take a look at the `FilterLink` 
+*Container* Component that renders a `Link` with an `active` property 
+and a *click* handler. 
+*First* I will write the `mapStateToProps` function 
+which I will call `mapStateToLinkProp` 
+because I have everything in a *single* file. 
+And it's going to accept the `state` of the Redux `store` 
+and `return` the `props` that should be passed to the `Link` 
+and we only have a *single* such `prop` called `active` 
+that determines whether the link displays 
+the *current* `visiblityFilter`. 
+When I *paste* this *expression* from the `render` method 
+I see that it references the `filter` prop 
+of the `FilterLink` Component. 
+To tell whether a link is *active* we need to 
+compare this `prop` with with the `visibilityFilter` 
+from the Redux `store` `state` 
+it is fairly common to use the *Container* `props` 
+when calculating the *Child* `props` 
+so this is why `props` are passed as a *second* argument 
+to `mapStateToProps` [*or in this example `mapStateToLinkProps`*]
+I will re-name it [*the `mapStateToLinkProps` second argument*] 
+to `ownProps` to make it clear that 
+we are talking about the *Container* Component's *own* `props` 
+and not the `props` that are *passed* to the *Child* 
+which is the `return` value of `mapStateToLinkProps` 
+
+```js
+const mapStateToLinkProps = ( 
+  state,
+  ownProps
+) => {
+  return {
+    active: 
+      ownProps.filter ===
+      state.visibilityFilter  
+  }
+} 
+```
+
+The second function I'm writing here is `mapDispatchToProps` 
+or to avoid name clashes in the JSBin [*single file app*]
+`mapDispatchToLinkProps`. 
+The only argument so far is the `dispatch` function 
+and I'm going to need to look at the *Container* Component 
+I wrote by hand to see what `props` depend on the `dispatch` function. 
+In this case this is just the `onClick` handler 
+where I `dispatch` the `SET_VISIBILITY_FILTER` `action`. 
+the only `prop` I'm passing down is called `onClick` 
+and I declare it as an **ES6** [***Arrow Function***]() 
+with no arguments and I *paste* the `dispatch` call. 
+
+```js
+const mapDispatchToLinkProps = (
+  dispatch
+) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: props.filter
+      });
+    }
+  };
+}
+```
+
+But it references the `props` *again*, 
+so I need to add `ownProps` as an *argument* 
+the *second* argument to `mapDispatchToLinkProps` function 
+thus: 
+
+```js
+const mapDispatchToLinkProps = (
+  dispatch,
+  ownProps
+) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter
+      });
+    }
+  };
+}
+
+*Finally* I will call the `connect` function from `ReactRedux` Library 
+to generate the `FilterLink` *Container* Component 
+I pass the relevant `mapStateToProps` function 
+as the *first* argument [*in our case `mapStateToLinkProps`*] 
+the `mapDispatchToProps` as the *second* argument 
+[*or `mapDispatchToLinkProps` in our case*] 
+and I call the function *again* with the `Link` Component 
+which should be *rendered*:
+
+```js
+const FilterLink = connect(
+  mapStateToLinkProps,
+  mapDispatchToLinkProps
+)(Link);
+```
+
+Now I can *remove* the "*old*" `FilterLink` implementation 
 
 
 
