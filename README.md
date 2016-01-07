@@ -230,7 +230,8 @@ and specify *just* the `filter`
 but the *underlying* `Link` Component 
 will receive the *calculated* `active` and `onClick` values. 
 
-
+> Complete Code at the *end* of **Video 29**: 
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/f3c0a045b0694714e0ac7060cb1c77efae7d7baa/index.html)
 
 
 
