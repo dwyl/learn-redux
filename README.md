@@ -107,6 +107,60 @@ https://github.com/nelsonic/learn-redux/issues
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-action-creators
 
+So far we have covered the *Container* Components 
+the *Presentational* Components, 
+the Reducers and the `store`, 
+but we have not covered the concept of `action` *Creators* 
+which you might see in the Redux *talks* and *examples*. 
+
+Let's consider the following example: 
+I `dispatch` the `ADD_TODO` `action` 
+from inside the `<button>` `onClick` handler 
+and this is "*fine*", 
+however it references the `nextTodoId` variable 
+which I declare along side the `AddTodo` Component 
+*normally* it would be *local* 
+however what if another componet wants to `dispatch` 
+the `ADD_TODO` `action` ? 
+It would need to have access to the `nextTodoId` somehow 
+and while I *could* make this variable *GLOBAL* 
+it's *not* a very good idea ... 
+instead it would be *best* if the Components 
+dispatching the `ADD_TODO` `action` 
+did not have to *worry* about specifying the `id` 
+because the only information they *really* pass 
+is the `text` of the `todo` being added 
+I don't *want* to generate the `id` inside the *reducer* 
+because that would make it *non-deterministic* 
+however I can extract this code 
+generating the `action` `Object` 
+into a function I will call `addTodo` 
+I pass the `input.value` to `addTodo` 
+and `addTodo` is just a function that takes 
+the `text` of the `todo` and constructs an `action` `Object` 
+representing `ADD_TODO` `action`. 
+So it has the `type: 'ADD_TODO'`, 
+it takes care of *generating* the `id` 
+and it includes the `text`. 
+
+```js
+let nextTodoId = 0;
+const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text // implied value from function argument
+  }
+}
+```
+
+Although extracting such function is not required 
+it is a very common pattern in Redux applications 
+to keep them *maintainable* 
+so we call these functions `action` *Creators* 
+and we usually place them separately from Components 
+or from *Reducers*. 
+
 
 
 
