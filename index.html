@@ -70,13 +70,16 @@ const visibilityFilter = (
   }
 };
 
+
 const { combineReducers } = Redux;
+
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
 
 const { Component } = React;
+const { connect } = ReactRedux;
 
 const Link = ({
   active,
@@ -126,47 +129,6 @@ const FilterLink = connect(
   mapStateToLinkProps,
   mapDispatchToLinkProps
 )(Link);
-
-
-class FilterLink extends Component {
-  componentDidMount() {
-    // const { store } = this.props; // no browser supports this!
-    const store = this.context.store;
-    this.unsubscribe = store.subscribe(() => 
-      this.forceUpdate()
-    );
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const store = this.context.store;
-    const state = store.getState();
-
-    return (
-      <Link 
-        active={
-          props.filter ===
-          state.visibilityFilter
-        }
-        onClick={() =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter: props.filter
-          })
-        }
-      >
-        {props.children}
-      </Link>
-    );
-  }
-}
-FilterLink.contextTypes = {
-  store: React.PropTypes.object
-}
 
 
 const Footer = () => (
@@ -225,8 +187,6 @@ const TodoList = ({
     )}
   </ul> 
 );
-
-const { connect } = ReactRedux;
 
 let nextTodoId = 0;
 let AddTodo = ({ dispatch }) => {
