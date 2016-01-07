@@ -103,6 +103,10 @@ https://github.com/nelsonic/learn-redux/issues
 *Thanks*!
 
 
+#### 29. Generating Containers with connect() from React Redux (FooterLink)
+
+> Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-footerlink
+
 
 
 
