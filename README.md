@@ -210,7 +210,27 @@ const FilterLink = connect(
 )(Link);
 ```
 
-Now I can *remove* the "*old*" `FilterLink` implementation 
+Now I can *remove* the "*old*" `FilterLink` implementation. 
+
+Let's re-cap the *data flow* in this example:
+the `Footer` Component renders **3** `FilterLink` 
+and each of them has a different `filter` prop 
+that specifies which `filter` it corresponds to 
+this `prop` will be available on the `ownProps` `Object` 
+that *both* `mapDispatchToProps` and `mapStateToProps` 
+will receive as the *second* argument. 
+we pass these two functions to the `connect` call 
+which will return a *Container* Component called `FilterLink`. 
+The `FilterLink` will take the `props` 
+that we `return` from the `mapDispatchToProps` and `mapStateToProps` 
+[*or the "Link" versions of these in our case...*] 
+and pass them as `props` the `Link` Component that it *wraps* 
+we can now use the `FilterLink` *Container* Component 
+and specify *just* the `filter` 
+but the *underlying* `Link` Component 
+will receive the *calculated* `active` and `onClick` values. 
+
+
 
 
 
