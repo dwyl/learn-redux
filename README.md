@@ -161,7 +161,69 @@ so we call these functions `action` *Creators*
 and we usually place them separately from Components 
 or from *Reducers*. 
 
+I will now *extrac* other `action` *Creators* from the Components 
+and I see that I have a `SET_VISIBILITY_FILTER` in a `dispatch` here 
+[*in the `mapDispatchToLinkProps` method*] 
+so I will change this to call the `setVisiblityFilter` 
+`action` *Creator* with the `ownProps.filter` as the argument 
+and it's going to `return` the `action` 
+that needs to be `dispatched` 
+so I'm declaring the `setVisibilityFilter` function 
+this is what I call an `action` *Creator* because 
+it takes the arguments *about* the `action` 
+and it returns the `action` `Object` 
+with the `type: 'SET_VISIBILITY_FILTER'` 
+and the `filter` its' self. 
 
+```js
+cosnt setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter // implied value from argument
+  }
+}
+```
+
+You might think that this kind of code is "*boiler plate*" 
+and you would rather `dispatch` the `action` in-line 
+inside the Component 
+however don't *underestimate* how `action` *Creators* 
+*document* your software because they tell your *team* 
+what kinds of *actions* the Components can `dispatch` 
+and this kind of information can be *invaluable* 
+in *large* applications. 
+
+I will now scroll down to the *last* place where I call `dispatch` 
+with an *in-line* `action` `Object` 
+[*the `mapDispatchToTodoListProps` function*]
+and I will *extract* that to add `toggleTodo` `action` *Creator* 
+to which I pass the `id` of the `todo` as the argument. 
+
+I'm now scrolling up to my `action` *Creators* 
+and I will add a new one that I call `toggleTodo` 
+it accepts the `id` as the argument 
+and it returns the `action` with the `type: 'TOGGLE_TODO'`
+and this `id`:
+
+```js
+const toggleTodo = (id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    id // inferred value from argument
+  };
+};
+```
+
+Lets take a moment to consider how *convenient* it is 
+to have all the `action` Creators in a single place 
+so that I can use them from Components and Tests 
+without worrying about the *actions* internal structure. 
+
+Note that whether you use `action` Creators or *not* 
+the *data flow* is *exactly* the same 
+because I just calle the `action` Creator to get 
+the `action` `Object` and then I call `dispatch` 
+just like I did *before* passing the `action`. 
 
 
 <br />

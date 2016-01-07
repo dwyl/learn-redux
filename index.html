@@ -72,6 +72,32 @@ const visibilityFilter = (
 
 
 const { combineReducers } = Redux;
+const { Provider }        = ReactRedux;
+const { createStore }     = Redux;
+
+// Action Creators
+let nextTodoId = 0;
+const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text // implied value from function argument.
+  }
+}
+
+const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter // implied value from argument
+  }
+}
+
+const toggleTodo = (id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    id // inferred value from argument
+  }
+}
 
 const todoApp = combineReducers({
   todos,
@@ -188,15 +214,6 @@ const TodoList = ({
   </ul> 
 );
 
-let nextTodoId = 0;
-const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text // implied value from function argument.
-  }
-}
-
 let AddTodo = ({ dispatch }) => {
   let input;
 
@@ -251,10 +268,7 @@ const mapStateToTodoListProps = (state) => {
 const mapDispatchToTodoListProps = (dispatch) => {
   return { 
     onTodoClick: (id) => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        id
-      })
+      dispatch(toggleTodo(id));
     }
   };
 }
@@ -271,8 +285,6 @@ const TodoApp = () => (
   </div>
 );
 
-const { Provider }    = ReactRedux;
-const { createStore } = Redux;
 
 ReactDOM.render( 
   <Provider store={createStore(todoApp)}>
