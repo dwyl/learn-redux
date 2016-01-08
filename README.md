@@ -92,7 +92,7 @@ The *fastest* way to get started with Redux is to watch the video tutorials
 recoded by Dan Abramov (Creator of Redux) for
 [egghead.io](https://egghead.io/series/getting-started-with-redux)
 
-We have made a set of *comprehensive* notes:
+We have made a set of ***comprehensive notes***:
 [egghead.io_**video_tutorial**_***notes***.md](https://github.com/nelsonic/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
 
 If you have the notes open while you are watching the videos you can
