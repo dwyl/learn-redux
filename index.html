@@ -19,6 +19,10 @@
 
 'use strict'; // got: http://stackoverflow.com/q/33001246/1148249 without this
 
+const { createStore }       = Redux;
+const { combineReducers }   = Redux;
+const { Provider, connect } = ReactRedux;
+
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -70,11 +74,6 @@ const visibilityFilter = (
   }
 };
 
-
-const { combineReducers } = Redux;
-const { Provider }        = ReactRedux;
-const { createStore }     = Redux;
-
 // Action Creators
 let nextTodoId = 0;
 const addTodo = (text) => {
@@ -96,16 +95,15 @@ const toggleTodo = (id) => {
   return {
     type: 'TOGGLE_TODO',
     id // inferred value from argument
-  }
-}
+  };
+};
 
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
 
-const { Component } = React;
-const { connect } = ReactRedux;
+
 
 const Link = ({
   active,
