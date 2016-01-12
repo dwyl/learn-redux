@@ -2,22 +2,31 @@
 
 # Learn Redux
 
-Learn how to use Redux to write Predictable / Testable web apps.
+Redux simplifies writing **well-structured**, ***predictable***, ***testable*** & ***maintainable*** JavaScript Web Apps.
 
-> Note: these notes are aimed at people who already have "***intermediate***" ***JavaScript experience***.  
-> If you are just starting out on your programming journey, we recommend you read:  
-> [https://github.com/nelsonic/***learn-javascript***](https://github.com/nelsonic/learn-javascript)
+> **Note**: these notes are aimed at people who already have "***intermediate***" ***JavaScript experience***. 
+> e.g. you have already built a couple of small apps without 
+> using a framework or using an older more complex library like Ember, Angular, Flux or Backbone. 
+> If you are just *starting* out on your web programming journey, 
+> we *recommend* you checkout:  
+> [https://github.com/dwyl/start-here#**javascript**](https://github.com/dwyl/start-here#javascript)
 > ***first***
 and *then* come *back* here!  
 > :star: this GitHub repo so you don't forget where it is!
+> We have tried to make the example in this tutorial 
+> as ***beginner-friendly*** as *possible*, 
+> but if anything is unclear please let us know so we can help!
 
 
 ## Why?
 
-Redux is a *very* ***elegant*** way 
-to **structure** JavaScript web applications.  
-While there is an ***initial learning curve*** we feel the *simplicity*
+**Redux** is an ***elegant*** way 
+to ***structure*** **JavaScript web applications**.  
+While there is an ***initial learning curve*** 
+we feel the *simplicity*
 of the *single* `store` (*snapshot of your app's state*) 
+and applying changes to your app 
+by *dispatching* succinct *functional* ***actions*** 
 offers a ***significant***
 **benefit** over other ways of organising your code.
 
@@ -37,6 +46,13 @@ Just keep reading this page and (*hopefully*) everything will become clear.
 > _If **anything** is **unclear**, 
 **please tell us** where you are stuck **so we can help**_!
 [![Join the chat at https://gitter.im/dwyl/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dwyl/chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+
+### React ?
+
+React is *the* most popular "*view*" library of 2015 
+
+### Immutable.js ?
 
 
 <sup>1</sup> <small> ***Redux*** *the JavaScript Library should not to be confused with the Redux Framework [PHP framework](https://github.com/reduxframework/redux-framework)  
