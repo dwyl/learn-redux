@@ -36,6 +36,7 @@ Just keep reading this page and (*hopefully*) everything will become clear.
 
 > _If **anything** is **unclear**, 
 **please tell us** where you are stuck **so we can help**_!
+[![Join the chat at https://gitter.im/dwyl/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dwyl/chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 <sup>1</sup> <small> ***Redux*** *the JavaScript Library should not to be confused with the Redux Framework [PHP framework](https://github.com/reduxframework/redux-framework)  
