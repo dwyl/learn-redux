@@ -1,4 +1,4 @@
-![learn-redux-header](https://cloud.githubusercontent.com/assets/194400/12205940/0c75bc34-b636-11e5-91b5-1e9a3a104400.png)
+![learn-redux-header](https://cloud.githubusercontent.com/assets/194400/12328626/12f025de-bad4-11e5-9ebd-c0994b8f2f24.png)
 
 # Learn Redux
 
@@ -20,8 +20,18 @@ and *then* come *back* here!
 
 ## Why?
 
+![xkcd code quality](http://imgs.xkcd.com/comics/code_quality.png)
+
+JavaScript web applications can become messy if 
+they don't have a *clear* organisation from the beginning.
+
 **Redux** is an ***elegant*** way 
-to ***structure*** **JavaScript web applications**.  
+to ***structure*** your **JavaScript web applications**.  
+
+Having built *many* web applications over the past few years
+using *all* the most popular frameworks/libraries, we were *delighted* 
+to discover Redux's are *confident* 
+
 While there is an ***initial learning curve*** 
 we feel the *simplicity*
 of the *single* `store` (*snapshot of your app's state*) 
@@ -29,6 +39,9 @@ and applying changes to your app
 by *dispatching* succinct *functional* ***actions*** 
 offers a ***significant***
 **benefit** over other ways of organising your code.
+
+Redux offers a balance of performance and structure,
+if you need blazing fast, try 
 
 > *Please, don't take our word for it,
 skim through the notes we have made and*
