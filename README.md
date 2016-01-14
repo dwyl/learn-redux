@@ -30,7 +30,7 @@ to ***structure*** your **JavaScript web applications**.
 
 Having built *many* web applications over the past few years
 using *all* the most popular frameworks/libraries, we were *delighted* 
-to discover Redux's are *confident* 
+to discover Redux's *refreshingly simple approach*. 
 
 While there is an ***initial learning curve*** 
 we feel the *simplicity*
@@ -39,9 +39,6 @@ and applying changes to your app
 by *dispatching* succinct *functional* ***actions*** 
 offers a ***significant***
 **benefit** over other ways of organising your code.
-
-Redux offers a balance of performance and structure,
-if you need blazing fast, try 
 
 > *Please, don't take our word for it,
 skim through the notes we have made and*
@@ -63,9 +60,17 @@ Just keep reading this page and (*hopefully*) everything will become clear.
 
 ### React ?
 
-React is *the* most popular "*view*" library of 2015 
+React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015.
+While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React.
+You can/should use Redux to *organise* your application and ***optionally*** use React 
+to `render` your views.
 
 ### Immutable.js ?
+
+The *convention* in Redux is for `state` to be 
+[`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
+
+
 
 
 <sup>1</sup> <small> ***Redux*** *the JavaScript Library should not to be confused with the Redux Framework [PHP framework](https://github.com/reduxframework/redux-framework)  
