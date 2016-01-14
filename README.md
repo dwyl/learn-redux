@@ -2,41 +2,38 @@
 
 # Learn Redux
 
-Redux simplifies writing **well-structured**, ***predictable***, ***testable*** & ***maintainable*** JavaScript Web Apps.
+Redux simplifies writing **well-structured**, ***predictable***, ***testable*** & ***maintainable*** JavaScript Web Applications.
 
-> **Note**: these notes are aimed at people who already have "***intermediate***" ***JavaScript experience***. 
-> e.g. you have already built a couple of small apps without 
-> using a framework or using an older more complex library like Ember, Angular, Flux or Backbone. 
-> If you are just *starting* out on your web programming journey, 
-> we *recommend* you checkout:  
+> **Note**: this guide is aimed at people who already have "***intermediate***" ***JavaScript experience***.
+> e.g. you have already built a couple of small apps without
+> using a framework and/or have used an older more complex library such as Angular, Ember, Backbone or Flux.
+> If you are just *starting* out on your web programming journey,
+> we *recommend* you checkout:
 > [https://github.com/dwyl/start-here#**javascript**](https://github.com/dwyl/start-here#javascript)
 > ***first***
 and *then* come *back* here!  
-> :star: this GitHub repo so you don't forget where it is!
-> We have tried to make the example in this tutorial 
-> as ***beginner-friendly*** as *possible*, 
-> but if anything is unclear please let us know so we can help!
+> Bookmark/Star this GitHub repository so you don't forget where it is!
 
 
 ## Why?
 
 ![xkcd code quality](http://imgs.xkcd.com/comics/code_quality.png)
 
-JavaScript web applications can become messy if 
+JavaScript web applications can become messy if
 they don't have a *clear* organisation from the beginning.
 
-**Redux** is an ***elegant*** way 
+**Redux** is an ***elegant*** way
 to ***structure*** your **JavaScript web applications**.  
 
 Having built *many* web applications over the past few years
-using *all* the most popular frameworks/libraries, we were *delighted* 
-to discover Redux's *refreshingly simple approach*. 
+using *all* the most popular frameworks/libraries, we were *delighted*
+to discover Redux's *refreshingly simple approach*.
 
-While there is an ***initial learning curve*** 
+While there is an ***initial learning curve***
 we feel the *simplicity*
-of the *single* `store` (*snapshot of your app's state*) 
-and applying changes to your app 
-by *dispatching* succinct *functional* ***actions*** 
+of the *single* `store` (*snapshot of your app's state*)
+and applying changes to your app
+by *dispatching* succinct *functional* ***actions***
 offers a ***significant***
 **benefit** over other ways of organising your code.
 
@@ -51,24 +48,31 @@ Redux<sup>1</sup> *borrows the* ***reducer pattern*** *from*
 which simplifies writing web apps.  
 If you have *never heard of Elm*, ***don't worry***,
 you *don't need* to go read another doc before you can understand this...
-Just keep reading this page and (*hopefully*) everything will become clear.
+Just keep reading and (*hopefully*) everything will become clear.
 
-> _If **anything** is **unclear**, 
+> _If **anything** is **unclear**,
 **please tell us** where you are stuck **so we can help**_!
 [![Join the chat at https://gitter.im/dwyl/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dwyl/chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-### React ?
+### (Do I *Need* to use) React ?
 
-React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015.
-While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React.
-You can/should use Redux to *organise* your application and ***optionally*** use React 
+**Short Answer**: ***No***, Redux is can be used
+While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from Lesson 8 onwards. Hopefully you can see where the
+
+React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
+and the pace of its' adoption looks set to *continue* in 2016 ... so it won't *hurt* you to know *how* to use React.
+We've made some notes on this: https://github.com/dwyl/learn-react
+
+You can/should use Redux to *organise* your application and ***optionally*** use React
 to `render` your views.
 
-### Immutable.js ?
+### (*Should I use*) Immutable.js ?
 
-The *convention* in Redux is for `state` to be 
+The *convention* in Redux is for the `state` to be
 [`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
+if you want to understand why this is a *good* thing, watch
+[Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
 
 
 
@@ -120,6 +124,9 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 
 ## How?
 
+> We have tried to make the example in this tutorial
+> as ***beginner-friendly*** as *possible*,
+> but if anything is unclear please let us know so we can help!
 
 ### *Video Tutorials* by Dan Abramov (*the Creator of Redux*)
 
@@ -128,13 +135,13 @@ recoded by Dan Abramov (Creator of Redux) for
 [egghead.io](https://egghead.io/series/getting-started-with-redux)
 
 We have made a set of ***comprehensive notes***:
-[egghead.io_**video_tutorial**_***notes***.md](https://github.com/nelsonic/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
+[egghead.io_**video_tutorial**_***notes***.md](https://github.com/dwyl/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
 
 If you have the notes open while you are watching the videos you can
 go a *lot* faster.  
 
 *Please* give feedback and suggest improvements by creating issues on GitHub:
-https://github.com/nelsonic/learn-redux/issues
+https://github.com/dwyl/learn-redux/issues
 *Thanks*!
 
 
@@ -151,33 +158,52 @@ https://github.com/nelsonic/learn-redux/issues
 on The **Changelog** Podcast: https://changelog.com/187 -
 Good history and insight into his motivations for learning to program
 and the journey that lead him to writing Redux.
++ Smart and Dumb Components by [Dan Abramov](https://github.com/gaearon)
+https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 + Redux: Simplifying Application State in JavaScript -
 https://youtu.be/okdC5gcD-dM (*good overview by* [**Tim Griesser**](https://github.com/tgriesser) December 2015)
++ Redux best practices by [Will Becker](https://github.com/wbecker) https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e
 + Full-Stack Redux Tutorial (Redux, React & Immutable.js) by
 [@teropa](https://github.com/teropa)
 http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
 + Single source of truth: https://en.wikipedia.org/wiki/Single_Source_of_Truth
 + Redux Undo: https://github.com/omnidan/redux-undo
 
+### Architecture
+
+If you are building a React-based app
+you will most likely be using [react-router](https://github.com/rackt/react-router)
+to manage the routing of your client-side app ...
+React-Router manages an important piece of your application state:
+the URL. If you are using redux, you want your app state to fully
+represent your UI; if you snapshotted the app state,
+you should be able to load it up later and see the same thing.
+
++ Keep react-router and redux in sync: https://github.com/rackt/redux-simple-router
++ A Simple Way to Route with Redux (November 25, 2015) by [James Long @Mozilla](https://github.com/jlongster)
+http://jlongster.com/A-Simple-Way-to-Route-with-Redux
+
+
 
 ## Notes:
 
-At the time of writing, the *minified* version of redux is 
-[**5.4kb**](https://github.com/nelsonic/learn-redux/issues/11#issue-124671091) 
+At the time of writing, the *minified* version of redux is
+[**5.4kb**](https://github.com/dwyl/learn-redux/issues/11#issue-124671091)
 and has
 No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
-## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcomed-brightgreen.svg?style=flat)](https://github.com/nelsonic/learn-redux/issues)
+## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcomed-brightgreen.svg?style=flat)](https://github.com/dwyl/learn-redux/issues)
 
-+ [ ] Explain why ***Unidirectional Data Flow*** is this "better" than bi-directional e.g: Angular.js 
++ [ ] Explain why ***Unidirectional Data Flow*** is this "better" than bi-directional e.g: Angular.js
 
 ## Kudos to Fellow *DWYLers*
 
-> Props to [Rafe](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*   
-> Thanks to [Milo](https://github.com/bananaoomarang) for his 
+> Props to [***Rafe***](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*
+> Thanks to [***Milo***](https://github.com/bananaoomarang) for his
 *fantastic* demo/example: https://github.com/bananaoomarang/isomorphic-redux  
 (*which he has painstakingly kept up-to-date with the latest Redux/React versions!*)  
-> and *love* to [Niki](https://github.com/nikhilaravi) for her 
-*enthusiasm* and *patience* while explaining it all to us ... 
+> and *love* to [***Niki***](https://github.com/nikhilaravi) &
+> [***Jack***](https://github.com/jrans) for their
+> *enthusiasm* and *patience* while explaining it all to us ...
