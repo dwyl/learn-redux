@@ -43,7 +43,7 @@ skim through the notes we have made and*
 
 ## What?
 
-Redux<sup>1</sup> *borrows the* ***reducer pattern*** *from*
+Redux[<sup>1</sup>](https://github.com/dwyl/learn-redux/issues/22) *borrows the* ***reducer pattern*** *from*
 [***Elm*** Architecture](https://github.com/evancz/elm-architecture-tutorial/)
 which simplifies writing web apps.  
 If you have *never heard of Elm*, ***don't worry***,
@@ -69,23 +69,27 @@ to `render` your views.
 
 ### (*Should I use*) Immutable.js ?
 
-The *convention* in Redux is for the `state` to be
+The *convention* in Redux apps is for the `state` to be
 [`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
-if you want to understand why this is a *good* thing, watch
-[Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
-while you are learning Redux ignore **immutable.js**
+this makes your app far more predictable because
+any/all changes to the `state` have to be done via an `action`.
+
+[Immutable.js](https://facebook.github.io/immutable-js/)
+makes the data structures in your application `state`
+more efficient (*in larger apps*) however,
+while you are learning Redux we suggest you ignore **immutable.js**
 as you will have more than enough to master for now.
+
 Once you have published your first app using Redux,
 come back to immutable.js to appreciate how it makes ***large apps***
 run faster. As Lee Byron, the *creator* of Immutable.js states,
 for small apps without much change in `state`, adding Immutable.js
 will actually make your app perform *worse*!
 
+If you want to understand *why* using Immutable.js
+can be a ***good*** thing in ***large apps***, watch
+[Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
 
-
-<sup>1</sup> <small> ***Redux*** *the JavaScript Library should not to be confused with the Redux Framework [PHP framework](https://github.com/reduxframework/redux-framework)  
-... naming collisions are inevitable in the world of code.
-naming things is a [hard problem](http://martinfowler.com/bliki/TwoHardThings.html)*</small>
 
 ### Three Principals
 
@@ -134,19 +138,17 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 > as ***beginner-friendly*** as *possible*,
 > but if anything is unclear please let us know so we can help!
 
-### *Video Tutorials* by Dan Abramov (*the Creator of Redux*)
+### *Introductory Video Tutorials* by Dan Abramov (*the Creator of Redux*)
 
-The *fastest* way to get started with Redux is to watch the video tutorials
-recoded by Dan Abramov (Creator of Redux) for
-[egghead.io](https://egghead.io/series/getting-started-with-redux)
+The *fastest* way to get started learning Redux is to watch the [video tutorials](https://egghead.io/series/getting-started-with-redux)
+recoded by Dan Abramov (Creator of Redux)
 
 We have made a set of ***comprehensive notes***:
-[egghead.io_**video_tutorial**_***notes***.md](https://github.com/dwyl/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)
+[egghead.io_**video_tutorial**_***notes***.md](https://github.com/dwyl/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)  
+(Keep the notes open while you are watching the videos; you can
+go a *lot* faster.)
 
-If you have the notes open while you are watching the videos you can
-go a *lot* faster.  
-
-*Please* give feedback and suggest improvements by creating issues on GitHub:
+> *Please* give feedback and suggest improvements by creating issues on GitHub:
 https://github.com/dwyl/learn-redux/issues
 *Thanks*!
 
