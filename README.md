@@ -73,7 +73,13 @@ The *convention* in Redux is for the `state` to be
 [`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
 if you want to understand why this is a *good* thing, watch
 [Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
-
+while you are learning Redux ignore **immutable.js**
+as you will have more than enough to master for now.
+Once you have published your first app using Redux,
+come back to immutable.js to appreciate how it makes ***large apps***
+run faster. As Lee Byron, the *creator* of Immutable.js states,
+for small apps without much change in `state`, adding Immutable.js
+will actually make your app perform *worse*!
 
 
 
