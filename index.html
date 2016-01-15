@@ -61,7 +61,6 @@ const todos = (state = [], action) => {
   }
 };
 
-
 const visibilityFilter = (
   state = 'SHOW_ALL', // default state
   action
@@ -102,8 +101,6 @@ const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
-
-
 
 const Link = ({
   active,
@@ -282,7 +279,6 @@ const TodoApp = () => (
     <Footer />
   </div>
 );
-
 
 ReactDOM.render( 
   <Provider store={createStore(todoApp)}>
