@@ -57,7 +57,9 @@ Just keep reading and (*hopefully*) everything will become clear.
 
 ### (Do I *Need* to use) React ?
 
-**Short Answer**: ***No***, Redux is can be used
+**Short Answer**: ***No***, Redux does not depend on or require you to use React; the two are separate and can be learned/used independently.
+
+**Longer Answer**:
 While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from Lesson 8 onwards. Hopefully you can see where the
 
 React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
@@ -69,6 +71,9 @@ to `render` your views.
 
 ### (*Should I use*) Immutable.js ?
 
+**Short Answer**: ***Not Yet!***
+
+**Longer Answer**:
 The *convention* in Redux apps is for the `state` to be
 [`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
 this makes your app far more predictable because
@@ -138,7 +143,7 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 > as ***beginner-friendly*** as *possible*,
 > but if anything is unclear please let us know so we can help!
 
-### *Introductory Video Tutorials* by Dan Abramov (*the Creator of Redux*)
+#### *Introductory Video Tutorials* by Dan Abramov (*the Creator of Redux*)
 
 The *fastest* way to get started learning Redux is to watch the [video tutorials](https://egghead.io/series/getting-started-with-redux)
 recoded by Dan Abramov (Creator of Redux)
@@ -151,8 +156,6 @@ go a *lot* faster.)
 > *Please* give feedback and suggest improvements by creating issues on GitHub:
 https://github.com/dwyl/learn-redux/issues
 *Thanks*!
-
-
 
 
 
@@ -170,7 +173,10 @@ and the journey that lead him to writing Redux.
 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 + Redux: Simplifying Application State in JavaScript -
 https://youtu.be/okdC5gcD-dM (*good overview by* [**Tim Griesser**](https://github.com/tgriesser) December 2015)
-+ Redux best practices by [Will Becker](https://github.com/wbecker) https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e
++ ***Ducks*** - a proposal for bundling reducers, action types and actions when using Redux - by [Erik Rasmussen](https://github.com/erikras)
+https://github.com/erikras/ducks-modular-redux
++ Redux ***best practices*** by [Will Becker](https://github.com/wbecker) https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e
++ Starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform: https://github.com/erikras/react-redux-universal-hot-example
 + Full-Stack Redux Tutorial (Redux, React & Immutable.js) by
 [@teropa](https://github.com/teropa)
 http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
@@ -202,7 +208,7 @@ No Dependencies.
 [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
 We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
-## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcomed-brightgreen.svg?style=flat)](https://github.com/dwyl/learn-redux/issues)
+## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/learn-redux/issues)
 
 + [ ] Explain why ***Unidirectional Data Flow*** is this "better" than bi-directional e.g: Angular.js
 
