@@ -60,11 +60,16 @@ Just keep reading and (*hopefully*) everything will become clear.
 **Short Answer**: ***No***, Redux does not depend on or require you to use React; the two are separate and can be learned/used independently.
 
 **Longer Answer**:
-While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from Lesson 8 onwards. Hopefully you can see where the
+While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from **Lesson 8** *onwards*.
 
-React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
-and the pace of its' adoption looks set to *continue* in 2016 ... so it won't *hurt* you to know *how* to use React.
-We've made some notes on this: https://github.com/dwyl/learn-react
+React is a *good* fit for rendering views in a Redux-based app, however there are many other *great* alternative component-based virtual-DOM-enabled view rendering libraries (*#mouth-full*) that work *really* well with Redux; e.g: https://github.com/dekujs/deku
+
+Considering that React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
+and the pace of its' adoption looks set to *continue* in 2016
+... so it won't *hurt* you to know *how* to use React.
+
+We've made some notes to help you get started learning React:
+https://github.com/dwyl/learn-react
 
 You can/should use Redux to *organise* your application and ***optionally*** use React
 to `render` your views.
@@ -121,6 +126,7 @@ as a function which gets applied to the existing store and returns a new version
 
 To change the state tree we use "*actions*" called "*reducers*",
 these are simple functions which perform a *single* action.
+
 
 
 <br />

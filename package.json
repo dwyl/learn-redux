@@ -1,6 +1,6 @@
 {
   "name": "learn-redux",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "redux is logical. learn it.",
   "main": "index.html",
   "scripts": {
