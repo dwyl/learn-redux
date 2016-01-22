@@ -158,14 +158,15 @@ you should be able to load it up later and see the same thing.
 + A Simple Way to Route with Redux (November 25, 2015) by [James Long @Mozilla](https://github.com/jlongster)
 http://jlongster.com/A-Simple-Way-to-Route-with-Redux
 
+### Size (*Matters*)
 
-## Notes:
-
-At the time of writing, the *minified* version of redux is
+At the time of writing, the *minified* version of Redux is
 [**5.4kb**](https://github.com/dwyl/learn-redux/issues/11#issue-124671091)
-and has
-No Dependencies.
-[![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
+which is even *smaller* when GZipped!  
+
+### No Dependencies [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
+
+Redux has No Dependencies.  
 We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
 ## Frequently Asked Questions (*FAQ*)
