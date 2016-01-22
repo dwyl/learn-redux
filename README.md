@@ -159,7 +159,6 @@ you should be able to load it up later and see the same thing.
 http://jlongster.com/A-Simple-Way-to-Route-with-Redux
 
 
-
 ## Notes:
 
 At the time of writing, the *minified* version of redux is
@@ -223,10 +222,19 @@ can be a ***good*** thing in ***large apps***, watch
 
 ## Kudos to Fellow *DWYLers*
 
-> Props to [***Rafe***](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*
+> Props to [***Rafe***](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*  
 > Thanks to [***Milo***](https://github.com/bananaoomarang) for his
 *fantastic* demo/example: https://github.com/bananaoomarang/isomorphic-redux  
 (*which he has painstakingly kept up-to-date with the latest Redux/React versions!*)  
 > and *love* to [***Niki***](https://github.com/nikhilaravi) &
 > [***Jack***](https://github.com/jrans) for their
 > *enthusiasm* and *patience* while explaining it all to us ...
+
+## *Thanks* for Learning with Us!
+
+If you found our notes useful, please share them with others by
+starring this repo and/or re-tweeting:
+
+[![dan_abramov_retweeted](https://cloud.githubusercontent.com/assets/194400/12523324/0ee0ac2c-c14e-11e5-9e6c-de4717fa474c.png)](https://twitter.com/dwylhq/status/687703493264732160)
+
+> https://twitter.com/dwylhq/status/687703493264732160
