@@ -55,51 +55,6 @@ Just keep reading and (*hopefully*) everything will become clear.
 [![Join the chat at https://gitter.im/dwyl/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dwyl/chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-### (Do I *Need* to use) React ?
-
-**Short Answer**: ***No***, Redux does not depend on or require you to use React; the two are separate and can be learned/used independently.
-
-**Longer Answer**:
-While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from **Lesson 8** *onwards*.
-
-React is a *good* fit for rendering views in a Redux-based app, however there are many other *great* alternative component-based virtual-DOM-enabled view rendering libraries (*#mouth-full*) that work *really* well with Redux; e.g: https://github.com/dekujs/deku
-
-Considering that React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
-and the pace of its' adoption looks set to *continue* in 2016
-... so it won't *hurt* you to know *how* to use React.
-
-We've made some notes to help you get started learning React:
-https://github.com/dwyl/learn-react
-
-You can/should use Redux to *organise* your application and ***optionally*** use React
-to `render` your views.
-
-### (*Should I use*) Immutable.js ?
-
-**Short Answer**: ***Not Yet!***
-
-**Longer Answer**:
-The *convention* in Redux apps is for the `state` to be
-[`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
-this makes your app far more predictable because
-any/all changes to the `state` have to be done via an `action`.
-
-[Immutable.js](https://facebook.github.io/immutable-js/)
-makes the data structures in your application `state`
-more efficient (*in larger apps*) however,
-while you are learning Redux we suggest you ignore **immutable.js**
-as you will have more than enough to master for now.
-
-Once you have published your first app using Redux,
-come back to immutable.js to appreciate how it makes ***large apps***
-run faster. As Lee Byron, the *creator* of Immutable.js states,
-for small apps without much change in `state`, adding Immutable.js
-will actually make your app perform *worse*!
-
-If you want to understand *why* using Immutable.js
-can be a ***good*** thing in ***large apps***, watch
-[Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
-
 
 ### Three Principals
 
@@ -203,16 +158,64 @@ you should be able to load it up later and see the same thing.
 + A Simple Way to Route with Redux (November 25, 2015) by [James Long @Mozilla](https://github.com/jlongster)
 http://jlongster.com/A-Simple-Way-to-Route-with-Redux
 
+### Size (*Matters*)
 
-
-## Notes:
-
-At the time of writing, the *minified* version of redux is
+At the time of writing, the *minified* version of Redux is
 [**5.4kb**](https://github.com/dwyl/learn-redux/issues/11#issue-124671091)
-and has
-No Dependencies.
-[![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
+which is even *smaller* when GZipped!  
+
+### No Dependencies [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
+
+Redux has No Dependencies.  
 We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
+
+## Frequently Asked Questions (*FAQ*)
+
+### (Do I *Need* to use) React ?
+
+**Short Answer**: ***No***, Redux does not depend on or require you to use React; the two are separate and can be learned/used independently.
+
+**Longer Answer**:
+While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from **Lesson 8** *onwards*.
+
+React is a *good* fit for rendering views in a Redux-based app, however there are many other *great* alternative component-based virtual-DOM-enabled view rendering libraries (*#mouth-full*) that work *really* well with Redux; e.g: https://github.com/dekujs/deku
+
+Considering that React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
+and the pace of its' adoption looks set to *continue* in 2016
+... so it won't *hurt* you to know *how* to use React.
+
+We've made some notes to help you get started learning React:
+https://github.com/dwyl/learn-react
+
+You can/should use Redux to *organise* your application and ***optionally*** use React
+to `render` your views.
+
+### (*Should I use*) Immutable.js ?
+
+**Short Answer**: ***Not Yet!***
+
+**Longer Answer**:
+The *convention* in Redux apps is for the `state` to be
+[`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
+this makes your app far more predictable because
+any/all changes to the `state` have to be done via an `action`.
+
+[Immutable.js](https://facebook.github.io/immutable-js/)
+makes the data structures in your application `state`
+more efficient (*in larger apps*) however,
+while you are learning Redux we suggest you ignore **immutable.js**
+as you will have more than enough to master for now.
+
+Once you have published your first app using Redux,
+come back to immutable.js to appreciate how it makes ***large apps***
+run faster. As Lee Byron, the *creator* of Immutable.js states,
+for small apps without much change in `state`, adding Immutable.js
+will actually make your app perform *worse*!
+
+If you want to understand *why* using Immutable.js
+can be a ***good*** thing in ***large apps***, watch
+[Lee Byron's intro to Immutable](https://www.youtube.com/watch?v=kbnUIhsX2ds)
+
 
 ## Todo: [![pull requests welcomed!](https://img.shields.io/badge/pull%20requests-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/learn-redux/issues)
 
@@ -220,10 +223,19 @@ We *like* this. It means the Library is *self-contained* ("*stand-alone*") and y
 
 ## Kudos to Fellow *DWYLers*
 
-> Props to [***Rafe***](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*
+> Props to [***Rafe***](https://github.com/rjmk) for telling us about Redux and Elm: https://github.com/rjmk/reducks *before* it was *cool*  
 > Thanks to [***Milo***](https://github.com/bananaoomarang) for his
 *fantastic* demo/example: https://github.com/bananaoomarang/isomorphic-redux  
 (*which he has painstakingly kept up-to-date with the latest Redux/React versions!*)  
 > and *love* to [***Niki***](https://github.com/nikhilaravi) &
 > [***Jack***](https://github.com/jrans) for their
 > *enthusiasm* and *patience* while explaining it all to us ...
+
+## *Thanks* for Learning with Us!
+
+If you found our notes useful, please share them with others by
+starring this repo and/or re-tweeting:
+
+[![dan_abramov_retweeted](https://cloud.githubusercontent.com/assets/194400/12523324/0ee0ac2c-c14e-11e5-9e6c-de4717fa474c.png)](https://twitter.com/dwylhq/status/687703493264732160)
+
+> https://twitter.com/dwylhq/status/687703493264732160
