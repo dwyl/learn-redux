@@ -26,7 +26,7 @@ Just like the state is the minimal representation of data in your app,
 the action is the minimal representation of the change to that data.
 The only requirement of an action is that it has a `type` property
 (*this more a description for your action*). The convention is to use a `String`
-because they are serialisable (*i.e. easy to `JSON.stringify`*)
+because they are serializable (*i.e. easy to `JSON.stringify`*)
 
 > "*Any data that gets into your Redux Application gets there by actions*"
 
@@ -47,7 +47,7 @@ The functions you write in redux need to be pure.
 > Video: https://egghead.io/lessons/javascript-redux-the-reducer-function
 
 The UI/View layer of an application is most predictable when it is described
-as a pure function of the application state. Pioneered by ~~React~~ [Ractive](https://github.com/ractivejs/ractive) and now addopted by several other
+as a pure function of the application state. Pioneered by ~~React~~ [Ractive](https://github.com/ractivejs/ractive) and now adopted by several other
 frameworks, Redux compliments this approach with another idea:
 the state mutations in your app need to be described as a pure function
 that takes the previous state and the action being "dispatched" (*performed*)
@@ -168,7 +168,7 @@ Another issue is that while the reducer is in control of the application state,
 example that would be zero.
 
 The convention in Redux is that if the reducer receives `undefined` as the
-`state` argument, it *must* `return` what it considers to be the inital
+`state` argument, it *must* `return` what it considers to be the initial
 `state` of the application. In this case it will be zero.
 
 > *Code for*
@@ -248,14 +248,14 @@ video 5, go back and watch it, and try writing/running the code!
 
 Dan starts off by showing how to include Redux (*from CDN JS*)
 in a client-side app so we can start using the methods.
-This is not the *recommended* way of loading Redux but works fine for this
+This is not the *recommended* way of loading Redux, but works fine for this
 example/demo.
 
 "*In real applications I suggest you use npm and a module bundler like
 webpack or browserify*".
 
 
-In this tutorial we are using a single function from Redux called `createStore`
+In this tutorial we are using a single function from Redux called `createStore`.
 
 Using **ES6** [**destructuring assignment**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 syntax to extract the `createStore` method from Redux:
@@ -317,7 +317,7 @@ The code at the end of video #6 looks like this: (*explanatory comments added*)
       const render = () => { // render function updates DOM with counter value
         document.body.innerText = store.getState();
       }
-      store.subscribe(render); // all actions re-redner the DOM
+      store.subscribe(render); // all actions re-render the DOM
       render(); // render the initial state of the page/app
 
       // listen for click event on the whole document (click anywhere on the page)
@@ -376,7 +376,7 @@ And after the state is updated we need to notify every change listener by callin
 1:44 - There is an important missing piece here: we have not provided a way
 to unsubscribe a listener. But instead of adding a dedicated `unsubscribe` method,
 we will just return a function from the subscribe method that removes this listener from the `listeners` array.  
-2:03 - Finally by the time the store is returned we want it to have the inital
+2:03 - Finally by the time the store is returned we want it to have the initial
 state populated. so we are going to dispatch a dummy action just to get the
 reducer to return the initial value.  
 2:18 - this implementation of the Redux store is (*apart from a few minor details
@@ -553,7 +553,7 @@ const addCounter = (list) => {
 Now the tests pass without *mutations*.
 
 And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
-to write the code in a more consise way:
+to write the code in a more concise way:
 
 ```js
 const addCounter = (list) => {
@@ -606,7 +606,7 @@ const removeCounter = (list, index) => {
 
 Finally, instead of writing it as a method chain with `concat` calls, 
 I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
-to write it more concicely:
+to write it more concisely:
 
 ```js
 const removeCounter = (list, index) => {
@@ -666,7 +666,7 @@ We want to take a slice *before* the `index`
 and `concat` it with a single item `Array` with a *new* value
 and then `concat` it with the *rest* of the original `Array`.
 
-Fincally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+Finally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
 we can spread over the left part of the `Array`
 *specify* the *new* item,
 and then *spread* over the right part of the *original* `Array`
@@ -770,14 +770,14 @@ method which is *new* to **ES6**
 and it lets you `assign` properties of *several* objects onto the target object. Note how the `Object.assign` order corresponds to that of the JavaScript assignment operator. 
 The left (*first*) argument is the one who's properties 
 are going to be assigned, so its going to be *mutated*.
-This is why we are passing an *empty* `Object` as the *frist* argument
+This is why we are passing an *empty* `Object` as the *first* argument
 so we don't *mutate* any *existing* data.
 Every further argument to `Object.assign` will be considered a 
 "*source*" `Object` who's properties will be copied to the target object.
 
-It is ***important*** that if several *sources* specifiy 
+It is ***important*** that if several *sources* specify 
 different values for the *same* property, the ***last*** one "*wins*".
-and this is what we use to *overwite* the `completed` field 
+and this is what we use to *overwrite* the `completed` field 
 despite what the original object says.
 
 ```js
@@ -795,11 +795,11 @@ all the Browsers (*specifically not supported in Internet Explorer*).
 
 ![object assign-browser-compatibility](https://cloud.githubusercontent.com/assets/194400/12080810/6fbc745c-b25f-11e5-9e58-ed860ea2872a.png)
 
-You should use a "*pollyfill*" either the one that ships with ***Babel***
-or a *standalone* pollyfill to use it (`Object.assign`) without risking
+You should use a "*polyfill*" either the one that ships with ***Babel***
+or a *standalone* polyfill to use it (`Object.assign`) without risking
 crashing your website.
 
-Another option that does not require a pollyfill is use 
+Another option that does not require a polyfill is use 
 the new [`Object` ***spread*** operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 which is ***not part of ES6*** however it is *proposed* for **ES7**
 it is "*fairly popular*" and it is *enabled* in Babel 
@@ -836,7 +836,7 @@ who's state is described as an array of Todos.
 Just to remind you what a reducer is: its a "*pure function*" 
 you write to implement the update logic of your application.
 That is how the next state is calculated given the current state
-and the action being disptched.
+and the action being dispatched.
 
 Before writing a reducer I want a way of knowing whether its code is correct. So I'm starting by writing a test for it:
 
@@ -883,7 +883,7 @@ and like `stateBefore` it is an `Array`, but this time it has
 a *single element* representing the Todo that was just added;
 so it has the same `id` and `text` as the action `Object`.
 and it *also* has an *additional* field called `completed` 
-that I want to be *initialised* to be `false`
+that I want to be *initialized* to be `false`
 
 We want to make sure that the reducer is a "*pure function*",
 so I am calling `deepFreeze` both on the `stateBefore`
@@ -1133,7 +1133,7 @@ case 'TOGGLE_TODO':
     var keys = Object.keys(todo); // IE9+
     var toggled = {};             // new object to avoid mutation
     keys.forEach(function(index) {
-      toggled.index = todo.index; // copy all properties/valud of todo
+      toggled.index = todo.index; // copy all properties/values of todo
     });
     toggled.completed = !todo.completed
     return toggled;
@@ -1262,9 +1262,9 @@ its merely been separated to simplify the *main* reducer.
 
 #### 14. Reducer Composition with Objects
 
-Tip: This tutorial builds apon the code written in Video/Lesson 13.
+Tip: This tutorial builds upon the code written in Video/Lesson 13.
 If you skipped it, or left a break between watching the videos,
-go back and re-aquaint yourself before proceeding.
+go back and re-acquaint yourself before proceeding.
 
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-objects
 
@@ -1272,7 +1272,7 @@ In the *previous* lesson we established
 the *pattern* of "*Reducer Composition"
 where one reducer can be called by another reducer
 to update items inside an array. 
-If we creat a `store` with this reducer and log its `state` 
+If we create a `store` with this reducer and log its `state` 
 we will find that the *initial* `state` of it
 is an *empty* `Array` of todos 
 and if we *dispatch* an `ADD_TODO` `action` 
@@ -1375,7 +1375,7 @@ const todoApp = (state = {}, action) => {
 ```
 
 To *store* this *new* information, I don't need to *change* 
-the *exisiting* reducers, I will use the Reducer Composition Pattern
+the *existing* reducers, I will use the Reducer Composition Pattern
 and create a *new* reducer that *calls* the existing reducers 
 to manage parts of its state 
 and combines the results in a *single* `state` `Object`
@@ -1401,7 +1401,7 @@ the *initial* `state` of the *independent* reducers
 and any time an `action` comes in those reducers handle the action 
 *independently* this pattern helps *scale* Redux development
 because different people on the team
-can work on differnt reducers handling the *same* actions 
+can work on different reducers handling the *same* actions 
 without running into each other and causing merge conflicts.
 
 ```js
@@ -1416,7 +1416,7 @@ console.log(store.getState());
 console.log('--------------');
 ```
 
-> Note: This `action` is merely setting the `visibilityFilter` *propert*
+> Note: This `action` is merely setting the `visibilityFilter` *property*
 of the `store` `Object`
 
 ![console-log-output-for-set_visibility_filter](https://cloud.githubusercontent.com/assets/194400/12123718/753f2a92-b3da-11e5-982a-17be0a075f1b.png)
@@ -1496,7 +1496,7 @@ commented out below:
 *Finally* I will establish a *useful* convention:
 I will *always* name my reducers after the `state` keys they manage
 since the *key* names and the *value* names are now the *same*
-I can *omit* the *values* thanks to the **ES6** Object Litteral 
+I can *omit* the *values* thanks to the **ES6** Object Literal 
 ***Shorthand Notation***:
 
 ```js
@@ -1515,17 +1515,17 @@ by using the `combineReducers` utility function.
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/128196f61fe5d0e752b16625e8676961f74858ff/index.html#L62-L66)
 
 
-##### Read more about ES6 Object Litteral *Shorthand* Notation
+##### Read more about ES6 Object Literal *Shorthand* Notation
 
 + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015
 + Good examples: http://eslint.org/docs/rules/object-shorthand.html (*by Nicholas C. Zakas*)
 
-> ***NOTE***: as *usual*, while **ES6** Object Litteral *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
+> ***NOTE***: as *usual*, while **ES6** Object Literal *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
 
 ![es6-object-literal-shorthand-notation](https://cloud.githubusercontent.com/assets/194400/12127256/0d4190d8-b3ee-11e5-9191-8c4a532ad59f.png)
 
 > *I have a* ***strong bias*** *towards* ***explicitly*** 
-*typing the* ***Values*** *in an `Object` litteral for clarity*.
+*typing the* ***Values*** *in an `Object` literal for clarity*.
 *But given the* ***naming convention*** *in Redux*,
 *its pretty safe to omit them in this case*.
 
@@ -1596,12 +1596,12 @@ who's values are the reducer functions
 and keys are the `state` fields they manage
 inside the *generated* reducer I'm retrieving all the keys 
 of the reducers I passed to `combineReducers` which is 
-an `Array` of `Strings` (*spcifically*) 
+an `Array` of `Strings` (*specifically*) 
 `todos` and `visibilityFilter` (*in our example*).
 I'm starting with an *empty* `Object` for my `nextState`
 and I'm using the `Reduce` operation over these `keys` 
 to fill it *gradually*.
-Notice that I am *mutating* the `nextState` `Object` on every itteration
+Notice that I am *mutating* the `nextState` `Object` on every iteration
 this is not a problem because it is an `Object` I created 
 *inside* the reducer it is not something passed from *outside*
 so reducer stays a "*pure*" function.
@@ -1618,7 +1618,7 @@ and save the result in the `nextState` by the same `key`
 
 *Finally* we use the `Array.reduce` operation (*method*) 
 with the *empty* `Object` as the *initial* `nextState` 
-that is being filled on every itteration 
+that is being filled on every iteration 
 until it is the return value of the whole `.reduce` operation
 
 In this lesson you learned how to implement the `combineReducers`
@@ -1712,7 +1712,7 @@ and the `id` I need to specify a sequential `id`
 so this is why I'm declaring a *global* variable called `nextTodoId`
 and I'm going to keep incrementing it.
 so every time its going to emit (*dispatch an `action` with*) a *new* `id` 
-and *finally* I aslo want to display a *list* of the todos
+and *finally* I also want to display a *list* of the todos
 so, *assuming* that I have the todos injected as a `todos` prop
 I will call `.map` and for every `todo` item I'm going to show a `<li>`
 showing the text of that particular todo.
@@ -1977,11 +1977,11 @@ I'm starting by creating a *new* Component,
 a *functional* Component called `FilterLink`
 that user needs to click to switch the *current* visible todos. 
 and the `FilterLink` accepts `filter` prop which is just a `String`
-and the `children` which is the contens of the link. 
+and the `children` which is the content of the link. 
 and its going to be a simple `<a>` ("*anchor*") tag 
 that doesn't really *link* anywhere, 
 its going to `prevent` the navigation when clicked 
-and its going to dispacth and `action` 
+and its going to dispatch and `action` 
 with a `type` `SET_VISIBILITY_FILTER` 
 and passing the `filter` prop 
 so that the reducer knows which filter is being clicked. 
@@ -2025,7 +2025,7 @@ and `SHOW_COMPLETED` which means show the *completed* todos.
 ```
 
 So I'm *copy-pasting* the `FilterLink` 
-and I'm changing the lables 
+and I'm changing the labels 
 and the filters corresponding to it 
 running this code will give me 3 different things
 under the list of todos.
@@ -2173,7 +2173,7 @@ only different in their *predicates*.
 The `return` value is the `Array` of `visibleTodos` and it is used 
 in the `render` function to actually enumerate every `todo`
 and *render* it 
-and the `visibilityFilter` field is also used byt the `FilterLink`
+and the `visibilityFilter` field is also used by the `FilterLink`
 as the `currentFilter` because the `FilterLink` wants to know
 whether its `filter` is the *current* one 
 in order to `render` a `<span>` instead of a link (`<a>` tag). 
@@ -2208,7 +2208,7 @@ I'm declaring the `Todo` Component as a function
 which React 0.14 allows me to do. 
 I'm not *sure* which props its going to have 
 so I will leave them blank for now 
-and I will just *paste* the `<li>` I coppied before. 
+and I will just *paste* the `<li>` I copied before. 
 
 The first thing I am doing is *removing* the special `key` property
 because it's only needed when I am enumerating an `Array` 
@@ -2219,7 +2219,7 @@ Right now I have *hard-coded* that *clicking* a todo always
 causes the `TOGGLE_TODO` `action` 
 and this is perfectly fine to do in your app 
 however I prefer to have a bunch of Components 
-that don't specify any *behaviours* 
+that don't specify any *behaviors* 
 and that are *only* concerned with how things *look* 
 or how they `render` and I call such Components 
 the "*presentational*" Components 
@@ -2236,7 +2236,7 @@ so instead of passing a `todo` `Object`
 I pass `completed` and `text` fields as *separate* props. 
 note: how the `Todo` Component 
 is now a *purely* "*Presentational*" Component 
-and does not specify *any* behaviour 
+and does not specify *any* behavior 
 but it *knows* how to `render` a todo. 
 
 ```js
@@ -2280,7 +2280,7 @@ so `onTodoClick` is another prop for the `TodoList`
 both `Todo` and `TodoList` are "*Presentational*" Components 
 so we need something I call "*Container*" Components 
 to actually pass the data from the `store` 
-and to specify the behaviour
+and to specify the behavior
 
 ```js
 const TodoList = ({
@@ -2344,7 +2344,7 @@ In the previous lesson I extracted the `Todo` and `TodoList`
 Components from the `TodoApp` Component. 
 In this lesson I will continue extracting 
 other "*Presentational*" Components to separate the *looks* 
-from the *behaviour*. 
+from the *behavior*. 
 Now I want to extract the `<input>` and the `<button>`
 into a separate Component called `AddTodo`. 
 I'm declaring `AddTodo` as a "*Functional* Component" 
@@ -2382,7 +2382,7 @@ I can use a *local* variable called `input`
 that I'm going to "*close over*" so that I can write to it 
 in the callback ref and I can read from it in the event handler. 
 Like previously I want it to be a "*Presentational*" Component 
-and not specify behaviour 
+and not specify behavior 
 so I'm just calling a function called `onAddClick` 
 passing the *current* `input` value and I make `onAddClick` a prop 
 so that the Component that *uses* `AddTodo` 
@@ -2477,7 +2477,7 @@ with the `type: 'SET_VISIBILITY_FILTER'` and the `filter` being clicked.
 *have* to be a `Class`, I can turn it into a `function` 
 and I prefer to do that when possible. 
 Instead of `destructuring` the props inside the `render` method
-I am now doing it inside the arugments.
+I am now doing it inside the arguments.
 I can remove now the `destructuring` and I can also remove
 the `render` method declaration 
 the `visibleTodos` are only used in a *single* place 
@@ -2526,7 +2526,7 @@ and it specifies the `onClick` handler as calling `onTodoClick`
 with the `id` of the particular todo 
 the `Todo` Component is defined above 
 and it is also a "*Presentational*" Component 
-so it doesn't specify the behaviour 
+so it doesn't specify the behavior 
 it says that when a `<li>` is *clicked* 
 it should call the `onClick` handler 
 being a "*Presentational*" Component it specifies how the Component *looks* 
@@ -2556,7 +2556,7 @@ the `Footer` delegates handling the *click* of the `FilterLink`
 to its own prop called `onFilterClick`. 
 
 *Finally* the `TodoApp` Component being the "*Container*" Component 
-in our application specifies the *behaviour* 
+in our application specifies the *behavior* 
 which in this case means that when the `FilterLink` is *clicked* 
 it should dispatch and `action` with the `action` 
 `type: 'SET_VISIBILITY_FILTER` and the *new* `filter`. 
@@ -2584,7 +2584,7 @@ many intermediate "*Container*" Components as we will see in the next lesson.
 
 In the previous lesson we separated the "*Presentational*" Components 
 from the the main "*Container*" Component 
-the `TodoApp` specifies the *behaviours* 
+the `TodoApp` specifies the *behaviors* 
 such as what happens when the **Add** `<button>` is clicked 
 how the todos are selected 
 what happens when a *single* `Todo` has been clicked 
@@ -2592,7 +2592,7 @@ and what happens when a `Footer` Link is clicked.
 And the components such as `AddTodo`, the `TodoList`, the `Todo` its' self 
 the `Footer` and the `FilterLink` they don't dispatch actions 
 they call their callbacks [passed] in the props 
-so they are *only* responsible for the *looks* but not for the behaviour. 
+so they are *only* responsible for the *looks* but not for the behavior. 
 The downside of this approach is that 
 I have to pass a lot of props down the "tree" 
 even when the *intermediate* Components don't really *use* them 
@@ -2651,13 +2651,13 @@ and it might start to seem a lot like the code *before*
 separating the "*Presentational*" Components 
 however what I want to do here is a little bit different.
 
-The `FilterLink` does not *currently* specify the behaviour 
+The `FilterLink` does not *currently* specify the behavior 
 for clicking on the link 
 it also needs the `currentFilter` 
 to tell whether it should be rendered as *active*
 therefore its a bit "*dishonest*" to say that `FilterLink` 
 is a "*Presentational*" Component 
-because it is inseperable from its *behaviour* 
+because it is inseparable from its *behavior* 
 the only *reasonable* reaction to clicking on it 
 is setting the `visibilityFilter` by dispatching an `action` 
 this is why I am changing it to a *different* "*Presentational*" Component 
@@ -2715,7 +2715,7 @@ and the `visibilityFilter` corresponds to the
 that is held in the Redux `store` `state`. 
 and if they *match* we want the `Link` to appear *active*
 (*un-clickable*). 
-The "*Container*" Component also needs to specify the *behaviour* 
+The "*Container*" Component also needs to specify the *behavior* 
 so in this case the `FilterLink` 
 specifies that when this particular link is *clicked* 
 we should dispatch the `action` with the `type: 'SET_VISIBILITY_FILTER'`
@@ -2826,9 +2826,9 @@ Let's re-cap the relationship between the
 and the `Link` "*Presentational*" Component:
 The `Link` Component only specifies the *appearance* of a link
 when it is *active* or *inactive* 
-but it doesn't know about the behaviour. 
+but it doesn't know about the behavior. 
 The `FilterLink` Component is a *Container* 
-so it provides the *data* and the *behaviour* for 
+so it provides the *data* and the *behavior* for 
 the "*Presentational*" Component. 
 When it mounts it subscribes to the `store` so 
 it *independently* re-renders when the `store` `state` changes 
@@ -2854,9 +2854,9 @@ The `FilterLink` is a "*Container*" Component
 so it is completely self-sufficient 
 and can be used inside the "*Presentational*" Components such as
 `Footer` without passing additional props 
-to get the data from the `store` and specify the behaviour 
+to get the data from the `store` and specify the behavior 
 this lets us keep the `Footer` Component simple 
-and de-coupled from the behaviour and data 
+and de-coupled from the behavior and data 
 that its' child Components need. 
 
 
@@ -2873,7 +2873,7 @@ In the previous lesson I separated the
 `Link` "*Presentational*" Component from the 
 `FilterLink` "*Container*" Component 
 that is subscribed to the Redux `store` 
-and that provides the *data* and the *behaviour* 
+and that provides the *data* and the *behavior* 
 for the `Link` Component it renders.
 While it makes the data flow a little bit *less* explicit 
 it makes it easier to use `FilterLink` in 
@@ -2898,13 +2898,13 @@ and I'm using the `getVisibleTodos` function
 to calculate the *currently* visible todos 
 based on all the todos from the Redux `store` 
 and the *current* `visibilityFilter` from the Redux `store` `state` 
-and I'm specifying the *behaviour* as well 
+and I'm specifying the *behavior* as well 
 I'm saying that when the todo is *clicked* 
 we should dispatch an `action` with `type: 'TOGGLE_TODO'`
 and the `id` of the todo being clicked.
 All "*Container*" Components are similar 
 their job is to *connect* a "*Presentational*" Component 
-to the Redux `store` and specify the data and the behaviour 
+to the Redux `store` and specify the data and the behavior 
 that it needs. 
 
 ```js
@@ -2960,7 +2960,7 @@ I made `AddTodo` a *Presentational* Component
 but I'm going to ***back-track*** on this now. 
 I will *copy-paste* the `dispatch` call back inline 
 into the `onClick` handler inside the Component 
-because there isn't really a lot of presentation or *behaviour* here 
+because there isn't really a lot of presentation or *behavior* here 
 and its *easier* to keep them together 
 until we figure out how to split the *presentation*. 
 For example if in the *future* we're going to have something 
@@ -3008,11 +3008,11 @@ The *first* Component I'm looking at is called `AddTodo`
 and frankly I can't classify it either as a *Presentational* Component 
 *or* as a *Container* Component because it doesn't fit either category.
 The `<input>` and the `<button>` are the *Presentational* part 
-but dispatching an `action` `onClick` is the *behaviour* 
+but dispatching an `action` `onClick` is the *behavior* 
 which is *usually* specified by the *Container* 
 however in *this* case I'd rather keep them together 
 because there isn't any `state`, the **UI** is *very simple* 
-and its hard to imagine any *other* behaviour 
+and its hard to imagine any *other* behavior 
 other than dispatching the `ADD_TODO` `action`. 
 
 The *second* Component I render inside the `TodoApp` is 
@@ -3037,7 +3037,7 @@ so it *subscribes* to the `store`
 and it renders the *Presentational* Component called `Link` 
 calculating weather it should be *active* based on its' props 
 the *current* Redux `store` `state` 
-and it specifies the *behaviour* 
+and it specifies the *behavior* 
 (*what happens when it's clicked*). 
 *Finally* the `Link` Component is just a *Presentational* Component 
 that renders an `<a>` tag. 
@@ -3050,7 +3050,7 @@ of your codebase. In general I suggest *first* trying to
 extract the *Presentational* Components, 
 and if there is *too much* boilerplate 
 passing the props to them then you can create the *Containers* 
-around them that load the data and specify the *behaviour*.
+around them that load the data and specify the *behavior*.
 
 > Code at the *end* of **Video 23**: 
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/0966f4c5177bcd6430e2b7a963517cf88658623c/index.html)
@@ -3146,7 +3146,7 @@ read the `store` instance from the `props`
 and don't rely on a top-level variable that I removed. 
 
 
-Note that this change did not change the behaviour or *data* flow 
+Note that this change did not change the behavior or *data* flow 
 of this application. 
 The *Container* Components `subscribe` to the `store` 
 just like *before* and update their `state` 
@@ -3271,7 +3271,7 @@ I still have to add a property called `contextTypes`
 that specifies which *Context* I want to receive 
 and in this case I want to receive the `store` from the `Provider`. 
 If I *forget* to declare the `contextTypes` 
-my *functiona* Component will not receive the relevant *Context* 
+my *functional* Component will not receive the relevant *Context* 
 as the *second argument*.
 
 ```js
@@ -3315,7 +3315,7 @@ by defining the `getChildContext` with the `store` key
 pointing to that `prop`. 
 It is ***essential*** that the `getChildContext` 
 is matched by `childContextTypes` 
-where we specifcy that the `store` key has `PropTypes` 
+where we specify that the `store` key has `PropTypes` 
 of `object`. 
 
 > Note: that the `childContextTypes` definition 
@@ -3332,7 +3332,7 @@ The `context` creates something like a "*worm hole*"
 between the `VisibleTodoList` Component that reads the `context` 
 and the `Provider` that *provides* the `context` 
 and this "*worm hole*" is only *enabled* 
-because the `contextTypes` declared ont he `VisibleTodoList` 
+because the `contextTypes` declared on the `VisibleTodoList` 
 include the `store` that is defined in `childContextTypes` 
 of the `Provider` Component. 
 
@@ -3455,7 +3455,7 @@ with some `props` that they *calculate* from the `state` of the `store`
 and they *also* need to *specify* the `contextTypes` 
 to get the `store` from the `context`. 
 
-I'm going to write this Component in a *diferent* way now: 
+I'm going to write this Component in a *different* way now: 
 and I'll declare a function called `mapStateToProps` 
 which takes the Redux `store` `state` 
 and returns the `props` that I need to pass to the 
@@ -3492,7 +3492,7 @@ Note that I don't have the reference to the `store` here *anymore*
 so instead I'm changing it to use *just* the `dispatch` 
 which is provided as an *argument* to `mapDispatchToProps` 
 "I will add some *punctuation* to make it *appear* easier on my eyes"
-[*brackes around the `id` argument 
+[*parenthesis around the `id` argument 
 & curly-braces around the function block*]
 `onTodoClick` is a function that accepts the `id` 
 of the `todo` and dispatches an `action`. 
@@ -3516,7 +3516,7 @@ to the `props` of the `TodoList` Component
 that are *related* to the *data* from the Redux `store` 
 the *second* function maps the `dispatch` method of the `store` 
 to the callback `props` of the `TodoList` Component 
-it specifies the *behaviour* 
+it specifies the *behavior* 
 that is which callback `prop` dispatches which `action`. 
 
 Together these two functions describe the a *Container* Component 
@@ -3531,7 +3531,7 @@ If you use `npm` and `Babel` you will
 likely *import* it like *this* instead:
 
 ```js
-import { connnect } from 'react-redux'
+import { connect } from 'react-redux'
 ```
 "*and don't forget the curly braces*..." 
 [*destructuring assignment of the `connect` method from the `react-redux` package*]
@@ -3576,7 +3576,7 @@ These `props` will be *updated* any time the `state` changes
 it takes the `store.dispatch` method as it's *first* argument 
 and it returns the `props` that *use* the `dispatch` method 
 to `dispatch` *actions*, 
-so it *returns* the calback `props` 
+so it *returns* the callback `props` 
 needed for the *Presentational* Component. 
 
 To create a *Container* Component from them, 
@@ -3752,7 +3752,7 @@ in `connect` as the *second* argument
 you're going to get `dispatch` injected as a `prop`.
 
 So in fact I can just ***remove all arguments*** here 
-and the *default* behaviour will be to *not* `subscribe` 
+and the *default* behavior will be to *not* `subscribe` 
 to the `store` and to *inject* just the `dispatch` function 
 as a `prop`. 
 
@@ -3773,8 +3773,8 @@ however that will pass `dispatch` to the Component that it *wraps*
 and in this case it *wraps* my `AddTodo` Component 
 
 The *second* `connect` call returns the *generated* 
-*Container* Component and I'm assinging it to `AddTodo` 
-so I'm re-assiging the `let` binding the second time 
+*Container* Component and I'm assigning it to `AddTodo` 
+so I'm re-assigning the `let` binding the second time 
 and when the further code references `AddTodo` 
 it's going to reference the *Container* Component 
 that does not need the `dispatch` prop 
@@ -3939,7 +3939,7 @@ and this is "*fine*",
 however it references the `nextTodoId` variable 
 which I declare along side the `AddTodo` Component 
 *normally* it would be *local* 
-however what if another componet wants to `dispatch` 
+however what if another component wants to `dispatch` 
 the `ADD_TODO` `action` ? 
 It would need to have access to the `nextTodoId` somehow 
 and while I *could* make this variable *GLOBAL* 
@@ -3980,7 +3980,7 @@ so we call these functions `action` *Creators*
 and we usually place them separately from Components 
 or from *Reducers*. 
 
-I will now *extrac* other `action` *Creators* from the Components 
+I will now *extract* other `action` *Creators* from the Components 
 and I see that I have a `SET_VISIBILITY_FILTER` in a `dispatch` here 
 [*in the `mapDispatchToLinkProps` method*] 
 so I will change this to call the `setVisiblityFilter` 
@@ -3995,7 +3995,7 @@ with the `type: 'SET_VISIBILITY_FILTER'`
 and the `filter` its' self. 
 
 ```js
-cosnt setVisibilityFilter = (filter) => {
+const setVisibilityFilter = (filter) => {
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter // implied value from argument
@@ -4040,7 +4040,7 @@ without worrying about the *actions* internal structure.
 
 Note that whether you use `action` Creators or *not* 
 the *data flow* is *exactly* the same 
-because I just calle the `action` Creator to get 
+because I just called the `action` Creator to get 
 the `action` `Object` and then I call `dispatch` 
 just like I did *before* passing the `action`. 
 
