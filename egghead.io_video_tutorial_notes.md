@@ -26,7 +26,7 @@ Just like the state is the minimal representation of data in your app,
 the action is the minimal representation of the change to that data.
 The only requirement of an action is that it has a `type` property
 (*this more a description for your action*). The convention is to use a `String`
-because they are serialisable (*i.e. easy to `JSON.stringify`*)
+because they are serializable (*i.e. easy to `JSON.stringify`*)
 
 > "*Any data that gets into your Redux Application gets there by actions*"
 
@@ -47,7 +47,7 @@ The functions you write in redux need to be pure.
 > Video: https://egghead.io/lessons/javascript-redux-the-reducer-function
 
 The UI/View layer of an application is most predictable when it is described
-as a pure function of the application state. Pioneered by ~~React~~ [Ractive](https://github.com/ractivejs/ractive) and now addopted by several other
+as a pure function of the application state. Pioneered by ~~React~~ [Ractive](https://github.com/ractivejs/ractive) and now adopted by several other
 frameworks, Redux compliments this approach with another idea:
 the state mutations in your app need to be described as a pure function
 that takes the previous state and the action being "dispatched" (*performed*)
@@ -83,8 +83,8 @@ The first [*and only*] function in this video is the Reducer for the counter exa
 A reducer accepts state and action as arguments and returns the next state.
 
 Before writing any code, we write a few assertions (*tests*) using
-[**Michael Jackson**](https://github.com/mjackson)'s  
-(*Yes, there's a* ***developer*** *with that name... and he's* ***really good***)  
+[**Michael Jackson**](https://github.com/mjackson)'s
+(*Yes, there's a* ***developer*** *with that name... and he's* ***really good***)
 ***Expect*** (testing/assertion) **library**: https://github.com/mjackson/expect
 
 We assert that when the state of the counter is zero and you pass an `INCREMENT`
@@ -168,7 +168,7 @@ Another issue is that while the reducer is in control of the application state,
 example that would be zero.
 
 The convention in Redux is that if the reducer receives `undefined` as the
-`state` argument, it *must* `return` what it considers to be the inital
+`state` argument, it *must* `return` what it considers to be the initial
 `state` of the application. In this case it will be zero.
 
 > *Code for*
@@ -211,7 +211,7 @@ const counter = (state = 0, action) => {
 ***Arrow functions*** can be fewer characters to type but are
 [***not supported***](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Browser_compatibility)
 in **Safari** *or* **Internet Explorer**
-[*at the time of writing*] ...  
+[*at the time of writing*] ...
 ![ES6-arrow-functions-not-supported-in-safari-or-internet-explorer](https://cloud.githubusercontent.com/assets/194400/12050430/5800888c-aeed-11e5-91fb-0bb8ff2ae4a4.png)
 
 ***Default parameters*** are a *nice* addition to JavaScript (ECMAScript 2015) because
@@ -240,7 +240,7 @@ We will come back to Babel later...
 
 #### 6. Store Methods: getState(), dispatch(), and subscribe()
 
-> Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe  
+> Video: https://egghead.io/lessons/javascript-redux-store-methods-getstate-dispatch-and-subscribe
 > Code: [Video 6 Code Snapshot]( https://github.com/nelsonic/learn-redux/blob/2430c6e95eacd61ebf7ff4a660cc64e80c9e883e/index.html)
 
 Video #6 picks up from where #5 finished, so if you skipped
@@ -248,14 +248,14 @@ video 5, go back and watch it, and try writing/running the code!
 
 Dan starts off by showing how to include Redux (*from CDN JS*)
 in a client-side app so we can start using the methods.
-This is not the *recommended* way of loading Redux but works fine for this
+This is not the *recommended* way of loading Redux, but works fine for this
 example/demo.
 
 "*In real applications I suggest you use npm and a module bundler like
 webpack or browserify*".
 
 
-In this tutorial we are using a single function from Redux called `createStore`
+In this tutorial we are using a single function from Redux called `createStore`.
 
 Using **ES6** [**destructuring assignment**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 syntax to extract the `createStore` method from Redux:
@@ -317,7 +317,7 @@ The code at the end of video #6 looks like this: (*explanatory comments added*)
       const render = () => { // render function updates DOM with counter value
         document.body.innerText = store.getState();
       }
-      store.subscribe(render); // all actions re-redner the DOM
+      store.subscribe(render); // all actions re-render the DOM
       render(); // render the initial state of the page/app
 
       // listen for click event on the whole document (click anywhere on the page)
@@ -336,7 +336,7 @@ Try viewing the [`index.html`](https://github.com/nelsonic/learn-redux/blob/2430
 
 #### 7. Implementing Store from Scratch
 
-> Video: https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch  
+> Video: https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch
 > Code: [Video #7 Code Snapshot](https://github.com/nelsonic/learn-redux/blob/17432aacb7e75702fe66338d9eacf27ffcca33c7/index.html#L15-L43)
 
 In the 7<sup>th</sup> Video Dan shows how the Redux store is *implemented*
@@ -372,13 +372,13 @@ And any time it is called we want to push the new listener into the (`listeners`
 Dispatching an action is the only way to change the internal state.
 in order to calculate the new state we call the reducer with the state
 and the action being dispatched.
-And after the state is updated we need to notify every change listener by calling it.  
+And after the state is updated we need to notify every change listener by calling it.
 1:44 - There is an important missing piece here: we have not provided a way
 to unsubscribe a listener. But instead of adding a dedicated `unsubscribe` method,
-we will just return a function from the subscribe method that removes this listener from the `listeners` array.  
-2:03 - Finally by the time the store is returned we want it to have the inital
+we will just return a function from the subscribe method that removes this listener from the `listeners` array.
+2:03 - Finally by the time the store is returned we want it to have the initial
 state populated. so we are going to dispatch a dummy action just to get the
-reducer to return the initial value.  
+reducer to return the initial value.
 2:18 - this implementation of the Redux store is (*apart from a few minor details
   and edge cases*) is the `createStore` we ship with Redux."
 
@@ -466,7 +466,7 @@ gets the *current* state.
 
 *Most* React.js Examples are written using
 [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax.
-This is not *standard* JavaScript so no browser can *understand* it.  
+This is not *standard* JavaScript so no browser can *understand* it.
 
 If you want the Counter *example* to work in the browser (*without having to compile your counter component with babel*) you will need to include the `JSXTransformer`:
 
@@ -483,8 +483,8 @@ Don't forget to add `type="text/jsx"` to your script tag in `index.html`
 to ensure that the JSX in the React Component is transformed.
 see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
 
-> *Final version* of *working* code for Video 8: 
-[`index.html`](https://github.com/nelsonic/learn-redux/blob/a6cbc789e078d8c42a73066dbb94adf8bd5a7f3f/index.html#L19-L72)  
+> *Final version* of *working* code for Video 8:
+[`index.html`](https://github.com/nelsonic/learn-redux/blob/a6cbc789e078d8c42a73066dbb94adf8bd5a7f3f/index.html#L19-L72)
 Run it by opening it in **Google Chrome Canary**:
 
 ![learn-redux-video-9-counter-example](https://cloud.githubusercontent.com/assets/194400/12079438/c0203cdc-b230-11e5-9338-00254dc9761a.png)
@@ -553,7 +553,7 @@ const addCounter = (list) => {
 Now the tests pass without *mutations*.
 
 And I can also use the new **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
-to write the code in a more consise way:
+to write the code in a more concise way:
 
 ```js
 const addCounter = (list) => {
@@ -571,7 +571,7 @@ is still [***not*** *(yet)* ***supported***](https://developer.mozilla.org/en-US
 
 The next function is `removeCounter` and it accepts two arguments: `list` (*an `Array` of `Numbers`*) and `index` the `Number` to *skip* from the `Array`.
 
-So if I've got three numbers 
+So if I've got three numbers
 and I'm passing 1 as the second argument,
 I expect to receive an `Array` with *two* items with the *second* item *skipped* in the `Array`:
 
@@ -589,7 +589,7 @@ const testRemoveCounter = () => {
 *Usually* to `delete` an item from an `Array` I would use the `splice` method.
 However `splice` is a mutating method, so you can't use it in Redux.
 I'm going to `deepFreeze` the (`listBefore`) `Array` object,
-and now I need to figure out a *different* way of removing an item from 
+and now I need to figure out a *different* way of removing an item from
 the array *without mutating it*.
 I'm using a method called `slice` here and it does not have *anything* to do with `splice`; it is ***not mutating*** and it gives me a part of the `Array` from some beginning to some end index.
 So what I am doing is taking the parts before the index I want to skip
@@ -604,9 +604,9 @@ const removeCounter = (list, index) => {
 };
 ```
 
-Finally, instead of writing it as a method chain with `concat` calls, 
-I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
-to write it more concicely:
+Finally, instead of writing it as a method chain with `concat` calls,
+I can use the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+to write it more concisely:
 
 ```js
 const removeCounter = (list, index) => {
@@ -625,7 +625,7 @@ lets implement *incrementing* the counter:
 
 ```js
 incrementCounter = (list, index) => {
-  
+
 };
 
 // write a test/assertion before implementing the function:
@@ -662,15 +662,15 @@ incrementCounter = (list, index) => {
 };
  ```
 
-We want to take a slice *before* the `index` 
+We want to take a slice *before* the `index`
 and `concat` it with a single item `Array` with a *new* value
 and then `concat` it with the *rest* of the original `Array`.
 
-Fincally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 
+Finally with the **ES6** [***spread operator***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 we can spread over the left part of the `Array`
 *specify* the *new* item,
 and then *spread* over the right part of the *original* `Array`
-and this *looks* much nicer ... 
+and this *looks* much nicer ...
 
 ```js
 incrementCounter = (list, index) => {
@@ -708,7 +708,7 @@ or if it was `true` it should be `false`
 
 ```js
 const toggleTodo = (todo) => {
-  
+
 };
 
 const testToggleTodo = () => {
@@ -765,19 +765,19 @@ However if we later add new properties to the `todo` object,
 we might *forget* to update this piece of code to include them.
 
 This is why I suggest that you use the **ES6**
-[`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 
-method which is *new* to **ES6** 
-and it lets you `assign` properties of *several* objects onto the target object. Note how the `Object.assign` order corresponds to that of the JavaScript assignment operator. 
-The left (*first*) argument is the one who's properties 
+[`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+method which is *new* to **ES6**
+and it lets you `assign` properties of *several* objects onto the target object. Note how the `Object.assign` order corresponds to that of the JavaScript assignment operator.
+The left (*first*) argument is the one who's properties
 are going to be assigned, so its going to be *mutated*.
-This is why we are passing an *empty* `Object` as the *frist* argument
+This is why we are passing an *empty* `Object` as the *first* argument
 so we don't *mutate* any *existing* data.
-Every further argument to `Object.assign` will be considered a 
+Every further argument to `Object.assign` will be considered a
 "*source*" `Object` who's properties will be copied to the target object.
 
-It is ***important*** that if several *sources* specifiy 
+It is ***important*** that if several *sources* specify
 different values for the *same* property, the ***last*** one "*wins*".
-and this is what we use to *overwite* the `completed` field 
+and this is what we use to *overwrite* the `completed` field
 despite what the original object says.
 
 ```js
@@ -788,21 +788,21 @@ const toggleTodo = (todo) => {
 };
 ```
 
-*Finally* you need to *remember* that 
-[`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 
-is a *new* method in **ES6** so it is *not natively available* in 
+*Finally* you need to *remember* that
+[`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+is a *new* method in **ES6** so it is *not natively available* in
 all the Browsers (*specifically not supported in Internet Explorer*).
 
 ![object assign-browser-compatibility](https://cloud.githubusercontent.com/assets/194400/12080810/6fbc745c-b25f-11e5-9e58-ed860ea2872a.png)
 
-You should use a "*pollyfill*" either the one that ships with ***Babel***
-or a *standalone* pollyfill to use it (`Object.assign`) without risking
+You should use a "*polyfill*" either the one that ships with ***Babel***
+or a *standalone* polyfill to use it (`Object.assign`) without risking
 crashing your website.
 
-Another option that does not require a pollyfill is use 
+Another option that does not require a polyfill is use
 the new [`Object` ***spread*** operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 which is ***not part of ES6*** however it is *proposed* for **ES7**
-it is "*fairly popular*" and it is *enabled* in Babel 
+it is "*fairly popular*" and it is *enabled* in Babel
 if you use the "*stage 2 preset*":
 
 ```js
@@ -826,24 +826,24 @@ our code because it does not run in *any* browser!!
 
 > Video: https://egghead.io/lessons/javascript-redux-writing-a-todo-list-reducer-adding-a-todo
 
-Just like in the previous two lessons, I'm using the 
+Just like in the previous two lessons, I'm using the
 **expect** library to make test assertions and
 **deep-freeze** library to *prevent accidental mutations* in my code.
 
 In this lesson I will create a reducer for a Todo-list application
 who's state is described as an array of Todos.
 
-Just to remind you what a reducer is: its a "*pure function*" 
+Just to remind you what a reducer is: its a "*pure function*"
 you write to implement the update logic of your application.
 That is how the next state is calculated given the current state
-and the action being disptched.
+and the action being dispatched.
 
 Before writing a reducer I want a way of knowing whether its code is correct. So I'm starting by writing a test for it:
 
 
 ```js
 const todos = (state = [], action) => {
-    
+
 };
 
 const testAddTodo = () => {
@@ -879,11 +879,11 @@ I'm declaring two variables:
 + `action` - the action being dispatched - which is an action describing a user adding a new todo with some `id` and a `text` (*fields*).
 
 I am also declaring the *state* I `expect` *after* calling the reducer.
-and like `stateBefore` it is an `Array`, but this time it has 
+and like `stateBefore` it is an `Array`, but this time it has
 a *single element* representing the Todo that was just added;
 so it has the same `id` and `text` as the action `Object`.
-and it *also* has an *additional* field called `completed` 
-that I want to be *initialised* to be `false`
+and it *also* has an *additional* field called `completed`
+that I want to be *initialized* to be `false`
 
 We want to make sure that the reducer is a "*pure function*",
 so I am calling `deepFreeze` both on the `stateBefore`
@@ -891,25 +891,25 @@ so I am calling `deepFreeze` both on the `stateBefore`
 
 *Finally* I'm ready to use the `expect` library to verify that if I call
 the todo reducer with the `stateBefore` and the `action`
-I'm going to get the result that is ***deeply*** **equal** 
+I'm going to get the result that is ***deeply*** **equal**
 to the `stateAfter` I *just* declared.
 
-This concludes my *first* test, now I can call it 
-just like a regular JavaScript function: `testAddTodo();` 
+This concludes my *first* test, now I can call it
+just like a regular JavaScript function: `testAddTodo();`
 And if it doesn't `throw` in the `expect` call I'm going to see a message
 that the tests have passed.
 
 Of *course* it fails because the reducer is not implemented yet;
-it's an *empty* function, so it returns `undefined` 
+it's an *empty* function, so it returns `undefined`
 instead of the `Array` with a single item that I `expect` in the test.
 
-To fix this I will need my reducer to take a look at the 
+To fix this I will need my reducer to take a look at the
 `action.type` property which is a `String`
 when it matches the `ADD_TODO` string which I specify in my test
 to *satisfy* the test I need to return a *new* `Array`
 which includes all the items from the *original* `Array`
 but *also* a *new* Todo item that has its `id` and `text`
-copied from the `action` Object 
+copied from the `action` Object
 and a `completed` field set to `false`
 
 Finally I add a `default` case to my `switch` statement
@@ -937,7 +937,7 @@ const todos = (state = [], action) => {
 Now the tests run *successfully*!
 
 Lets **recap** the *data flow* in this example to see why
-first I create the state `Array` (`stateBefore`) 
+first I create the state `Array` (`stateBefore`)
 which is an *empty* `Array`
 and the `action` Object inside my test function.
 I'm passing them as arguments to my *reducer* function called todos
@@ -945,20 +945,20 @@ the `todos` reducer accepts the state and action as *arguments*
 and takes a look at the `action.type`
 in this case the `action.type` is a `String` saying `ADD_TODO`
 so it matches the `switch` `case` inside the reducer
-the reducer returns a *new* `Array` 
+the reducer returns a *new* `Array`
 which contains the items from the *old* `Array`
 (*in the case of our test, the empty `stateBefore` Array*...)
 and a *new* item (`Object`) representing the added todo
 however the `state` we passed from the test was an *empty* `Array`
 so at the end we are going to get an `Array` with a *single* item
 which is the *new* todo
-*finally* we compare the returned value 
-to an `Array` with a single todo item 
+*finally* we compare the returned value
+to an `Array` with a single todo item
 to make sure the reducer works as intended
-the equality check passes 
+the equality check passes
 so this makes the test successful.
 
-> Code snapshot for the end of Video 11: 
+> Code snapshot for the end of Video 11:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/278a17be1fafe2e0f354aa431e0ad4fc776bbc41/index.html#L15-L56)
 
 <br />
@@ -972,7 +972,7 @@ so make sure you watched that an tried writing/running the code!
 
 In this lesson we will continue creating the reducer for the
 todo list application
-and the only action that this reducer *currently* handles 
+and the only action that this reducer *currently* handles
 is called `ADD_TODO`
 we also created a ***test*** that makes sure that when the reducer
 is called with an *empty* `Array` and the `ADD_TODO` `action`
@@ -981,23 +981,23 @@ it returns an `Array` with a *single* todo element.
 In this lesson we will follow the same approach
 to implement another action called `toggleTodo`
 
-We're going to start with the *test* again 
-and *this* time we are testing a different action 
-and we have a different *initial* `state` 
-the `state` *before* calling the reducer (`stateBefore`) 
+We're going to start with the *test* again
+and *this* time we are testing a different action
+and we have a different *initial* `state`
+the `state` *before* calling the reducer (`stateBefore`)
 now includes two different todos with `id` `0` and `1`.
 notice how *both* of them have their `completed` field set to `false`
 
 Next I declare the `action`
-and the action is as `Object` with the `type` property 
+and the action is as `Object` with the `type` property
 wich is `TOGGLE_TODO` `String`
 and the `id` of the todo that I want to be "*toggled*"
-I declare the state that I `expect` 
+I declare the state that I `expect`
 to receive *after* calling the reducer (`stateAfter`)
-its pretty much the same as *before* calling the reducer 
+its pretty much the same as *before* calling the reducer
 however I `expect` the todo with `id` specified in the `action`
-or `1` in this case 
-to change its `completed` field 
+or `1` in this case
+to change its `completed` field
 
 ```js
 const testToggleTodo = () => {
@@ -1044,15 +1044,15 @@ console.log('All tests passed.')
 ```
 
 the reducer *must* be a "*pure function*"
-so at a matter of *precaution* I call `deepFreeze` 
+so at a matter of *precaution* I call `deepFreeze`
 on the `state` and the `action`
 
-*Finally*, just like in the previous lesson, I'm asserting 
-that the result of calling our reducer with the `stateBefore` and the `action` 
+*Finally*, just like in the previous lesson, I'm asserting
+that the result of calling our reducer with the `stateBefore` and the `action`
 is going to be "*deeply equal*" (`toEqual`) the `stateAfter`.
 
 Now, my test is a function so I need to call it at the end of the file
-And if I run it, it fails because I have not *implemented* 
+And if I run it, it fails because I have not *implemented*
 handling this action yet.
 
 I'm adding a new `switch case` to my reducer
@@ -1061,7 +1061,7 @@ so I'm using the [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/Java
 to produce a *new* `Array`
 the function I pass as an argument will be called for *every* todo
 so if its *not* the todo I'm looking for, I don't want to change it,
-so I just `return` it as is.  
+so I just `return` it as is.
 *However* if the todo *is* the one we want to toggle
 I'm going to `return` a *new* `Object`
 that *all* the properties of the *original* todo `Object`
@@ -1099,13 +1099,13 @@ const todos = (state = [], action) => {
 Now both of our tests run successfully...
 And we have an implementation of the reducer that can add and toggle todos.
 
-> Code at the end of Video 12: 
+> Code at the end of Video 12:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/92b9a312678ba26ca90050f17d796b26f992de63/index.html#L31-L33) (*using `Object` spread*)
 
 > ***Note***: While the [*spread operator*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Browser_compatibility)
 is an **ES6** *Standard* for `Array`, its only a ***Draft*** for `Object`
-proposed for **ES7** which means it is 
-**not** yet **available** in ***any*** **Browser**! 
+proposed for **ES7** which means it is
+**not** yet **available** in ***any*** **Browser**!
 As such I have modified Dan's
 code to use `Object.assign` (*see Video #10) 
 which (*at least*) works in Chrome...:
@@ -1133,7 +1133,7 @@ case 'TOGGLE_TODO':
     var keys = Object.keys(todo); // IE9+
     var toggled = {};             // new object to avoid mutation
     keys.forEach(function(index) {
-      toggled.index = todo.index; // copy all properties/valud of todo
+      toggled.index = todo.index; // copy all properties/values of todo
     });
     toggled.completed = !todo.completed
     return toggled;
@@ -1141,13 +1141,13 @@ case 'TOGGLE_TODO':
 
 ```
 
-We can *probably* ***all*** agree that the code is more *elegant* 
-with the ES7 Object spread operator.  
-But in the interest of having something that works *now* 
+We can *probably* ***all*** agree that the code is more *elegant*
+with the ES7 Object spread operator.
+But in the interest of having something that works *now*
 (*without Babel for running this tutorial in a Chrome without a node.js "workflow"...*)
 I've opted to use the `Object.assign` method is an **ES6** *Standard*.
 
-> Code at the end of Video 12: 
+> Code at the end of Video 12:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/de238f6391dbaf85de9527932c48d7702e4e2336/index.html#L31-L33) (*using `Object.assign`*)
 
 <br />
@@ -1156,18 +1156,18 @@ I've opted to use the `Object.assign` method is an **ES6** *Standard*.
 
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-arrays
 
-In the *previous* lesson we created a *reducer* 
-that can handle two actions: adding a *new* todo 
+In the *previous* lesson we created a *reducer*
+that can handle two actions: adding a *new* todo
 and toggling an *existing* todo.
 Right now the code to *update* the todo item
 or to *create* a new one is placed right inside the todos reducer
 this function is hard [*difficult*] to understand
 because it mixes two different concerns:
-how the todos `Array` is updated *and* 
+how the todos `Array` is updated *and*
 how individual todos (`Objects`) are updated.
 This is not a problem *unique* to Redux
 any time a function does *too many* things
-you want to *extract* other functions from it and call them 
+you want to *extract* other functions from it and call them
 so that every function only addresses a single concern
 
 In this case I decided that creating and updating a todo
@@ -1210,77 +1210,77 @@ const todos = (state = [], action) => {
 };
 ```
 
-As a matter of convention I decided that it should also accept 
+As a matter of convention I decided that it should also accept
 two arguments: the *current* `state` and the `action` being dispatched
-and it should `return` the *next* `state`. 
+and it should `return` the *next* `state`.
 But in this case the `state` refers to the *individual* todo
 and *not* to the *list* (`Array`) of todos.
 
 *Finally* there is no "*magic*" in Redux to make it work.
 We extracted the todo reducer from the todos reducer.
-So now we need to call it for every todo 
+So now we need to call it for every todo
 and assemble the results into an `Array`.
-While this is not required in this particular example 
-I suggest that you *always* have the `default` case 
+While this is not required in this particular example
+I suggest that you *always* have the `default` case
 where you `return` the *current* `state`
 to avoid "*odd bugs*" in the future.
 
-The ***Pattern*** described in this lesson 
-is *pervasive* in Redux development 
+The ***Pattern*** described in this lesson
+is *pervasive* in Redux development
 and is called "[***Reducer Composition***](http://rackt.org/redux/docs/basics/Reducers.html)".
 
 Different reducers specify how different parts of the `state` tree
 are updated in response to different actions.
-Reducers are also "*normal*" JavaScript functions 
+Reducers are also "*normal*" JavaScript functions
 so they can call *other* reducers
-to delegate and abstract away handling of updates 
+to delegate and abstract away handling of updates
 of some parts of the `state` they manage
-this pattern can be applied *many* times 
+this pattern can be applied *many* times
 and while there is still a *single* top-level reducer
 managing the `state` of your app
-you will find it convenient 
-to express it as *many* reducers calling each other 
+you will find it convenient
+to express it as *many* reducers calling each other
 each contributing to a *part* of the application `state` tree.
 
 
 > Recap: this video/lesson was simply to show how
 to extract a method from inside the *main* ("*top-level*")
-reducer and have a *separate* reducer 
-which handles updates on the *individual* todo items.  
+reducer and have a *separate* reducer
+which handles updates on the *individual* todo items.
 > While there are ***more lines of code***,
 > the *separate* reducers are ***more maintainable***
 
 > Note that the tests from the *previous* video still pass
-after we have created the `todo` reducer, 
-because the *functionality* has not changed, 
+after we have created the `todo` reducer,
+because the *functionality* has not changed,
 its merely been separated to simplify the *main* reducer.
 
-> Code at the end of Video 13: 
+> Code at the end of Video 13:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/89572d3b8e751c2fe11d8a1750ea4f82d64d5e3c/index.html#L15-L47)
 
 <br />
 
 #### 14. Reducer Composition with Objects
 
-Tip: This tutorial builds apon the code written in Video/Lesson 13.
+Tip: This tutorial builds upon the code written in Video/Lesson 13.
 If you skipped it, or left a break between watching the videos,
-go back and re-aquaint yourself before proceeding.
+go back and re-acquaint yourself before proceeding.
 
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-objects
 
-In the *previous* lesson we established 
+In the *previous* lesson we established
 the *pattern* of "*Reducer Composition"
 where one reducer can be called by another reducer
-to update items inside an array. 
-If we creat a `store` with this reducer and log its `state` 
+to update items inside an array.
+If we create a `store` with this reducer and log its `state`
 we will find that the *initial* `state` of it
-is an *empty* `Array` of todos 
-and if we *dispatch* an `ADD_TODO` `action` 
-we will find that the *corresponding* todo has been added 
+is an *empty* `Array` of todos
+and if we *dispatch* an `ADD_TODO` `action`
+we will find that the *corresponding* todo has been added
 to the `state` `Array`
-if we *dispatch* *another* `ADD_TODO` `action` 
+if we *dispatch* *another* `ADD_TODO` `action`
 the *corresponding* todo will *also* be added at the end of the `Array`.
-And dispatching a `TOGGLE_TODO` `action` with `id` (*set to*) `0` 
+And dispatching a `TOGGLE_TODO` `action` with `id` (*set to*) `0`
 will flip the `completed` field of the todo with `id` *zero* (`0`).
 
 > The new code not in the previous tutorial is:
@@ -1327,17 +1327,17 @@ console.log(store.getState());
 console.log('--------------');
 ```
 
-> or you can run: [`index.html`](https://github.com/nelsonic/learn-redux/blob/33a46dbc0eb733f6494fdb8de89d91dde58c1731/index.html#L50-L87) 
-(Code Snapshot for Video 14 @ 0:40)  
+> or you can run: [`index.html`](https://github.com/nelsonic/learn-redux/blob/33a46dbc0eb733f6494fdb8de89d91dde58c1731/index.html#L50-L87)
+(Code Snapshot for Video 14 @ 0:40)
 > which has the following developer console *output*:
 
 ![learn-redux-output-of-video-14-console logs](https://cloud.githubusercontent.com/assets/194400/12122835/6dc1bc44-b3d5-11e5-8e4d-691bdd86f910.png)
 
 
-Representing the *whole* `state` of the application 
-as an `Array` of todos works for a *simple* example 
+Representing the *whole* `state` of the application
+as an `Array` of todos works for a *simple* example
 but what if we want to store *more* information?
-For *example* we may want to let the user choose which todos 
+For *example* we may want to let the user choose which todos
 are *currently* *visible* with a `visibilityFilter`
 such as `SHOW_COMPLETED`, `SHOW_ALL` or `SHOW_ACTIVE`.
 
@@ -1374,22 +1374,22 @@ const todoApp = (state = {}, action) => {
 };
 ```
 
-To *store* this *new* information, I don't need to *change* 
-the *exisiting* reducers, I will use the Reducer Composition Pattern
-and create a *new* reducer that *calls* the existing reducers 
-to manage parts of its state 
+To *store* this *new* information, I don't need to *change*
+the *existing* reducers, I will use the Reducer Composition Pattern
+and create a *new* reducer that *calls* the existing reducers
+to manage parts of its state
 and combines the results in a *single* `state` `Object`
 ***note*** that the first time it runs, it will pass `undefined` as the `state`
-to the "*child*" reducers because the *initial* state 
+to the "*child*" reducers because the *initial* state
 of the *combined* reducer is an *empty* `Object`
-so all its fields are `undefined` 
+so all its fields are `undefined`
 this gets the "*child*" reducers to return their *initial* `state`
 and populates the `state` `Object` for the first time.
 
-> Code Snapshot for Video 14 @ 1:45 
+> Code Snapshot for Video 14 @ 1:45
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/7fef9d1ede97b48a03a4e55c6b8f10bdcc0b5a89/index.html#L62-L73)
 
-When an `action` comes in, it calls the reducers 
+When an `action` comes in, it calls the reducers
 with the parts of the `state` that they manage and the `action`
 and combines the result into the *new* `State` object.
 This is *another* example of the Reducer Composition Pattern
@@ -1397,11 +1397,11 @@ but this time we use it to *combine* *several* reducers
 into a single reducer that we will now use to create our `store`.
 
 The *initial* `state` of the *combined* reducer now contains
-the *initial* `state` of the *independent* reducers 
-and any time an `action` comes in those reducers handle the action 
+the *initial* `state` of the *independent* reducers
+and any time an `action` comes in those reducers handle the action
 *independently* this pattern helps *scale* Redux development
 because different people on the team
-can work on differnt reducers handling the *same* actions 
+can work on different reducers handling the *same* actions
 without running into each other and causing merge conflicts.
 
 ```js
@@ -1416,13 +1416,13 @@ console.log(store.getState());
 console.log('--------------');
 ```
 
-> Note: This `action` is merely setting the `visibilityFilter` *propert*
+> Note: This `action` is merely setting the `visibilityFilter` *property*
 of the `store` `Object`
 
 ![console-log-output-for-set_visibility_filter](https://cloud.githubusercontent.com/assets/194400/12123718/753f2a92-b3da-11e5-982a-17be0a075f1b.png)
 
 
-> ***NOTE***: this code does not actually do anything 
+> ***NOTE***: this code does not actually do anything
 to the ***UI** *yet*. (*be patient that's next...*)
 
 *Finally* I'm dispatching the `SET_VISIBILITY_FILTER` `action`
@@ -1461,18 +1461,18 @@ const todoApp = combineReducers({
 ```
 
 The returned value of the `combineReducers` call is a reducer function
-which is pretty much equivalent to 
+which is pretty much equivalent to
 the reducer function I wrote by hand previously [*See: Video 14 above*]
 
 The keys of the `Object` that I configure `combineReducers` with
-correspond to the fields of the `state` `Object` its going to manage. 
+correspond to the fields of the `state` `Object` its going to manage.
 
 The *values* of the `Object` I pass to combine reducers are the reducers
 it should call to update the corresponding `state` fields
-this *combined* reducer call says that 
-the todos field inside the state object manages 
-will be updated by the `todos` reducer 
-and the `visibilityFilter` field inside the the `state` `Object` 
+this *combined* reducer call says that
+the todos field inside the state object manages
+will be updated by the `todos` reducer
+and the `visibilityFilter` field inside the the `state` `Object`
 will be will be updated by calling the `visibilityFilter` reducer
 and the results will be assembled into a *single* `Object`
 in other words it behaves pretty much exactly as the function
@@ -1496,7 +1496,7 @@ commented out below:
 *Finally* I will establish a *useful* convention:
 I will *always* name my reducers after the `state` keys they manage
 since the *key* names and the *value* names are now the *same*
-I can *omit* the *values* thanks to the **ES6** Object Litteral 
+I can *omit* the *values* thanks to the **ES6** Object Literal
 ***Shorthand Notation***:
 
 ```js
@@ -1507,25 +1507,25 @@ const todoApp = combineReducers({
 });
 ```
 
-In this lesson you learned how to *generate* a single reducer 
-that calls many reducers to manage parts of its state 
-by using the `combineReducers` utility function. 
+In this lesson you learned how to *generate* a single reducer
+that calls many reducers to manage parts of its state
+by using the `combineReducers` utility function.
 
-> Code Snapshot for *End* of Video 15 
+> Code Snapshot for *End* of Video 15
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/128196f61fe5d0e752b16625e8676961f74858ff/index.html#L62-L66)
 
 
-##### Read more about ES6 Object Litteral *Shorthand* Notation
+##### Read more about ES6 Object Literal *Shorthand* Notation
 
 + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015
 + Good examples: http://eslint.org/docs/rules/object-shorthand.html (*by Nicholas C. Zakas*)
 
-> ***NOTE***: as *usual*, while **ES6** Object Litteral *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
+> ***NOTE***: as *usual*, while **ES6** Object Literal *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
 
 ![es6-object-literal-shorthand-notation](https://cloud.githubusercontent.com/assets/194400/12127256/0d4190d8-b3ee-11e5-9191-8c4a532ad59f.png)
 
-> *I have a* ***strong bias*** *towards* ***explicitly*** 
-*typing the* ***Values*** *in an `Object` litteral for clarity*.
+> *I have a* ***strong bias*** *towards* ***explicitly***
+*typing the* ***Values*** *in an `Object` literal for clarity*.
 *But given the* ***naming convention*** *in Redux*,
 *its pretty safe to omit them in this case*.
 
@@ -1569,7 +1569,7 @@ The returned value is supposed to be a reducer its' self
 so this is a function that returns another function
 and the signature of the returned function is a reducer signature
 it has the `state` and the `action`
-now I'm calling the [`Object.keys` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) (*IE9+*) 
+now I'm calling the [`Object.keys` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) (*IE9+*)
 which gives me all the `keys` of the `reducers` `Object`
 in our example this is `todos` and `visibilityFilter`
 next I am calling the (Array) `reduce` method on the `keys`
@@ -1577,60 +1577,60 @@ because I want to produce a *single* value such as the `nextState`
 by *accumulating* over every reducer `key`
 and calling the *corresponding* reducer
 each reducer passed to the combined reducers function is only responsible
-for updating a *part* of the `state` 
+for updating a *part* of the `state`
 this is why I'm saying that the `nextState` by the given `key`
-can be calculated by calling 
-the *corresponding* reducer by the *given* `key` with 
-the *current* `state` by the *given* `key` 
+can be calculated by calling
+the *corresponding* reducer by the *given* `key` with
+the *current* `state` by the *given* `key`
 and the `action`
 the `Array.reduce` wants me to `return` the *next* accumulated value
-from the callback so I am returning the `nextState` 
+from the callback so I am returning the `nextState`
 and I'm also specifying an *empty* `Object` as the *initial* `nextState`
-*before* all the `keys` are processed. 
-And there we have it this is a *working* re-implementation of 
+*before* all the `keys` are processed.
+And there we have it this is a *working* re-implementation of
 `combineReducers` utility from Redux
 
 Lets briefly *recap* how it works.
 I'm calling `combineReducers` with an `Object`
-who's values are the reducer functions 
+who's values are the reducer functions
 and keys are the `state` fields they manage
-inside the *generated* reducer I'm retrieving all the keys 
-of the reducers I passed to `combineReducers` which is 
-an `Array` of `Strings` (*spcifically*) 
+inside the *generated* reducer I'm retrieving all the keys
+of the reducers I passed to `combineReducers` which is
+an `Array` of `Strings` (*specifically*)
 `todos` and `visibilityFilter` (*in our example*).
 I'm starting with an *empty* `Object` for my `nextState`
-and I'm using the `Reduce` operation over these `keys` 
+and I'm using the `Reduce` operation over these `keys`
 to fill it *gradually*.
-Notice that I am *mutating* the `nextState` `Object` on every itteration
-this is not a problem because it is an `Object` I created 
+Notice that I am *mutating* the `nextState` `Object` on every iteration
+this is not a problem because it is an `Object` I created
 *inside* the reducer it is not something passed from *outside*
 so reducer stays a "*pure*" function.
-To calculate the `nextState` for a given `key` 
-it calls the corresponding reducer function 
-such as `todos` or `visibilityFilter` 
-the *generated* reducer will pass to the *child* reducer 
+To calculate the `nextState` for a given `key`
+it calls the corresponding reducer function
+such as `todos` or `visibilityFilter`
+the *generated* reducer will pass to the *child* reducer
 only a *part* of its `state` by the `key`
 so if its `state` is a *single* `Object`
 its only going to pass the *relevant* part
-such as `todos` or `visibilityFilter` 
+such as `todos` or `visibilityFilter`
 depending on the *current* `key`
 and save the result in the `nextState` by the same `key`
 
-*Finally* we use the `Array.reduce` operation (*method*) 
-with the *empty* `Object` as the *initial* `nextState` 
-that is being filled on every itteration 
+*Finally* we use the `Array.reduce` operation (*method*)
+with the *empty* `Object` as the *initial* `nextState`
+that is being filled on every iteration
 until it is the return value of the whole `.reduce` operation
 
 In this lesson you learned how to implement the `combineReducers`
-utility that comes with Redux from *scratch* 
-it is not *essential* to use in Redux 
-so it is *fine* if you don't fully understand how it works *yet* 
-however it is a *good* [*great*!] idea to 
-*practice* functional programming 
-and *understand* that functions can take other functions 
+utility that comes with Redux from *scratch*
+it is not *essential* to use in Redux
+so it is *fine* if you don't fully understand how it works *yet*
+however it is a *good* [*great*!] idea to
+*practice* functional programming
+and *understand* that functions can take other functions
 and `return` other functions
 because knowing this will help you get more productive in Redux
-in the long term. 
+in the long term.
 
 <br />
 
@@ -1640,7 +1640,7 @@ in the long term.
 
 In the *previous* lesson we learned how to split the "*root*" reducer
 into *many* smaller reducers that manage *parts* of the `state` tree
-and now we have a ready `todoApp` reducer 
+and now we have a ready `todoApp` reducer
 that handles all the `actions` of our simple todo application.
 
 So now it's time to *implement* the ***view layer***
@@ -1659,7 +1659,7 @@ Similar to the React *Counter* example from the 8<sup>th</sup> Lesson
 I declare a `render` function that is going to update the DOM
 in response to the *current* application `state`
 and I'm going to `subscribe` to the `store` changes
-and call `render` when ever the `store` changes 
+and call `render` when ever the `store` changes
 and *once* to `render` the *initial* state:
 
 ```js
@@ -1680,10 +1680,10 @@ for some `TodoApp` *component* I haven't written *yet*
 and it renders it into the `div` I created inside the `html`
 called `root`.
 
-React provides a "*base*" `Class` for all components 
-so I'm grabbing it from the React `Object` 
+React provides a "*base*" `Class` for all components
+so I'm grabbing it from the React `Object`
 its called `React.Component`
-and I'm declaring my own `TodoApp` component 
+and I'm declaring my own `TodoApp` component
 that `extends` the React "*base*" `Component`
 
 ```js
@@ -1694,7 +1694,7 @@ class TodoAPP extends Component {
 }
 
 const render = () => {
-  ReactDOM.render( 
+  ReactDOM.render(
     <TodoApp />,
     document.getElementById('root')
   );
@@ -1702,25 +1702,25 @@ const render = () => {
 ```
 
 This `Component` is only going to have a `render` function
-and is going to return a `<div>` 
+and is going to return a `<div>`
 and *inside* the `<div>` I'm going to place a `<button>` saying "Add Todo"
 but I don't want to add an `input` field *yet* to keep the example *simple*
-at first so I'm dispatching the `ADD_TODO` `action` 
+at first so I'm dispatching the `ADD_TODO` `action`
 and I'm going to put `Test` as my `text` for the `action`
 so it's going to keep adding todos with the `text` "Test".
-and the `id` I need to specify a sequential `id` 
+and the `id` I need to specify a sequential `id`
 so this is why I'm declaring a *global* variable called `nextTodoId`
 and I'm going to keep incrementing it.
-so every time its going to emit (*dispatch an `action` with*) a *new* `id` 
-and *finally* I aslo want to display a *list* of the todos
+so every time its going to emit (*dispatch an `action` with*) a *new* `id`
+and *finally* I also want to display a *list* of the todos
 so, *assuming* that I have the todos injected as a `todos` prop
 I will call `.map` and for every `todo` item I'm going to show a `<li>`
 showing the text of that particular todo.
 
-*Finally* because I need the `todos` as a `prop` 
-I'm going to pass it to the `TodoApp` 
+*Finally* because I need the `todos` as a `prop`
+I'm going to pass it to the `TodoApp`
 by reading the the *current* `store` `state`
-and reading its `todos` field: 
+and reading its `todos` field:
 
 ```js
 const { Component } = React;
@@ -1738,10 +1738,10 @@ class TodoApp extends Component {
             id: nextTodoId++
           });
         }}>
-          Add Todo 
-        </button> 
+          Add Todo
+        </button>
         <ul>
-          {this.props.todos.map(todo => 
+          {this.props.todos.map(todo =>
             <li key={todo.id}>
               {todo.text}
             </li>
@@ -1753,7 +1753,7 @@ class TodoApp extends Component {
 }
 
 const render = () => {
-  ReactDOM.render( 
+  ReactDOM.render(
     <TodoApp todos={store.getState().todos} />,
     document.getElementById('root')
   );
@@ -1773,11 +1773,11 @@ and any time I press it I see a *new* todo with the "Test" `text`.
 
 Now I'm going to add an `input` inside my render function
 and I'm using the React callback `ref` API where `ref` is a function
-it gets the `node` corresponding to the `ref` 
+it gets the `node` corresponding to the `ref`
 and I'm saving that `node` in this case `this.input`
-so I'm able to *read* the `value` of the `input` 
+so I'm able to *read* the `value` of the `input`
 inside my event handler, I'm reading `this.input.value`
-and I'm also able to *reset* that value 
+and I'm also able to *reset* that value
 *after* dispatching the `action` so that the field is cleared.
 
 Now if I try to write something in the `input` field and press "Add Todo"
@@ -1785,65 +1785,65 @@ the `ADD_TODO` `action` is dispatched and the field is *cleared*.
 
 Lets take a moment to recap how this application works.
 
-It starts with the TodoApp React Component 
+It starts with the TodoApp React Component
 and this Component is not aware *exactly* how todos are being added
-however it can express its desire to mutate the `state` 
+however it can express its desire to mutate the `state`
 by dispatching an `action` with the `type` `ADD_TODO`
 for the `text` field it uses the *current* `input` value (`this.input.value`)
 and it passes an *incrementing* `id` as the `id` of todo
-every todo needs its own `id` and in this approach we are just going 
+every todo needs its own `id` and in this approach we are just going
 to increment the counter so it always gives us the next integer as `id`
 it is common for React Components to dispatch `actions` in Redux apps
 however it is *equally* important to be able to `render` the *current* `state`
-my `TodoApp` Component assumes that it is going to receive todos 
+my `TodoApp` Component assumes that it is going to receive todos
 as a `prop` and it *maps* over the todos to display a *list* of them.
 using the `id` as a `key`.
-This Component is being rendered in the `render` function 
-that runs any time the `store` `state` changes, and *initially*. 
-The `render` function reads the *current* `state` of the `store` 
-and passes the todos `Array` that it gets 
+This Component is being rendered in the `render` function
+that runs any time the `store` `state` changes, and *initially*.
+The `render` function reads the *current* `state` of the `store`
+and passes the todos `Array` that it gets
 from the *current* `state` of the `store`
 to the `TodoApp` Component as a `prop`
 the `render` function is called on every `store` change
-so the `todos` prop is always up-to-date 
-this was the *rendering* part of the Redux flow. 
+so the `todos` prop is always up-to-date
+this was the *rendering* part of the Redux flow.
 
 Lets recap how *mutations* work in Redux:
-any `state` change is caused by a `store.dispatch` 
+any `state` change is caused by a `store.dispatch`
 call somewhere in the Component.
-When an `action` is dispatched 
-the `store` calls the *reducer* it was created with 
-with the *current* `state` and the `action` being dispatched 
+When an `action` is dispatched
+the `store` calls the *reducer* it was created with
+with the *current* `state` and the `action` being dispatched
 and in our case, this is the `todoApp` reducer
 which we obtained by combining the `visibilityFilter` and the `todos` reducer.
-It matches the `action` `type` in a `switch` statement 
-and if the `action` `type` is `ADD_TODO` 
+It matches the `action` `type` in a `switch` statement
+and if the `action` `type` is `ADD_TODO`
 and indeed it is equal to `ADD_TODO` `String`
 in this case it will call the "*child*" `todo` reducer,
 passing it `undefined` because there is no `state` for a *new* todo
 and the `action`.
 We have a *similar* `switch` statement inside the `todo` reducer
-and the `action` `type` is `ADD_TODO` which returns the 
+and the `action` `type` is `ADD_TODO` which returns the
 *initial* `state` of the todo with the `id` and `text` from the `action`
 and `completed` field set to `false`
-the todos reducer that *called* it will return 
-a *new* `Array` with all *existing* items 
+the todos reducer that *called* it will return
+a *new* `Array` with all *existing* items
 and the *new* item added at the very end as a *new* todo
 to the *current* `state`
 
 *Finally* the combined reducer called `todoApp`
-will use this *new* `Array` as the new value for the todos field 
-in the *global* `state` `Object` 
-so its going to return a *new* `state` `Object` 
-where the todos field corresponds to the `Array` 
+will use this *new* `Array` as the new value for the todos field
+in the *global* `state` `Object`
+so its going to return a *new* `state` `Object`
+where the todos field corresponds to the `Array`
 with the newly added Todo item.
-The `todoApp` reducer is the "*root*" reducer in this application 
-it is the one the `store` was created with. 
-so its next state is the *next* `state` of the Redux `store` 
-and all the *listeners* are notified 
-the `render` function is *subscribed* to the `store` changes 
-so it is called *again* and it gets the *fresh* `state` 
-by calling `getState` and it passes the *fresh* todos to the Component 
+The `todoApp` reducer is the "*root*" reducer in this application
+it is the one the `store` was created with.
+so its next state is the *next* `state` of the Redux `store`
+and all the *listeners* are notified
+the `render` function is *subscribed* to the `store` changes
+so it is called *again* and it gets the *fresh* `state`
+by calling `getState` and it passes the *fresh* todos to the Component
 re-rending it with the *new* data.
 
 > Code at the *end* of Video 17:
@@ -1865,18 +1865,18 @@ to *add* the todos we dispatched the `ADD_TODO` `action`
 and in *this* lesson we are going to the `TOGGLE_TODO` `action`
 to *toggle* the *completed* `state` of the todos by clicking on them.
 
-I'm scrolling down to my React Component and I've got a `<li>` here 
-corresponding to the todo so I'm adding the `onClick` handler 
-so when the user clicks on the list item I want to dispatch an `action` 
-to my `store` with the `type` `TOGGLE_TODO` and the `id` 
+I'm scrolling down to my React Component and I've got a `<li>` here
+corresponding to the todo so I'm adding the `onClick` handler
+so when the user clicks on the list item I want to dispatch an `action`
+to my `store` with the `type` `TOGGLE_TODO` and the `id`
 of the todo being *toggled* which I get from the todo `Object`
 
-The event handler *knows* which todo it corresponds to so it is able 
-to pass its `id` in the `action`. 
-In the user interface I want the completed todos to appear crossed out. 
-so I'm adding the `style` attribute to the `<li>` 
-and I'm going to use the `textDecoration` property 
-which is going to be "line-through" (*strike-through*) 
+The event handler *knows* which todo it corresponds to so it is able
+to pass its `id` in the `action`.
+In the user interface I want the completed todos to appear crossed out.
+so I'm adding the `style` attribute to the `<li>`
+and I'm going to use the `textDecoration` property
+which is going to be "line-through" (*strike-through*)
 when `completed` is `true` and *none* when `todo.compleded` is `false`
 so I get a "normal" looking todo.
 And now if I add a couple of todos
@@ -1884,7 +1884,7 @@ I can click on them and they are going to appear toggled:
 
 ```js
 <ul>
-  {this.props.todos.map(todo => 
+  {this.props.todos.map(todo =>
     <li key={todo.id}
      onClick={() => {
       store.dispatch({
@@ -1893,8 +1893,8 @@ I can click on them and they are going to appear toggled:
       });
      }}
      style={{
-      textDecoration: 
-        todo.completed ? 
+      textDecoration:
+        todo.completed ?
           'line-through' :
           'none'
      }}
@@ -1915,39 +1915,39 @@ When you run it (*in Google Chrome Canary*) you should expect to see:
 ... And I can *toggle* them back. Isn't that *satisfying*...?
 
 Lets recap how *toggling* the todo actually *works*.
-it starts with me dispatching the `TOGGLE_TODO` `action` 
-inside my `onClick` handler with the `type` `TOGGLE_TODO` 
-and the `id` which is the `id` of the todo being rendered 
-I get the `todo` `Object` as an *argument* to the `Array.map` callback 
+it starts with me dispatching the `TOGGLE_TODO` `action`
+inside my `onClick` handler with the `type` `TOGGLE_TODO`
+and the `id` which is the `id` of the todo being rendered
+I get the `todo` `Object` as an *argument* to the `Array.map` callback
 inside my `render` method where I render all the todos
-when an `action` is dispatched the `store` will call the "*root*" reducer 
-which will call the todos reducer with the `Array` of todos 
+when an `action` is dispatched the `store` will call the "*root*" reducer
+which will call the todos reducer with the `Array` of todos
 and the `action` and in *this* case the `action` `type` is `TOGGLE_TODO`
-so the todos reducer delegates the handling of *every* todo 
+so the todos reducer delegates the handling of *every* todo
 to the `todo` reducer with a `.map` function to call it for *every* todo item.
  So the `todo` reducer receives the todo as `state` and the `action`
 again we `switch` on the `action.type` and it matches `TOGGLE_TODO` `String`
-and now for *every* todo who's `id` does not match the `id` specified 
-in the `action` we just `return` the *previous* `state` 
-that is the todo `Object` as it was 
-*however* if the `id` of the todo matches 
-the one *specified* in the `action` 
+and now for *every* todo who's `id` does not match the `id` specified
+in the `action` we just `return` the *previous* `state`
+that is the todo `Object` as it was
+*however* if the `id` of the todo matches
+the one *specified* in the `action`
 we are going to `return` a *new* `Object`
-with all the properties of the *original* todo 
-but with the `completed` field equal to 
-the *opposite* value of what it was; 
+with all the properties of the *original* todo
+but with the `completed` field equal to
+the *opposite* value of what it was;
 e.g: `completed: !state.completed`
 
-The updated todo item will be will be included in the todos field 
+The updated todo item will be will be included in the todos field
 under the *new* application `state`
-and because we `subscribe` the `render` function 
-its going to get the *next* `state` of the application 
+and because we `subscribe` the `render` function
+its going to get the *next* `state` of the application
 in `store.getState()`
-and pass the *new* version of the todos to the `TodoApp` Component. 
+and pass the *new* version of the todos to the `TodoApp` Component.
 Which is going to render the *updated* todos.
 
-*Finally* the (CSS) `style` of the `<li>` 
-depends on the `todo.completed` field which we just updated 
+*Finally* the (CSS) `style` of the `<li>`
+depends on the `todo.completed` field which we just updated
 which is why it re-renders in a crossed-out `state`.
 
 
@@ -1957,44 +1957,44 @@ which is why it re-renders in a crossed-out `state`.
 <br />
 
 #### 19. React Todo List Example (Filtering Todos)
-  
+
 > Video: https://egghead.io/lessons/javascript-redux-react-todo-list-example-filtering-todos
 
 In the previous two lessons we were working on creating the user-interface
-for the Todo List Application that displays the todos 
+for the Todo List Application that displays the todos
 lets us add new todos and "toggle" them `onClick`
-we *implemented* that by dispatching `ADD_TODO` 
-and `TOGGLE_TODO` `actions` 
+we *implemented* that by dispatching `ADD_TODO`
+and `TOGGLE_TODO` `actions`
 that we already know how to handle in our reducers.
 
-In *this* lesson we are going to dispatch `SET_VISIBILITY_FILTER` `action` 
-and use the `visibilityFilter` *field* 
-to *only* show the todos the *user* wants to see; 
-either the *completed* todos, *active* todos 
-or *all* the todos in the *current* `state`. 
+In *this* lesson we are going to dispatch `SET_VISIBILITY_FILTER` `action`
+and use the `visibilityFilter` *field*
+to *only* show the todos the *user* wants to see;
+either the *completed* todos, *active* todos
+or *all* the todos in the *current* `state`.
 
-I'm starting by creating a *new* Component, 
+I'm starting by creating a *new* Component,
 a *functional* Component called `FilterLink`
-that user needs to click to switch the *current* visible todos. 
+that user needs to click to switch the *current* visible todos.
 and the `FilterLink` accepts `filter` prop which is just a `String`
-and the `children` which is the contens of the link. 
-and its going to be a simple `<a>` ("*anchor*") tag 
-that doesn't really *link* anywhere, 
-its going to `prevent` the navigation when clicked 
-and its going to dispacth and `action` 
-with a `type` `SET_VISIBILITY_FILTER` 
-and passing the `filter` prop 
-so that the reducer knows which filter is being clicked. 
-I will pass the `children` down to the `<a>` tag 
-so the "consumer" can specify the `text` of the link 
-Now I can use it in my `TodoApp` Component. 
+and the `children` which is the content of the link.
+and its going to be a simple `<a>` ("*anchor*") tag
+that doesn't really *link* anywhere,
+its going to `prevent` the navigation when clicked
+and its going to dispatch and `action`
+with a `type` `SET_VISIBILITY_FILTER`
+and passing the `filter` prop
+so that the reducer knows which filter is being clicked.
+I will pass the `children` down to the `<a>` tag
+so the "consumer" can specify the `text` of the link
+Now I can use it in my `TodoApp` Component.
 
 Just below the todo list I'm adding a paragraph
-where I'm going to offer the user the choice 
-as to which todos should be *currently* visible 
+where I'm going to offer the user the choice
+as to which todos should be *currently* visible
 by using the `FilterLink` Component I just created.
-The `filter` prop is one of these possible values 
-such as `SHOW_ALL` which corresponds 
+The `filter` prop is one of these possible values
+such as `SHOW_ALL` which corresponds
 to showing *every* todo in the `state`
 `SHOW_ACTIVE` which means just show the todos
 that are *not* completed yet,
@@ -2024,9 +2024,9 @@ and `SHOW_COMPLETED` which means show the *completed* todos.
 </p>
 ```
 
-So I'm *copy-pasting* the `FilterLink` 
-and I'm changing the lables 
-and the filters corresponding to it 
+So I'm *copy-pasting* the `FilterLink`
+and I'm changing the labels
+and the filters corresponding to it
 running this code will give me 3 different things
 under the list of todos.
 Clicking on them will change the `state.visibilityFilter` field
@@ -2034,19 +2034,19 @@ Clicking on them will change the `state.visibilityFilter` field
 because we don't interpret the value of the `visibilityFilter`
 
 
-I'm creating a *new* function 
-that is going to help me filter the todos according to the 
+I'm creating a *new* function
+that is going to help me filter the todos according to the
 the filter value, its called `getVisibleTodos`
 it accepts two arguments: the `todos` and the `filter`
-and it *switches* on the *current* `filter` value 
+and it *switches* on the *current* `filter` value
 so if the `filter` is `SHOW_ALL`
 its going to `return` all of the todos
-but if the `filter` is `SHOW_COMPLETED` 
-its going to call `todos.filter()` 
-(*that is the `Array.filter` method*) 
-to only return those todos that have `completed` set to `true` 
-and `SHOW_ACTIVE` is going to be the *opposite* of that 
-its going to `return` *only* those todos that 
+but if the `filter` is `SHOW_COMPLETED`
+its going to call `todos.filter()`
+(*that is the `Array.filter` method*)
+to only return those todos that have `completed` set to `true`
+and `SHOW_ACTIVE` is going to be the *opposite* of that
+its going to `return` *only* those todos that
 where `completed` field is `false`.
 
 ```js
@@ -2069,37 +2069,37 @@ const getVisibleTodos = (
 }
 ```
 
-Now I need to *call* this function 
+Now I need to *call* this function
 to `filter` the todos *before* rendering them
 so in the `render` function of the `TodoApp` Component
 I get the `visibleTodos` by calling the `getVisibleTodos`
-with the `todos` and the `visibilityFilter` *values* from my props 
+with the `todos` and the `visibilityFilter` *values* from my props
 and I'm going to *use* the `visibleTodos` *instead* of
-`this.props.todos` when I enumerate them for rendering. 
+`this.props.todos` when I enumerate them for rendering.
 
-> Code snapshot for Video 19 @ 03:45: 
+> Code snapshot for Video 19 @ 03:45:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/5e0622c277a37a478c887ba27e521474a5d480ad/index.html#L83-L128)
 
-*Finally* I now use the `visibilityFilter` inside my `TodoApp` Component 
+*Finally* I now use the `visibilityFilter` inside my `TodoApp` Component
 so I need to pass it as a prop
-and I can do this *explicitly* 
-but its *easier* just to "spread" over *all* the `state` fields 
-so *every* property of the `state` `Object` is passed 
-as a prop to the `TodoApp` Component 
-this way it receives the `visibilityFilter` 
+and I can do this *explicitly*
+but its *easier* just to "spread" over *all* the `state` fields
+so *every* property of the `state` `Object` is passed
+as a prop to the `TodoApp` Component
+this way it receives the `visibilityFilter`
 and if I *add* some todo items and then click on them
-so I change their `completed` fields 
-and then click on the `visibilityFilter` links 
-the *currently* visible todos are rendered according 
-to the *chosen* `visibilityFilter`. 
+so I change their `completed` fields
+and then click on the `visibilityFilter` links
+the *currently* visible todos are rendered according
+to the *chosen* `visibilityFilter`.
 
-The links look all the same right now 
-but we want to highlight the *chosen* one. 
-To *implement* this, we're going to need the `visibilityFilter` prop 
+The links look all the same right now
+but we want to highlight the *chosen* one.
+To *implement* this, we're going to need the `visibilityFilter` prop
 which says which is the *current* one.
-I'm changing the *beginning* of the `render` method 
-to "*destructure*" the `todos` and `visibilityFilter` from the props 
-so I can access them *directly* without typing `this.props` every time. 
+I'm changing the *beginning* of the `render` method
+to "*destructure*" the `todos` and `visibilityFilter` from the props
+so I can access them *directly* without typing `this.props` every time.
 
 > ***NOTE***: [**ES6** ***Destructuring assignment***](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 is ***not supported*** in Chrome yet, so I'm not using this in the code example.
@@ -2119,65 +2119,65 @@ const todos = this.props.tods, visibilityFilter = this.props.visibilityFilter
 ```
 
 and I'm going to pass the `visibilityFilter` to every `FilterLink`
-so it can *know* which `filter` is the *current* one 
-and *apply* different styling 
-if the `currentFilter` matches the `FilterLink`'s *own* filter. 
+so it can *know* which `filter` is the *current* one
+and *apply* different styling
+if the `currentFilter` matches the `FilterLink`'s *own* filter.
 
-After passing the `currentFilter` prop to every `FilterLink` 
+After passing the `currentFilter` prop to every `FilterLink`
 I go back to the `FilterLink` declaration and I'm adding
-`currentFilter` as a prop to it and I'm adding a *condition* 
-that says that when the `filter` is the `currentFilter` 
-that is when the link is *active* 
+`currentFilter` as a prop to it and I'm adding a *condition*
+that says that when the `filter` is the `currentFilter`
+that is when the link is *active*
 I want to `return` a `<span>` instead of a link
-because I don't want it to be *clickable*, 
-I want it to be *static* text 
-this completes the user-interface of our Todo List example 
+because I don't want it to be *clickable*,
+I want it to be *static* text
+this completes the user-interface of our Todo List example
 it lets us *add* items, it lets us *view* items,
-toggle them as *completed* 
-and when we `switch` the `visibilityFilter` 
-it displays only *relevant* todos 
-and it *also* updates the link *appearance* 
+toggle them as *completed*
+and when we `switch` the `visibilityFilter`
+it displays only *relevant* todos
+and it *also* updates the link *appearance*
 so we see which link is *active*.
 
 Lets recap how changing the `visibilityFilter` *works*
-it starts with a dispatch call with an `action` 
-of the `type: 'SET_VISIBILITY_FILTER'` 
-and it passes `filter` which is a prop to the `FilterLink` Component 
-so every one of those 3 links is going to have a different `filter` prop 
+it starts with a dispatch call with an `action`
+of the `type: 'SET_VISIBILITY_FILTER'`
+and it passes `filter` which is a prop to the `FilterLink` Component
+so every one of those 3 links is going to have a different `filter` prop
 it passes in the `action`.
 The `store.dispatch` function will call our *root* reducer with
-the `state` and the `action` which in turn 
-will call the `visibilityFilter` reducer 
-with the *part* of the `state` and the `action`. 
-Note that when the `action.type` is `SET_VISIBILITY_FILTER` 
-it doesn't *care* for the *previous* `state` 
-it just returns the `action.filter` as the *next* value, 
-the next `state` of the `visibilityFilter` reducer 
+the `state` and the `action` which in turn
+will call the `visibilityFilter` reducer
+with the *part* of the `state` and the `action`.
+Note that when the `action.type` is `SET_VISIBILITY_FILTER`
+it doesn't *care* for the *previous* `state`
+it just returns the `action.filter` as the *next* value,
+the next `state` of the `visibilityFilter` reducer
 the root reducer will *use* this new field as part of its *new*
 `state` `Object` and because the `render` function is
-*subscribed* to the `store` changes ( `store.subscribe(render);` ) 
-its going to get this *new* `state` `Object` 
-and pass all its keys as props to the `TodoApp` Component 
-so the `TodoApp` Component will receive the todos 
-and the *updated* `visibilityFilter` as its' props 
-both its props are passed to the `getVisibleTodos` function 
-which calculates the *currently* `visibleTodos` 
-according to a list of *all* `todos` and the `visibilityFilter` 
+*subscribed* to the `store` changes ( `store.subscribe(render);` )
+its going to get this *new* `state` `Object`
+and pass all its keys as props to the `TodoApp` Component
+so the `TodoApp` Component will receive the todos
+and the *updated* `visibilityFilter` as its' props
+both its props are passed to the `getVisibleTodos` function
+which calculates the *currently* `visibleTodos`
+according to a list of *all* `todos` and the `visibilityFilter`
 and the `filter` is just a `String` saying
-`SHOW_ALL`, `SHOW_COMPLETED` or `SHOW_ACTIVE` 
-and the returned value is a *new* `Array` of todos 
-that in some cases filters them and in some cases returns as is 
-and the `SHOW_COMPLETED` and `SHOW_ACTIVE` are 
-only different in their *predicates*. 
+`SHOW_ALL`, `SHOW_COMPLETED` or `SHOW_ACTIVE`
+and the returned value is a *new* `Array` of todos
+that in some cases filters them and in some cases returns as is
+and the `SHOW_COMPLETED` and `SHOW_ACTIVE` are
+only different in their *predicates*.
 
-The `return` value is the `Array` of `visibleTodos` and it is used 
+The `return` value is the `Array` of `visibleTodos` and it is used
 in the `render` function to actually enumerate every `todo`
-and *render* it 
-and the `visibilityFilter` field is also used byt the `FilterLink`
+and *render* it
+and the `visibilityFilter` field is also used by the `FilterLink`
 as the `currentFilter` because the `FilterLink` wants to know
-whether its `filter` is the *current* one 
-in order to `render` a `<span>` instead of a link (`<a>` tag). 
-This is how clicking a link makes it appear selected 
+whether its `filter` is the *current* one
+in order to `render` a `<span>` instead of a link (`<a>` tag).
+This is how clicking a link makes it appear selected
 and changes the *currently* displayed items in the list.
 
 > Code at the *end* of Video 19:
@@ -2189,55 +2189,55 @@ and changes the *currently* displayed items in the list.
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-presentational-components-todo-todolist
 
-In the last few lessons we created the user interface for a simple 
-React and Redux Todo List where I can add items, toggle them 
-as completed and change the *currently* visible Todos 
-and we do that by having a *single* `TodoApp` Component 
-that the `<input>`, the `<button>` for *adding* todos 
-the *list* of *currently* visible todos with `onClick` handler 
-and it has these 3 links that let us change 
+In the last few lessons we created the user interface for a simple
+React and Redux Todo List where I can add items, toggle them
+as completed and change the *currently* visible Todos
+and we do that by having a *single* `TodoApp` Component
+that the `<input>`, the `<button>` for *adding* todos
+the *list* of *currently* visible todos with `onClick` handler
+and it has these 3 links that let us change
 the *currently* visible todos.
 The *single* Component approach worked so far,
-however we really want to have *many* components 
-that can be used tested and changed by different people separately 
-so we are going to re-factor our application in this lesson. 
+however we really want to have *many* components
+that can be used tested and changed by different people separately
+so we are going to re-factor our application in this lesson.
 
-The first Component I want to *extract* from the `TodoApp` Component 
+The first Component I want to *extract* from the `TodoApp` Component
 is the `Todo` Component that renders a *single* `<li>`
-I'm declaring the `Todo` Component as a function 
-which React 0.14 allows me to do. 
-I'm not *sure* which props its going to have 
-so I will leave them blank for now 
-and I will just *paste* the `<li>` I coppied before. 
+I'm declaring the `Todo` Component as a function
+which React 0.14 allows me to do.
+I'm not *sure* which props its going to have
+so I will leave them blank for now
+and I will just *paste* the `<li>` I copied before.
 
 The first thing I am doing is *removing* the special `key` property
-because it's only needed when I am enumerating an `Array` 
-and I will use it *later* when enumerating *many* todos. 
+because it's only needed when I am enumerating an `Array`
+and I will use it *later* when enumerating *many* todos.
 One of my goals with this refactoring is to make every Component
 as flexible as it is *reasonable*.
 Right now I have *hard-coded* that *clicking* a todo always
-causes the `TOGGLE_TODO` `action` 
-and this is perfectly fine to do in your app 
-however I prefer to have a bunch of Components 
-that don't specify any *behaviours* 
-and that are *only* concerned with how things *look* 
-or how they `render` and I call such Components 
-the "*presentational*" Components 
-I would like to keep `Todo` a "*Presentational*" Component 
-so I *remove* the `onClick` handler and I promote it to be a prop 
-so that anyone who uses the `Todo` Component 
-can specify what happens on the *click* 
-and you don't *have* to do this in your Redux apps 
-but I find it to be a very *convenient* pattern. 
+causes the `TOGGLE_TODO` `action`
+and this is perfectly fine to do in your app
+however I prefer to have a bunch of Components
+that don't specify any *behaviors*
+and that are *only* concerned with how things *look*
+or how they `render` and I call such Components
+the "*presentational*" Components
+I would like to keep `Todo` a "*Presentational*" Component
+so I *remove* the `onClick` handler and I promote it to be a prop
+so that anyone who uses the `Todo` Component
+can specify what happens on the *click*
+and you don't *have* to do this in your Redux apps
+but I find it to be a very *convenient* pattern.
 *Finally* while it does not make a lot of difference,
-I prefer to keep it explicit what is the `data` 
-that the Component needs to `render` 
-so instead of passing a `todo` `Object` 
-I pass `completed` and `text` fields as *separate* props. 
-note: how the `Todo` Component 
-is now a *purely* "*Presentational*" Component 
-and does not specify *any* behaviour 
-but it *knows* how to `render` a todo. 
+I prefer to keep it explicit what is the `data`
+that the Component needs to `render`
+so instead of passing a `todo` `Object`
+I pass `completed` and `text` fields as *separate* props.
+note: how the `Todo` Component
+is now a *purely* "*Presentational*" Component
+and does not specify *any* behavior
+but it *knows* how to `render` a todo.
 
 ```js
 const Todo = ({
@@ -2245,11 +2245,11 @@ const Todo = ({
   completed,
   text
 }) => (
-<li 
+<li
   onClick={onClick}
   style={{
-  textDecoration: 
-    completed ? 
+  textDecoration:
+    completed ?
       'line-through' :
       'none'
   }}
@@ -2259,28 +2259,28 @@ const Todo = ({
 );
 ```
 
-The *next* Component I create is called `TodoList` 
-and it's *also* a "*Presentational*" Component 
-its *only* concerned with how things *look* 
-and it accepts an `Array` of todos 
+The *next* Component I create is called `TodoList`
+and it's *also* a "*Presentational*" Component
+its *only* concerned with how things *look*
+and it accepts an `Array` of todos
 and is going to `render` an `<ul>` (*unordered list*) of them
-by calling the todos `map` function (`Array.map`) 
-and rendering a Todo component for every todo. 
-it tells React to use `todo.id` as the unique `key` for the elements 
-and it *spreads* over the `todo` `Object` properties 
-so that `text` and `completed` end up as props on `Todo` Component 
-now I need to *specify* what happens when a `Todo` is clicked 
-and I *could* have dispatched an `action` here 
-and again, that would be *fine* 
-but I want it to be a "*Presentational*" Component 
-so I'm going to call *another* function 
-called `onTodoClick` and pass the `id` of the `todo` 
-and let it decide what should happen 
-so `onTodoClick` is another prop for the `TodoList` 
-both `Todo` and `TodoList` are "*Presentational*" Components 
-so we need something I call "*Container*" Components 
-to actually pass the data from the `store` 
-and to specify the behaviour
+by calling the todos `map` function (`Array.map`)
+and rendering a Todo component for every todo.
+it tells React to use `todo.id` as the unique `key` for the elements
+and it *spreads* over the `todo` `Object` properties
+so that `text` and `completed` end up as props on `Todo` Component
+now I need to *specify* what happens when a `Todo` is clicked
+and I *could* have dispatched an `action` here
+and again, that would be *fine*
+but I want it to be a "*Presentational*" Component
+so I'm going to call *another* function
+called `onTodoClick` and pass the `id` of the `todo`
+and let it decide what should happen
+so `onTodoClick` is another prop for the `TodoList`
+both `Todo` and `TodoList` are "*Presentational*" Components
+so we need something I call "*Container*" Components
+to actually pass the data from the `store`
+and to specify the behavior
 
 ```js
 const TodoList = ({
@@ -2289,46 +2289,46 @@ const TodoList = ({
 }) => (
   <ul>
     {todos.map(todo =>
-      <Todo 
+      <Todo
         key={todo.id}
         {...todo}
         onClick={() => onTodoClick(todo.id)}
       />
     )}
-  </ul> 
+  </ul>
 ```
 
-In this case the top-level `TodoApp` Component 
-acts as a "*Container*" Components 
-and we will see more examples of "*Container*" Components 
-in the future lessons. 
+In this case the top-level `TodoApp` Component
+acts as a "*Container*" Components
+and we will see more examples of "*Container*" Components
+in the future lessons.
 In this case you just render the `TodoList` with `visibleTodos`
-as the `todos` and with a callback that says 
-that when `onTodoClick` is called with a `todo.id` 
-we should dispatch an `action` on the `store` 
+as the `todos` and with a callback that says
+that when `onTodoClick` is called with a `todo.id`
+we should dispatch an `action` on the `store`
 with the `type` `TOGGLE_TODO` and the `id` of the `todo`.
 
 ```js
-<TodoList 
+<TodoList
   todos={visibleTodos}
   onTodoClick={id =>
     store.dispatch({
       type: 'TOGGLE_TODO',
-      id // where is id value?
+      id
     })
   } />
 ```
 
 Let's recap again how this works:
-The `TodoApp` Component renders a `TodoList` 
-and it passes a function to it 
-that can dispatch an `action` 
-the `TodoList` Component renders the `Todo` Component 
-and passes `onClick` prop which calls `onTodoClick` 
-the `Todo` Component uses the `onClick` prop it receives 
-and binds it to the `<li>` `onClick` 
-this way when its called the `onTodoClick` is called 
-and this dispatches the `action` and updates the `visibleTodos` 
+The `TodoApp` Component renders a `TodoList`
+and it passes a function to it
+that can dispatch an `action`
+the `TodoList` Component renders the `Todo` Component
+and passes `onClick` prop which calls `onTodoClick`
+the `Todo` Component uses the `onClick` prop it receives
+and binds it to the `<li>` `onClick`
+this way when its called the `onTodoClick` is called
+and this dispatches the `action` and updates the `visibleTodos`
 because the `action` updates the `store`.
 
 > Complete Code at the *end* of Video 20:
@@ -2340,19 +2340,19 @@ because the `action` updates the `store`.
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-presentational-components-addtodo-footer-filterlink
 
-In the previous lesson I extracted the `Todo` and `TodoList` 
-Components from the `TodoApp` Component. 
-In this lesson I will continue extracting 
-other "*Presentational*" Components to separate the *looks* 
-from the *behaviour*. 
+In the previous lesson I extracted the `Todo` and `TodoList`
+Components from the `TodoApp` Component.
+In this lesson I will continue extracting
+other "*Presentational*" Components to separate the *looks*
+from the *behavior*.
 Now I want to extract the `<input>` and the `<button>`
-into a separate Component called `AddTodo`. 
-I'm declaring `AddTodo` as a "*Functional* Component" 
-that does not accept any props 
-and I'm going to `return` these 
-*copy-pasted*  `<input>` and `<button>` 
-but I'm wrapping them in a `<div>` because 
-a (React) Component needs to have a *single* root element. 
+into a separate Component called `AddTodo`.
+I'm declaring `AddTodo` as a "*Functional* Component"
+that does not accept any props
+and I'm going to `return` these
+*cut-pasted*  `<input>` and `<button>`
+but I'm wrapping them in a `<div>` because
+a (React) Component needs to have a *single* root element.
 
 ```js
 const AddTodo = () => {
@@ -2369,49 +2369,49 @@ const AddTodo = () => {
         });
         this.input.value = '';
       }}>
-        Add Todo 
-      </button> 
+        Add Todo
+      </button>
     </div>
   );
 }
 ```
 
-The *Functional* Components don't have instances 
-however instead of using `this`, 
+The *Functional* Components don't have instances
+however instead of using `this`,
 I can use a *local* variable called `input`
-that I'm going to "*close over*" so that I can write to it 
-in the callback ref and I can read from it in the event handler. 
-Like previously I want it to be a "*Presentational*" Component 
-and not specify behaviour 
-so I'm just calling a function called `onAddClick` 
-passing the *current* `input` value and I make `onAddClick` a prop 
-so that the Component that *uses* `AddTodo` 
+that I'm going to "*close over*" so that I can write to it
+in the callback ref and I can read from it in the event handler.
+Like previously I want it to be a "*Presentational*" Component
+and not specify behavior
+so I'm just calling a function called `onAddClick`
+passing the *current* `input` value and I make `onAddClick` a prop
+so that the Component that *uses* `AddTodo`
 can specify what happens when `Add` button is clicked.
 
-Again, the `TodoApp` Component acts as a "*Container*" Component 
-for the `AddTodo` and it specifies that when the *add* `<button>` 
-is clicked we should dispatch an action with the `type: 'ADD_TODO'` 
-the corresponding `text` and the `nextTodoId`. 
+Again, the `TodoApp` Component acts as a "*Container*" Component
+for the `AddTodo` and it specifies that when the *add* `<button>`
+is clicked we should dispatch an action with the `type: 'ADD_TODO'`
+the corresponding `text` and the `nextTodoId`.
 
-The *last* Component I want to extract is the *footer* which contains 
-all these three `FilterLink`. 
-I'm creating a *new* "*Functional*" Component called `footer` 
-and I'm not sure which props it needs so I skip them 
-and I *paste* the markup. 
-It seems that the `FilterLink` need the `visbilityFilter` 
+The *last* Component I want to extract is the *footer* which contains
+all these three `FilterLink`.
+I'm creating a *new* "*Functional*" Component called `footer`
+and I'm not sure which props it needs so I skip them
+and I *paste* the markup.
+It seems that the `FilterLink` need the `visbilityFilter`
 so I add it as a prop.
-I would like the `Footer` and the `FilterLink` to be 
-"*Presentational*" Components 
-however the `FilterLink` currently includes a `store.dispatch` call. 
-I'm replacing it with an `onClick` call 
-and I pass the `filter` as the single parameter 
-for the calling Component's convenience 
-I add `onClick` to the props and now I need to specify it 
-every time `FilterLink` is used 
-so I add `onFilterClick` to the `Footer` 
+I would like the `Footer` and the `FilterLink` to be
+"*Presentational*" Components
+however the `FilterLink` currently includes a `store.dispatch` call.
+I'm replacing it with an `onClick` call
+and I pass the `filter` as the single parameter
+for the calling Component's convenience
+I add `onClick` to the props and now I need to specify it
+every time `FilterLink` is used
+so I add `onFilterClick` to the `Footer`
 and I pass `onClick={onFilterClick}` for every link in the `Footer`
 so what ever we pass to the `Footer` as `onFilterClick` prop is
-going to end up in the `FilterLink` as `onClick`. 
+going to end up in the `FilterLink` as `onClick`.
 
 ```js
 const Footer = ({
@@ -2422,7 +2422,7 @@ const Footer = ({
     Show:
     {' '}
     <FilterLink
-      filter='SHOW_ALL' 
+      filter='SHOW_ALL'
       currentFilter={visibilityFilter}
       onClick={onFilterClick}
     >
@@ -2430,7 +2430,7 @@ const Footer = ({
     </FilterLink>
     {' '}
     <FilterLink
-      filter='SHOW_ACTIVE' 
+      filter='SHOW_ACTIVE'
       currentFilter={visibilityFilter}
       onClick={onFilterClick}
     >
@@ -2438,7 +2438,7 @@ const Footer = ({
     </FilterLink>
     {' '}
     <FilterLink
-      filter='SHOW_COMPLETED' 
+      filter='SHOW_COMPLETED'
       currentFilter={visibilityFilter}
       onClick={onFilterClick}
     >
@@ -2449,19 +2449,19 @@ const Footer = ({
 ```
 
 
-Now I can use the `Footer` Component I just defined 
-inside my `TodoApp` Component 
-and I need to pass *two* props 
-one of them is the `visibilityFilter` so it can highlight the *active* link 
-and another prop is `onFilterClick` where I say that 
-whenever a `Filter` is clicked I want to dispatch an `action` 
+Now I can use the `Footer` Component I just defined
+inside my `TodoApp` Component
+and I need to pass *two* props
+one of them is the `visibilityFilter` so it can highlight the *active* link
+and another prop is `onFilterClick` where I say that
+whenever a `Filter` is clicked I want to dispatch an `action`
 with the `type: 'SET_VISIBILITY_FILTER'` and the `filter` being clicked.
 
 ```js
 // inside the TodoApp Component:
 
-  <Footer 
-    visibilityFilter={visibilityFilter} 
+  <Footer
+    visibilityFilter={visibilityFilter}
     onFilterClick={filter =>
       store.dispatch({
         type: 'SET_VISIBILITY_FILTER',
@@ -2474,19 +2474,19 @@ with the `type: 'SET_VISIBILITY_FILTER'` and the `filter` being clicked.
 ```
 
 *Finally* I just noticed that the `TodoApp` Component doesn't actually
-*have* to be a `Class`, I can turn it into a `function` 
-and I prefer to do that when possible. 
+*have* to be a `Class`, I can turn it into a `function`
+and I prefer to do that when possible.
 Instead of `destructuring` the props inside the `render` method
-I am now doing it inside the arugments.
+I am now doing it inside the arguments.
 I can remove now the `destructuring` and I can also remove
-the `render` method declaration 
-the `visibleTodos` are only used in a *single* place 
-so I'm moving the `getVisibleTodos` call 
-to the `TodoList` `todos` prop declaration. 
+the `render` method declaration
+the `visibleTodos` are only used in a *single* place
+so I'm moving the `getVisibleTodos` call
+to the `TodoList` `todos` prop declaration.
 
-Now the body of my function is just a *single* expression 
-so I can get rid of the `return` statement 
-and *un-indent* the code to make it look nicer. 
+Now the body of my function is just a *single* expression
+so I can get rid of the `return` statement
+and *un-indent* the code to make it look nicer.
 
 > Full code snapshot for Video 21 @ 04:12:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/6577aa2eb0256fca4aba7bf1694d998e9f128100/index.html)
@@ -2526,7 +2526,7 @@ and it specifies the `onClick` handler as calling `onTodoClick`
 with the `id` of the particular todo 
 the `Todo` Component is defined above 
 and it is also a "*Presentational*" Component 
-so it doesn't specify the behaviour 
+so it doesn't specify the behavior 
 it says that when a `<li>` is *clicked* 
 it should call the `onClick` handler 
 being a "*Presentational*" Component it specifies how the Component *looks* 
@@ -2556,7 +2556,7 @@ the `Footer` delegates handling the *click* of the `FilterLink`
 to its own prop called `onFilterClick`. 
 
 *Finally* the `TodoApp` Component being the "*Container*" Component 
-in our application specifies the *behaviour* 
+in our application specifies the *behavior* 
 which in this case means that when the `FilterLink` is *clicked* 
 it should dispatch and `action` with the `action` 
 `type: 'SET_VISIBILITY_FILTER` and the *new* `filter`. 
@@ -2584,7 +2584,7 @@ many intermediate "*Container*" Components as we will see in the next lesson.
 
 In the previous lesson we separated the "*Presentational*" Components 
 from the the main "*Container*" Component 
-the `TodoApp` specifies the *behaviours* 
+the `TodoApp` specifies the *behaviors* 
 such as what happens when the **Add** `<button>` is clicked 
 how the todos are selected 
 what happens when a *single* `Todo` has been clicked 
@@ -2592,7 +2592,7 @@ and what happens when a `Footer` Link is clicked.
 And the components such as `AddTodo`, the `TodoList`, the `Todo` its' self 
 the `Footer` and the `FilterLink` they don't dispatch actions 
 they call their callbacks [passed] in the props 
-so they are *only* responsible for the *looks* but not for the behaviour. 
+so they are *only* responsible for the *looks* but not for the behavior. 
 The downside of this approach is that 
 I have to pass a lot of props down the "tree" 
 even when the *intermediate* Components don't really *use* them 
@@ -2625,19 +2625,19 @@ const Footer = () => (
     Show:
     {' '}
     <FilterLink
-      filter='SHOW_ALL' 
+      filter='SHOW_ALL'
     >
     All
     </FilterLink>
     {' '}
     <FilterLink
-      filter='SHOW_ACTIVE' 
+      filter='SHOW_ACTIVE'
     >
     Active
     </FilterLink>
     {' '}
     <FilterLink
-      filter='SHOW_COMPLETED' 
+      filter='SHOW_COMPLETED'
     >
     Completed
     </FilterLink>
@@ -2651,13 +2651,13 @@ and it might start to seem a lot like the code *before*
 separating the "*Presentational*" Components 
 however what I want to do here is a little bit different.
 
-The `FilterLink` does not *currently* specify the behaviour 
+The `FilterLink` does not *currently* specify the behavior 
 for clicking on the link 
 it also needs the `currentFilter` 
 to tell whether it should be rendered as *active*
 therefore its a bit "*dishonest*" to say that `FilterLink` 
 is a "*Presentational*" Component 
-because it is inseperable from its *behaviour* 
+because it is inseparable from its *behavior* 
 the only *reasonable* reaction to clicking on it 
 is setting the `visibilityFilter` by dispatching an `action` 
 this is why I am changing it to a *different* "*Presentational*" Component 
@@ -2689,42 +2689,42 @@ const Link = ({
 
 ```
 
-The `Link` Component doesn't know *anything* about the `Filter` 
-it only accepts the `active` prop and calls its `onClick` handler 
-it is *only* concerned with rendering 
-however I am *also* creating another Component called `FilterLink` 
+The `Link` Component doesn't know *anything* about the `Filter`
+it only accepts the `active` prop and calls its `onClick` handler
+it is *only* concerned with rendering
+however I am *also* creating another Component called `FilterLink`
 and its going to be a `Class` this time.
-It's going to `render` the `Link` 
+It's going to `render` the `Link`
 with the *current* data from the `store`.
-It's going to read the props, the Component props 
-and it's going to read the `state` 
-but I don't mean the *React* `state` 
-I mean the Redux `store` state 
-it gets by calling `store.getState()`. 
-As a "*Container*" Component the `FilterLink` 
-doesn't have its *own* markup 
-and it delegates rendering to the `Link` 
+It's going to read the props, the Component props
+and it's going to read the `state`
+but I don't mean the *React* `state`
+I mean the Redux `store` state
+it gets by calling `store.getState()`.
+As a "*Container*" Component the `FilterLink`
+doesn't have its *own* markup
+and it delegates rendering to the `Link`
 "*Presentational*" Component.
-In this case it *calculates* its' `active` prop 
-by comparing its *own* `filter` prop 
-with the `visibilityFilter` in the Redux `store` `state`. 
-The `filter` prop is the one that is passed 
-to the `FilterLink` from the `Footer` 
-and the `visibilityFilter` corresponds to the 
-*currently* chosen `visibilityFilter` 
-that is held in the Redux `store` `state`. 
+In this case it *calculates* its' `active` prop
+by comparing its *own* `filter` prop
+with the `visibilityFilter` in the Redux `store` `state`.
+The `filter` prop is the one that is passed
+to the `FilterLink` from the `Footer`
+and the `visibilityFilter` corresponds to the
+*currently* chosen `visibilityFilter`
+that is held in the Redux `store` `state`.
 and if they *match* we want the `Link` to appear *active*
-(*un-clickable*). 
-The "*Container*" Component also needs to specify the *behaviour* 
-so in this case the `FilterLink` 
-specifies that when this particular link is *clicked* 
+(*un-clickable*).
+The "*Container*" Component also needs to specify the *behavior*
+so in this case the `FilterLink`
+specifies that when this particular link is *clicked*
 we should dispatch the `action` with the `type: 'SET_VISIBILITY_FILTER'`
-and the `filter` value that we take from the props 
-the `FilterLink` may accept "*Children*" 
-which are used as the *contents* of the `Link` 
-so we are going to pass the *children* down 
+and the `filter` value that we take from the props
+the `FilterLink` may accept "*Children*"
+which are used as the *contents* of the `Link`
+so we are going to pass the *children* down
 to the `Link` Component which is going to `render` them
-inside the `<a>` tag. 
+inside the `<a>` tag.
 
 ```js
 class FilterLink extends Component {
@@ -2733,7 +2733,7 @@ class FilterLink extends Component {
     const state = store.getState();
 
     return (
-      <Link 
+      <Link
         active={
           props.filter ===
           state.visibilityFilter
@@ -2752,29 +2752,29 @@ class FilterLink extends Component {
 }
 ```
 
-There is a *small problem* with this implementation of `FilterLink` 
-inside the `render` method it reads the *current* `state` 
-of the Redux `store` however it is not *subscribed* to this `store`. 
-So if the *Parent* Component does not update when 
-the `store` is updated its going to render the "*stale*" value. 
+There is a *small problem* with this implementation of `FilterLink`
+inside the `render` method it reads the *current* `state`
+of the Redux `store` however it is not *subscribed* to this `store`.
+So if the *Parent* Component does not update when
+the `store` is updated its going to render the "*stale*" value.
 
-Currently we re-render the *whole* application when the `state` changes 
-however this is *not* very efficient 
-so in future we will instead move the *subscription* to the `store` 
-to the lifecycle methods of the "*Container*" Components. 
-React provides a *special* `forceUpdate` method 
-on the Component instances to *force* their re-rendering 
-and we're going to use it together with `store.subscribe` method 
-so that any time the `store` `state` changes 
-we `forceUpdate` the "*Container*" Components. 
-We perform the subscription inside the `componentDidMount` 
-lifecycle method so its important to 
-to *unsubscribe* inside the `componentWillUnmount` method. 
+Currently we re-render the *whole* application when the `state` changes
+however this is *not* very efficient
+so in future we will instead move the *subscription* to the `store`
+to the lifecycle methods of the "*Container*" Components.
+React provides a *special* `forceUpdate` method
+on the Component instances to *force* their re-rendering
+and we're going to use it together with `store.subscribe` method
+so that any time the `store` `state` changes
+we `forceUpdate` the "*Container*" Components.
+We perform the subscription inside the `componentDidMount`
+lifecycle method so its important to
+to *unsubscribe* inside the `componentWillUnmount` method.
 
 ```js
 class FilterLink extends Component {
   componentDidMount() {
-    this.unsubscribe = store.subscribe(() => 
+    this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
   }
@@ -2788,7 +2788,7 @@ class FilterLink extends Component {
     const state = store.getState();
 
     return (
-      <Link 
+      <Link
         active={
           props.filter ===
           state.visibilityFilter
@@ -2809,33 +2809,33 @@ class FilterLink extends Component {
 ```
 
 Note that we don't actually have the `unsubscribe` method,
-but this is the returned value of the `store.subscribe` method 
-so we can keep it and then *call* it in `componentWillUnmount`. 
+but this is the returned value of the `store.subscribe` method
+so we can keep it and then *call* it in `componentWillUnmount`.
 
 Let's re-cap this part:
-the `FilterLink` Component subscribes to the `store` 
-calling `forceUpdate` any time the `store` changes 
-so it can `render` the *current* `state` of the `store`. 
-it saves the *reference* to the `unsubscribe` function 
-returned by `store.subscribe` 
-and it *invokes* it when the Component is about to *Unmount* 
-to clean up the subscription. 
+the `FilterLink` Component subscribes to the `store`
+calling `forceUpdate` any time the `store` changes
+so it can `render` the *current* `state` of the `store`.
+it saves the *reference* to the `unsubscribe` function
+returned by `store.subscribe`
+and it *invokes* it when the Component is about to *Unmount*
+to clean up the subscription.
 
-Let's re-cap the relationship between the  
-`FilterLink` "*Container*" Component 
+Let's re-cap the relationship between the
+`FilterLink` "*Container*" Component
 and the `Link` "*Presentational*" Component:
 The `Link` Component only specifies the *appearance* of a link
-when it is *active* or *inactive* 
-but it doesn't know about the behaviour. 
-The `FilterLink` Component is a *Container* 
-so it provides the *data* and the *behaviour* for 
-the "*Presentational*" Component. 
-When it mounts it subscribes to the `store` so 
-it *independently* re-renders when the `store` `state` changes 
-because it needs to use the `store` *current* `state` 
-inside its `render` method. 
-Instead of specifying the DOM tree 
-it delegates all the rendering to 
+when it is *active* or *inactive*
+but it doesn't know about the behavior.
+The `FilterLink` Component is a *Container*
+so it provides the *data* and the *behavior* for
+the "*Presentational*" Component.
+When it mounts it subscribes to the `store` so
+it *independently* re-renders when the `store` `state` changes
+because it needs to use the `store` *current* `state`
+inside its `render` method.
+Instead of specifying the DOM tree
+it delegates all the rendering to
 the `Link` "*Presentational*" Component 
 and its' only job is to calculate the props 
 base on its *own* props and the *current* `state` of the Redux `store` 
@@ -2854,9 +2854,9 @@ The `FilterLink` is a "*Container*" Component
 so it is completely self-sufficient 
 and can be used inside the "*Presentational*" Components such as
 `Footer` without passing additional props 
-to get the data from the `store` and specify the behaviour 
+to get the data from the `store` and specify the behavior 
 this lets us keep the `Footer` Component simple 
-and de-coupled from the behaviour and data 
+and de-coupled from the behavior and data 
 that its' child Components need. 
 
 
@@ -2873,7 +2873,7 @@ In the previous lesson I separated the
 `Link` "*Presentational*" Component from the 
 `FilterLink` "*Container*" Component 
 that is subscribed to the Redux `store` 
-and that provides the *data* and the *behaviour* 
+and that provides the *data* and the *behavior* 
 for the `Link` Component it renders.
 While it makes the data flow a little bit *less* explicit 
 it makes it easier to use `FilterLink` in 
@@ -2898,13 +2898,13 @@ and I'm using the `getVisibleTodos` function
 to calculate the *currently* visible todos 
 based on all the todos from the Redux `store` 
 and the *current* `visibilityFilter` from the Redux `store` `state` 
-and I'm specifying the *behaviour* as well 
+and I'm specifying the *behavior* as well 
 I'm saying that when the todo is *clicked* 
 we should dispatch an `action` with `type: 'TOGGLE_TODO'`
 and the `id` of the todo being clicked.
 All "*Container*" Components are similar 
 their job is to *connect* a "*Presentational*" Component 
-to the Redux `store` and specify the data and the behaviour 
+to the Redux `store` and specify the data and the behavior 
 that it needs. 
 
 ```js
@@ -2932,7 +2932,7 @@ class VisibleTodoList extends Component {
 ```
 
 I'm scrolling up to the `FilterLink` *Container* Component 
-I wrote in the *previous* lesson to *copy-paste* 
+I wrote in the *previous* lesson to *cut-paste* 
 the `store` *subscription* logic:
 
 ```js
@@ -2958,9 +2958,9 @@ and we no longer have to pass all the props from the top.
 *Finally* in the *previous* lesson 
 I made `AddTodo` a *Presentational* Component 
 but I'm going to ***back-track*** on this now. 
-I will *copy-paste* the `dispatch` call back inline 
+I will *cut-paste* the `dispatch` call back inline 
 into the `onClick` handler inside the Component 
-because there isn't really a lot of presentation or *behaviour* here 
+because there isn't really a lot of presentation or *behavior* here 
 and its *easier* to keep them together 
 until we figure out how to split the *presentation*. 
 For example if in the *future* we're going to have something 
@@ -3008,11 +3008,11 @@ The *first* Component I'm looking at is called `AddTodo`
 and frankly I can't classify it either as a *Presentational* Component 
 *or* as a *Container* Component because it doesn't fit either category.
 The `<input>` and the `<button>` are the *Presentational* part 
-but dispatching an `action` `onClick` is the *behaviour* 
+but dispatching an `action` `onClick` is the *behavior* 
 which is *usually* specified by the *Container* 
 however in *this* case I'd rather keep them together 
 because there isn't any `state`, the **UI** is *very simple* 
-and its hard to imagine any *other* behaviour 
+and its hard to imagine any *other* behavior 
 other than dispatching the `ADD_TODO` `action`. 
 
 The *second* Component I render inside the `TodoApp` is 
@@ -3037,7 +3037,7 @@ so it *subscribes* to the `store`
 and it renders the *Presentational* Component called `Link` 
 calculating weather it should be *active* based on its' props 
 the *current* Redux `store` `state` 
-and it specifies the *behaviour* 
+and it specifies the *behavior* 
 (*what happens when it's clicked*). 
 *Finally* the `Link` Component is just a *Presentational* Component 
 that renders an `<a>` tag. 
@@ -3050,7 +3050,7 @@ of your codebase. In general I suggest *first* trying to
 extract the *Presentational* Components, 
 and if there is *too much* boilerplate 
 passing the props to them then you can create the *Containers* 
-around them that load the data and specify the *behaviour*.
+around them that load the data and specify the *behavior*.
 
 > Code at the *end* of **Video 23**: 
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/0966f4c5177bcd6430e2b7a963517cf88658623c/index.html)
@@ -3146,7 +3146,7 @@ read the `store` instance from the `props`
 and don't rely on a top-level variable that I removed. 
 
 
-Note that this change did not change the behaviour or *data* flow 
+Note that this change did not change the behavior or *data* flow 
 of this application. 
 The *Container* Components `subscribe` to the `store` 
 just like *before* and update their `state` 
@@ -3271,7 +3271,7 @@ I still have to add a property called `contextTypes`
 that specifies which *Context* I want to receive 
 and in this case I want to receive the `store` from the `Provider`. 
 If I *forget* to declare the `contextTypes` 
-my *functiona* Component will not receive the relevant *Context* 
+my *functional* Component will not receive the relevant *Context* 
 as the *second argument*.
 
 ```js
@@ -3315,7 +3315,7 @@ by defining the `getChildContext` with the `store` key
 pointing to that `prop`. 
 It is ***essential*** that the `getChildContext` 
 is matched by `childContextTypes` 
-where we specifcy that the `store` key has `PropTypes` 
+where we specify that the `store` key has `PropTypes` 
 of `object`. 
 
 > Note: that the `childContextTypes` definition 
@@ -3332,7 +3332,7 @@ The `context` creates something like a "*worm hole*"
 between the `VisibleTodoList` Component that reads the `context` 
 and the `Provider` that *provides* the `context` 
 and this "*worm hole*" is only *enabled* 
-because the `contextTypes` declared ont he `VisibleTodoList` 
+because the `contextTypes` declared on the `VisibleTodoList` 
 include the `store` that is defined in `childContextTypes` 
 of the `Provider` Component. 
 
@@ -3455,7 +3455,7 @@ with some `props` that they *calculate* from the `state` of the `store`
 and they *also* need to *specify* the `contextTypes` 
 to get the `store` from the `context`. 
 
-I'm going to write this Component in a *diferent* way now: 
+I'm going to write this Component in a *different* way now: 
 and I'll declare a function called `mapStateToProps` 
 which takes the Redux `store` `state` 
 and returns the `props` that I need to pass to the 
@@ -3492,7 +3492,7 @@ Note that I don't have the reference to the `store` here *anymore*
 so instead I'm changing it to use *just* the `dispatch` 
 which is provided as an *argument* to `mapDispatchToProps` 
 "I will add some *punctuation* to make it *appear* easier on my eyes"
-[*brackes around the `id` argument 
+[*parenthesis around the `id` argument 
 & curly-braces around the function block*]
 `onTodoClick` is a function that accepts the `id` 
 of the `todo` and dispatches an `action`. 
@@ -3516,7 +3516,7 @@ to the `props` of the `TodoList` Component
 that are *related* to the *data* from the Redux `store` 
 the *second* function maps the `dispatch` method of the `store` 
 to the callback `props` of the `TodoList` Component 
-it specifies the *behaviour* 
+it specifies the *behavior* 
 that is which callback `prop` dispatches which `action`. 
 
 Together these two functions describe the a *Container* Component 
@@ -3531,7 +3531,7 @@ If you use `npm` and `Babel` you will
 likely *import* it like *this* instead:
 
 ```js
-import { connnect } from 'react-redux'
+import { connect } from 'react-redux'
 ```
 "*and don't forget the curly braces*..." 
 [*destructuring assignment of the `connect` method from the `react-redux` package*]
@@ -3576,7 +3576,7 @@ These `props` will be *updated* any time the `state` changes
 it takes the `store.dispatch` method as it's *first* argument 
 and it returns the `props` that *use* the `dispatch` method 
 to `dispatch` *actions*, 
-so it *returns* the calback `props` 
+so it *returns* the callback `props` 
 needed for the *Presentational* Component. 
 
 To create a *Container* Component from them, 
@@ -3752,7 +3752,7 @@ in `connect` as the *second* argument
 you're going to get `dispatch` injected as a `prop`.
 
 So in fact I can just ***remove all arguments*** here 
-and the *default* behaviour will be to *not* `subscribe` 
+and the *default* behavior will be to *not* `subscribe` 
 to the `store` and to *inject* just the `dispatch` function 
 as a `prop`. 
 
@@ -3773,8 +3773,8 @@ however that will pass `dispatch` to the Component that it *wraps*
 and in this case it *wraps* my `AddTodo` Component 
 
 The *second* `connect` call returns the *generated* 
-*Container* Component and I'm assinging it to `AddTodo` 
-so I'm re-assiging the `let` binding the second time 
+*Container* Component and I'm assigning it to `AddTodo` 
+so I'm re-assigning the `let` binding the second time 
 and when the further code references `AddTodo` 
 it's going to reference the *Container* Component 
 that does not need the `dispatch` prop 
@@ -3939,7 +3939,7 @@ and this is "*fine*",
 however it references the `nextTodoId` variable 
 which I declare along side the `AddTodo` Component 
 *normally* it would be *local* 
-however what if another componet wants to `dispatch` 
+however what if another component wants to `dispatch` 
 the `ADD_TODO` `action` ? 
 It would need to have access to the `nextTodoId` somehow 
 and while I *could* make this variable *GLOBAL* 
@@ -3980,7 +3980,7 @@ so we call these functions `action` *Creators*
 and we usually place them separately from Components 
 or from *Reducers*. 
 
-I will now *extrac* other `action` *Creators* from the Components 
+I will now *extract* other `action` *Creators* from the Components 
 and I see that I have a `SET_VISIBILITY_FILTER` in a `dispatch` here 
 [*in the `mapDispatchToLinkProps` method*] 
 so I will change this to call the `setVisiblityFilter` 
@@ -3995,7 +3995,7 @@ with the `type: 'SET_VISIBILITY_FILTER'`
 and the `filter` its' self. 
 
 ```js
-cosnt setVisibilityFilter = (filter) => {
+const setVisibilityFilter = (filter) => {
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter // implied value from argument
@@ -4040,7 +4040,7 @@ without worrying about the *actions* internal structure.
 
 Note that whether you use `action` Creators or *not* 
 the *data flow* is *exactly* the same 
-because I just calle the `action` Creator to get 
+because I just called the `action` Creator to get 
 the `action` `Object` and then I call `dispatch` 
 just like I did *before* passing the `action`. 
 
