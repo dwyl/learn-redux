@@ -2314,7 +2314,7 @@ with the `type` `TOGGLE_TODO` and the `id` of the `todo`.
   onTodoClick={id =>
     store.dispatch({
       type: 'TOGGLE_TODO',
-      id // where is id value?
+      id
     })
   } />
 ```
