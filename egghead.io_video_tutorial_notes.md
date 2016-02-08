@@ -506,8 +506,8 @@ and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my c
 These are loaded from [@Substack](https://github.com/substack)'s CDN: https://wzrd.in
 
 "Let's say that I want to implement a **counter** ***list*** application.
-I would need to write a few function that operate on its' state and
-its' state is an `Array` of JavaScript *Numbers* representing the individual counters."
+I would need to write a few function that operate on its state and
+its state is an `Array` of JavaScript *Numbers* representing the individual counters."
 
 The first function I want to write is called addCounter
 and all it should do is to *append* a zero at the end
@@ -617,7 +617,7 @@ const removeCounter = (list, index) => {
 };
 ```
 
-> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both*** 
+> **Note**: *make* ***sure*** *you* ***understand*** *how* ***both***
 *of these work before proceeding ... Dan is a big fan of his ES6; he uses it* ***everywhere***!
 
 Now that we have implemented adding and removing counters,
@@ -641,7 +641,7 @@ testIncrementCounter = () => {
 ```
 
 The `incrementCounter` function takes two arguments:
-`list` - the `Array` (*of all our counters*) 
+`list` - the `Array` (*of all our counters*)
 and `index` - the counter that should be incremented.
 So the returned value (`Array`) has the same count of items
 but one of them is incremented.
@@ -731,7 +731,7 @@ testToggleTodo(); // run the test
 
 ```
 
-Just like in the last lesson, I'm going to start by writing 
+Just like in the last lesson, I'm going to start by writing
 a *mutating* version that passes the current test.
 So a *mutating* version just flips the `completed` field and re-assigns it on the passed `Object` (*the `todo`):
 
@@ -741,13 +741,13 @@ const toggleTodo = (todo) => {
   return todo;
 }
 ```
-And while it works, 
+And while it works,
 we know that *mutations* are ***not allowed*** in Redux.
-So to *enforce* this, I'm calling `deepFreeze` on my `todo` Object 
-(*in the case of the test `todoBefore`*) 
+So to *enforce* this, I'm calling `deepFreeze` on my `todo` Object
+(*in the case of the test `todoBefore`*)
 and I'm *not allowed* to change its `completed` field anymore.
 
-One way out of this would be to create a new object 
+One way out of this would be to create a new object
 with every field copied from the original object
 *except* the `completed` field which would be flipped:
 
@@ -1107,7 +1107,7 @@ is an **ES6** *Standard* for `Array`, its only a ***Draft*** for `Object`
 proposed for **ES7** which means it is
 **not** yet **available** in ***any*** **Browser**!
 As such I have modified Dan's
-code to use `Object.assign` (*see Video #10) 
+code to use `Object.assign` (*see Video #10)
 which (*at least*) works in Chrome...:
 
 ```js
@@ -1426,10 +1426,10 @@ of the `store` `Object`
 to the ***UI** *yet*. (*be patient that's next...*)
 
 *Finally* I'm dispatching the `SET_VISIBILITY_FILTER` `action`
-and you can see that it does not affect the todos 
-but the `visibilityFilter` field has been updated. 
+and you can see that it does not affect the todos
+but the `visibilityFilter` field has been updated.
 
-> Code Snapshot for *End* of Video 14: 
+> Code Snapshot for *End* of Video 14:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/9702c1c858b4a22fff85339c55cf914ae3969666/index.html#L115-L123)
 
 <br />
@@ -1438,11 +1438,11 @@ but the `visibilityFilter` field has been updated.
 
 > Video: https://egghead.io/lessons/javascript-redux-reducer-composition-with-combinereducers
 
-In the previous lesson we learned how to use 
-the "*Reducer Composition*" Pattern 
+In the previous lesson we learned how to use
+the "*Reducer Composition*" Pattern
 to let different reducers handle different parts of the `state` tree
 and then *combine* their results.
-In fact this pattern is *so* common 
+In fact this pattern is *so* common
 that it's present in *most* Redux applications.
 And this is why Redux provides a function called `combineReducers`
 that lets you avoid writing this code by *hand*
@@ -1544,7 +1544,7 @@ To gain a *deeper* understanding of how *exactly* `combineReducers` works
 we will *implement* it ***from scratch*** in this lesson.
 
 `combineReducers` is a function so I'm writing a function declaration
-and its' only argument is the *mapping* between `state` keys
+and its only argument is the *mapping* between `state` keys
 and the reducers, so I'm just going to call it `reducers`.
 
 ```js
@@ -1565,7 +1565,7 @@ const combineReducers = (reducers) => {
 };
 ```
 
-The returned value is supposed to be a reducer its' self
+The returned value is supposed to be a reducer itself
 so this is a function that returns another function
 and the signature of the returned function is a reducer signature
 it has the `state` and the `action`
@@ -1646,7 +1646,7 @@ that handles all the `actions` of our simple todo application.
 So now it's time to *implement* the ***view layer***
 and I'm going to use React in this example
 
-I'm adding **React** and [React-DOM](https://facebook.github.io/react/docs/glossary.html) packages from the Facebook CDN 
+I'm adding **React** and [React-DOM](https://facebook.github.io/react/docs/glossary.html) packages from the Facebook CDN
 and I'm also adding a div with `id='root'`
 which is where I'm going to `render` my React application
 
@@ -2159,7 +2159,7 @@ the root reducer will *use* this new field as part of its *new*
 its going to get this *new* `state` `Object`
 and pass all its keys as props to the `TodoApp` Component
 so the `TodoApp` Component will receive the todos
-and the *updated* `visibilityFilter` as its' props
+and the *updated* `visibilityFilter` as its props
 both its props are passed to the `getVisibleTodos` function
 which calculates the *currently* `visibleTodos`
 according to a list of *all* `todos` and the `visibilityFilter`
@@ -2493,84 +2493,84 @@ and *un-indent* the code to make it look nicer.
 
 > *This version of `TodoApp` is *so* ***much cleaner***... **IMO**.
 
-This concludes the *initial* refactoring of the Todo List Application 
-into a single "*Container*" Component called `TodoApp` 
-and many "*Presentational*" Components that are 
+This concludes the *initial* refactoring of the Todo List Application
+into a single "*Container*" Component called `TodoApp`
+and many "*Presentational*" Components that are
 only concerned with how things *look*.
 
 Lets re-cap the *data* flow in this example:
-We have a *single* "*Container*" Component called `TodoApp` 
-and we re-render it any time the `store` changes 
-it receives the `keys` of the *global* `state` `Object` as the props 
-so it receives the `todos` and the `visibilityFilter` values 
-the *first* Component it renders is called `AddTodo`. 
-`AddTodo` is a "*Presentational*" Component that 
-renders an `<input>` and a `<button>` 
-and when the `<button>` is *clicked* it passes the *current* `<input>` value 
+We have a *single* "*Container*" Component called `TodoApp`
+and we re-render it any time the `store` changes
+it receives the `keys` of the *global* `state` `Object` as the props
+so it receives the `todos` and the `visibilityFilter` values
+the *first* Component it renders is called `AddTodo`.
+`AddTodo` is a "*Presentational*" Component that
+renders an `<input>` and a `<button>`
+and when the `<button>` is *clicked* it passes the *current* `<input>` value
 to the `onAddClick` function.
-`onAddClick` function is a prop for the `AddTodo` Component 
-in this case it is *specified* by the `TodoApp` 
-which says that when the `<button>` is clicked it should dispatch an `action` 
-containing the *current* `text` in the `action` `Object`. 
-Dispatching the `ADD_TODO` `action` will call our reducer 
-update the `store` `state` with the new todos 
-and re-render the `TodoApp` Component with the new todos. 
+`onAddClick` function is a prop for the `AddTodo` Component
+in this case it is *specified* by the `TodoApp`
+which says that when the `<button>` is clicked it should dispatch an `action`
+containing the *current* `text` in the `action` `Object`.
+Dispatching the `ADD_TODO` `action` will call our reducer
+update the `store` `state` with the new todos
+and re-render the `TodoApp` Component with the new todos.
 The todos themselves are rendered by the `TodoList`
 "*Presentational*" Component that receives two props:
-the *currently* visible todos and the `onTodoClick` callback 
-the `TodoList` Component receives an `Array` of todos 
-and it *maps* over them rendering individual `Todo` Components 
-it uses the *spread* operator to pass every property of the todo `Object` 
-as a prop to `Todo` Component 
-and it specifies the `onClick` handler as calling `onTodoClick` 
-with the `id` of the particular todo 
-the `Todo` Component is defined above 
-and it is also a "*Presentational*" Component 
-so it doesn't specify the behavior 
-it says that when a `<li>` is *clicked* 
-it should call the `onClick` handler 
-being a "*Presentational*" Component it specifies how the Component *looks* 
-in different circumstances 
-and in this case it uses the `completed` prop 
-to chose between two different styles of the todo item 
-the `TodoList` is also a "*Presentational*" Component 
-so it delegates actually *handling* the *click* to `onTodoClick` prop 
+the *currently* visible todos and the `onTodoClick` callback
+the `TodoList` Component receives an `Array` of todos
+and it *maps* over them rendering individual `Todo` Components
+it uses the *spread* operator to pass every property of the todo `Object`
+as a prop to `Todo` Component
+and it specifies the `onClick` handler as calling `onTodoClick`
+with the `id` of the particular todo
+the `Todo` Component is defined above
+and it is also a "*Presentational*" Component
+so it doesn't specify the behavior
+it says that when a `<li>` is *clicked*
+it should call the `onClick` handler
+being a "*Presentational*" Component it specifies how the Component *looks*
+in different circumstances
+and in this case it uses the `completed` prop
+to chose between two different styles of the todo item
+the `TodoList` is also a "*Presentational*" Component
+so it delegates actually *handling* the *click* to `onTodoClick` prop
 and it pass the `id` of the todo being *clicked*.
 
-*Finally* the `TodoApp` reacts to it by dispatching an `action` 
+*Finally* the `TodoApp` reacts to it by dispatching an `action`
 containing the `id` of the todo clicked and the `type: 'TOGGLE_TODO'`
-the `store` will call our reducer and update the `state` of the application 
-re-rendering the `TodoApp` Component with the *new* todos. 
+the `store` will call our reducer and update the `state` of the application
+re-rendering the `TodoApp` Component with the *new* todos.
 
-The `Footer` Component receives the *current* `visibilityFilter` as a prop 
-and also receives the `onFilterClick` callback that sets 
-the *current* `visibilityFilter`. 
-The `Footer` Component renders *three* `FilterLink` 
-passing down their respective `filter` values 
-the `onClick` handler and the *current* `visibilityFilter` 
-the `FilterLink` Component being a "*Presentational*" Component 
-doesn't know *what* to do when it is *clicked*. 
-so it calls the `onClick` callback passing the `filter` 
-which is different for each of those links as an *argument* 
-the `Footer` delegates handling the *click* of the `FilterLink` 
-to its own prop called `onFilterClick`. 
+The `Footer` Component receives the *current* `visibilityFilter` as a prop
+and also receives the `onFilterClick` callback that sets
+the *current* `visibilityFilter`.
+The `Footer` Component renders *three* `FilterLink`
+passing down their respective `filter` values
+the `onClick` handler and the *current* `visibilityFilter`
+the `FilterLink` Component being a "*Presentational*" Component
+doesn't know *what* to do when it is *clicked*.
+so it calls the `onClick` callback passing the `filter`
+which is different for each of those links as an *argument*
+the `Footer` delegates handling the *click* of the `FilterLink`
+to its own prop called `onFilterClick`.
 
-*Finally* the `TodoApp` Component being the "*Container*" Component 
-in our application specifies the *behavior* 
-which in this case means that when the `FilterLink` is *clicked* 
-it should dispatch and `action` with the `action` 
-`type: 'SET_VISIBILITY_FILTER` and the *new* `filter`. 
+*Finally* the `TodoApp` Component being the "*Container*" Component
+in our application specifies the *behavior*
+which in this case means that when the `FilterLink` is *clicked*
+it should dispatch and `action` with the `action`
+`type: 'SET_VISIBILITY_FILTER` and the *new* `filter`.
 
 Separation of the "*Presentational*" Components is *not required* in Redux.
-But I *recommend* this pattern because it de-couples your rendering from Redux. So if you later chose to move your project to another framework 
-such as Relay you will not have to *change* all your components 
-because you can keep all your "*Presentational*" Component exactly the same. 
+But I *recommend* this pattern because it de-couples your rendering from Redux. So if you later chose to move your project to another framework
+such as Relay you will not have to *change* all your components
+because you can keep all your "*Presentational*" Component exactly the same.
 
-This approach also has *downsides* such as that you have to 
-thread a lot of props through the Components to get them 
-to the "*leaf*" Components including the callbacks 
-this problem can be *easily* solved by introducing 
-many intermediate "*Container*" Components as we will see in the next lesson. 
+This approach also has *downsides* such as that you have to
+thread a lot of props through the Components to get them
+to the "*leaf*" Components including the callbacks
+this problem can be *easily* solved by introducing
+many intermediate "*Container*" Components as we will see in the next lesson.
 
 > Code at the *end* of Video 21:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/9a791dbc032e0c945a4c82a0c8b9fd8bd027a2be/index.html)
@@ -2582,41 +2582,41 @@ many intermediate "*Container*" Components as we will see in the next lesson.
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-container-components-filterlink
 
-In the previous lesson we separated the "*Presentational*" Components 
-from the the main "*Container*" Component 
-the `TodoApp` specifies the *behaviors* 
-such as what happens when the **Add** `<button>` is clicked 
-how the todos are selected 
-what happens when a *single* `Todo` has been clicked 
+In the previous lesson we separated the "*Presentational*" Components
+from the the main "*Container*" Component
+the `TodoApp` specifies the *behaviors*
+such as what happens when the **Add** `<button>` is clicked
+how the todos are selected
+what happens when a *single* `Todo` has been clicked
 and what happens when a `Footer` Link is clicked.
-And the components such as `AddTodo`, the `TodoList`, the `Todo` its' self 
-the `Footer` and the `FilterLink` they don't dispatch actions 
-they call their callbacks [passed] in the props 
-so they are *only* responsible for the *looks* but not for the behavior. 
-The downside of this approach is that 
-I have to pass a lot of props down the "tree" 
-even when the *intermediate* Components don't really *use* them 
-for example: the `FilterLink` needs to know the `currentFilter` 
-so that it can chose a different appearance when it is *active* 
-however, in order to *receive* the `currentFilter` it has to be passed down 
-from the top, so this is why the `Footer` has to accept `visibilityFilter` 
+And the components such as `AddTodo`, the `TodoList`, the `Todo` itself
+the `Footer` and the `FilterLink` they don't dispatch actions
+they call their callbacks [passed] in the props
+so they are *only* responsible for the *looks* but not for the behavior.
+The downside of this approach is that
+I have to pass a lot of props down the "tree"
+even when the *intermediate* Components don't really *use* them
+for example: the `FilterLink` needs to know the `currentFilter`
+so that it can chose a different appearance when it is *active*
+however, in order to *receive* the `currentFilter` it has to be passed down
+from the top, so this is why the `Footer` has to accept `visibilityFilter`
 as a prop so it can pass it down as a `currentFilter` to the `FilterLink`.
 
-In a way this *breaks* encapsulation 
-because the "*Parent*" Components need to *know* too much 
-about what data the *Child* Components need 
-so to solve this we are going to *extract* a few more "*Container*" Components 
-just like we extracted the "*Presentational*" Components in the previous lesson. 
+In a way this *breaks* encapsulation
+because the "*Parent*" Components need to *know* too much
+about what data the *Child* Components need
+so to solve this we are going to *extract* a few more "*Container*" Components
+just like we extracted the "*Presentational*" Components in the previous lesson.
 
-The *first* Component I'm going to re-factor is the `Footer` Component 
-and *currently* it accepts two props the `visibilityFilter` 
-and the `onFilterClick` callback, 
-but it doesn't actually *use* either of them, 
-it just passes them down to the `Filterlink` 
-so this seems like a *good* opportunity for *simplification*. 
-We can only do this because we *know* that the `Footer` Component 
-doesn't *care* about the values of these props 
-they only exist to be passed down to the `Filterlink` 
+The *first* Component I'm going to re-factor is the `Footer` Component
+and *currently* it accepts two props the `visibilityFilter`
+and the `onFilterClick` callback,
+but it doesn't actually *use* either of them,
+it just passes them down to the `Filterlink`
+so this seems like a *good* opportunity for *simplification*.
+We can only do this because we *know* that the `Footer` Component
+doesn't *care* about the values of these props
+they only exist to be passed down to the `Filterlink`
 that cares about them.
 
 ```js
@@ -2646,24 +2646,24 @@ const Footer = () => (
 ```
 
 I'm removing the props definition
-and I'm removing these props from the `FilterLink` usage 
-and it might start to seem a lot like the code *before* 
-separating the "*Presentational*" Components 
+and I'm removing these props from the `FilterLink` usage
+and it might start to seem a lot like the code *before*
+separating the "*Presentational*" Components
 however what I want to do here is a little bit different.
 
-The `FilterLink` does not *currently* specify the behavior 
-for clicking on the link 
-it also needs the `currentFilter` 
+The `FilterLink` does not *currently* specify the behavior
+for clicking on the link
+it also needs the `currentFilter`
 to tell whether it should be rendered as *active*
-therefore its a bit "*dishonest*" to say that `FilterLink` 
-is a "*Presentational*" Component 
-because it is inseparable from its *behavior* 
-the only *reasonable* reaction to clicking on it 
-is setting the `visibilityFilter` by dispatching an `action` 
-this is why I am changing it to a *different* "*Presentational*" Component 
-I'm going to call `Link` 
-and I will create another `FilterLink` Component 
-as a Container that uses it for rendering. 
+therefore its a bit "*dishonest*" to say that `FilterLink`
+is a "*Presentational*" Component
+because it is inseparable from its *behavior*
+the only *reasonable* reaction to clicking on it
+is setting the `visibilityFilter` by dispatching an `action`
+this is why I am changing it to a *different* "*Presentational*" Component
+I'm going to call `Link`
+and I will create another `FilterLink` Component
+as a Container that uses it for rendering.
 
 ```js
 const Link = ({
@@ -2705,7 +2705,7 @@ As a "*Container*" Component the `FilterLink`
 doesn't have its *own* markup
 and it delegates rendering to the `Link`
 "*Presentational*" Component.
-In this case it *calculates* its' `active` prop
+In this case it *calculates* its `active` prop
 by comparing its *own* `filter` prop
 with the `visibilityFilter` in the Redux `store` `state`.
 The `filter` prop is the one that is passed
@@ -2836,31 +2836,31 @@ because it needs to use the `store` *current* `state`
 inside its `render` method.
 Instead of specifying the DOM tree
 it delegates all the rendering to
-the `Link` "*Presentational*" Component 
-and its' only job is to calculate the props 
-base on its *own* props and the *current* `state` of the Redux `store` 
-and it also specifies the callbacks that are 
-going to dispatch the `actions` on the `store`. 
+the `Link` "*Presentational*" Component
+and its only job is to calculate the props
+base on its *own* props and the *current* `state` of the Redux `store`
+and it also specifies the callbacks that are
+going to dispatch the `actions` on the `store`.
 
-After the `action` is dispatched the `store` will remember 
-the *new* `state` returned by the reducer 
-and will call *every* subscriber to the `store` 
-and this case every `FilterLink` Component instance 
-is subscribed to the `store` 
-so they will all have their `forceUpdate` methods called on them 
+After the `action` is dispatched the `store` will remember
+the *new* `state` returned by the reducer
+and will call *every* subscriber to the `store`
+and this case every `FilterLink` Component instance
+is subscribed to the `store`
+so they will all have their `forceUpdate` methods called on them
 and they will re-render according to the *current* `store` `state`.
 
-The `FilterLink` is a "*Container*" Component 
-so it is completely self-sufficient 
+The `FilterLink` is a "*Container*" Component
+so it is completely self-sufficient
 and can be used inside the "*Presentational*" Components such as
-`Footer` without passing additional props 
-to get the data from the `store` and specify the behavior 
-this lets us keep the `Footer` Component simple 
-and de-coupled from the behavior and data 
-that its' child Components need. 
+`Footer` without passing additional props
+to get the data from the `store` and specify the behavior
+this lets us keep the `Footer` Component simple
+and de-coupled from the behavior and data
+that its child Components need.
 
 
-> Code at the *end* of Video 22: 
+> Code at the *end* of Video 22:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/4572cb33f575567687b2683dfe20b22cfda8b16e/index.html)
 
 <br />
@@ -2869,43 +2869,43 @@ that its' child Components need.
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-container-components-visibletodolist-addtodo
 
-In the previous lesson I separated the 
-`Link` "*Presentational*" Component from the 
-`FilterLink` "*Container*" Component 
-that is subscribed to the Redux `store` 
-and that provides the *data* and the *behavior* 
+In the previous lesson I separated the
+`Link` "*Presentational*" Component from the
+`FilterLink` "*Container*" Component
+that is subscribed to the Redux `store`
+and that provides the *data* and the *behavior*
 for the `Link` Component it renders.
-While it makes the data flow a little bit *less* explicit 
-it makes it easier to use `FilterLink` in 
-*any* Component without worrying about passing additional data 
-to the `FilterLink` or to the Component that *contains* it. 
+While it makes the data flow a little bit *less* explicit
+it makes it easier to use `FilterLink` in
+*any* Component without worrying about passing additional data
+to the `FilterLink` or to the Component that *contains* it.
 
-In *this* lesson we will continue extracting 
-the "*Container*" Components from the top-level 
-"*Container*" Component and the *first* candidate is 
-the `TodoList` Component. 
+In *this* lesson we will continue extracting
+the "*Container*" Components from the top-level
+"*Container*" Component and the *first* candidate is
+the `TodoList` Component.
 
-I actually want to *keep* the `TodoList` a "*Presentational*" Component 
-however I want to *encapsulate* within the *currently* 
-visible Todos into a *separate* "*Container*" Component 
-that connects the `TodoList` to the Redux `store` 
+I actually want to *keep* the `TodoList` a "*Presentational*" Component
+however I want to *encapsulate* within the *currently*
+visible Todos into a *separate* "*Container*" Component
+that connects the `TodoList` to the Redux `store`
 so I'm going to call this Component the `VisibleTodoList`.
-Just like when declaring the `FilterLink` Component 
-in the *previous* lesson, I calculate the data for the *current* 
-Component by using the *current* `state` 
-which is the `state` from the Redux `store` 
-and I'm using the `getVisibleTodos` function 
-to calculate the *currently* visible todos 
-based on all the todos from the Redux `store` 
-and the *current* `visibilityFilter` from the Redux `store` `state` 
-and I'm specifying the *behavior* as well 
-I'm saying that when the todo is *clicked* 
+Just like when declaring the `FilterLink` Component
+in the *previous* lesson, I calculate the data for the *current*
+Component by using the *current* `state`
+which is the `state` from the Redux `store`
+and I'm using the `getVisibleTodos` function
+to calculate the *currently* visible todos
+based on all the todos from the Redux `store`
+and the *current* `visibilityFilter` from the Redux `store` `state`
+and I'm specifying the *behavior* as well
+I'm saying that when the todo is *clicked*
 we should dispatch an `action` with `type: 'TOGGLE_TODO'`
 and the `id` of the todo being clicked.
-All "*Container*" Components are similar 
-their job is to *connect* a "*Presentational*" Component 
-to the Redux `store` and specify the data and the behavior 
-that it needs. 
+All "*Container*" Components are similar
+their job is to *connect* a "*Presentational*" Component
+to the Redux `store` and specify the data and the behavior
+that it needs.
 
 ```js
 class VisibleTodoList extends Component {
@@ -2913,7 +2913,7 @@ class VisibleTodoList extends Component {
     const props = this.props;
     const state = store.getState();
     return (
-      <TodoList 
+      <TodoList
         todos={
           getVisibleTodos(
             state.todos,
@@ -2931,13 +2931,13 @@ class VisibleTodoList extends Component {
 }
 ```
 
-I'm scrolling up to the `FilterLink` *Container* Component 
-I wrote in the *previous* lesson to *cut-paste* 
+I'm scrolling up to the `FilterLink` *Container* Component
+I wrote in the *previous* lesson to *cut-paste*
 the `store` *subscription* logic:
 
 ```js
 componentDidMount() {
-  this.unsubscribe = store.subscribe(() => 
+  this.unsubscribe = store.subscribe(() =>
     this.forceUpdate()
   );
 }
@@ -2947,39 +2947,39 @@ componentWillUnmount() {
 }
 ```
 
-Just like the `FilterLink` the `VisibleTodoList` is 
-going to *subscribe* to the `store` 
-and *force* an update any time the `store` `state` changes 
-because it uses the `state` in its' `render` method. 
-Now that the `VisibleTodoList` is connected to the Redux `store` 
-we can use it *instead* of the `TodoList` 
+Just like the `FilterLink` the `VisibleTodoList` is
+going to *subscribe* to the `store`
+and *force* an update any time the `store` `state` changes
+because it uses the `state` in its `render` method.
+Now that the `VisibleTodoList` is connected to the Redux `store`
+we can use it *instead* of the `TodoList`
 and we no longer have to pass all the props from the top.
 
-*Finally* in the *previous* lesson 
-I made `AddTodo` a *Presentational* Component 
-but I'm going to ***back-track*** on this now. 
-I will *cut-paste* the `dispatch` call back inline 
-into the `onClick` handler inside the Component 
-because there isn't really a lot of presentation or *behavior* here 
-and its *easier* to keep them together 
-until we figure out how to split the *presentation*. 
-For example if in the *future* we're going to have something 
-like a `<form>` Component we may split it 
+*Finally* in the *previous* lesson
+I made `AddTodo` a *Presentational* Component
+but I'm going to ***back-track*** on this now.
+I will *cut-paste* the `dispatch` call back inline
+into the `onClick` handler inside the Component
+because there isn't really a lot of presentation or *behavior* here
+and its *easier* to keep them together
+until we figure out how to split the *presentation*.
+For example if in the *future* we're going to have something
+like a `<form>` Component we may split it
 but for now we'll keep them together.
 
-I'm scrolling down to my `TodoApp` Component 
-and I'm removing the `onAddClick` prop 
-and I just noticed that *none* of the *Containers* actually 
-need props from the `state` 
-so I can *remove* the props of the `TodoApp` Component 
-and I can *remove* the `render` function that 
-renders the `TodoApp` Component with 
-the *current* `state` of the `store` 
-because I can just call it *once* 
-remove all the props that are related to the `state` 
-and just `render` it *as is* 
-because the *Container* Components that I render 
-are going to `subscribe` to the `store` *themselves* 
+I'm scrolling down to my `TodoApp` Component
+and I'm removing the `onAddClick` prop
+and I just noticed that *none* of the *Containers* actually
+need props from the `state`
+so I can *remove* the props of the `TodoApp` Component
+and I can *remove* the `render` function that
+renders the `TodoApp` Component with
+the *current* `state` of the `store`
+because I can just call it *once*
+remove all the props that are related to the `state`
+and just `render` it *as is*
+because the *Container* Components that I render
+are going to `subscribe` to the `store` *themselves*
 and are going to *update* themselves when the `store` `state` changes.
 
 ```js
@@ -2991,68 +2991,68 @@ const TodoApp = () => (
   </div>
 )
 
-ReactDOM.render( 
+ReactDOM.render(
   <TodoApp />,
   document.getElementById('root')
 );
 ```
 
-Lets re-cap the data flow after separating 
+Lets re-cap the data flow after separating
 the *Presentational* and the *Container* Components.
 
-There is just *one* `ReactDOM.render` call 
-at the very end and we don't `render` again 
-when the `store` `state` changes 
+There is just *one* `ReactDOM.render` call
+at the very end and we don't `render` again
+when the `store` `state` changes
 because the *Container* Components take care of that!
-The *first* Component I'm looking at is called `AddTodo` 
-and frankly I can't classify it either as a *Presentational* Component 
+The *first* Component I'm looking at is called `AddTodo`
+and frankly I can't classify it either as a *Presentational* Component
 *or* as a *Container* Component because it doesn't fit either category.
-The `<input>` and the `<button>` are the *Presentational* part 
-but dispatching an `action` `onClick` is the *behavior* 
-which is *usually* specified by the *Container* 
-however in *this* case I'd rather keep them together 
-because there isn't any `state`, the **UI** is *very simple* 
-and its hard to imagine any *other* behavior 
-other than dispatching the `ADD_TODO` `action`. 
+The `<input>` and the `<button>` are the *Presentational* part
+but dispatching an `action` `onClick` is the *behavior*
+which is *usually* specified by the *Container*
+however in *this* case I'd rather keep them together
+because there isn't any `state`, the **UI** is *very simple*
+and its hard to imagine any *other* behavior
+other than dispatching the `ADD_TODO` `action`.
 
-The *second* Component I render inside the `TodoApp` is 
-`VisibleTodoList`, and this time it is a "proper" *Container* Component 
-that subscribes to the `store` and re-renders 
-the `TodoList` any time the `store` `state` changes 
-and it *calculates* the `visibleTodos` 
-from the *current* Redux `store` `state`, the todos and 
-`visibilityFilter` fields and it passes them as the `todos` (prop) 
-and when the `todos` are *clicked* 
-its going to `dispatch` an `action` with the `type:'TOGGLE_TODO'` 
-and the `id` of the *respective* `todo` 
-the *actual* rendering here is performed 
-by the `TodoList` Component that just renders the Todos 
+The *second* Component I render inside the `TodoApp` is
+`VisibleTodoList`, and this time it is a "proper" *Container* Component
+that subscribes to the `store` and re-renders
+the `TodoList` any time the `store` `state` changes
+and it *calculates* the `visibleTodos`
+from the *current* Redux `store` `state`, the todos and
+`visibilityFilter` fields and it passes them as the `todos` (prop)
+and when the `todos` are *clicked*
+its going to `dispatch` an `action` with the `type:'TOGGLE_TODO'`
+and the `id` of the *respective* `todo`
+the *actual* rendering here is performed
+by the `TodoList` Component that just renders the Todos
 passed through as prop and binds their clicks to the `onTodoClick` prop.
 
-*Finally* the *last* Component the `TodoApp` renders is the `Footer` 
-and the `Footer` is just a *Presentational* Component 
+*Finally* the *last* Component the `TodoApp` renders is the `Footer`
+and the `Footer` is just a *Presentational* Component
 rendering **3** different `FilterLink`s.
-The `FilterLink` is a *Container* Component 
-so it *subscribes* to the `store` 
-and it renders the *Presentational* Component called `Link` 
-calculating weather it should be *active* based on its' props 
-the *current* Redux `store` `state` 
-and it specifies the *behavior* 
-(*what happens when it's clicked*). 
-*Finally* the `Link` Component is just a *Presentational* Component 
-that renders an `<a>` tag. 
+The `FilterLink` is a *Container* Component
+so it *subscribes* to the `store`
+and it renders the *Presentational* Component called `Link`
+calculating weather it should be *active* based on its props
+the *current* Redux `store` `state`
+and it specifies the *behavior*
+(*what happens when it's clicked*).
+*Finally* the `Link` Component is just a *Presentational* Component
+that renders an `<a>` tag.
 
-Separating the *Container* and the *Presentational* Components 
-is often a good idea, but you shouldn't take it as a 
-"[*dogma*](https://en.wikipedia.org/wiki/Dogma)"; 
-Only do this when it *truly* reduces the *complexity* 
-of your codebase. In general I suggest *first* trying to 
-extract the *Presentational* Components, 
-and if there is *too much* boilerplate 
-passing the props to them then you can create the *Containers* 
+Separating the *Container* and the *Presentational* Components
+is often a good idea, but you shouldn't take it as a
+"[*dogma*](https://en.wikipedia.org/wiki/Dogma)";
+Only do this when it *truly* reduces the *complexity*
+of your codebase. In general I suggest *first* trying to
+extract the *Presentational* Components,
+and if there is *too much* boilerplate
+passing the props to them then you can create the *Containers*
 around them that load the data and specify the *behavior*.
 
-> Code at the *end* of **Video 23**: 
+> Code at the *end* of **Video 23**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/0966f4c5177bcd6430e2b7a963517cf88658623c/index.html)
 
 <br />
@@ -3062,40 +3062,40 @@ around them that load the data and specify the *behavior*.
 
 > Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-explicitly-via-props
 
-In the *previous* lessons we used the `store` top level variable 
-to refer to the Redux `store`. 
-The Components that *access* the `store` such as 
-the *Container* Components read the `state` from it, 
-`subscribe` to the `store` and dispatch *actions* on the `store` 
-using the `store` top level variable. 
-This approach works fine for a "*JS Bin*" example where 
-everything is in a *single* file 
-however it doesn't *scale* to "*real*" applications 
-for *several* reasons. 
-*First* of all it makes your *Container* Components harder to *test* 
-because they reference a *specific* `store` 
-but you might want to supply a *different* "*Mock*" `store` 
-in the *Tests*. 
-*Secondly* it makes it very hard to implement "*Universal Applications*" 
-that are rendered on the *server* 
-because on the *server* you want to supply a different `store` 
-instance for every `request` because different requests 
+In the *previous* lessons we used the `store` top level variable
+to refer to the Redux `store`.
+The Components that *access* the `store` such as
+the *Container* Components read the `state` from it,
+`subscribe` to the `store` and dispatch *actions* on the `store`
+using the `store` top level variable.
+This approach works fine for a "*JS Bin*" example where
+everything is in a *single* file
+however it doesn't *scale* to "*real*" applications
+for *several* reasons.
+*First* of all it makes your *Container* Components harder to *test*
+because they reference a *specific* `store`
+but you might want to supply a *different* "*Mock*" `store`
+in the *Tests*.
+*Secondly* it makes it very hard to implement "*Universal Applications*"
+that are rendered on the *server*
+because on the *server* you want to supply a different `store`
+instance for every `request` because different requests
 have different *data*.
 
-I'm going to *start* by moving the `store` creation code 
-to the *bottom* of the file where I `render` my React Components. 
-I'm going to change it *slightly* 
-and *instead* of creating the `store` top level variable 
-I will pass the `store` I create as a prop 
-to the top level Component 
-so it is completely "*injectable*" to it. 
-Every *Container* Component needs a reference to the `store` 
-so *unfortunately* we have to pass it down to every Component 
+I'm going to *start* by moving the `store` creation code
+to the *bottom* of the file where I `render` my React Components.
+I'm going to change it *slightly*
+and *instead* of creating the `store` top level variable
+I will pass the `store` I create as a prop
+to the top level Component
+so it is completely "*injectable*" to it.
+Every *Container* Component needs a reference to the `store`
+so *unfortunately* we have to pass it down to every Component
 as a prop.
-Its *less effort* than passing different *data* to every Component 
-but its still *inconvenient* 
-so don't worry, we'll find a *better* solution later. 
-But for *now* we need to see the problem. 
+Its *less effort* than passing different *data* to every Component
+but its still *inconvenient*
+so don't worry, we'll find a *better* solution later.
+But for *now* we need to see the problem.
 
 ```js
 const TodoApp = ({ store }) => (
@@ -3108,59 +3108,59 @@ const TodoApp = ({ store }) => (
 
 const { createStore } =  Redux;
 
-ReactDOM.render( 
+ReactDOM.render(
   <TodoApp store={createStore(todoApp)} />,
   document.getElementById('root')
 );
 ```
 
-The *problem* is that the *Container* Components 
-need to have the `store` instance to get the `state` from it, 
-dispatch *actions* and get the changes. 
-So this time I'm changing the *Container* Component 
+The *problem* is that the *Container* Components
+need to have the `store` instance to get the `state` from it,
+dispatch *actions* and get the changes.
+So this time I'm changing the *Container* Component
 to take the `store` from the `props` using the **ES6** ***Destructuring Syntax*** which just means `const { store } = props.store;` ...
 
 > **Note**: destructuring **Objects** is not yet available in *any* browser, so I'm using "traditional" variable assignment: `const store = props.store;` (*almost identical*!)
 
-And I'm doing the *same* here, just taking the `store` from the `props` 
-so I can call `dispatch` on it. 
+And I'm doing the *same* here, just taking the `store` from the `props`
+so I can call `dispatch` on it.
 
-I need to make similar changes to other *Container* Components 
-and in this case I have this `AddTodo` Component, 
-which is not *exactly* a *Container* Component 
-but it still needs the `store` to `dispatch` the `ADD_TODO` `action` 
-so I add it as a `prop`. 
-And I'm also going to add the `store` to the `Footer` Component 
-because *unfortunately* `FilterLink` needs it 
-and the `Footer` Component renders `FilterLink`. 
-So this is not *convenient* but as I said, 
-we'll figure out a way to avoid this *later* 
-but for *now* we need to pass the `store` down 
-so that *every* *Container* Component such as `FilterLink` 
-can use it to `subscribe` to the changes, 
-to *read* the `state` and to `dispatch` actions 
-without relying on a top-level variable being available. 
-I'm changing the `render` method to read the `store` 
-from the `props` and now all *Containers* 
-read the `store` instance from the `props` 
-and don't rely on a top-level variable that I removed. 
+I need to make similar changes to other *Container* Components
+and in this case I have this `AddTodo` Component,
+which is not *exactly* a *Container* Component
+but it still needs the `store` to `dispatch` the `ADD_TODO` `action`
+so I add it as a `prop`.
+And I'm also going to add the `store` to the `Footer` Component
+because *unfortunately* `FilterLink` needs it
+and the `Footer` Component renders `FilterLink`.
+So this is not *convenient* but as I said,
+we'll figure out a way to avoid this *later*
+but for *now* we need to pass the `store` down
+so that *every* *Container* Component such as `FilterLink`
+can use it to `subscribe` to the changes,
+to *read* the `state` and to `dispatch` actions
+without relying on a top-level variable being available.
+I'm changing the `render` method to read the `store`
+from the `props` and now all *Containers*
+read the `store` instance from the `props`
+and don't rely on a top-level variable that I removed.
 
 
-Note that this change did not change the behavior or *data* flow 
-of this application. 
-The *Container* Components `subscribe` to the `store` 
-just like *before* and update their `state` 
-in response to its' changes, 
-however what changed is how they *access* the `store`. 
-Previously they would *access* a top-level variable 
-but this approach does not *scale* 
-to "*real world*" applications 
-and this is why right now I'm passing down the `store` 
-as a `prop` so the *Container* Components can `subscribe` to it. 
+Note that this change did not change the behavior or *data* flow
+of this application.
+The *Container* Components `subscribe` to the `store`
+just like *before* and update their `state`
+in response to its changes,
+however what changed is how they *access* the `store`.
+Previously they would *access* a top-level variable
+but this approach does not *scale*
+to "*real world*" applications
+and this is why right now I'm passing down the `store`
+as a `prop` so the *Container* Components can `subscribe` to it.
 
-In the *future* lessons we will see how to pass the `store` down 
-to the *Container* Components *implicitly* 
-but without introducing the top level variable. 
+In the *future* lessons we will see how to pass the `store` down
+to the *Container* Components *implicitly*
+but without introducing the top level variable.
 
 
 > Code at the *end* of **Video 24**:
@@ -3172,21 +3172,21 @@ but without introducing the top level variable.
 
 > Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-implicitly-via-context
 
-In the previous lesson we got rid of the top-level `store` variable 
-and instead started passing the `store` as a `prop` to the `TodoApp` 
-Component so *every* Component below received the `store` 
-as a `prop`. And we even have to do this for *Presentational* Components 
-because sometimes they contain *Container* Components 
-that need the `store` to `subscribe` to the changes. 
-We have to write a lot of "*boilerplate*" code 
-to pass the `store` down as a `prop` 
-but there is *another* way using the "*advanced*" React feature 
+In the previous lesson we got rid of the top-level `store` variable
+and instead started passing the `store` as a `prop` to the `TodoApp`
+Component so *every* Component below received the `store`
+as a `prop`. And we even have to do this for *Presentational* Components
+because sometimes they contain *Container* Components
+that need the `store` to `subscribe` to the changes.
+We have to write a lot of "*boilerplate*" code
+to pass the `store` down as a `prop`
+but there is *another* way using the "*advanced*" React feature
 called "***Context***".
 
-I'm creating a *new* Component called `Provider` 
-and from its' `render` method it just returns what ever its' *child* is. 
-So we can *wrap* any Component in a `Provider` 
-and it's going to `render` that Component. 
+I'm creating a *new* Component called `Provider`
+and from its `render` method it just returns what ever its *child* is.
+So we can *wrap* any Component in a `Provider`
+and it's going to `render` that Component.
 
 ```js
 class Provider extends Component {
@@ -3196,13 +3196,13 @@ class Provider extends Component {
 }
 ```
 
-I'm changing the `render` call 
-to render a `TodoApp` inside the `Provider` 
-and I'm moving the `store` `prop` from the `TodoApp` 
+I'm changing the `render` call
+to render a `TodoApp` inside the `Provider`
+and I'm moving the `store` `prop` from the `TodoApp`
 to the `Provider` Component.
 
 ```js
-ReactDOM.render( 
+ReactDOM.render(
   <Provider store={createStore(todoApp)}>
   <TodoApp />,
   </Provider>
@@ -3210,137 +3210,137 @@ ReactDOM.render(
 );
 ```
 
-The `Provider` Component will use the React 
-*advanced* ***Context*** Feature to make the `store` 
-available to *any* Component inside it 
-including "*Grand Children*". 
-To do this it has to define a special method called 
-`getChildContext` that will be *called* by React. 
-We are using `this.props.store` which corresponds to 
+The `Provider` Component will use the React
+*advanced* ***Context*** Feature to make the `store`
+available to *any* Component inside it
+including "*Grand Children*".
+To do this it has to define a special method called
+`getChildContext` that will be *called* by React.
+We are using `this.props.store` which corresponds to
 `store` passed to the `Provider` as a `prop` just *once*.
-*this* `store` will be part of the *Context* 
-that the `Provider` specifies 
-for any "*Children*" and "*Grand Children*" 
-so the `TodoApp` is going to receive this *Context* 
-and any Component inside `TodoApp` is going to receive 
-this *Context* `Object` with the `store` inside it. 
-However there is an *important condition* for the *Context* to work, 
-and this *condition* is that you have to specify 
-`childContextTypes` on the Component that defines 
-`getChildContext` these are just `React.PropTypes` definitions 
-but *unlike* `PropTypes`, the `ChildContext` Types are ***essential*** 
-for the *Context* to be turned on. 
-If you don't specify them, no *Child* Components 
-will receive this *Context*. 
+*this* `store` will be part of the *Context*
+that the `Provider` specifies
+for any "*Children*" and "*Grand Children*"
+so the `TodoApp` is going to receive this *Context*
+and any Component inside `TodoApp` is going to receive
+this *Context* `Object` with the `store` inside it.
+However there is an *important condition* for the *Context* to work,
+and this *condition* is that you have to specify
+`childContextTypes` on the Component that defines
+`getChildContext` these are just `React.PropTypes` definitions
+but *unlike* `PropTypes`, the `ChildContext` Types are ***essential***
+for the *Context* to be turned on.
+If you don't specify them, no *Child* Components
+will receive this *Context*.
 
-The *Container* Components *currently* access `store` by `props` 
-but we are going to change this to read the `store` from React *Context* 
-and to do that we just refer to `this.context` 
-similarly in the `render` method I'm also going to *read* the `store` 
+The *Container* Components *currently* access `store` by `props`
+but we are going to change this to read the `store` from React *Context*
+and to do that we just refer to `this.context`
+similarly in the `render` method I'm also going to *read* the `store`
 from the *Context* instead of the `props`:
 
 ```js
 const store = this.context.store; // no ES6 required.
 ```
 
-*Finally* the *Context* is "*Opt In*" 
-for the *receiving* Components *too* 
-so you *have* to *specify* a special field called `contextTypes` 
-which are *similar* to `childContextTypes` 
+*Finally* the *Context* is "*Opt In*"
+for the *receiving* Components *too*
+so you *have* to *specify* a special field called `contextTypes`
+which are *similar* to `childContextTypes`
 but in this case we are specifying which Context we
-want to *receive* and not pass down. 
+want to *receive* and not pass down.
 
 ```js
 VisibleTodoList.contextTypes = {
   store: React.PropTypes.object
 }
 ```
-If you *forget* to declare the `contextTypes` 
-the Component will *not* receive the relevant Context 
+If you *forget* to declare the `contextTypes`
+the Component will *not* receive the relevant Context
 so it is ***essential*** to remember to declare them.
 
-What about the *functional* Components that don't have [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 
-(*JavaScript context*). 
-It turns out that they *also* receive the Context 
-but as a *second* argument *after* the `props` 
-so I'm destructuring the *second argument* 
-and getting the `store` from there 
+What about the *functional* Components that don't have [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+(*JavaScript context*).
+It turns out that they *also* receive the Context
+but as a *second* argument *after* the `props`
+so I'm destructuring the *second argument*
+and getting the `store` from there
 and the *second argument* is the Context.
-Just like with the `class` Components 
-I still have to add a property called `contextTypes` 
-that specifies which *Context* I want to receive 
-and in this case I want to receive the `store` from the `Provider`. 
-If I *forget* to declare the `contextTypes` 
-my *functional* Component will not receive the relevant *Context* 
+Just like with the `class` Components
+I still have to add a property called `contextTypes`
+that specifies which *Context* I want to receive
+and in this case I want to receive the `store` from the `Provider`.
+If I *forget* to declare the `contextTypes`
+my *functional* Component will not receive the relevant *Context*
 as the *second argument*.
 
 ```js
 AddTodo.contextTypes = {
-  store: React.PropTypes.object 
+  store: React.PropTypes.object
 }
 ```
-So, its *important* to *remember* to declare them 
+So, its *important* to *remember* to declare them
 any time you *use* the *Context*.
-*Finally* I'm replacing the `props` with the `context` 
-when getting the `store` for the `FilterLink` 
-and I'm adding the `contextTypes` declaration 
-to the `FilterLink` so it receives the relevant *Context* 
-from the `Provider`. 
-Now that the `FilterLink` receives the `store` by `context` 
-I no longer need to pass it as a `prop` 
-so I'm removing its' usage (*from the `Footer` Component*)
-and I'm also removing the `store` prop from the `Footer` 
-because it doesn't need to pass it down anymore. 
+*Finally* I'm replacing the `props` with the `context`
+when getting the `store` for the `FilterLink`
+and I'm adding the `contextTypes` declaration
+to the `FilterLink` so it receives the relevant *Context*
+from the `Provider`.
+Now that the `FilterLink` receives the `store` by `context`
+I no longer need to pass it as a `prop`
+so I'm removing its usage (*from the `Footer` Component*)
+and I'm also removing the `store` prop from the `Footer`
+because it doesn't need to pass it down anymore.
 
-I'm also removing the `store` prop from the `TodoApp` Component 
-because I no longer need to pass it down to the *Containers*. 
-Now instead of *explicitly* passing the `store` down 
-by `props`, we pass it *implicitly* by `context`. 
+I'm also removing the `store` prop from the `TodoApp` Component
+because I no longer need to pass it down to the *Containers*.
+Now instead of *explicitly* passing the `store` down
+by `props`, we pass it *implicitly* by `context`.
 
 Lets recap how we use the `context` to pass the `store` down:
-We *start* by *rendering* the `TodoApp` 
-inside the `Provider` Component we defined above. 
-The `Provider` Component just *renders* 
-what ever you pass to it 
-so in this case it renders its' "*Children*" 
-or [*more specifically*] the `TodoApp` component 
-however it also provides the `context` 
-to *any* Components inside it, including "*Grand Children*" 
-the `context` contains just *one* key called the `store` 
-and it corresponds to the `store` we passed as a `prop` 
-to the `Provider` Component. 
-We pass the `store` to the `Provider` Component in our `render` call 
-and make it available to "*Child Components*" 
-by defining the `getChildContext` with the `store` key 
-pointing to that `prop`. 
-It is ***essential*** that the `getChildContext` 
-is matched by `childContextTypes` 
-where we specify that the `store` key has `PropTypes` 
-of `object`. 
+We *start* by *rendering* the `TodoApp`
+inside the `Provider` Component we defined above.
+The `Provider` Component just *renders*
+what ever you pass to it
+so in this case it renders its "*Children*"
+or [*more specifically*] the `TodoApp` component
+however it also provides the `context`
+to *any* Components inside it, including "*Grand Children*"
+the `context` contains just *one* key called the `store`
+and it corresponds to the `store` we passed as a `prop`
+to the `Provider` Component.
+We pass the `store` to the `Provider` Component in our `render` call
+and make it available to "*Child Components*"
+by defining the `getChildContext` with the `store` key
+pointing to that `prop`.
+It is ***essential*** that the `getChildContext`
+is matched by `childContextTypes`
+where we specify that the `store` key has `PropTypes`
+of `object`.
 
-> Note: that the `childContextTypes` definition 
-is ***absolutely required*** 
-if you want to pass the `context` down the tree. 
+> Note: that the `childContextTypes` definition
+is ***absolutely required***
+if you want to pass the `context` down the tree.
 
-The benefit is that we don't need to pass the `store` 
-through the *intermediate* components 
-and instead we can declare the `contextTypes` 
-on the *Container* Components that need access to the `store` 
-so that they can retrieve it from the `context` 
-instead of retrieving it from the `props`. 
-The `context` creates something like a "*worm hole*" 
-between the `VisibleTodoList` Component that reads the `context` 
-and the `Provider` that *provides* the `context` 
-and this "*worm hole*" is only *enabled* 
-because the `contextTypes` declared on the `VisibleTodoList` 
-include the `store` that is defined in `childContextTypes` 
-of the `Provider` Component. 
+The benefit is that we don't need to pass the `store`
+through the *intermediate* components
+and instead we can declare the `contextTypes`
+on the *Container* Components that need access to the `store`
+so that they can retrieve it from the `context`
+instead of retrieving it from the `props`.
+The `context` creates something like a "*worm hole*"
+between the `VisibleTodoList` Component that reads the `context`
+and the `Provider` that *provides* the `context`
+and this "*worm hole*" is only *enabled*
+because the `contextTypes` declared on the `VisibleTodoList`
+include the `store` that is defined in `childContextTypes`
+of the `Provider` Component.
 
-The `AddTodo` is another Component that needs *access* to the `store` 
-so it also *opts-in* to receiving it in the `context` 
-by specifying the `contextTypes` 
-this is why in *addition* to `props`, 
-it receives a *second argument* which is the `context` 
+The `AddTodo` is another Component that needs *access* to the `store`
+so it also *opts-in* to receiving it in the `context`
+by specifying the `contextTypes`
+this is why in *addition* to `props`,
+it receives a *second argument* which is the `context`
 I'm using the *destructuring* syntax here so instead of:
 
 ```js
@@ -3354,82 +3354,82 @@ we get a simplified version:
 const AddTodo = (props, { store }) => {
 // rest of code ...
 ```
-The `context` works at *any* depth 
-so it is not necessary to put `contextTypes` on the `Footer` 
-the `FilterLink` is the Component that *directly* uses the `context` 
-so this is the component that has to *specify* the `contextTypes` 
-so that it can use the `store` by reading it from the `context`. 
+The `context` works at *any* depth
+so it is not necessary to put `contextTypes` on the `Footer`
+the `FilterLink` is the Component that *directly* uses the `context`
+so this is the component that has to *specify* the `contextTypes`
+so that it can use the `store` by reading it from the `context`.
 
-Context is a *powerful feature* 
-but in a way it contradicts the React philosophy 
-of the ***explicit data flow***. 
-The `context` essentially allows ***Global Variables*** 
-across the Component Tree 
-but ***Global Variables*** are *usually* a ***Bad Idea*** ... 
-and unless you're using it for dependency injection 
-like here where we need to make a *single* `Object` 
-available to all Components, 
-then probably you *shouldn't* use `context` ... 
+Context is a *powerful feature*
+but in a way it contradicts the React philosophy
+of the ***explicit data flow***.
+The `context` essentially allows ***Global Variables***
+across the Component Tree
+but ***Global Variables*** are *usually* a ***Bad Idea*** ...
+and unless you're using it for dependency injection
+like here where we need to make a *single* `Object`
+available to all Components,
+then probably you *shouldn't* use `context` ...
 
-*Finally* the Context API is ***NOT Stable*** in React! 
-It has changed before and it is likely to change again 
-so try your best not to rely on it too much. 
+*Finally* the Context API is ***NOT Stable*** in React!
+It has changed before and it is likely to change again
+so try your best not to rely on it too much.
 
-> Code at the *end* of **Video 25**: 
+> Code at the *end* of **Video 25**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/45789c3333b17adee09c9f011292bfaa7269c40a/index.html)
 
 <br />
 
-#### 26. Passing the Store Down with <Provider> from React Redux
+#### 26. Passing the Store Down with &lt;Provider&gt; from React Redux
 
 > Video: https://egghead.io/lessons/javascript-redux-passing-the-store-down-with-provider-from-react-redux
 
-In the *previous* lesson we implemented the `Provider` Component 
-that uses the React "*Advanced*" Context Feature 
-to make the `store` from the `props` available 
-to *every* Component in our App. 
-So if we pass it to the `Provider` 
-we can read it in *any* other Component from the `context` 
-which is *really* convenient for the *Container* Components 
-in fact this is *so* convenient 
-that you don't actually *need* to write the `Provider` *yourself* 
-because it is included in a "*special library*" 
-called ***React-Redux*** 
+In the *previous* lesson we implemented the `Provider` Component
+that uses the React "*Advanced*" Context Feature
+to make the `store` from the `props` available
+to *every* Component in our App.
+So if we pass it to the `Provider`
+we can read it in *any* other Component from the `context`
+which is *really* convenient for the *Container* Components.
+In fact this is *so* convenient
+that you don't actually *need* to write the `Provider` *yourself*
+because it is included in a "*special library*"
+called ***React-Redux***
 
 ```js
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.5/react-redux.js"></script>
 ```
-And note that this is *not* the same a Redux, 
-this is a *different* library 
+And note that this is *not* the same a Redux,
+this is a *different* library
 these are *React bindings* to the Redux Library.
 
 You can import the `Provider` by *destructuring* the `ReactRedux`
-***Global*** `Object` in JSBin: 
+***Global*** `Object` in JSBin:
 ```js
 const { Provider } = ReactRedux;
 ```
-***or*** if you use `Babel` 
-and something like `npm` 
+***or*** if you use `Babel`
+and something like `npm`
 you can:
 
 ```js
-import { Provider } from 'react-redux'
-``` 
+import { Provider } from 'react-redux';
+```
 
-with the braces because it is a *named* `export` 
-from the `react-redux` package. 
+with the braces because it is a *named* `export`
+from the `react-redux` package.
 Or if you write **ES5** code, you can write:
 
 ```js
 var Provider = require('react-redux').Provider;
 ```
 
-Just like the `Provider` we wrote *before*, 
-the `Provider` that comes with `ReactRedux` 
-exposes the `store` you pass to it as a `prop` 
-on the `context` so the Components can specify 
-the `contextTypes` and then use `this.context.store` 
-to `subscribe` to the `store` updates and `dispatch` *actions*. 
+Just like the `Provider` we wrote *before*,
+the `Provider` that comes with `ReactRedux`
+exposes the `store` you pass to it as a `prop`
+on the `context` so the Components can specify
+the `contextTypes` and then use `this.context.store`
+to `subscribe` to the `store` updates and `dispatch` *actions*.
 
 > Code at the *end* of **Video 26**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/bbc303a0a689d0c99daa71c6b0a8ead5ccc5484e/index.html)
@@ -3441,28 +3441,28 @@ to `subscribe` to the `store` updates and `dispatch` *actions*.
 > Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-visibletodolist
 
 
-In the previous lesson I added `ReactRedux` bindings to the project 
-and I used the `Provider` Component from `ReactRedux` 
-to pass the `store` down the `context` 
-so that the *Container* Components can *read* the `store` 
-from the `context` and `subscribe` to its' changes. 
-All *Container* Components are *very similar*, 
-they need to *re-render* when the `store` `state` changes 
-they need to `unsubscribe` from the `store` when they `Unmount`. 
-and they take the *current* `state` of the Redux `store` 
-and use it to `render` the *Presentational* Components 
-with some `props` that they *calculate* from the `state` of the `store` 
-and they *also* need to *specify* the `contextTypes` 
-to get the `store` from the `context`. 
+In the previous lesson I added `ReactRedux` bindings to the project
+and I used the `Provider` Component from `ReactRedux`
+to pass the `store` down the `context`
+so that the *Container* Components can *read* the `store`
+from the `context` and `subscribe` to its changes.
+All *Container* Components are *very similar*,
+they need to *re-render* when the `store` `state` changes
+they need to `unsubscribe` from the `store` when they `Unmount`.
+and they take the *current* `state` of the Redux `store`
+and use it to `render` the *Presentational* Components
+with some `props` that they *calculate* from the `state` of the `store`
+and they *also* need to *specify* the `contextTypes`
+to get the `store` from the `context`.
 
-I'm going to write this Component in a *different* way now: 
-and I'll declare a function called `mapStateToProps` 
-which takes the Redux `store` `state` 
-and returns the `props` that I need to pass to the 
-*Presentational* `TodoList` Component 
-to `render` it with the *current* `state`. 
-In this case there is just a *single* `prop` called `todos` 
-so I *copy-paste* this expression: 
+I'm going to write this Component in a *different* way now:
+and I'll declare a function called `mapStateToProps`
+which takes the Redux `store` `state`
+and returns the `props` that I need to pass to the
+*Presentational* `TodoList` Component
+to `render` it with the *current* `state`.
+In this case there is just a *single* `prop` called `todos`
+so I *cut-paste* this expression:
 
 ```js
 const mapStateToProps = (state) => {
@@ -3474,32 +3474,32 @@ const mapStateToProps = (state) => {
   };
 };
 ```
-It returns the `props` that *depend* on the *current* 
-`state` of the Redux `store` 
-so in *this* case this is just the `todos` prop. 
+It returns the `props` that *depend* on the *current*
+`state` of the Redux `store`
+so in *this* case this is just the `todos` prop.
 
-I'm creating another function 
-that I call `mapDispatchToProps` 
+I'm creating another function
+that I call `mapDispatchToProps`
 and it accepts the `dispatch` method from the `store`
-as the *only* argument and returns 
-the `props` that should be passed to the `TodoList` Component 
-and that *depend* on the `dispatch` method. 
-The *only* `prop` that uses `store.dispatch` 
-is called `onTodoClick` 
-so I'm *copy-pasting* [*cut-and-pasting*] `onTodoClick` 
-into `mapDispatchToProps`. 
-Note that I don't have the reference to the `store` here *anymore* 
-so instead I'm changing it to use *just* the `dispatch` 
-which is provided as an *argument* to `mapDispatchToProps` 
+as the *only* argument and returns
+the `props` that should be passed to the `TodoList` Component
+and that *depend* on the `dispatch` method.
+The *only* `prop` that uses `store.dispatch`
+is called `onTodoClick`
+so I'm *copy-pasting* [*cut-and-pasting*] `onTodoClick`
+into `mapDispatchToProps`.
+Note that I don't have the reference to the `store` here *anymore*
+so instead I'm changing it to use *just* the `dispatch`
+which is provided as an *argument* to `mapDispatchToProps`
 "I will add some *punctuation* to make it *appear* easier on my eyes"
-[*parenthesis around the `id` argument 
+[*parenthesis around the `id` argument
 & curly-braces around the function block*]
-`onTodoClick` is a function that accepts the `id` 
-of the `todo` and dispatches an `action`. 
+`onTodoClick` is a function that accepts the `id`
+of the `todo` and dispatches an `action`.
 
 ```js
 const mapDispatchToProps = (dispatch) => {
-  return { 
+  return {
     onTodoClick: (id) => {
       dispatch({
         type: 'TOGGLE_TODO',
@@ -3511,40 +3511,40 @@ const mapDispatchToProps = (dispatch) => {
 ```
 
 Now I've got two different functions:
-The *first* one *maps* the Redux `store` `state` 
-to the `props` of the `TodoList` Component 
-that are *related* to the *data* from the Redux `store` 
-the *second* function maps the `dispatch` method of the `store` 
-to the callback `props` of the `TodoList` Component 
-it specifies the *behavior* 
-that is which callback `prop` dispatches which `action`. 
+The *first* one *maps* the Redux `store` `state`
+to the `props` of the `TodoList` Component
+that are *related* to the *data* from the Redux `store`
+the *second* function maps the `dispatch` method of the `store`
+to the callback `props` of the `TodoList` Component
+it specifies the *behavior*
+that is which callback `prop` dispatches which `action`.
 
-Together these two functions describe the a *Container* Component 
-*so* well that instead of *writing* it 
-I can *generate* it by using the `connect` function 
-provided by the `ReactRedux` Library: 
+Together these two functions describe the a *Container* Component
+*so* well that instead of *writing* it
+I can *generate* it by using the `connect` function
+provided by the `ReactRedux` Library:
 
 ```js
 const { connect } = ReactRedux;
 ```
-If you use `npm` and `Babel` you will 
+If you use `npm` and `Babel` you will
 likely *import* it like *this* instead:
 
 ```js
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 ```
-"*and don't forget the curly braces*..." 
+"*and don't forget the curly braces*..."
 [*destructuring assignment of the `connect` method from the `react-redux` package*]
 
-Now, instead of declaring a `class` I'm going to declare a `variable` 
-and I will call the `connect` method to *obtain* it. 
-I'm passing `mapStateToProps` as the *first* argument, 
-and `mapDispatchToProps` as the *second* argument. 
-And notice that this is a 
-["*curried*"](https://github.com/iteles/Javascript-the-Good-Parts-notes#curry) 
-function so I have to call it once *again* 
-and this time I pass the *Presentational* Component 
-that I want it to *wrap* and pass the `props` to. 
+Now, instead of declaring a `class` I'm going to declare a `variable`
+and I will call the `connect` method to *obtain* it.
+I'm passing `mapStateToProps` as the *first* argument,
+and `mapDispatchToProps` as the *second* argument.
+And notice that this is a
+["*curried*"](https://github.com/iteles/Javascript-the-Good-Parts-notes#curry)
+function so I have to call it once *again*
+and this time I pass the *Presentational* Component
+that I want it to *wrap* and pass the `props` to.
 
 ```js
 const VisibleTodoList = connect(
@@ -3553,50 +3553,50 @@ const VisibleTodoList = connect(
 )(TodoList);
 ```
 
-The `connect` function will *generate* the Component 
-will *generate* the Component just like the one 
-I *previously* wrote by *hand* 
-so I don't want you to write the *code* 
-to `subscribe` to the `store` or to *specify* the `contextTypes` 
-because the `connect` function takes care of that. 
+The `connect` function will *generate* the Component
+will *generate* the Component just like the one
+I *previously* wrote by *hand*
+so I don't want you to write the *code*
+to `subscribe` to the `store` or to *specify* the `contextTypes`
+because the `connect` function takes care of that.
 
-> At 03:27 Dan *deletes* the "old" `VisibleTodoList` Component 
-and its `contextTypes` definition which 
+> At 03:27 Dan *deletes* the "old" `VisibleTodoList` Component
+and its `contextTypes` definition which
 are *both* now being *generated* by the `connect` call.
 
-Now lets re-cap how to *generate* the *Container* Component 
-using the `connect` function: 
- 
-*First* I write a `function` called `mapStateToProps` 
-that takes the `state` of the Redux `store` 
-and returns the `props` for the *Presentational* Component 
-calculated from it. 
-These `props` will be *updated* any time the `state` changes 
-*Next* I write a `function` that I call `mapDispatchToProps` 
-it takes the `store.dispatch` method as it's *first* argument 
-and it returns the `props` that *use* the `dispatch` method 
-to `dispatch` *actions*, 
-so it *returns* the callback `props` 
-needed for the *Presentational* Component. 
+Now lets re-cap how to *generate* the *Container* Component
+using the `connect` function:
 
-To create a *Container* Component from them, 
-I *import* `connect` from the `ReactRedux` library 
-and I *call* it passing `mapStateToProps` 
-as the *first* argument and `mapDispatchToProps` 
-as the *second* argument. 
-*Finally*, I close the function call parens, 
-and I *open* another [*pair of*] parentheses 
-because this is a *curried* function and it needs to be 
-*called* ***twice*** 
-and the last argument is the *Presentational* Component 
-that I want to *connect* to the Redux `store`. 
-The *result* of the `connect` call 
-is the *Container* Component 
-that is going to `render` my *Presentational* Component 
-it will calculate the `props` to pass to the 
-*Presentational* Component by merging the objects 
-returned from `mapStateToProps`, `mapDispatchToProps` 
-and its *own* `props`. 
+*First* I write a `function` called `mapStateToProps`
+that takes the `state` of the Redux `store`
+and returns the `props` for the *Presentational* Component
+calculated from it.
+These `props` will be *updated* any time the `state` changes
+*Next* I write a `function` that I call `mapDispatchToProps`
+it takes the `store.dispatch` method as it's *first* argument
+and it returns the `props` that *use* the `dispatch` method
+to `dispatch` *actions*,
+so it *returns* the callback `props`
+needed for the *Presentational* Component.
+
+To create a *Container* Component from them,
+I *import* `connect` from the `ReactRedux` library
+and I *call* it passing `mapStateToProps`
+as the *first* argument and `mapDispatchToProps`
+as the *second* argument.
+*Finally*, I close the function call parens,
+and I *open* another [*pair of*] parentheses
+because this is a *curried* function and it needs to be
+*called* ***twice***
+and the last argument is the *Presentational* Component
+that I want to *connect* to the Redux `store`.
+The *result* of the `connect` call
+is the *Container* Component
+that is going to `render` my *Presentational* Component
+it will calculate the `props` to pass to the
+*Presentational* Component by merging the objects
+returned from `mapStateToProps`, `mapDispatchToProps`
+and its *own* `props`.
 
 > Complete Code at the *end* of **Video 27**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/182bde8b227fd2746838f57e89bc97f049ef5370/index.html)
@@ -3607,31 +3607,31 @@ and its *own* `props`.
 
 > Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-addtodo
 
-In the *previous* lesson we used the `connect` function from 
-`ReactRedux` bindings library to *generate* 
-the *Container* Component that *renders* 
-a *Presentational* Component 
-I *specify* how to calculate the `props` to "*inject*" 
-from the *current* Redux `store` `state` 
-and the callback `props` to *inject* 
-from the `dispatch` function on the Redux `store`. 
+In the *previous* lesson we used the `connect` function from
+`ReactRedux` bindings library to *generate*
+the *Container* Component that *renders*
+a *Presentational* Component.
+I *specify* how to calculate the `props` to "*inject*"
+from the *current* Redux `store` `state`
+and the callback `props` to *inject*
+from the `dispatch` function on the Redux `store`.
 
-*Normally* I would keep these functions 
-called `mapStateToProps` and `mapDispatchToProps` 
-but I'm working in a *single* file right now 
-and I need to write these functions for a few *other* 
-*Container* Components so I'm going to *re-name* 
+*Normally* I would keep these functions
+called `mapStateToProps` and `mapDispatchToProps`,
+but I'm working in a *single* file right now
+and I need to write these functions for a few *other*
+*Container* Components so I'm going to *re-name*
 them to something more *specific*:
 
 + `mapStateToProps` becomes `mapStateToTodoListProps`
-+ `mapDispatchToProps` becomes `mapDispatchToTodoListProps` 
++ `mapDispatchToProps` becomes `mapDispatchToTodoListProps`
 
-Which you don't *have* to do in your code, 
-if you keep each Component in its' *own* file. 
+Which you don't *have* to do in your code,
+if you keep each Component in its *own* file (which is considered to be a best practise).
 
-I will also remove the line-breaks here 
-to make it *clear* that these functions are only relevant 
-for generating this particular *Container* Component 
+I will also remove the line-breaks here
+to make it *clear* that these functions are only relevant
+for generating this particular *Container* Component.
 
 Final Code (*after re-naming*):
 
@@ -3645,7 +3645,7 @@ const mapStateToTodoListProps = (state) => {
   };
 };
 const mapDispatchToTodoListProps = (dispatch) => {
-  return { 
+  return {
     onTodoClick: (id) => {
       dispatch({
         type: 'TOGGLE_TODO',
@@ -3661,44 +3661,44 @@ const VisibleTodoList = connect(
 )(TodoList);
 ```
 
-Now I'm *scrolling* up to the `AddTodo` Component 
-which is not clearly a *Container* or a *Presentational* Component 
-however it uses the `store`, 
-it *reads* the `store` from the `context` 
-to `dispatch` an `action` when the `<button>` is *clicked* 
-and it *has* to declare the `contextTypes` 
-to be able to grab the `store` from the `context`. 
-[React] Context is a an ***unstable API*** so 
-its best to ***avoid using*** it ***in application code***. 
+Now I'm *scrolling* up to the `AddTodo` Component
+which is not clearly a *Container* or a *Presentational* Component.
+However it uses the `store`,
+it *reads* the `store` from the `context`
+to `dispatch` an `action` when the `<button>` is *clicked*
+and it *has* to declare the `contextTypes`
+to be able to grab the `store` from the `context`.
+[React] Context is a an ***unstable API*** so
+it's best to ***avoid using*** it ***in application code***.
 
-Instead of reading the `store` from the `context` 
-I will read the `dispatch` function from the `props` 
-because I only need the `dispatch` here 
-I don't *need* the whole `store` 
-and I will create a *Container* Component with `connect` 
-that will *inject* the `dispatch` function as a `prop`. 
-I will *remove* the `contextTypes` 
-[*from the `AddTodo` Component*] 
-because the Component generated by `connect` function 
-will take care of reading the `store` from the `context`. 
+Instead of reading the `store` from the `context`,
+I will read the `dispatch` function from the `props`,
+because I only need the `dispatch` here.
+I don't *need* the whole `store`,
+and I will create a *Container* Component with `connect`
+that will *inject* the `dispatch` function as a `prop`.
+I will *remove* the `contextTypes`
+[*from the `AddTodo` Component*]
+because the Component generated by `connect` function
+will take care of reading the `store` from the `context`.
 
-Because I changed the `AddTodo` declaration 
-from the `const` to the `let` binding 
-I can re-assign it now 
-so that the *consuming* Component does not need to *specify* 
-the `dispatch` prop because it will be *injected* 
-by the Component *generated* by the `connect` call. 
-The *first* argument to the `connect` function is `mapStateToProps` 
-but there aren't any `props` for `AddTodo` Component 
-that *depend* on the *current* `state`, 
-so I `return` an *empty* `Object`. 
-The *second* argument to `connect` is `mapDispatchToProps` 
-but `AddTodo` Component doesn't *need* any callback `props` 
-it just accepts the `dispatch` function its' self, 
-so I'm returning it as a `prop` with the *same name*. 
-*Finally* I'm calling the function for a *second* time 
-to specify the Component I want to *wrap*, 
-in this case `AddTodo` its' self:
+Because I changed the `AddTodo` declaration
+from the `const` to the `let` binding,
+I can re-assign it now,
+so that the *consuming* Component does not need to *specify*
+the `dispatch` prop because it will be *injected*
+by the Component *generated* by the `connect` call.
+The *first* argument to the `connect` function is `mapStateToProps`,
+but there aren't any `props` for `AddTodo` Component
+that *depend* on the *current* `state`,
+so I `return` an *empty* `Object`.
+The *second* argument to `connect` is `mapDispatchToProps`,
+but `AddTodo` Component doesn't *need* any callback `props`.
+It just accepts the `dispatch` function itself,
+so I'm returning it as a `prop` with the *same name*.
+*Finally* I'm calling the function for a *second* time
+to specify the Component I want to *wrap*,
+in this case `AddTodo` itself:
 
 `AddTodo` with the re-assignment as a call to `connect`:
 
@@ -3719,8 +3719,8 @@ let AddTodo = ({ dispatch }) => {
         })
         input.value = '';
       }}>
-        Add Todo 
-      </button> 
+        Add Todo
+      </button>
     </div>
   );
 }
@@ -3734,58 +3734,58 @@ AddTodo = connect(
 )(AddTodo);
 ```
 
-The *generated* *Container* Component 
-will not pass any `props` dependent on the `state` 
-but it will pass `dispatch` its' self 
-as a `function` so that the Component can read it from the `props` 
-and use it without worrying about *context* 
-or specifying `contextTypes`. 
-However it is *wasteful* to even `subscribe` to the `store` 
-if we don't calculate any `props` from its' `state` 
-so I'm *replacing* the `mapStateToProps` function with a `null` 
-which tells `connect` that there is *no need* 
-to `subscribe` to the `store`. 
+The *generated* *Container* Component
+will not pass any `props` dependent on the `state`,
+but it will pass `dispatch` itself
+as a `function` so that the Component can read it from the `props`
+and use it without worrying about *context*
+or specifying `contextTypes`.
+However it is *wasteful* to even `subscribe` to the `store`
+if we don't calculate any `props` from its `state`,
+so I'm *replacing* the `mapStateToProps` function with a `null`,
+which tells `connect` that there is *no need*
+to `subscribe` to the `store`.
 Additionally its a pretty *common pattern*
-to *inject just the `dispatch` function* 
-so this is why if you specify `null` or any "*falsy*" value 
-in `connect` as the *second* argument 
+to *inject just the `dispatch` function*,
+so this is why if you specify `null` or any "*falsy*" value
+in `connect` as the *second* argument
 you're going to get `dispatch` injected as a `prop`.
 
-So in fact I can just ***remove all arguments*** here 
-and the *default* behavior will be to *not* `subscribe` 
-to the `store` and to *inject* just the `dispatch` function 
-as a `prop`. 
+So in fact I can just ***remove all arguments*** here
+and the *default* behavior will be to *not* `subscribe`
+to the `store` and to *inject* just the `dispatch` function
+as a `prop`.
 
 ```js
 AddTodo = connect()(AddTodo);
 ```
 
 03:44 - Let's re-cap what happens to the Components here:
-The `AddTodo` Component that I declare 
-accepts `dispatch` as a `prop` 
-but it doesn't know how to *get* the `store` 
-it just "*hopes*" that "*someone*" is going 
-to *pass* `dispatch` to it. 
-The `connect` call without any arguments is going 
-to *generate* a *Container* Component 
-that does *not* `subscribe` to the `store` 
-however that will pass `dispatch` to the Component that it *wraps* 
-and in this case it *wraps* my `AddTodo` Component 
+The `AddTodo` Component that I declare
+accepts `dispatch` as a `prop`,
+but it doesn't know how to *get* the `store`.
+It just "*hopes*" that "*someone*" is going
+to *pass* `dispatch` to it.
+The `connect` call without any arguments is going
+to *generate* a *Container* Component
+that does *not* `subscribe` to the `store`.
+However that will pass `dispatch` to the Component that it *wraps*
+and in this case it *wraps* my `AddTodo` Component
 
-The *second* `connect` call returns the *generated* 
-*Container* Component and I'm assigning it to `AddTodo` 
-so I'm re-assigning the `let` binding the second time 
-and when the further code references `AddTodo` 
-it's going to reference the *Container* Component 
-that does not need the `dispatch` prop 
-and that will pass the `dispatch` prop 
-to my *inner* `AddTodo` Component 
-that I don't have a reference to anymore. 
+The *second* `connect` call returns the *generated*
+*Container* Component and I'm assigning it to `AddTodo`,
+so I'm re-assigning the `let` binding the second time,
+and when the further code references `AddTodo`
+it's going to reference the *Container* Component
+that does not need the `dispatch` prop
+and that will pass the `dispatch` prop
+to my *inner* `AddTodo` Component
+that I don't have a reference to anymore.
 
-> If you did not fully understand *why* Dan did this re-factoring, 
+> If you did not fully understand *why* Dan did this re-factoring,
 read the docs: http://rackt.org/redux/docs/basics/UsageWithReact.html
 
-> Complete code for the *end* of **Video 28**: 
+> Complete code for the *end* of **Video 28**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/c76e0f0efb7ac1f8883d0727bd244224ee9c6741/index.html)
 
 <br />
@@ -3794,57 +3794,57 @@ read the docs: http://rackt.org/redux/docs/basics/UsageWithReact.html
 
 > Video: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-footerlink
 
-*Finally* let's take a look at the `FilterLink` 
-*Container* Component that renders a `Link` with an `active` property 
-and a *click* handler. 
-*First* I will write the `mapStateToProps` function 
-which I will call `mapStateToLinkProp` 
-because I have everything in a *single* file. 
-And it's going to accept the `state` of the Redux `store` 
-and `return` the `props` that should be passed to the `Link` 
-and we only have a *single* such `prop` called `active` 
-that determines whether the link displays 
-the *current* `visiblityFilter`. 
-When I *paste* this *expression* from the `render` method 
-I see that it references the `filter` prop 
-of the `FilterLink` Component. 
-To tell whether a link is *active* we need to 
-compare this `prop` with with the `visibilityFilter` 
-from the Redux `store` `state` 
-it is fairly common to use the *Container* `props` 
-when calculating the *Child* `props` 
-so this is why `props` are passed as a *second* argument 
+*Finally* let's take a look at the `FilterLink`
+*Container* Component that renders a `Link` with an `active` property
+and a *click* handler.
+*First* I will write the `mapStateToProps` function
+which I will call `mapStateToLinkProp`
+because I have everything in a *single* file.
+And it's going to accept the `state` of the Redux `store`
+and `return` the `props` that should be passed to the `Link`
+and we only have a *single* such `prop` called `active`
+that determines whether the link displays
+the *current* `visiblityFilter`.
+When I *paste* this *expression* from the `render` method
+I see that it references the `filter` prop
+of the `FilterLink` Component.
+To tell whether a link is *active* we need to
+compare this `prop` with with the `visibilityFilter`
+from the Redux `store` `state`
+it is fairly common to use the *Container* `props`
+when calculating the *Child* `props`
+so this is why `props` are passed as a *second* argument
 to `mapStateToProps` [*or in this example `mapStateToLinkProps`*]
-I will re-name it [*the `mapStateToLinkProps` second argument*] 
-to `ownProps` to make it clear that 
-we are talking about the *Container* Component's *own* `props` 
-and not the `props` that are *passed* to the *Child* 
-which is the `return` value of `mapStateToLinkProps` 
+I will re-name it [*the `mapStateToLinkProps` second argument*]
+to `ownProps` to make it clear that
+we are talking about the *Container* Component's *own* `props`
+and not the `props` that are *passed* to the *Child*
+which is the `return` value of `mapStateToLinkProps`
 
 ```js
-const mapStateToLinkProps = ( 
+const mapStateToLinkProps = (
   state,
   ownProps
 ) => {
   return {
-    active: 
+    active:
       ownProps.filter ===
-      state.visibilityFilter  
+      state.visibilityFilter
   }
-} 
+}
 ```
 
-The second function I'm writing here is `mapDispatchToProps` 
+The second function I'm writing here is `mapDispatchToProps`
 or to avoid name clashes in the JSBin [*single file app*]
-`mapDispatchToLinkProps`. 
-The only argument so far is the `dispatch` function 
-and I'm going to need to look at the *Container* Component 
-I wrote by hand to see what `props` depend on the `dispatch` function. 
-In this case this is just the `onClick` handler 
-where I `dispatch` the `SET_VISIBILITY_FILTER` `action`. 
-the only `prop` I'm passing down is called `onClick` 
-and I declare it as an **ES6** [***Arrow Function***]() 
-with no arguments and I *paste* the `dispatch` call. 
+`mapDispatchToLinkProps`.
+The only argument so far is the `dispatch` function
+and I'm going to need to look at the *Container* Component
+I wrote by hand to see what `props` depend on the `dispatch` function.
+In this case this is just the `onClick` handler
+where I `dispatch` the `SET_VISIBILITY_FILTER` `action`.
+the only `prop` I'm passing down is called `onClick`
+and I declare it as an **ES6** [***Arrow Function***]()
+with no arguments and I *paste* the `dispatch` call.
 
 ```js
 const mapDispatchToLinkProps = (
@@ -3861,10 +3861,10 @@ const mapDispatchToLinkProps = (
 }
 ```
 
-But it references the `props` *again*, 
-so I need to add `ownProps` as an *argument* 
-the *second* argument to `mapDispatchToLinkProps` function 
-thus: 
+But it references the `props` *again*,
+so I need to add `ownProps` as an *argument*
+the *second* argument to `mapDispatchToLinkProps` function
+thus:
 
 ```js
 const mapDispatchToLinkProps = (
@@ -3881,13 +3881,13 @@ const mapDispatchToLinkProps = (
   };
 }
 
-*Finally* I will call the `connect` function from `ReactRedux` Library 
-to generate the `FilterLink` *Container* Component 
-I pass the relevant `mapStateToProps` function 
-as the *first* argument [*in our case `mapStateToLinkProps`*] 
-the `mapDispatchToProps` as the *second* argument 
-[*or `mapDispatchToLinkProps` in our case*] 
-and I call the function *again* with the `Link` Component 
+*Finally* I will call the `connect` function from `ReactRedux` Library
+to generate the `FilterLink` *Container* Component
+I pass the relevant `mapStateToProps` function
+as the *first* argument [*in our case `mapStateToLinkProps`*]
+the `mapDispatchToProps` as the *second* argument
+[*or `mapDispatchToLinkProps` in our case*]
+and I call the function *again* with the `Link` Component
 which should be *rendered*:
 
 ```js
@@ -3897,27 +3897,27 @@ const FilterLink = connect(
 )(Link);
 ```
 
-Now I can *remove* the "*old*" `FilterLink` implementation. 
+Now I can *remove* the "*old*" `FilterLink` implementation.
 
 Let's re-cap the *data flow* in this example:
-the `Footer` Component renders **3** `FilterLink` 
-and each of them has a different `filter` prop 
-that specifies which `filter` it corresponds to 
-this `prop` will be available on the `ownProps` `Object` 
-that *both* `mapDispatchToProps` and `mapStateToProps` 
-will receive as the *second* argument. 
-we pass these two functions to the `connect` call 
-which will return a *Container* Component called `FilterLink`. 
-The `FilterLink` will take the `props` 
-that we `return` from the `mapDispatchToProps` and `mapStateToProps` 
-[*or the "Link" versions of these in our case...*] 
-and pass them as `props` the `Link` Component that it *wraps* 
-we can now use the `FilterLink` *Container* Component 
-and specify *just* the `filter` 
-but the *underlying* `Link` Component 
-will receive the *calculated* `active` and `onClick` values. 
+the `Footer` Component renders **3** `FilterLink`
+and each of them has a different `filter` prop
+that specifies which `filter` it corresponds to
+this `prop` will be available on the `ownProps` `Object`
+that *both* `mapDispatchToProps` and `mapStateToProps`
+will receive as the *second* argument.
+we pass these two functions to the `connect` call
+which will return a *Container* Component called `FilterLink`.
+The `FilterLink` will take the `props`
+that we `return` from the `mapDispatchToProps` and `mapStateToProps`
+[*or the "Link" versions of these in our case...*]
+and pass them as `props` the `Link` Component that it *wraps*
+we can now use the `FilterLink` *Container* Component
+and specify *just* the `filter`
+but the *underlying* `Link` Component
+will receive the *calculated* `active` and `onClick` values.
 
-> Complete Code at the *end* of **Video 29**: 
+> Complete Code at the *end* of **Video 29**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/f3c0a045b0694714e0ac7060cb1c77efae7d7baa/index.html)
 
 <br />
@@ -3926,41 +3926,41 @@ will receive the *calculated* `active` and `onClick` values.
 
 > Video: https://egghead.io/lessons/javascript-redux-extracting-action-creators
 
-So far we have covered the *Container* Components 
-the *Presentational* Components, 
-the Reducers and the `store`, 
-but we have not covered the concept of `action` *Creators* 
-which you might see in the Redux *talks* and *examples*. 
+So far we have covered the *Container* Components
+the *Presentational* Components,
+the Reducers and the `store`,
+but we have not covered the concept of `action` *Creators*
+which you might see in the Redux *talks* and *examples*.
 
-Let's consider the following example: 
-I `dispatch` the `ADD_TODO` `action` 
-from inside the `<button>` `onClick` handler 
-and this is "*fine*", 
-however it references the `nextTodoId` variable 
-which I declare along side the `AddTodo` Component 
-*normally* it would be *local* 
-however what if another component wants to `dispatch` 
-the `ADD_TODO` `action` ? 
-It would need to have access to the `nextTodoId` somehow 
-and while I *could* make this variable *GLOBAL* 
-it's *not* a very good idea ... 
-instead it would be *best* if the Components 
-dispatching the `ADD_TODO` `action` 
-did not have to *worry* about specifying the `id` 
-because the only information they *really* pass 
-is the `text` of the `todo` being added 
-I don't *want* to generate the `id` inside the *reducer* 
-because that would make it *non-deterministic* 
-however I can extract this code 
-generating the `action` `Object` 
-into a function I will call `addTodo` 
-I pass the `input.value` to `addTodo` 
-and `addTodo` is just a function that takes 
-the `text` of the `todo` and constructs an `action` `Object` 
-representing `ADD_TODO` `action`. 
-So it has the `type: 'ADD_TODO'`, 
-it takes care of *generating* the `id` 
-and it includes the `text`. 
+Let's consider the following example:
+I `dispatch` the `ADD_TODO` `action`
+from inside the `<button>` `onClick` handler
+and this is "*fine*",
+however it references the `nextTodoId` variable
+which I declare along side the `AddTodo` Component
+*normally* it would be *local*
+however what if another component wants to `dispatch`
+the `ADD_TODO` `action` ?
+It would need to have access to the `nextTodoId` somehow
+and while I *could* make this variable *GLOBAL*
+it's *not* a very good idea ...
+instead it would be *best* if the Components
+dispatching the `ADD_TODO` `action`
+did not have to *worry* about specifying the `id`
+because the only information they *really* pass
+is the `text` of the `todo` being added
+I don't *want* to generate the `id` inside the *reducer*
+because that would make it *non-deterministic*
+however I can extract this code
+generating the `action` `Object`
+into a function I will call `addTodo`
+I pass the `input.value` to `addTodo`
+and `addTodo` is just a function that takes
+the `text` of the `todo` and constructs an `action` `Object`
+representing `ADD_TODO` `action`.
+So it has the `type: 'ADD_TODO'`,
+it takes care of *generating* the `id`
+and it includes the `text`.
 
 ```js
 let nextTodoId = 0;
@@ -3973,26 +3973,26 @@ const addTodo = (text) => {
 }
 ```
 
-Although extracting such function is not required 
-it is a very common pattern in Redux applications 
-to keep them *maintainable* 
-so we call these functions `action` *Creators* 
-and we usually place them separately from Components 
-or from *Reducers*. 
+Although extracting such function is not required
+it is a very common pattern in Redux applications
+to keep them *maintainable*
+so we call these functions `action` *Creators*
+and we usually place them separately from Components
+or from *Reducers*.
 
-I will now *extract* other `action` *Creators* from the Components 
-and I see that I have a `SET_VISIBILITY_FILTER` in a `dispatch` here 
-[*in the `mapDispatchToLinkProps` method*] 
-so I will change this to call the `setVisiblityFilter` 
-`action` *Creator* with the `ownProps.filter` as the argument 
-and it's going to `return` the `action` 
-that needs to be `dispatched` 
-so I'm declaring the `setVisibilityFilter` function 
-this is what I call an `action` *Creator* because 
-it takes the arguments *about* the `action` 
-and it returns the `action` `Object` 
-with the `type: 'SET_VISIBILITY_FILTER'` 
-and the `filter` its' self. 
+I will now *extract* other `action` *Creators* from the Components
+and I see that I have a `SET_VISIBILITY_FILTER` in a `dispatch` here
+[*in the `mapDispatchToLinkProps` method*]
+so I will change this to call the `setVisiblityFilter`
+`action` *Creator* with the `ownProps.filter` as the argument
+and it's going to `return` the `action`
+that needs to be `dispatched`
+so I'm declaring the `setVisibilityFilter` function
+this is what I call an `action` *Creator* because
+it takes the arguments *about* the `action`
+and it returns the `action` `Object`
+with the `type: 'SET_VISIBILITY_FILTER'`
+and the `filter` itself.
 
 ```js
 const setVisibilityFilter = (filter) => {
@@ -4003,24 +4003,24 @@ const setVisibilityFilter = (filter) => {
 }
 ```
 
-You might think that this kind of code is "*boiler plate*" 
-and you would rather `dispatch` the `action` in-line 
-inside the Component 
-however don't *underestimate* how `action` *Creators* 
-*document* your software because they tell your *team* 
-what kinds of *actions* the Components can `dispatch` 
-and this kind of information can be *invaluable* 
-in *large* applications. 
+You might think that this kind of code is "*boiler plate*"
+and you would rather `dispatch` the `action` in-line
+inside the Component
+however don't *underestimate* how `action` *Creators*
+*document* your software because they tell your *team*
+what kinds of *actions* the Components can `dispatch`
+and this kind of information can be *invaluable*
+in *large* applications.
 
-I will now scroll down to the *last* place where I call `dispatch` 
-with an *in-line* `action` `Object` 
+I will now scroll down to the *last* place where I call `dispatch`
+with an *in-line* `action` `Object`
 [*the `mapDispatchToTodoListProps` function*]
-and I will *extract* that to add `toggleTodo` `action` *Creator* 
-to which I pass the `id` of the `todo` as the argument. 
+and I will *extract* that to add `toggleTodo` `action` *Creator*
+to which I pass the `id` of the `todo` as the argument.
 
-I'm now scrolling up to my `action` *Creators* 
-and I will add a new one that I call `toggleTodo` 
-it accepts the `id` as the argument 
+I'm now scrolling up to my `action` *Creators*
+and I will add a new one that I call `toggleTodo`
+it accepts the `id` as the argument
 and it returns the `action` with the `type: 'TOGGLE_TODO'`
 and this `id`:
 
@@ -4033,16 +4033,16 @@ const toggleTodo = (id) => {
 };
 ```
 
-Lets take a moment to consider how *convenient* it is 
-to have all the `action` Creators in a single place 
-so that I can use them from Components and Tests 
-without worrying about the *actions* internal structure. 
+Lets take a moment to consider how *convenient* it is
+to have all the `action` Creators in a single place
+so that I can use them from Components and Tests
+without worrying about the *actions* internal structure.
 
-Note that whether you use `action` Creators or *not* 
-the *data flow* is *exactly* the same 
-because I just called the `action` Creator to get 
-the `action` `Object` and then I call `dispatch` 
-just like I did *before* passing the `action`. 
+Note that whether you use `action` Creators or *not*
+the *data flow* is *exactly* the same
+because I just called the `action` Creator to get
+the `action` `Object` and then I call `dispatch`
+just like I did *before* passing the `action`.
 
 > Complete Code at the *end* of **Video 30**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/78817e3e49a35234c175e4aa62f4de2c444c4211/index.html)
