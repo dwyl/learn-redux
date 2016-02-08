@@ -506,8 +506,8 @@ and [**deep-freeze**](https://github.com/substack/deep-freeze) to make sure my c
 These are loaded from [@Substack](https://github.com/substack)'s CDN: https://wzrd.in
 
 "Let's say that I want to implement a **counter** ***list*** application.
-I would need to write a few function that operate on its' state and
-its' state is an `Array` of JavaScript *Numbers* representing the individual counters."
+I would need to write a few function that operate on its state and
+its state is an `Array` of JavaScript *Numbers* representing the individual counters."
 
 The first function I want to write is called addCounter
 and all it should do is to *append* a zero at the end
@@ -1544,7 +1544,7 @@ To gain a *deeper* understanding of how *exactly* `combineReducers` works
 we will *implement* it ***from scratch*** in this lesson.
 
 `combineReducers` is a function so I'm writing a function declaration
-and its' only argument is the *mapping* between `state` keys
+and its only argument is the *mapping* between `state` keys
 and the reducers, so I'm just going to call it `reducers`.
 
 ```js
@@ -1565,7 +1565,7 @@ const combineReducers = (reducers) => {
 };
 ```
 
-The returned value is supposed to be a reducer its' self
+The returned value is supposed to be a reducer itself
 so this is a function that returns another function
 and the signature of the returned function is a reducer signature
 it has the `state` and the `action`
@@ -2159,7 +2159,7 @@ the root reducer will *use* this new field as part of its *new*
 its going to get this *new* `state` `Object`
 and pass all its keys as props to the `TodoApp` Component
 so the `TodoApp` Component will receive the todos
-and the *updated* `visibilityFilter` as its' props
+and the *updated* `visibilityFilter` as its props
 both its props are passed to the `getVisibleTodos` function
 which calculates the *currently* `visibleTodos`
 according to a list of *all* `todos` and the `visibilityFilter`
@@ -2589,7 +2589,7 @@ such as what happens when the **Add** `<button>` is clicked
 how the todos are selected
 what happens when a *single* `Todo` has been clicked
 and what happens when a `Footer` Link is clicked.
-And the components such as `AddTodo`, the `TodoList`, the `Todo` its' self
+And the components such as `AddTodo`, the `TodoList`, the `Todo` itself
 the `Footer` and the `FilterLink` they don't dispatch actions
 they call their callbacks [passed] in the props
 so they are *only* responsible for the *looks* but not for the behavior.
@@ -2705,7 +2705,7 @@ As a "*Container*" Component the `FilterLink`
 doesn't have its *own* markup
 and it delegates rendering to the `Link`
 "*Presentational*" Component.
-In this case it *calculates* its' `active` prop
+In this case it *calculates* its `active` prop
 by comparing its *own* `filter` prop
 with the `visibilityFilter` in the Redux `store` `state`.
 The `filter` prop is the one that is passed
@@ -2837,7 +2837,7 @@ inside its `render` method.
 Instead of specifying the DOM tree
 it delegates all the rendering to
 the `Link` "*Presentational*" Component
-and its' only job is to calculate the props
+and its only job is to calculate the props
 base on its *own* props and the *current* `state` of the Redux `store`
 and it also specifies the callbacks that are
 going to dispatch the `actions` on the `store`.
@@ -2857,7 +2857,7 @@ and can be used inside the "*Presentational*" Components such as
 to get the data from the `store` and specify the behavior
 this lets us keep the `Footer` Component simple
 and de-coupled from the behavior and data
-that its' child Components need.
+that its child Components need.
 
 
 > Code at the *end* of Video 22:
@@ -2950,7 +2950,7 @@ componentWillUnmount() {
 Just like the `FilterLink` the `VisibleTodoList` is
 going to *subscribe* to the `store`
 and *force* an update any time the `store` `state` changes
-because it uses the `state` in its' `render` method.
+because it uses the `state` in its `render` method.
 Now that the `VisibleTodoList` is connected to the Redux `store`
 we can use it *instead* of the `TodoList`
 and we no longer have to pass all the props from the top.
@@ -3035,7 +3035,7 @@ rendering **3** different `FilterLink`s.
 The `FilterLink` is a *Container* Component
 so it *subscribes* to the `store`
 and it renders the *Presentational* Component called `Link`
-calculating weather it should be *active* based on its' props
+calculating weather it should be *active* based on its props
 the *current* Redux `store` `state`
 and it specifies the *behavior*
 (*what happens when it's clicked*).
@@ -3150,7 +3150,7 @@ Note that this change did not change the behavior or *data* flow
 of this application.
 The *Container* Components `subscribe` to the `store`
 just like *before* and update their `state`
-in response to its' changes,
+in response to its changes,
 however what changed is how they *access* the `store`.
 Previously they would *access* a top-level variable
 but this approach does not *scale*
@@ -3184,7 +3184,7 @@ but there is *another* way using the "*advanced*" React feature
 called "***Context***".
 
 I'm creating a *new* Component called `Provider`
-and from its' `render` method it just returns what ever its' *child* is.
+and from its `render` method it just returns what ever its *child* is.
 So we can *wrap* any Component in a `Provider`
 and it's going to `render` that Component.
 
@@ -3288,7 +3288,7 @@ to the `FilterLink` so it receives the relevant *Context*
 from the `Provider`.
 Now that the `FilterLink` receives the `store` by `context`
 I no longer need to pass it as a `prop`
-so I'm removing its' usage (*from the `Footer` Component*)
+so I'm removing its usage (*from the `Footer` Component*)
 and I'm also removing the `store` prop from the `Footer`
 because it doesn't need to pass it down anymore.
 
@@ -3302,7 +3302,7 @@ We *start* by *rendering* the `TodoApp`
 inside the `Provider` Component we defined above.
 The `Provider` Component just *renders*
 what ever you pass to it
-so in this case it renders its' "*Children*"
+so in this case it renders its "*Children*"
 or [*more specifically*] the `TodoApp` component
 however it also provides the `context`
 to *any* Components inside it, including "*Grand Children*"
@@ -3445,7 +3445,7 @@ In the previous lesson I added `ReactRedux` bindings to the project
 and I used the `Provider` Component from `ReactRedux`
 to pass the `store` down the `context`
 so that the *Container* Components can *read* the `store`
-from the `context` and `subscribe` to its' changes.
+from the `context` and `subscribe` to its changes.
 All *Container* Components are *very similar*,
 they need to *re-render* when the `store` `state` changes
 they need to `unsubscribe` from the `store` when they `Unmount`.
@@ -3627,7 +3627,7 @@ them to something more *specific*:
 + `mapDispatchToProps` becomes `mapDispatchToTodoListProps`
 
 Which you don't *have* to do in your code,
-if you keep each Component in its' *own* file (which is considered to be a best practise).
+if you keep each Component in its *own* file (which is considered to be a best practise).
 
 I will also remove the line-breaks here
 to make it *clear* that these functions are only relevant
@@ -3741,7 +3741,7 @@ as a `function` so that the Component can read it from the `props`
 and use it without worrying about *context*
 or specifying `contextTypes`.
 However it is *wasteful* to even `subscribe` to the `store`
-if we don't calculate any `props` from its' `state`,
+if we don't calculate any `props` from its `state`,
 so I'm *replacing* the `mapStateToProps` function with a `null`,
 which tells `connect` that there is *no need*
 to `subscribe` to the `store`.
@@ -3992,7 +3992,7 @@ this is what I call an `action` *Creator* because
 it takes the arguments *about* the `action`
 and it returns the `action` `Object`
 with the `type: 'SET_VISIBILITY_FILTER'`
-and the `filter` its' self.
+and the `filter` itself.
 
 ```js
 const setVisibilityFilter = (filter) => {
