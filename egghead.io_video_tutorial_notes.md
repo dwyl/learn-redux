@@ -105,7 +105,6 @@ expect (
 
 // We add a test that check how `DECREMENT` works; from 2 to 1 and from 1 to zero:
 
-```js
 expect (
   counter(2, { type: 'DECREMENT' })
 ).toEqual(1);
