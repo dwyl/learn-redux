@@ -143,6 +143,9 @@ https://github.com/erikras/ducks-modular-redux
 http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
 + Single source of truth: https://en.wikipedia.org/wiki/Single_Source_of_Truth
 + Redux Undo: https://github.com/omnidan/redux-undo
++ **Cartoon!** On Redux: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6#.f9fhidgvl
++ ...And flux: https://code-cartoons.com/a-cartoon-guide-to-flux-6157355ab207#.jdauhkpjg
++ ...And time travel debugging (this one's short)! https://code-cartoons.com/hot-reloading-and-time-travel-debugging-what-are-they-3c8ed2812f35#.cvkq7d5du
 
 ### Architecture
 
