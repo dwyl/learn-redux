@@ -353,7 +353,7 @@ const createStore = (reducer) => {
     listeners.forEach(listener => listener());
   };
   const subscribe = (listener) => {
-    listeners.push(listeners);
+    listeners.push(listener);
     return () => { // removing the listener from the array to unsubscribe listener
       listeners = listeners.filter(l => l !== listener);
     };
