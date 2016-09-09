@@ -1307,7 +1307,7 @@ console.log('--------------');
 console.log('Dispatching ADD_TODO.'); // second todo
 store.dispatch({
   type: 'ADD_TODO',
-  id: 0,
+  id: 1,
   text: 'Go shopping'
 });
 
