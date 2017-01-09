@@ -1226,7 +1226,7 @@ to avoid "*odd bugs*" in the future.
 
 The ***Pattern*** described in this lesson
 is *pervasive* in Redux development
-and is called "[***Reducer Composition***](http://rackt.org/redux/docs/basics/Reducers.html)".
+and is called "[***Reducer Composition***](http://redux.js.org/docs/basics/Reducers.html)".
 
 Different reducers specify how different parts of the `state` tree
 are updated in response to different actions.
@@ -3782,7 +3782,7 @@ to my *inner* `AddTodo` Component
 that I don't have a reference to anymore.
 
 > If you did not fully understand *why* Dan did this re-factoring,
-read the docs: http://rackt.org/redux/docs/basics/UsageWithReact.html
+read the docs: http://redux.js.org/docs/basics/UsageWithReact.html
 
 > Complete code for the *end* of **Video 28**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/c76e0f0efb7ac1f8883d0727bd244224ee9c6741/index.html)

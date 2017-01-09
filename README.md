@@ -59,7 +59,7 @@ Just keep reading and (*hopefully*) everything will become clear.
 ### Three Principals
 
 Redux is based on three principals.  
-see: http://rackt.org/redux/docs/introduction/ThreePrinciples.html
+see: http://redux.js.org/docs/introduction/ThreePrinciples.html
 
 #### 1. *Single* Source of Truth
 
