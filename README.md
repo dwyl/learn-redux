@@ -100,14 +100,9 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 
 ## How?
 
-> We have tried to make the example in this tutorial
-> as ***beginner-friendly*** as *possible*,
-> but if anything is unclear please let us know so we can help!
-
-#### *Introductory Video Tutorials* by Dan Abramov (*the Creator of Redux*)
-
-The *fastest* way to get started learning Redux is to watch the [video tutorials](https://egghead.io/series/getting-started-with-redux)
-recoded by Dan Abramov (Creator of Redux)
+The *fastest* way to get started learning Redux is to watch the 
+[Introductory Video Tutorials](https://egghead.io/series/getting-started-with-redux)
+recoded by Dan Abramov (*the Creator of Redux*)
 
 We have made a set of ***comprehensive notes***:
 [egghead.io_**video_tutorial**_***notes***.md](https://github.com/dwyl/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)  
