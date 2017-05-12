@@ -129,6 +129,7 @@ and the journey that lead him to writing Redux.
 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 + Redux: Simplifying Application State in JavaScript -
 https://youtu.be/okdC5gcD-dM (*good overview by* [**Tim Griesser**](https://github.com/tgriesser) December 2015)
++ [Write Yourself A Redux](https://zapier.com/engineering/how-to-build-redux/) by Justin Deal/Zapier Engineering - Goes over the entire architecture and lets you build your own Redux _from scratch_! (April 27, 2017)
 + ***Ducks*** - a proposal for bundling reducers, action types and actions when using Redux - by [Erik Rasmussen](https://github.com/erikras)
 https://github.com/erikras/ducks-modular-redux
 + Redux ***best practices*** by [Will Becker](https://github.com/wbecker) https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e
