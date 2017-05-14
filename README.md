@@ -83,7 +83,6 @@ To change the state tree we use "*actions*" called "*reducers*",
 these are simple functions which perform a *single* action.
 
 
-
 <br />
 
 #### tl;dr
@@ -100,7 +99,29 @@ to understand what this means, watch: [youtu.be/xsSnOQynTHs?t=15m51s](https://yo
 
 ## How?
 
-The *fastest* way to get started learning Redux is to watch the 
+### Learn Where Redux Got It's _Best_ Ideas From!
+
+[Redux](https://github.com/dwyl/learn-redux) "_takes cues from_"
+(_i.e. takes **all** it's **best ideas/features** from_) Elm.
+![redux-borrows-elm](https://cloud.githubusercontent.com/assets/194400/25845941/c7a9ce78-34a7-11e7-91fb-a65f99ce0046.png) <br />
+So... by learning **The Elm _Architecture_**,
+you will **_intrinsically_ understand Redux** <br />
+which will help you learn/develop React apps. <br />
+
+We wrote a ***complete beginner's step-by-step introduction***
+to **The Elm _Architecture_** for **JavaScript** developers: <br />
+[github.com/dwyl/**learn-elm-architecture**-in-**javascript**](https://github.com/dwyl/learn-elm-architecture-in-javascript)
+
+If _after_ you've learned Redux and built a couple of React Apps,
+you decide you want to discover where all the _best_ ideas
+in the React _ecosystem_ came from,
+checkout: [github.com/dwyl/**learn-elm**](https://github.com/dwyl/learn-elm)
+
+
+
+### Learn from the _Creator_ of Redux!
+
+The *fastest* way to get started learning Redux is to watch the
 [Introductory Video Tutorials](https://egghead.io/series/getting-started-with-redux)
 recoded by Dan Abramov (*the Creator of Redux*)
 
@@ -119,7 +140,7 @@ https://github.com/dwyl/learn-redux/issues
 
 ## Background Reading / Watching / Listening
 
-+ GitHub Project: https://github.com/rackt/redux
++ GitHub Project: https://github.com/reactjs/redux/
 + Online Documentation: http://redux.js.org/  
 + ***Interview*** with [@gaearon](https://github.com/gaearon) (*Dan Abramov - creator of Redux*)
 on The **Changelog** Podcast: https://changelog.com/187 -
