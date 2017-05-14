@@ -140,7 +140,7 @@ https://github.com/dwyl/learn-redux/issues
 
 ## Background Reading / Watching / Listening
 
-+ GitHub Project: https://github.com/rackt/redux
++ GitHub Project: https://github.com/reactjs/redux/
 + Online Documentation: http://redux.js.org/  
 + ***Interview*** with [@gaearon](https://github.com/gaearon) (*Dan Abramov - creator of Redux*)
 on The **Changelog** Podcast: https://changelog.com/187 -
