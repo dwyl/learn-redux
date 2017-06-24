@@ -77,7 +77,7 @@ as a function which gets applied to the existing store and returns a new version
 
 > See: https://en.wikipedia.org/wiki/Immutable_object
 
-#### 3. Changes are made Using *Pure Functions*
+#### 3. Changes are made Using *Pure Functions*
 
 To change the state tree we use "*actions*" called "*reducers*",
 these are simple functions which perform a *single* action.
