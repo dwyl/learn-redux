@@ -184,10 +184,6 @@ At the time of writing, the *minified* version of Redux is
 [**5.4kb**](https://github.com/dwyl/learn-redux/issues/11#issue-124671091)
 which is even *smaller* when GZipped!  
 
-### No Dependencies [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
-
-Redux has No Dependencies.  
-We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
 ## Frequently Asked Questions (*FAQ*)
 
