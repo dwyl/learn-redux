@@ -42,7 +42,7 @@ or database calls. Pure functions just calculate the new value [of the state].
 
 The functions you write in redux need to be pure.
 
-#### 4. The Reducer Function (*Principal #3*)
+#### 4. The Reducer Function (*Principal #3*)
 
 > Video: https://egghead.io/lessons/javascript-redux-the-reducer-function
 
