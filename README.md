@@ -121,19 +121,24 @@ checkout: [github.com/dwyl/**learn-elm**](https://github.com/dwyl/learn-elm)
 
 ### Learn from the _Creator_ of Redux!
 
-The *fastest* way to get started learning Redux is to watch the
+The *fastest* way to learn Redux is to watch the
 [Introductory Video Tutorials](https://egghead.io/series/getting-started-with-redux)
-recoded by Dan Abramov (*the Creator of Redux*)
+recoded by **Dan Abramov** (*the Creator of Redux*). <br />
+The videos are broken down into "bite size" chunks which are easily digestible.
+Total viewing time for the videos is [**66 minutes**]()
 
-We have made a set of ***comprehensive notes***:
+We have made a set of ***comprehensive notes/transcriptions*** on the videos, these are in:
 [egghead.io_**video_tutorial**_***notes***.md](https://github.com/dwyl/learn-redux/blob/master/egghead.io_video_tutorial_notes.md)  
-(Keep the notes open while you are watching the videos; you can
-go a *lot* faster.)
+
+We _recommend_ keeping the **notes** open in a distinct window/browser
+while you are watching the videos; you can go a *lot* faster because all the sample code is included
+and if for any reason you do not _understand_ what Dan is saying you have the notes to refer to.
+
+![learn-redux-video-notes-side-by-side](https://user-images.githubusercontent.com/194400/30913122-fa9cc800-a386-11e7-9801-228bcc5e6512.png)
 
 > *Please* give feedback and suggest improvements by creating issues on GitHub:
 https://github.com/dwyl/learn-redux/issues
 *Thanks*!
-
 
 
 <br />
@@ -184,10 +189,6 @@ At the time of writing, the *minified* version of Redux is
 [**5.4kb**](https://github.com/dwyl/learn-redux/issues/11#issue-124671091)
 which is even *smaller* when GZipped!  
 
-### No Dependencies [![Dependency Status](https://david-dm.org/rackt/redux.svg)](https://david-dm.org/rackt/redux)  
-
-Redux has No Dependencies.  
-We *like* this. It means the Library is *self-contained* ("*stand-alone*") and you can read/understand it quite easily.
 
 ## Frequently Asked Questions (*FAQ*)
 
