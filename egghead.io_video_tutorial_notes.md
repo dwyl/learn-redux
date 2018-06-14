@@ -3879,6 +3879,7 @@ const mapDispatchToLinkProps = (
     }
   };
 }
+```
 
 *Finally* I will call the `connect` function from `ReactRedux` Library
 to generate the `FilterLink` *Container* Component
