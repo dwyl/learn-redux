@@ -288,7 +288,7 @@ The code at the end of video #6 looks like this: (*explanatory comments added*)
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Learn Redux</title>
-    <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
+    <link rel="shortcut icon" type="image/png" href="https://www.favicon.cc/logo3d/805435.png"/>
   </head>
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
@@ -472,7 +472,7 @@ If you want the Counter *example* to work in the browser (*without having to com
 ```js
 <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
 ```
-**note**: in-browser compilation of JSX is [not recommended](http://facebook.github.io/react/blog/2015/06/12/deprecating-jstransform-and-react-tools.html#other-deprecations) for "*Production*" use.
+**note**: in-browser compilation of JSX is [not recommended](https://reactjs.org/blog/2015/06/12/deprecating-jstransform-and-react-tools.html#other-deprecations) for "*Production*" use.
 instead you will need to *compile* your JSX to JS using Babel...
 
 For more detail,
@@ -480,7 +480,7 @@ read: https://facebook.github.io/react/docs/tooling-integration.html#jsx
 
 Don't forget to add `type="text/jsx"` to your script tag in `index.html`
 to ensure that the JSX in the React Component is transformed.
-see: http://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
+see: https://stackoverflow.com/questions/28100644/reactjs-uncaught-syntaxerror-unexpected-token
 
 > *Final version* of *working* code for Video 8:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/a6cbc789e078d8c42a73066dbb94adf8bd5a7f3f/index.html#L19-L72)
@@ -1186,7 +1186,7 @@ const todo = (state, action) => {
       if (state.id !== action.id) {
         return state;
       }
-      return Object.assign({}, state, { // see: http://git.io/vuBzV
+      return Object.assign({}, state, { // see: https://git.io/vuBzV
         completed: !state.completed     // here state is the individual todo
       });
     default:
@@ -1226,7 +1226,7 @@ to avoid "*odd bugs*" in the future.
 
 The ***Pattern*** described in this lesson
 is *pervasive* in Redux development
-and is called "[***Reducer Composition***](http://redux.js.org/docs/basics/Reducers.html)".
+and is called "[***Reducer Composition***](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers)".
 
 Different reducers specify how different parts of the `state` tree
 are updated in response to different actions.
@@ -1517,7 +1517,7 @@ by using the `combineReducers` utility function.
 ##### Read more about ES6 Object Literal *Shorthand* Notation
 
 + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015
-+ Good examples: http://eslint.org/docs/rules/object-shorthand.html (*by Nicholas C. Zakas*)
++ Good examples: https://eslint.org/docs/rules/object-shorthand.html (*by Nicholas C. Zakas*)
 
 > ***NOTE***: as *usual*, while **ES6** Object Literal *Shorthand* Notation is a *Standard* it is *still* not implemented in the *majority* of web browsers:
 
@@ -3782,7 +3782,7 @@ to my *inner* `AddTodo` Component
 that I don't have a reference to anymore.
 
 > If you did not fully understand *why* Dan did this re-factoring,
-read the docs: http://redux.js.org/docs/basics/UsageWithReact.html
+read the docs: https://redux.js.org/tutorials/fundamentals/part-5-ui-react
 
 > Complete code for the *end* of **Video 28**:
 [`index.html`](https://github.com/nelsonic/learn-redux/blob/c76e0f0efb7ac1f8883d0727bd244224ee9c6741/index.html)
