@@ -2,12 +2,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Learn Redux - Todo</title>
-    <link rel="shortcut icon" type="image/png" href="http://www.favicon.cc/logo3d/805435.png"/>
+    <link rel="shortcut icon" type="image/png" href="https://www.favicon.cc/logo3d/805435.png"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.5/redux.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.5/react-dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/4.0.5/react-redux.js"></script>
-    <!-- Why JSXTransformer? see: http://git.io/vug4q -->
+    <!-- Why JSXTransformer? see: https://git.io/vug4q -->
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
     <script src="https://wzrd.in/standalone/expect@latest"></script>
     <script src="https://wzrd.in/standalone/deep-freeze@latest"></script>
@@ -17,7 +17,7 @@
 
     <script type="text/jsx">
 
-'use strict'; // got: http://stackoverflow.com/q/33001246/1148249 without this
+'use strict'; // got: https://stackoverflow.com/q/33001246/1148249 without this
 
 const { createStore }       = Redux;
 const { combineReducers }   = Redux;
@@ -35,7 +35,7 @@ const todo = (state, action) => {
       if (state.id !== action.id) {
         return state;
       }
-      return Object.assign({}, state, { // see: http://git.io/vuBzV
+      return Object.assign({}, state, { // see: https://git.io/vuBzV
         completed: !state.completed     // here state is the individual todo
       });
     default:

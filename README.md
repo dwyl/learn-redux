@@ -17,7 +17,7 @@ and *then* come *back* here!
 
 ## Why?
 
-![xkcd code quality](http://imgs.xkcd.com/comics/code_quality.png)
+![xkcd code quality](https://imgs.xkcd.com/comics/code_quality.png)
 
 JavaScript web applications can become messy if
 they don't have a *clear* organisation from the beginning.
@@ -59,7 +59,7 @@ Just keep reading and (*hopefully*) everything will become clear.
 ### Three Principals
 
 Redux is based on three principals.  
-see: http://redux.js.org/docs/introduction/ThreePrinciples.html
+see: https://redux.js.org/understanding/thinking-in-redux/three-principles
 
 #### 1. *Single* Source of Truth
 
@@ -90,7 +90,7 @@ these are simple functions which perform a *single* action.
 Read more about JavaScript's Reduce (Array method):
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce  
 and how to reduce an array of Objects:
-http://stackoverflow.com/questions/5732043/javascript-reduce-on-array-of-objects  
+https://stackoverflow.com/questions/5732043/javascript-reduce-on-array-of-objects  
 understanding these two things will help you grasp why Redux is so simple.
 
 You will see this abbreviated/codified as `(state, action) => state`  
@@ -146,7 +146,7 @@ https://github.com/dwyl/learn-redux/issues
 ## Background Reading / Watching / Listening
 
 + GitHub Project: https://github.com/reactjs/redux/
-+ Online Documentation: http://redux.js.org/  
++ Online Documentation: https://redux.js.org/  
 + ***Interview*** with [@gaearon](https://github.com/gaearon) (*Dan Abramov - creator of Redux*)
 on The **Changelog** Podcast: https://changelog.com/187 -
 Good history and insight into his motivations for learning to program
@@ -162,7 +162,7 @@ https://github.com/erikras/ducks-modular-redux
 + Starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform: https://github.com/erikras/react-redux-universal-hot-example
 + Full-Stack Redux Tutorial (Redux, React & Immutable.js) by
 [@teropa](https://github.com/teropa)
-http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
+https://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html - really good but takes 4h+!
 + Single source of truth: https://en.wikipedia.org/wiki/Single_Source_of_Truth
 + Redux Undo: https://github.com/omnidan/redux-undo
 + **Cartoon!** On Redux: https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6#.f9fhidgvl
@@ -181,7 +181,7 @@ you should be able to load it up later and see the same thing.
 
 + Keep react-router and redux in sync: https://github.com/rackt/redux-simple-router
 + A Simple Way to Route with Redux (November 25, 2015) by [James Long @Mozilla](https://github.com/jlongster)
-http://jlongster.com/A-Simple-Way-to-Route-with-Redux
+https://jlongster.com/A-Simple-Way-to-Route-with-Redux
 
 ### Size (*Matters*)
 
@@ -217,7 +217,7 @@ to `render` your views.
 
 **Longer Answer**:
 The *convention* in Redux apps is for the `state` to be
-[`immutable`](http://stackoverflow.com/questions/3200211/what-does-immutable-mean)
+[`immutable`](https://stackoverflow.com/questions/3200211/what-does-immutable-mean)
 this makes your app far more predictable because
 any/all changes to the `state` have to be done via an `action`.
 
