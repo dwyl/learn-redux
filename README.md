@@ -199,7 +199,7 @@ which is even *smaller* when GZipped!
 **Longer Answer**:
 While *many* Redux apps and tutorials use React, Redux is ***totally separate*** from React. Dan's EggHead Video Tutorials do feature React heavily from **Lesson 8** *onwards*.
 
-React is a *good* fit for rendering views in a Redux-based app, however there are many other *great* alternative component-based virtual-DOM-enabled view rendering libraries (*#mouth-full*) that work *really* well with Redux; e.g: https://github.com/dekujs/deku
+React is a *good* fit for rendering views in a Redux-based app, however there are many other *great* alternative component-based virtual-DOM-enabled view rendering libraries (*#mouth-full*) that work *really* well with Redux; e.g: https://github.com/anthonyshort/deku
 
 Considering that React is *the* fastest growing "*view*" (*DOM Rendering*) library of 2015
 and the pace of its' adoption looks set to *continue* in 2016
